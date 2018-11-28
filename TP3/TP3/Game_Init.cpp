@@ -69,6 +69,7 @@ void Game::initSprites()
     _spiderTexture.update(_spiderImage);
     _spiderSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
     _spiderSprite.setTexture(_spiderTexture);
+    _spiderSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
 }
 
 // Recupere un sprite a partir des parametres
@@ -180,10 +181,15 @@ void Game::initViews()
 // Initialize les element du jeu
 void Game::initGameElements()
 {
+    // Player
     _player.setPositionInGrid(15, 1);
     _player.setSpeed(4);
 
     _yoyoString.init(25, 0.71, 0.71);
 
+    // Foes
+    _spider.setPositionInGrid(12, 8);
+    _spider.setSpeed(4);
+    // Bullets
     _bullets.clear();
 }

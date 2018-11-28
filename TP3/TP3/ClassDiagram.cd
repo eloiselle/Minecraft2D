@@ -3,7 +3,7 @@
   <Class Name="AngleDegree" Collapsed="true">
     <Position X="11.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABEAAIAAAAEAAAAAAIQEAAAAAAEACAYAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAgAAAAAAAAMQEIAAAAAAACAAAAAAAAEAAAA=</HashCode>
       <FileName>AngleDegree.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="Bullet" Collapsed="true">
     <Position X="11" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <HashCode>AAgAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Bullet.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="Direction8" Collapsed="true">
     <Position X="18" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABgAEAAAAAAAACAAAIAAAEAAAAAAAIAAgAAAAEADAAA=</HashCode>
+      <HashCode>ABgAAAAAAAAAACAAAIAAAAAAAAAAAIAAAAAAAEADAAA=</HashCode>
       <FileName>Direction8.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="Game" Collapsed="true">
     <Position X="18" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gDUAQJDKi4wJMIgihgEhCIEQB6wAMBJAHGMBQEiYABo=</HashCode>
+      <HashCode>gDWAQJDKi44NMIgihAEhCoEQB6wAMAJQHGMBQEiYABo=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,28 +115,28 @@
   <Class Name="Crawler" Collapsed="true">
     <Position X="10.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAICAAAAAICAAAAAAAAQAAAAQAAAAABACBAEAAA=</HashCode>
+      <HashCode>AAEAAAICAAAAAICAAAAAAAAAAAAAQAIAAABACBAEAAA=</HashCode>
       <FileName>Crawler.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SidewayCharacter" Collapsed="true">
     <Position X="6.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAACAgAAAAAAAgAgAAAAgAIAAAAAYAQAAEoAQAACAA=</HashCode>
+      <HashCode>ACAACAgAAAAAAAgAgAAAAgAIAAAAAYAAAAEoAQAAiAA=</HashCode>
       <FileName>SidewayCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TopDownCharacter" Collapsed="true">
     <Position X="9.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAEAACAAAAAAAAAAAAIAIIABAEoAAAAIAA=</HashCode>
+      <HashCode>AAAAAAgAAAAEAACAAAAAAAAAAAAIAIIAAAEoAAAAIAA=</HashCode>
       <FileName>TopDownCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VectorAngle" Collapsed="true">
     <Position X="11.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgIAAJAAAAFAAAAAgAQAAABACAFAAIAZAAgIGAAAAA=</HashCode>
+      <HashCode>AAAIAABAAAAEAAAABAEQAAABACABAAJBBAAgIGEAAAA=</HashCode>
       <FileName>VectorAngle.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -150,7 +150,7 @@
   <Class Name="WorldMap" Collapsed="true">
     <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQAAAAAACAAAIAAEAAAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABAAABAAACAAQAAAAAACAAAIgAEAAAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -220,7 +220,7 @@
   <Enum Name="CHAR_MAP" Collapsed="true">
     <Position X="14.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAAgABAAAAAAAAAAAQAAAAACAA=</HashCode>
+      <HashCode>CAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAIAAAAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Enum>

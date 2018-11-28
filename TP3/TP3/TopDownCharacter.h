@@ -15,9 +15,9 @@ class TopDownCharacter : public Character
 protected:
     DIR8 _direction;        // Direction ou il regarde
     bool _isWalking;        // Si en train de marcher
-    float _length;          // Vitesse de déplacement
+    //float _length;          // Vitesse de déplacement
 public:
-    TopDownCharacter() : _direction(DOWN), _isWalking(false), _length(0) {};
+    TopDownCharacter() : _direction(DOWN), _isWalking(false) {};
     void init();                            //
 
     // Get

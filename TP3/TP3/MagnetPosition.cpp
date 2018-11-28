@@ -47,6 +47,6 @@ void MagnetPosition::updateGridPosition()
 bool MagnetPosition::isGridCentered()
 {
     return
-        (_exactX == _gridC * RATIO * 1.5) &&
-        (_exactY == _gridL * RATIO * 1.5);
+        ((int)_exactX == (_gridC * RATIO) + RATIO / 2) &&
+        ((int)_exactY == (_gridL * RATIO) + RATIO / 2);
 }

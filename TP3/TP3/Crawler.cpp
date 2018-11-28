@@ -16,7 +16,7 @@ Crawler::Crawler(int x, int y, AI_Move ai, AI_Frequency decisionAI)
 void Crawler::init(int x, int y, AI_Move mov, AI_Frequency freq)
 {
     setPositionExact(x * TILE_SIZE + HALF_TILE_SIZE, y * TILE_SIZE + HALF_TILE_SIZE);
-    _length = 0.5;
+    //_length = 0.5;
     _aiMove = mov;
     _aiFreq = freq;
     _frameLeftBeforeControl = 0;
@@ -35,16 +35,16 @@ void Crawler::move()
     switch (_direction)
     {
     case UP:
-        setPositionExact(getExactX(), getExactY() - _length);
+        setPositionExact(getExactX(), getExactY() - _speed);
         break;
     case RIGHT:
-        setPositionExact(getExactX() + _length, getExactY());
+        setPositionExact(getExactX() + _speed, getExactY());
         break;
     case DOWN:
-        setPositionExact(getExactX(), getExactY() + _length);
+        setPositionExact(getExactX(), getExactY() + _speed);
         break;
     case LEFT:
-        setPositionExact(getExactX() - _length, getExactY());
+        setPositionExact(getExactX() - _speed, getExactY());
         break;
     }
     updateGridPosition();
@@ -56,7 +56,7 @@ void Crawler::startMoving()
 {
     _isWalking = true;
     _isControllable = false;
-    _frameLeftBeforeControl = TILE_SIZE / _length;
+    _frameLeftBeforeControl = TILE_SIZE / _speed;
 }
 
 // Change la direction de 90 degree anti-clockwise
@@ -72,7 +72,7 @@ void Crawler::turnRight()
 }
 
 // Effectu les operation de routine a chaque refresh
-//void RobotAI::update(int time, FixedGrid& map)
+//void Crawler::update(int time, FixedGrid& map)
 //{
 //    if (_frameLeftBeforeControl == 0)
 //    {
