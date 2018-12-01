@@ -88,6 +88,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ClassDiagram.cd" />
+    <None Include="..\..\TODO.yml" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

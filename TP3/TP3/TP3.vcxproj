@@ -178,6 +178,7 @@
     <ClCompile Include="VectorAngle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\TODO.yml" />
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
