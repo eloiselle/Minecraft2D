@@ -1,0 +1,44 @@
+
+Priorities: (High to Low)
+    Remise      : Trouver comment faire le vidéo
+    ResizMap    : Aggrandir vers l'exterieur
+    WorldMap    : Utiliser Block
+    WorldMap    : Faire des block indestructible
+    Debug       : Faire qu'on entre en contact avec les block indestructible (HARD_BLOCK)
+    Foes        : Changer image de spider (animation et/ou direction)
+    Player      : Choisir sprite du personnage
+    Art         : Trouver meilleurs graphiques
+    Foes        : Debug spider passe au travers des mur (A)
+    Weapon      : Utiliser la classe Weapon pour gérer les bullet
+    Weapon      : Faire détruire les bloc par les bullet
+    Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED
+    Weapon      : Uzi           : Attaque en continue qui ne detruit pas les block
+    Weapon      : Bulletshield  : Reutiliser le yoyo mais ne pas modifier la longueur avec smartCos()
+    Weapon      : Slow-mo       : Faire que que manageFoes() est appellé une fois sur deux quand c'est Actif
+    Weapon      : Homing        : appeller Aim() frequemment
+    Weapon      : Beam          : RectangleShape qui passe au travers des blocs
+    Foes        : Boss          : 
+    Art         : Faire que les Block ait plusieurs versions differentes
+    Art         : Mettre de la musique et du son (C)
+    Pathfinding : A* search
+    WorldMap    : LabyrintheGeneration
+    Meta        : EndGame,Timer,
+    Map         : Map Editor
+
+
+Final : 21 décembre à 13h30
+    Remise: 
+        Tp3_Minecraft2D_CatherineBronsard_LoiselleEmile_CoteAnthony.zip
+        Vidéo de votre projet qui s’exécute (Interactions générées par vous)
+        Le code de votre projet (pas de pdf, je corrigerai avec visual studio)
+    
+    Oral: (15-20 min. par équipe)
+        Introduction
+        Résultat intéressant
+        Apprentissage intéressant par personne
+            Enum
+            Structure de code et Interface de classe
+            
+        Conclusion
+
+

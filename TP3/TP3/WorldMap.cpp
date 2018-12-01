@@ -39,45 +39,42 @@ bool WorldMap::readFile(const char* nomFichier)
     }
 }
 
+bool WorldMap::blockIsTraversable(char cm) { return cm == EMPTY_BLOCK || cm == HARD_BLOCK; }
+bool WorldMap::blockIsDestructible(char cm) { return cm == EMPTY_BLOCK; }
+
 
 bool WorldMap::isTraversable(pixel_t x, pixel_t y)
 {
     MagnetPosition mp;
     mp.setPositionExact(x, y);
-    char cm = at(mp.getGridLine(), mp.getGridCol());
-    return cm == EMPTY_BLOCK || cm == HARD_BLOCK;
+    return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 bool WorldMap::isTraversable(tile_t x, tile_t y)
 {
-    char cm = at(y, x);
-    return cm == EMPTY_BLOCK || cm == HARD_BLOCK;
+    return blockIsTraversable(at(y, x));
 }
 
 bool WorldMap::isTraversable(MagnetPosition & mp)
 {
-    char cm = at(mp.getGridLine(), mp.getGridCol());
-    return cm == EMPTY_BLOCK || cm == HARD_BLOCK;
+    return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 bool WorldMap::isDestructible(pixel_t x, pixel_t y)
 {
     MagnetPosition mp;
     mp.setPositionExact(x, y);
-    char cm = at(mp.getGridLine(), mp.getGridCol());
-    return cm == EMPTY_BLOCK;
+    return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 bool WorldMap::isDestructible(tile_t x, tile_t y)
 {
-    char cm = at(y, x);
-    return cm == EMPTY_BLOCK;
+    return blockIsDestructible(at(y, x));
 }
 
 bool WorldMap::isDestructible(MagnetPosition & mp)
 {
-    char cm = at(mp.getGridLine(), mp.getGridCol());
-    return cm == EMPTY_BLOCK;
+    return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 

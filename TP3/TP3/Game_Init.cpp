@@ -50,7 +50,7 @@ void Game::initWindow()
 void Game::initSprites()
 {
     // Load files
-    if (!_tileset.loadFromFile("img\\dungeon.bmp"))
+    if (!_tileset.loadFromFile("img\\tiles.bmp"))
         quitApplication();
     if (!_spiderTexture.loadFromFile("img\\spider.bmp"))
         quitApplication();
@@ -58,13 +58,13 @@ void Game::initSprites()
         quitApplication();
 
     // Map
-    _tileSprite[EMPTY_BLOCK - 48] = initOneSprite(2, 2, _tileset);
-    _tileSprite[SOFT_BLOCK - 48] = initOneSprite(2, 5, _tileset);
-    _tileSprite[HARD_BLOCK - 48] = initOneSprite(8, 8, _tileset);
+    _tileSprite[EMPTY_BLOCK - 48] = initOneSprite(0, 2, _tileset);
+    _tileSprite[SOFT_BLOCK - 48] = initOneSprite(10, 5, _tileset);
+    _tileSprite[HARD_BLOCK - 48] = initOneSprite(0, 17, _tileset);
     _tileSprite[VISITED - 48] = initOneSprite(13, 2, _tileset);
     _tileSprite[CHECKPOINT - 48] = initOneSprite(5, 4, _tileset);
 
-    // Spiderd
+    // Spider
     _spiderImage.createMaskFromColor(Color(255, 255, 255));
     _spiderTexture.update(_spiderImage);
     _spiderSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));

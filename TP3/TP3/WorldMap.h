@@ -45,4 +45,6 @@ public:
     //char & at(MagnetPosition & mp) const;
 
     bool readFile(const char* nomFichier);      // Lit la map
+    bool blockIsTraversable(char cm);
+    bool blockIsDestructible(char cm);
 };

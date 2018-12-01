@@ -44,8 +44,8 @@ Click on the map to modify it.)";
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
 constexpr int MIN_WINDOW_WIDTH = 400;                       // Largeur minimum en pixel de l'ecran
 constexpr int MIN_WINDOW_HEIGHT = 300;                      // Hauteur minimum en pixel de l'ecran
-constexpr int DEF_WINDOW_WIDTH = 1024;                      // Largeur en pixel de l'ecran
-constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel de l'ecran
+constexpr int DEF_WINDOW_WIDTH = 1024;                      // Largeur en pixel de l'ecran par defaut
+constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel de l'ecran par defaut
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
 
 // Size
@@ -63,7 +63,7 @@ class Game
 {
 private:
 
-    // Terraria
+    // Game Elements
     WorldMap _map;                      // World map
     Player _player;                     // Avatar controlled by user
     Bullet _yoyo;                       // Tourne a l'entour de _player

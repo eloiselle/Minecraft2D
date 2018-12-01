@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Block" Collapsed="true">
-    <Position X="14.5" Y="2.5" Width="1.5" />
+    <Position X="5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAgIAQAAAQAAAAAAQAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Block.hpp</FileName>
@@ -29,14 +29,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Deplacement" Collapsed="true">
-    <Position X="16.25" Y="2.5" Width="1.5" />
+    <Position X="14.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAkAABAEAAEAAQAAAAAQAAAAAJAAAAAIAAAAAAA=</HashCode>
       <FileName>Deplacement.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Direction8" Collapsed="true">
-    <Position X="18" Y="2.5" Width="1.5" />
+    <Position X="14.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABgAAAAAAAAAACAAAIAAAAAAAAAAAIAAAAAAAEADAAA=</HashCode>
       <FileName>Direction8.h</FileName>
@@ -57,7 +57,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FixedGrid&lt;T, NB_LINE, NB_COL&gt;" Collapsed="true">
-    <Position X="16.25" Y="3.5" Width="1.5" />
+    <Position X="4.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAgAAAAAAAAIAAAAAgAAEAAAIAgAgQAAAAAAA=</HashCode>
       <FileName>FixedGrid.hpp</FileName>
@@ -71,7 +71,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Game" Collapsed="true">
-    <Position X="18" Y="3.5" Width="1.5" />
+    <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gDWAQJDKi44NMIgihAEhCoEQB6wAMAJQHGMBQEiYABo=</HashCode>
       <FileName>Game.h</FileName>
@@ -99,7 +99,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Position" Collapsed="true">
-    <Position X="14.5" Y="4.5" Width="1.5" />
+    <Position X="14.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAQAAACgAAAGAAACAAABAAAAAAAAAGAAAAA=</HashCode>
       <FileName>Position.h</FileName>
@@ -169,7 +169,7 @@
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="radian_t" Collapsed="true">
-    <Position X="18" Y="7.5" Width="1.5" />
+    <Position X="16.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AngleDegree.h</FileName>
@@ -190,7 +190,7 @@
     </TypeIdentifier>
   </Typedef>
   <Enum Name="BLOCK_TYPE" Collapsed="true">
-    <Position X="18" Y="5.75" Width="1.5" />
+    <Position X="14.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAAAYAAAAA=</HashCode>
       <FileName>Block.hpp</FileName>
