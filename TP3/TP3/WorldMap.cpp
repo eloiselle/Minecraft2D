@@ -39,8 +39,8 @@ bool WorldMap::readFile(const char* nomFichier)
     }
 }
 
-bool WorldMap::blockIsTraversable(char cm) { return cm == EMPTY_BLOCK; }
-bool WorldMap::blockIsDestructible(char cm) { return cm == SOFT_BLOCK; }
+bool WorldMap::blockIsTraversable(Block& cm) { return cm.getType() == EMPTY_BLOCK; }
+bool WorldMap::blockIsDestructible(Block& cm) { return cm.getType() == SOFT_BLOCK; }
 
 
 bool WorldMap::isTraversable(pixel_t x, pixel_t y)

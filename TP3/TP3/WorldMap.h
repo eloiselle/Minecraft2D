@@ -11,11 +11,11 @@ Goal  : Wrapper de Map<char> qui contient les positions de depart et arrivee
 #include "ResizableMap.HPP"
 #include "MagnetPosition.h"
 #include "FileOpener.h"
+#include "Block.h"
 using namespace std;
 
-enum CHAR_MAP { EMPTY_BLOCK = '0', SOFT_BLOCK, HARD_BLOCK, VISITED, CHECKPOINT };    // Type de cases
 
-class WorldMap : public ResizableMap<char>, FileOpener {
+class WorldMap : public ResizableMap<Block>, FileOpener {
 private:
     // Positions de depart et d'arrivee
     int _xDepart;           // Valeur X de depart
@@ -44,6 +44,6 @@ public:
     //char & at(MagnetPosition & mp) const;
 
     bool readFile(const char* nomFichier);      // Lit la map
-    bool blockIsTraversable(char cm);
-    bool blockIsDestructible(char cm);
+    bool blockIsTraversable(Block& cm);
+    bool blockIsDestructible(Block& cm);
 };

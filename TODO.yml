@@ -2,14 +2,12 @@
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
     ResizMap    : Aggrandir vers l'exterieur
-    WorldMap    : Utiliser Block
     WorldMap    : Faire des block indestructible
     Debug       : Faire qu'on entre en contact avec les block indestructible (HARD_BLOCK)
     Foes        : Changer image de spider (animation et/ou direction)
     Player      : Choisir sprite du personnage
     Art         : Trouver meilleurs graphiques
     Foes        : Debug spider passe au travers des mur (A)
-    Foes        : Créer Direction4 à l'image de Direction8
     Weapon      : Utiliser la classe Weapon pour gérer les bullet
     Weapon      : Faire détruire les bloc par les bullet
     Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED

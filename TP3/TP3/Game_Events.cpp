@@ -188,7 +188,7 @@ void Game::changeBlockAtMouse()
     int c = _mouseCoord.getPosition().x / TILE_SIZE;
     int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
-    switch (_map.at(l, c))
+    switch (_map.at(l, c).getType())
     {
     case EMPTY_BLOCK:
         _map.at(l, c) = SOFT_BLOCK;

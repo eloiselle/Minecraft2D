@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AngleDegree.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Crawler.cpp" />
@@ -182,7 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngleDegree.h" />
-    <ClInclude Include="Block.hpp" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Crawler.h" />
