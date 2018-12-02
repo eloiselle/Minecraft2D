@@ -28,13 +28,6 @@
       <FileName>Delay.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Deplacement" Collapsed="true">
-    <Position X="14.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAkAABAEAAEAAQAAAAAQAAAAAJAAAAAIAAAAAAA=</HashCode>
-      <FileName>Deplacement.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Entity" Collapsed="true">
     <Position X="7.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>

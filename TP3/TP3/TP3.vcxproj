@@ -166,7 +166,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SidewayCharacter.cpp" />
     <ClCompile Include="TopDownCharacter.cpp" />
-    <ClCompile Include="Deplacement.cpp" />
     <ClCompile Include="Game_Init.cpp" />
     <ClCompile Include="Game_Draw.cpp" />
     <ClCompile Include="Game_Events.cpp" />
@@ -174,7 +173,6 @@
     <ClCompile Include="MagnetPosition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Position.cpp" />
-    <ClCompile Include="Robot.cpp" />
     <ClCompile Include="VectorAngle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +196,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SidewayCharacter.h" />
     <ClInclude Include="TopDownCharacter.h" />
-    <ClInclude Include="Deplacement.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="WorldMap.h" />
     <ClInclude Include="MagnetPosition.h" />
@@ -206,7 +203,6 @@
     <ClInclude Include="FixedGrid.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Position.h" />
-    <ClInclude Include="Robot.h" />
     <ClInclude Include="VectorAngle.h" />
     <ClInclude Include="Weapon.hpp" />
   </ItemGroup>
