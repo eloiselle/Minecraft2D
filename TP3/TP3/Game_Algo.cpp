@@ -75,10 +75,7 @@ void Game::manageBullets()
     {
         willVanish = false;
 
-        b->advance(); // TODO : Fonctionnel seulement en bas a droite
-
-        if (!isInWindow(*b))
-            willVanish = true;
+        b->advance();
 
         if (isInMap(*b))
         {
@@ -89,7 +86,7 @@ void Game::manageBullets()
             //    willVanish = true;
             //}
 
-            //if (_map.isTraversable(*b))
+            //if (!_map.isTraversable(*b))
             //{
             //    willVanish = true;
             //}
