@@ -8,40 +8,41 @@ Goal  : Défini une structure de donnees a deux dimensions sous
 ***********************************************************************/
 #pragma once
 #include "pch.h"
+#include "Nameable.h"
 
 using namespace std;
 
 template <class T>
-class ResizableMap
+class ResizableMap : public Nameable
 {
 protected:
-    char *_name;        // Pointeur sur le nom de la map
+
     unsigned int _nbL;  // Nombre de lignes pour la matrice
     unsigned int _nbC;  // Nombre de colonnes pour la matrice
     T  **_map;          // La map dynamique de lignes qui pointe sur les colonnes
 public:
 
-    ResizableMap() : _name(nullptr), _map(nullptr), _nbL(0), _nbC(0) {}; // Constructeur sans parametres
+    ResizableMap() : _map(nullptr), _nbL(0), _nbC(0) {}; // Constructeur sans parametres
     ResizableMap(const char* name, unsigned int line, unsigned int col); // Constructeur avec parametres
     ResizableMap(const ResizableMap<T> &m);                              // Constructeur copieur
     ~ResizableMap();                                                     // Destructeur
     void clear();                                               // Vide l'objet
     void clearMap();                                            // Vide la map
-    void clearName();                                           // Vide le nom
 
     // Getteurs & Setters
     unsigned int nbLine()const;                                 // Retourne le nb de lignes
     unsigned int nbCol()const;                                  // Retourne le nb de colonnes
 
-    void setName(const char* name);                             // Modifie le nom de la map
-    const char* getName()const;                                 // Retourne le nom de la map
 
-    T& at(unsigned int line, unsigned int col)const;            // Retourne une réference a un élement
-    T* operator[](unsigned int line);                           // Retourne une réference a un élement
+    T& at(unsigned int line, unsigned int col)const;            // Retourne une réference a un element
+    T* operator[](unsigned int line);                           // Retourne une réference a un element
 
     // Methodes
     void resize(unsigned int nbLine, unsigned int nbCol, bool keepContenu = true);    // Resize la matrice
+    void addBottomLines(unsigned int nbLine, bool fill);
     void fill(const T& element);                                // Remplit la matrice avec l'element
+    void fillLine(const T& element, unsigned int line);         // Remplit la line avec l'element
+    void fillCol(const T& element, unsigned int col);           // Remplit la line avec l'element
 
     void printMeta(ostream& os = cout)const;                    // Output le nom et la taille de la matrice
     void print(ostream& os = cout)const;                        // Output la matrice (sans le nom)
@@ -145,13 +146,6 @@ void ResizableMap<T>::clearMap()
     _nbL = _nbC = 0;
 }
 
-// Vide le nom
-template <class T>
-void ResizableMap<T>::clearName()
-{
-    delete[] _name;
-    _name = nullptr;
-}
 
 // Retourne le nb de ligne
 template <class T>
@@ -167,30 +161,6 @@ unsigned int ResizableMap<T>::nbCol()const
     return _nbC;
 }
 
-// Retourne le nom de la map
-template <class T>
-const char* ResizableMap<T>::getName() const
-{
-    if (_name == nullptr)
-        return "\0";
-
-    return _name;
-}
-
-// Modifie le nom de la map
-template <class T>
-void ResizableMap<T>::setName(const char* name)
-{
-    clearName();
-
-    int nameLength = strlen(name);
-    if (nameLength > 0)
-    {
-        // Modifi le nom
-        _name = new char[nameLength + 1];
-        strcpy_s(_name, nameLength + 1, name);
-    }
-}
 
 // Resize
 template <class T>
@@ -198,12 +168,6 @@ void ResizableMap<T>::resize(unsigned int newNbL, unsigned int newNbC, bool keep
 {
     // Si le tableau se fait vider
     if (newNbL == 0 && newNbC == 0)
-    {
-        clearMap();
-        return;
-    }
-    // Si c'est trop gros
-    if (newNbL >= 3435973836 && newNbC >= 3435973836)
     {
         clearMap();
         return;
@@ -218,7 +182,7 @@ void ResizableMap<T>::resize(unsigned int newNbL, unsigned int newNbC, bool keep
     // Cree les lignes de colonnes
     for (int l = 0; l < newNbL; l++)
     {
-        *(newMap + l) = new T[newNbC];
+        newMap[l] = new T[newNbC];
     }
 
     if (keepContenu) // Copie les elements de la matrice
@@ -227,7 +191,7 @@ void ResizableMap<T>::resize(unsigned int newNbL, unsigned int newNbC, bool keep
         {
             for (int c = 0; c < newNbC && c < _nbC; c++)
             {
-                *(*(newMap + l) + c) = *(*(_map + l) + c);
+                newMap[l][c] = _map[l][c];
             }
         }
     }
@@ -235,6 +199,42 @@ void ResizableMap<T>::resize(unsigned int newNbL, unsigned int newNbC, bool keep
 
     _nbC = newNbC;
     _nbL = newNbL;
+    _map = newMap;
+    newMap = nullptr;
+}
+
+template<class T>
+void ResizableMap<T>::addBottomLines(unsigned int nbLine, bool fill)
+{
+    if (nbLine == 0)
+        return;
+
+    int total = nbLine + nbLine;
+
+    T **newMap = new T*[total];
+
+    // Transfert les anciennes lignes
+    for (size_t l = 0; l < _nbL; l++)
+    {
+        newMap[l] = _map[l];
+    }
+
+    // Cree les nouvelles colonne d'element
+    for (size_t l = _nbL; l < total; l++)
+    {
+        newMap[l] = new T[_nbC];
+    }
+
+    // Rempli les cases
+    if (fill)
+    {
+        for (size_t l = _nbL; l < total; l++)
+        {
+            fillLine(T(), l);
+        }
+    }
+
+    _nbL = total;
     _map = newMap;
     newMap = nullptr;
 }
@@ -247,10 +247,31 @@ void ResizableMap<T>::fill(const T& element)
     {
         for (int c = 0; c < _nbC; c++)
         {
-            *(*(_map + l) + c) = element;
+            _map[l][c] = element;
         }
     }
 }
+
+// Rempli la line avec la valeur
+template<class T>
+void ResizableMap<T>::fillLine(const T& element, unsigned int line)
+{
+    for (int c = 0; c < _nbC; c++)
+    {
+        _map[line][c] = element;
+    }
+}
+
+// Rempli la colonne avec la valeur
+template<class T>
+void ResizableMap<T>::fillCol(const T& element, unsigned int col)
+{
+    for (int l = 0; l < _nbL; l++)
+    {
+        _map[l][col] = element;
+    }
+}
+
 
 // Getter/Setter pour un element
 template <class T>
@@ -260,7 +281,7 @@ T& ResizableMap<T>::at(unsigned int line, unsigned int col)const
     assert(line < _nbL);
     assert(col < _nbC);
 
-    return *(*(_map + line) + col); // Retourne l'element pour acceder ou modifier.
+    return _map[line][col]; // Retourne l'element pour acceder ou modifier.
 }
 
 // Getter/Setter pour un element
@@ -300,7 +321,7 @@ const ResizableMap<T>& ResizableMap<T>::operator=(const ResizableMap<T> & m)
             // Copie les elements
             for (int c = 0; c < _nbC; c++)  // Colonnes
             {
-                *(*(_map + l) + c) = *(*(m._map + l) + c);
+                _map[l][c] = m._map[l][c];
             }
         }
     }
@@ -323,7 +344,7 @@ void ResizableMap<T>::print(ostream& os) const
     {
         for (int c = 0; c < _nbC; c++)        // Colonnes
         {
-            os << *(*(_map + l) + c) << " ";  // Imprime l'element
+            os << _map[l][c] << " "; // Imprime l'element
         }
         os << endl;
     }
@@ -342,7 +363,7 @@ void ResizableMap<T>::readGrid(istream& is)
     {
         for (int c = 0; c < _nbC; c++)  // Colonnes
         {
-            is >> *(*(_map + l) + c);   // Remplace le char suivant
+            is >> _map[l][c];    // Remplace le char suivant
         }
     }
 }

@@ -162,6 +162,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Foe.cpp" />
     <ClCompile Include="Game_Algo.cpp" />
+    <ClCompile Include="Nameable.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SidewayCharacter.cpp" />
     <ClCompile Include="TopDownCharacter.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Delay.hpp" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Foe.h" />
+    <ClInclude Include="Nameable.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SidewayCharacter.h" />
     <ClInclude Include="TopDownCharacter.h" />
