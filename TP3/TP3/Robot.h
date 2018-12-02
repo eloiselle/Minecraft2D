@@ -22,11 +22,11 @@ public:
     Robot(int line, int col);                           // initialiser à la position de départ
     void init(int line, int col);                       // initialiser à la position de départ
 
-    void deplacer(int line, int col, DIRECTION dir);    // ajouter un déplacement
+    void deplacer(int line, int col, DIRECTION4 dir);    // ajouter un déplacement
     void revenir();                                     // revenir en arrière (enlever un déplacement)
-    void changeDir(DIRECTION newDir);                   // changer la direction
+    void changeDir(DIRECTION4 newDir);                   // changer la direction
     bool empty();
 
     Deplacement getLastDeplacement() const;             // Retourne le dernier deplacement
-    DIRECTION getDir()const;                            // Retourne la direction
+    DIRECTION4 getDir()const;                            // Retourne la direction
 };

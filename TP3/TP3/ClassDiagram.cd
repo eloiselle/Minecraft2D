@@ -35,13 +35,6 @@
       <FileName>Deplacement.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Direction8" Collapsed="true">
-    <Position X="14.5" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABgAAAAAAAAAACAAAIAAAAAAAAAAAIAAAAAAAEADAAA=</HashCode>
-      <FileName>Direction8.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Entity" Collapsed="true">
     <Position X="7.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
@@ -91,13 +84,6 @@
       <FileName>MagnetPosition.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Player" Collapsed="true">
-    <Position X="4.5" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Player.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Position" Collapsed="true">
     <Position X="14.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
@@ -108,7 +94,7 @@
   <Class Name="ResizableMap&lt;T&gt;" Collapsed="true">
     <Position X="3" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEQAIAAAAAAAAAIAAAALIBACAAEgAABAgUg0AAAAAAA=</HashCode>
+      <HashCode>BEQABABAAAAAAAIAAAALIBACAAEgAAAAgUggAAAAAAA=</HashCode>
       <FileName>ResizableMap.hpp</FileName>
     </TypeIdentifier>
   </Class>
@@ -140,17 +126,10 @@
       <FileName>VectorAngle.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Weapon" Collapsed="true">
-    <Position X="3" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Weapon.hpp</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WorldMap" Collapsed="true">
     <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQAAAAAACAAAIgAEAAAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABAAABAAACAAQCAAAAACBAAIgAEAAAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -159,6 +138,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAA=</HashCode>
       <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="4.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="3" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Weapon.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Typedef Name="degree_t" Collapsed="true">
@@ -179,14 +172,14 @@
     <Position X="16.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Const.h</FileName>
+      <FileName>pch.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="tile_t" Collapsed="true">
     <Position X="14.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Const.h</FileName>
+      <FileName>pch.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Enum Name="BLOCK_TYPE" Collapsed="true">
@@ -194,13 +187,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAAAYAAAAA=</HashCode>
       <FileName>Block.hpp</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="DIRECTION" Collapsed="true">
-    <Position X="16.25" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAgAAAAAAAAAgAAAAAAAABAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Deplacement.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AI_Move" Collapsed="true">

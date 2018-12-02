@@ -173,7 +173,7 @@ public:
     bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
     bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
     void tryToMove(int dir, SidewayCharacter& player);  // SidewayCharacter essaye de se deplacer
-    void tryToMove(DIR8 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
+    void tryToMove(DIRECTION8 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window

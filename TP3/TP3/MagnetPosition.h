@@ -9,7 +9,6 @@ Goal  : Ensemble de deux positions qui sont coordonnées
 #pragma once
 #include "pch.h"
 
-#include "Const.h"
 
 class MagnetPosition
 {

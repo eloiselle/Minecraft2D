@@ -11,7 +11,6 @@ Goal  : Ouvre un fichier
 #include <String>
 
 #include "pch.h"
-#include "Const.h"
 
 using namespace std;
 

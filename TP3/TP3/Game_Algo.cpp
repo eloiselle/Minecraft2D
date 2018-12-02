@@ -36,7 +36,7 @@ void Game::manageFoes()
     // Manage one foe
     if (_spider.isGridCentered()) // Pret a se deplacer
     {
-        DIR8 randDirection = static_cast<DIR8>(rand() % 8 * 2);
+        DIRECTION8 randDirection = static_cast<DIRECTION8>(rand() % 8 * 2);
 
         if (_map.isTraversable(
             _spider.getExactX() + D8_x[randDirection] * TILE_SIZE,
@@ -202,7 +202,7 @@ void Game::tryToMove(int dir, SidewayCharacter& character)
 }
 
 // Regarde si on peu se déplacer a la nouvelle position // Version Top-down
-void Game::tryToMove(DIR8 dir, TopDownCharacter& character)
+void Game::tryToMove(DIRECTION8 dir, TopDownCharacter& character)
 {
     float newExactX = character.getExactX() + D8_x[dir] * character.getSpeed();
     float newExactY = character.getExactY() + D8_y[dir] * character.getSpeed();

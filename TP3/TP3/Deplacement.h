@@ -9,33 +9,29 @@ Description:      Déplacement (composé de la ligne, de la colonne et de la direc
 ============================ */
 #pragma once
 #include "pch.h"
+#include "Direction.h"
 
-// Direction
-enum DIRECTION { NORD = 0, EST = 1, SUD = 2, OUEST = 3, AUCUNE_DIRECTION = 4 }; // Directions numeriques
-constexpr int ch_dir[5] = { 'N', 'E', 'S', 'O', 'A' };      // Lettre a utiliser selon direction
-constexpr int xMove[5] = { 0, 1, 0, -1, 0 };                // Deplacement horizontal selon direction
-constexpr int yMove[5] = { -1, 0, 1, 0, 0 };                // Deplacement vertical selon direction
 
 class Deplacement
 {
 protected:
-    DIRECTION _direction;   // direction vers laquelle le robot-pile va
+    DIRECTION4 _direction;   // direction vers laquelle le robot-pile va
     int _ligne;             // ligne dans la matrice
     int _col;               // colonne dans la matrice
 
 public:
     /* Constructeurs */
     Deplacement() : _direction(NORD), _ligne(0), _col(0) {};
-    Deplacement(int line, int col, DIRECTION dir);
+    Deplacement(int line, int col, DIRECTION4 dir);
     Deplacement(const Deplacement & d);
 
     /* Setteurs */
-    void setDirection(DIRECTION dir);
+    void setDirection(DIRECTION4 dir);
     void setLigne(int line);
     void setCol(int col);
 
     /* Getteurs */
-    DIRECTION getDirection() const;
+    DIRECTION4 getDirection() const;
     int getLigne() const;
     int getCol() const;
 

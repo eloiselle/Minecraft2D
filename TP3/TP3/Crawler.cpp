@@ -62,13 +62,13 @@ void Crawler::startMoving()
 // Change la direction de 90 degree anti-clockwise
 void Crawler::turnLeft()
 {
-    _direction = static_cast<DIR8>((_direction + 6) % 8);
+    _direction = static_cast<DIRECTION8>((_direction + 6) % 8);
 }
 
 // Change la direction de 90 degree clockwise
 void Crawler::turnRight()
 {
-    _direction = static_cast<DIR8>((_direction + 2) % 8);
+    _direction = static_cast<DIRECTION8>((_direction + 2) % 8);
 }
 
 // Effectu les operation de routine a chaque refresh

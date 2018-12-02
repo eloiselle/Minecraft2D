@@ -9,7 +9,7 @@ Description:      contient les méthodes de la classe déplacement
 #include "Deplacement.h"
 
 // Constructeur avec parametres
-Deplacement::Deplacement(int line, int col, DIRECTION dir)
+Deplacement::Deplacement(int line, int col, DIRECTION4 dir)
 {
     _ligne = line;
     _col = col;
@@ -25,7 +25,7 @@ Deplacement::Deplacement(const Deplacement & d)
 }
 
 // Change la direction
-void Deplacement::setDirection(DIRECTION dir)
+void Deplacement::setDirection(DIRECTION4 dir)
 {
     assert(dir == NORD || dir == SUD || dir == EST || dir == OUEST || dir == AUCUNE_DIRECTION);
     _direction = dir;
@@ -46,7 +46,7 @@ void Deplacement::setCol(int col)
 }
 
 // Retourne la direction
-DIRECTION Deplacement::getDirection() const
+DIRECTION4 Deplacement::getDirection() const
 {
     return _direction;
 }

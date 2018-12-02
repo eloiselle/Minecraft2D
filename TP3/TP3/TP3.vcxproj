@@ -167,7 +167,6 @@
     <ClCompile Include="SidewayCharacter.cpp" />
     <ClCompile Include="TopDownCharacter.cpp" />
     <ClCompile Include="Deplacement.cpp" />
-    <ClCompile Include="Direction8.cpp" />
     <ClCompile Include="Game_Init.cpp" />
     <ClCompile Include="Game_Draw.cpp" />
     <ClCompile Include="Game_Events.cpp" />
@@ -189,6 +188,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Crawler.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="FileOpener.h" />
     <ClInclude Include="Killable.h" />
     <ClInclude Include="Delay.hpp" />
@@ -198,9 +198,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SidewayCharacter.h" />
     <ClInclude Include="TopDownCharacter.h" />
-    <ClInclude Include="Const.h" />
     <ClInclude Include="Deplacement.h" />
-    <ClInclude Include="Direction8.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="WorldMap.h" />
     <ClInclude Include="MagnetPosition.h" />

@@ -63,9 +63,6 @@
     <ClCompile Include="Killable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Direction8.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AngleDegree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Const.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ResizableMap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -140,9 +134,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Killable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Direction8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Delay.hpp">
@@ -173,6 +164,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Nameable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

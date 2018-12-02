@@ -25,7 +25,7 @@ void Robot::init(int line, int col)
 }
 
 // Deplacement
-void Robot::deplacer(int line, int col, DIRECTION dir)
+void Robot::deplacer(int line, int col, DIRECTION4 dir)
 {
     assert(line >= 0);
     assert(col >= 0);
@@ -41,7 +41,7 @@ void Robot::revenir()
 }
 
 // Change la direction
-void Robot::changeDir(DIRECTION newDir)
+void Robot::changeDir(DIRECTION4 newDir)
 {
     assert(newDir == NORD || newDir == SUD || newDir == EST || newDir == OUEST || newDir == AUCUNE_DIRECTION);
     _pile.top().setDirection(newDir);
@@ -59,7 +59,7 @@ Deplacement Robot::getLastDeplacement() const
 }
 
 // Retourne la direction
-DIRECTION Robot::getDir() const
+DIRECTION4 Robot::getDir() const
 {
     return _pile.top().getDirection();
 }

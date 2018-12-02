@@ -8,7 +8,6 @@ Goal  : Wrapper de Map<char> qui contient les positions de depart et arrivee
 #pragma once
 #include "pch.h"
 
-#include "Const.h"
 #include "ResizableMap.HPP"
 #include "MagnetPosition.h"
 #include "FileOpener.h"
