@@ -82,16 +82,16 @@ template <class T, unsigned int NB_LINE, unsigned int NB_COL>
 void FixedGrid<T, NB_LINE, NB_COL>::rempliLesBordures()
 {
     // Rempli les bordures horizontales
-    for (size_t x = 0; x < NB_COL; x++)
+    for (size_t c = 0; c < NB_COL; c++)
     {
-        _grid[x][0].set(Block::HARD_BLOCK);
-        _grid[x][NB_COL - 1].set(Block::HARD_BLOCK);
+        _grid[c][0].set(Block::HARD_BLOCK);
+        _grid[c][NB_COL - 1].set(Block::HARD_BLOCK);
     }
     // Rempli les bordures verticales
-    for (size_t y = 0; y < NB_LINE; y++)
+    for (size_t l = 0; l < NB_LINE; l++)
     {
-        _grid[0][y].set(Block::HARD_BLOCK);
-        _grid[NB_LINE - 1][y].set(Block::HARD_BLOCK);
+        _grid[0][l].set(Block::HARD_BLOCK);
+        _grid[NB_LINE - 1][l].set(Block::HARD_BLOCK);
     }
 }
 
@@ -101,9 +101,9 @@ void FixedGrid<T, NB_LINE, NB_COL>::affiche()const
 {
     //SDL_Rect currentTilePosition;
 
-    for (int i = 0; i < NB_LINE; i++)
+    for (int l = 0; l < NB_LINE; l++)
     {
-        for (int j = 0; j < NB_COL; j++)
+        for (int c = 0; c < NB_COL; c++)
         {
             //currentTilePosition.x = i * TILE_SIZE;
             //currentTilePosition.y = j * TILE_SIZE;
@@ -133,11 +133,11 @@ void FixedGrid<T, NB_LINE, NB_COL>::saveToFile(string fileName)const
 {
     ofstream ofs(fileName);
 
-    for (size_t x = 0; x < NB_COL; x++)
+    for (size_t c = 0; c < NB_COL; c++)
     {
-        for (size_t y = 0; y < NB_LINE; y++)
+        for (size_t l = 0; l < NB_LINE; l++)
         {
-            ofs << _grid[x][y].getType();
+            ofs << _grid[c][l].getType();
         }
     }
 }
@@ -148,13 +148,13 @@ void FixedGrid<T, NB_LINE, NB_COL>::loadFromFile(string fileName)
 {
     ifstream ifs(fileName);
 
-    for (int i = 0; i < NB_COL; i++)
+    for (int c = 0; c < NB_COL; c++)
     {
-        for (int j = 0; j < NB_LINE; j++)
+        for (int l = 0; l < NB_LINE; l++)
         {
             char t;
             ifs >> t;
-            _grid[i][j].set(t);
+            _grid[c][l].set(t);
         }
     }
 }

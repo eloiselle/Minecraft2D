@@ -13,6 +13,7 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 #include "Bullet.h"
 #include "TopDownCharacter.h"
 #include "Crawler.h"
+#include "MapRandomizer.h"
 
 using namespace std;
 using namespace sf;
@@ -181,4 +182,5 @@ public:
     void drawGrid();                                    // Affiche la grille de application
     void drawMovableObjects();                          // Affiche les objets mobiles
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
+    void printMap();
 };

@@ -58,11 +58,11 @@ void Game::initSprites()
         quitApplication();
 
     // Map
-    _tileSprite[EMPTY_BLOCK - 48] = initOneSprite(0, 2, _tileset);
-    _tileSprite[SOFT_BLOCK - 48] = initOneSprite(10, 5, _tileset);
-    _tileSprite[HARD_BLOCK - 48] = initOneSprite(0, 17, _tileset);
-    _tileSprite[VISITED - 48] = initOneSprite(13, 2, _tileset);
-    _tileSprite[CHECKPOINT - 48] = initOneSprite(5, 4, _tileset);
+    _tileSprite[EMPTY_BLOCK] = initOneSprite(0, 2, _tileset);
+    _tileSprite[SOFT_BLOCK] = initOneSprite(10, 5, _tileset);
+    _tileSprite[HARD_BLOCK] = initOneSprite(0, 17, _tileset);
+    _tileSprite[VISITED] = initOneSprite(13, 2, _tileset);
+    _tileSprite[INVALID_BLOCK] = initOneSprite(5, 4, _tileset);
 
     // Spider
     _spiderImage.createMaskFromColor(Color(255, 255, 255));
@@ -145,15 +145,12 @@ void Game::initWorldMap(const char* fileName)
 {
     assert(strlen(fileName) > 0);
 
-    // Read file
-    if (!_map.readFile(fileName))
-        return; // Action si fichier non conforme
+    //// Read file
+    //if (!_map.readFile(fileName))
+    //    return; // Action si fichier non conforme
 
-    // Read Start & Finish
-    //_map.at(_lab.xDepart(), _lab.yDepart()) = CHECKPOINT; // Depart
-    _map.at(_map.xFin(), _map.yFin()) = CHECKPOINT;       // Arrivee
+    _map.randomize();
 
-    // Prepare search
     _spider.setPositionInGrid(1, 1);
 
     initViews();
@@ -184,6 +181,7 @@ void Game::initGameElements()
     // Player
     _player.setPositionInGrid(15, 1);
     _player.setSpeed(4);
+    _map.at(_player.getGridLine(), _player.getGridCol());
 
     _yoyoString.init(25, 0.71, 0.71);
 

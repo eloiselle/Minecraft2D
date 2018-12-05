@@ -55,7 +55,7 @@ void Game::drawGrid()
         for (size_t c = 0; c < _map.nbCol(); c++)
         {
             // Choix de la bonne tuile a afficher
-            char tileIndex = _map.at(l, c).getType() - 48;
+            char tileIndex = _map.at(l, c).getType();
             _tileSprite[tileIndex].setPosition(c*TILE_SIZE, l*TILE_SIZE);
             _window.draw(_tileSprite[tileIndex]);
         }
@@ -109,7 +109,7 @@ void Game::drawMovableObjects()
 void Game::drawThingsDirectlyOnTheScreen()
 {
     _window.setView(_view[NULL_VIEW]);
-
+    
     // Ecran de pause
     if (_appState == PAUSED)
     {
@@ -134,4 +134,18 @@ void Game::flipSpriteHorizontal(Sprite& s)
 {
     s.setOrigin({ s.getLocalBounds().width, 0 });
     s.setScale({ -1, 1 });
+}
+
+// Affiche le contenu de map dans le _debug
+void Game::printMap()
+{
+    _debug += "\r\n";
+    for (size_t l= 0; l < 20; l++)
+    {
+        for (size_t c = 0; c < 20; c++)
+        {
+            _debug += _map.at(l, c).getType() + 48;
+        }
+        _debug += "\r\n";
+    }
 }

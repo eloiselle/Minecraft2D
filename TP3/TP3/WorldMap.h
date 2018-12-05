@@ -31,18 +31,17 @@ public:
     int xFin()const;       // Retourne la valeur X d'arrivee
     int yFin()const;       // Retourne la valeur Y d'arrivee
 
+    void randomize();
+
     bool isTraversable(pixel_t x, pixel_t y);   //
     bool isTraversable(tile_t x, tile_t y);     //
     bool isTraversable(MagnetPosition& mp);     //
 
     bool isDestructible(pixel_t x, pixel_t y);
-
     bool isDestructible(tile_t x, tile_t y);
-
     bool isDestructible(MagnetPosition & mp);
 
-    //char & at(MagnetPosition & mp) const;
-
+    void readGrid(istream& is = cin);   // Lit la matrice de la map dans le flux
     bool readFile(const char* nomFichier);      // Lit la map
     bool blockIsTraversable(Block& cm);
     bool blockIsDestructible(Block& cm);

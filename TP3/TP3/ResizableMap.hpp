@@ -46,7 +46,7 @@ public:
 
     void printMeta(ostream& os = cout)const;                    // Output le nom et la taille de la matrice
     void print(ostream& os = cout)const;                        // Output la matrice (sans le nom)
-    void readGrid(istream& is = cin);                           // Lit la matrice de la map dans le flux
+    virtual void readGrid(istream& is = cin);                   // Lit la matrice de la map dans le flux
 
     const ResizableMap<T>& operator=(const ResizableMap<T> & m);// Assigne une map sur une autre
 };

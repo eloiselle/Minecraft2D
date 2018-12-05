@@ -7,13 +7,6 @@
       <FileName>AngleDegree.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Block" Collapsed="true">
-    <Position X="5" Y="5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAgIAQAAAQAAAAAAQAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Block.hpp</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Bullet" Collapsed="true">
     <Position X="11" Y="4.75" Width="1.5" />
     <TypeIdentifier>
@@ -122,7 +115,7 @@
   <Class Name="WorldMap" Collapsed="true">
     <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQCAAAAACBAAIgAEAAAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABAAABAAACAAQCAAAAACBACIgAEAAAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -145,6 +138,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Weapon.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapRandomizer" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQACAAAAAAAgAAwAAAgAAAgEAEA=</HashCode>
+      <FileName>MapRandomizer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nameable" Collapsed="true">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAABAAAAAAAAAAAAAAABAAAAUAAAAAAA=</HashCode>
+      <FileName>Nameable.h</FileName>
     </TypeIdentifier>
   </Class>
   <Typedef Name="degree_t" Collapsed="true">
@@ -175,13 +182,6 @@
       <FileName>pch.h</FileName>
     </TypeIdentifier>
   </Typedef>
-  <Enum Name="BLOCK_TYPE" Collapsed="true">
-    <Position X="14.5" Y="5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAAAYAAAAA=</HashCode>
-      <FileName>Block.hpp</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="AI_Move" Collapsed="true">
     <Position X="16.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
@@ -196,11 +196,18 @@
       <FileName>Crawler.h</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="CHAR_MAP" Collapsed="true">
+  <Enum Name="DIRECTION4" Collapsed="true">
+    <Position X="16.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAgAAAAAAAAAgAAAAAAAABAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Direction.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DIRECTION8" Collapsed="true">
     <Position X="14.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAIAAAAA=</HashCode>
-      <FileName>WorldMap.h</FileName>
+      <HashCode>AAAAAABCAAAAAgAAAAAAAQAAAAICAAAgABAAAAAAAAA=</HashCode>
+      <FileName>Direction.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
