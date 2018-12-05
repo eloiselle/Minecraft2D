@@ -168,10 +168,10 @@ void Game::handleMouseButtonPressed()
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
 	{
-		if (isMouseInMap() && _player.getIsBuildingEquipped())
+		if (isMouseInMap() && _player.getIsBuildingEnabled())
 			changeBlockAtMouse();
 
-		if (_player.getIsWeaponEquipped())
+		if (_player.getIsWeaponEnabled())
 		{
 			shootBullet();
 		}

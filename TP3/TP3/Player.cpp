@@ -4,22 +4,22 @@
 Player::Player()
 {
 	setUzi();
-	_isBuilding = true;
-	_isWeapon = false;
+	_buildingEnabled = true;
+	_weaponEnabled = false;
 }
 
 void Player::changeMode()
 {
-	_isBuilding = !_isBuilding;
-	_isWeapon = !_isWeapon;
+	_buildingEnabled = !_buildingEnabled;
+	_weaponEnabled = !_weaponEnabled;
 }
 
-bool Player::getIsBuildingEquipped()
+bool Player::getIsBuildingEnabled()
 {
-	return _isBuilding;
+	return _buildingEnabled;
 }
 
-bool Player::getIsWeaponEquipped()
+bool Player::getIsWeaponEnabled()
 {
-	return _isWeapon;
+	return _weaponEnabled;
 }

@@ -17,14 +17,14 @@ class Player : public SidewayCharacter, public Weapon
 {
 protected:
 
-	bool _isBuilding;
-	bool _isWeapon;
+	bool _buildingEnabled;
+	bool _weaponEnabled;
 
 public:
 
 	Player();
 
 	void changeMode();
-	bool getIsBuildingEquipped();
-	bool getIsWeaponEquipped();
+	bool getIsBuildingEnabled();
+	bool getIsWeaponEnabled();
 };
