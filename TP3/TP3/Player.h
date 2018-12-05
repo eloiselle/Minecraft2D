@@ -8,14 +8,23 @@ Goal  : Avatar du joueur controllable avec le clavier/souris
 #pragma once
 #include "pch.h"
 
-//#include "Weapon.hpp"
+#include "Weapon.h"
 #include "SidewayCharacter.h"
 
 using namespace sf;
 
-class Player : public SidewayCharacter//, public Weapon
+class Player : public SidewayCharacter, public Weapon
 {
 protected:
-    // TODO : Add stuff because it's empty here
+
+	bool _isBuilding;
+	bool _isWeapon;
+
 public:
+
+	Player();
+
+	void changeMode();
+	bool getIsBuildingEquipped();
+	bool getIsWeaponEquipped();
 };
