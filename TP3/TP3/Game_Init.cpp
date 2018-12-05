@@ -24,6 +24,9 @@ void Game::init()
     initGameElements();
     initTexts();
 
+	initMusic();
+	initSounds();
+
     _frameRun = 0;
     _frameTotal = 0;
 }
@@ -157,6 +160,17 @@ void Game::initWorldMap(const char* fileName)
     _spider.setPositionInGrid(1, 1);
 
     initViews();
+}
+
+void Game::initMusic()
+{
+	_music.openFromFile("zelda.wav");
+	_music.play();
+}
+
+void Game::initSounds()
+{
+
 }
 
 void Game::initViews()

@@ -7,7 +7,7 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 **********************************************************/
 #pragma once
 #include "pch.h"
-
+#include "SFML\Audio.hpp"
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -67,6 +67,9 @@ private:
     Bullet _yoyo;                       // Tourne a l'entour de _player
     VectorAngle _yoyoString;            // Distance entre _yoyo et _player
     Crawler _spider;                    // Ennemi qui se promene dans la grille
+	Sound _sounds;						// sons 
+	Music _music;						// musique
+
 
     list<Bullet> _bullets;              // Liste des projectiles
 
@@ -123,6 +126,8 @@ public:
     void initViews();                   // Initialization des view
     void initGameElements();            // Initialization des elements qui se deplacent
     void initWorldMap(const char* fileName = DEFAULT_FILENAME);   // Initialization du labyrinthe
+	void initMusic();
+	void initSounds();
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes
