@@ -18,7 +18,7 @@
     <Position X="3" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>iAAAAAAEAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>Delay.hpp</FileName>
+      <FileName>Delay.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entity" Collapsed="true">
@@ -52,7 +52,7 @@
   <Class Name="Game" Collapsed="true">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gDWAQJDKi44NMIgihAEhCoEQB6wAMAJQHGMBQEiYABo=</HashCode>
+      <HashCode>gDXAQJDKi44NMIgihAEhCqEQB6wAMAJQHGMBQEiYABo=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,7 +115,7 @@
   <Class Name="WorldMap" Collapsed="true">
     <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQCAAAAACBACIgAEAAAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABAAABAAACAAQCAAIAACBACIgAEAAAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,15 +129,15 @@
   <Class Name="Player" Collapsed="true">
     <Position X="4.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAABAAAAAgAAAAAAAAAAAAAAAAAAACAAAAAQAAQAA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Weapon" Collapsed="true">
     <Position X="3" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Weapon.hpp</FileName>
+      <HashCode>AAAAAAAAAAEAAAAAQBAAIAAAAAAAAACAAAAEDC1CAAI=</HashCode>
+      <FileName>Weapon.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MapRandomizer" Collapsed="true">
@@ -199,14 +199,7 @@
   <Enum Name="DIRECTION4" Collapsed="true">
     <Position X="16.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAgAAAAAAAAAgAAAAAAAABAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Direction.h</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="DIRECTION8" Collapsed="true">
-    <Position X="14.5" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAABCAAAAAgAAAAAAAQAAAAICAAAgABAAAAAAAAA=</HashCode>
+      <HashCode>ABAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAACA=</HashCode>
       <FileName>Direction.h</FileName>
     </TypeIdentifier>
   </Enum>

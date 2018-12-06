@@ -45,11 +45,11 @@ void Game::manageFoes()
 	// Manage one foe
 	if (_spider.isGridCentered()) // Pret a se deplacer
 	{
-		DIRECTION8 randDirection = static_cast<DIRECTION8>(rand() % 8 * 2);
+		DIRECTION4 randDirection = static_cast<DIRECTION4>(rand() % 4);
 
 		if (_map.isTraversable(
-			_spider.getExactX() + D8_x[randDirection] * TILE_SIZE,
-			_spider.getExactY() + D8_y[randDirection] * TILE_SIZE))
+			_spider.getExactX() + D4_x[randDirection] * TILE_SIZE,
+			_spider.getExactY() + D4_y[randDirection] * TILE_SIZE))
 		{
 			_spider.setDirection(randDirection);
 			_spider.startMoving();
@@ -189,9 +189,9 @@ bool Game::playerIsLanding()
 }
 
 // Regarde si on peu se déplacer a la nouvelle position // Version Sideway
-void Game::tryToMove(int dir, SidewayCharacter& character)
+void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
 {
-	float newExactX = character.getExactX() + D8_x[dir] * character.getSpeed();
+	float newExactX = character.getExactX() + D4_x[dir] * character.getSpeed();
 
 	int nextGridX = (newExactX) / TILE_SIZE;
 
@@ -211,10 +211,10 @@ void Game::tryToMove(int dir, SidewayCharacter& character)
 }
 
 // Regarde si on peu se déplacer a la nouvelle position // Version Top-down
-void Game::tryToMove(DIRECTION8 dir, TopDownCharacter& character)
+void Game::tryToMove(DIRECTION4 dir, TopDownCharacter& character)
 {
-	float newExactX = character.getExactX() + D8_x[dir] * character.getSpeed();
-	float newExactY = character.getExactY() + D8_y[dir] * character.getSpeed();
+	float newExactX = character.getExactX() + D4_x[dir] * character.getSpeed();
+	float newExactY = character.getExactY() + D4_y[dir] * character.getSpeed();
 
 	int nextGridX = (newExactX) / TILE_SIZE;
 	int nextGridY = (newExactY) / TILE_SIZE;

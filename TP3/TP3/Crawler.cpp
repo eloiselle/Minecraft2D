@@ -34,16 +34,16 @@ void Crawler::move()
 {
     switch (_direction)
     {
-    case UP:
+    case D4_UP:
         setPositionExact(getExactX(), getExactY() - _speed);
         break;
-    case RIGHT:
+    case D4_RIGHT:
         setPositionExact(getExactX() + _speed, getExactY());
         break;
-    case DOWN:
+    case D4_DOWN:
         setPositionExact(getExactX(), getExactY() + _speed);
         break;
-    case LEFT:
+    case D4_LEFT:
         setPositionExact(getExactX() - _speed, getExactY());
         break;
     }
@@ -62,13 +62,13 @@ void Crawler::startMoving()
 // Change la direction de 90 degree anti-clockwise
 void Crawler::turnLeft()
 {
-    _direction = static_cast<DIRECTION8>((_direction + 6) % 8);
+    _direction = static_cast<DIRECTION4>((_direction + 3) % 4);
 }
 
 // Change la direction de 90 degree clockwise
 void Crawler::turnRight()
 {
-    _direction = static_cast<DIRECTION8>((_direction + 2) % 8);
+    _direction = static_cast<DIRECTION4>((_direction + 1) % 4);
 }
 
 // Effectu les operation de routine a chaque refresh
