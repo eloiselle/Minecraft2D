@@ -174,11 +174,19 @@ void Game::handleMouseButtonPressed()
 {
     if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
     {
-        if (isMouseInMap() && !(_player.getGridCol() == _mouseMagnet.getGridCol() && _player.getGridLine() == _mouseMagnet.getGridLine()))
+        if (isMouseInMap() && 
+            !areOnTheSameSquare(_mouseMagnet, _player))
             changeBlockAtMouse();
 
         shootBullet();
     }
+}
+
+// Retourne si deux objet sont sue la meme case
+bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
+{
+    return (mp1.getGridCol() == mp2.getGridCol()
+        && mp2.getGridLine() == mp2.getGridLine());
 }
 
 void Game::shootBullet()

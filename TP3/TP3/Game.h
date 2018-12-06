@@ -140,6 +140,7 @@ public:
     void handleArrowKeys();                             // Handler des fleches du clavier et WASD
     void handleMouseWheelMoved();                       // Handler de la roulette de souris
     void handleMouseButtonPressed();                    // Handler des boutons de souris
+    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
     void shootBullet();                                 // Tire une balle
     void changeBlockAtMouse();                          // Change un block a la position de la souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
