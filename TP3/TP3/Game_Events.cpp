@@ -174,7 +174,7 @@ void Game::handleMouseButtonPressed()
 {
     if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
     {
-        if (isMouseInMap())
+        if (isMouseInMap() && !(_player.getGridCol() == _mouseMagnet.getGridCol() && _player.getGridLine() == _mouseMagnet.getGridLine()))
             changeBlockAtMouse();
 
         shootBullet();
