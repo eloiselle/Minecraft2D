@@ -1,8 +1,9 @@
+#pragma once
 #include "TopDownCharacter.h"
 
 void TopDownCharacter::init()
 {
-    _direction = D4_DOWN;
+    _direction = DOWN;
     _isWalking = false;
 }
 
@@ -20,14 +21,14 @@ void TopDownCharacter::isWalking(bool isWalking) { _isWalking = isWalking; }
 // Se déplace automatiquement en fonction de la direction et de la vitesse
 void TopDownCharacter::move()
 {
-    move(D4_x[_direction] * _speed, D4_y[_direction] * _speed);
+    move(D4[_direction][X] * _speed, D4[_direction][Y] * _speed);
 }
 
 // Deplace dans une direction
 void TopDownCharacter::move(DIRECTION4 dir)
 {
     _direction = dir;
-    move(D4_x[dir] * _speed, D4_y[dir] * _speed);
+    move(D4[dir][X] * _speed, D4[dir][Y] * _speed);
 }
 
 // Change la position exacte et recalcule la position sur la grille

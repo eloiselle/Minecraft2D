@@ -1,3 +1,4 @@
+#pragma once
 #include "SidewayCharacter.h"
 
 // Récupere la vitesse de déplacement du saut

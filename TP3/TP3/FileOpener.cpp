@@ -1,3 +1,4 @@
+#pragma once
 #include "FileOpener.h"
 
 FileOpener::FileOpener(const char * fileName)

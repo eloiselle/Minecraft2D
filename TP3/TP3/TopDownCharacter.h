@@ -18,7 +18,7 @@ protected:
     bool _isWalking;        // Si en train de marcher
     //float _length;          // Vitesse de déplacement
 public:
-    TopDownCharacter() : _direction(D4_DOWN), _isWalking(false) {};
+    TopDownCharacter() : _direction(DOWN), _isWalking(false) {};
     void init();                            //
 
     // Get

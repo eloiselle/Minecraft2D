@@ -1,3 +1,4 @@
+#pragma once
 #include "Bullet.h"
 
 Bullet::Bullet(float x, float y, float speed)

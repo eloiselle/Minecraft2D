@@ -1,3 +1,4 @@
+#pragma once
 #include "WorldMap.h"
 
 using namespace std;

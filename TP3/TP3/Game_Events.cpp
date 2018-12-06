@@ -139,19 +139,19 @@ void Game::handleArrowKeys()
         Keyboard::isKeyPressed(Keyboard::D))
     {
         _view[CAMERA].move(ARROW_EXPLORE, 0);
-        tryToMove(D4_RIGHT, _player);
+        tryToMove(RIGHT, _player);
     }
     if (Keyboard::isKeyPressed(Keyboard::Down) ||
         Keyboard::isKeyPressed(Keyboard::S))
     {
         _view[CAMERA].move(0, ARROW_EXPLORE);
-        tryToMove(D4_DOWN, _player);
+        tryToMove(DOWN, _player);
     }
     if (Keyboard::isKeyPressed(Keyboard::Left) ||
         Keyboard::isKeyPressed(Keyboard::A))
     {
         _view[CAMERA].move(-ARROW_EXPLORE, 0);
-        tryToMove(D4_LEFT, _player);
+        tryToMove(LEFT, _player);
     }
 }
 

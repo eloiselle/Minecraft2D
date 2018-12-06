@@ -1,3 +1,4 @@
+#pragma once
 #include "AngleDegree.h"
 
 // Retourne la direction

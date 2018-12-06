@@ -1,3 +1,4 @@
+#pragma once
 #include "Crawler.h"
 
 // Constructeur
@@ -32,21 +33,7 @@ void Crawler::setAI(AI_Move ai, AI_Frequency decisionAI)
 //Change sa position de 1 dans la direction
 void Crawler::move()
 {
-    switch (_direction)
-    {
-    case D4_UP:
-        setPositionExact(getExactX(), getExactY() - _speed);
-        break;
-    case D4_RIGHT:
-        setPositionExact(getExactX() + _speed, getExactY());
-        break;
-    case D4_DOWN:
-        setPositionExact(getExactX(), getExactY() + _speed);
-        break;
-    case D4_LEFT:
-        setPositionExact(getExactX() - _speed, getExactY());
-        break;
-    }
+    setPositionExact(getExactX() + D4[_direction][X], getExactY() + D4[_direction][Y]);
     updateGridPosition();
     _frameLeftBeforeControl--;
 }
