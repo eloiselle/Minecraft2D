@@ -119,6 +119,8 @@ void Game::handleKeypress()
         _currentView = CAMERA;
     else if (Keyboard::isKeyPressed(Keyboard::Num4))
         _currentView = FOLLOW;
+
+
 }
 
 void Game::handleArrowKeys()
@@ -176,7 +178,7 @@ void Game::handleMouseButtonPressed()
 
         if (_player.getIsWeaponEnabled())
         {
-            shootBullet();
+        shootBullet();
         }
     }
 }
