@@ -159,6 +159,7 @@ public:
     // Terraria
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
+	void manageWeapon();
     void manageFoes();                                  // Gere les ennemis
     void manageBullets();                               // Gere les projectiles
 

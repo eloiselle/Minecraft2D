@@ -1,3 +1,4 @@
+#pragma once
 #include "Game.h"
 
 // ############################################################################
@@ -8,7 +9,7 @@
 void Game::quitApplication()
 {
     _window.close();
-    //exit(1);
+    exit(1);
 }
 
 // Gere les evenements globaux de l'application
@@ -118,12 +119,6 @@ void Game::handleKeypress()
         _currentView = CAMERA;
     else if (Keyboard::isKeyPressed(Keyboard::Num4))
         _currentView = FOLLOW;
-
-
-    //if (Keyboard::isKeyPressed(Keyboard::R))
-    //{
-    //    MapRandomizer mr(_map);
-    //}
 }
 
 void Game::handleArrowKeys()
@@ -175,10 +170,14 @@ void Game::handleMouseButtonPressed()
     if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
     {
         if (isMouseInMap() && 
-            !areOnTheSameSquare(_mouseMagnet, _player))
+            !areOnTheSameSquare(_mouseMagnet, _player) &&
+            _player.getIsBuildingEnabled())
             changeBlockAtMouse();
 
-        shootBullet();
+        if (_player.getIsWeaponEnabled())
+        {
+            shootBullet();
+        }
     }
 }
 

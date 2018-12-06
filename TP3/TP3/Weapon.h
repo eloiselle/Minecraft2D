@@ -9,22 +9,42 @@ Goal  : TODO : Gere des pattern compliquer de bullet
 #include "pch.h"
 
 #include "Bullet.h"
-#include "Delay.hpp"
+#include "Delay.h"
 //#include "AngleDegree.hpp"
 
 class Weapon : public Delay
 {
-public:
-
-    //void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
-    //void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);
-
-    //void shootAimedBullet(Entity & shooter, list<Bullet>& goodBullets, Entity & target);
-
 protected:
 
-    //AngleDegree _angle;
-    //float _shootDirectionDegree;  // Direction vers laquelle e shoot
+	float _accuracy;			//Détermine une variation dans _angle
+	float _bulletSpeed;			//Vitesse des bullets
+	float _damageMultiplier;	//Multiplicateur de dommages
+
+	AngleDegree _fireAngle;			//Angle où les balles sont tirés
+
+public:
+
+	void setUzi();
+	void setAssault();
+	void setSniper();
+	void setCustom(float, int, float, float);
+
+	float getAccuracy();
+	int getRateOfFire();
+	float getBulletSpeed();
+	float getDamageMultiplier();
+	AngleDegree getFireAngle();
+
+	void setAccuracy(float);
+	void setRateOfFire(int);
+	void setBulletSpeed(float);
+	void getDamageMultiplier(float);
+	void setFireAngle(AngleDegree);
+
+	//void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
+	//void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);
+
+	//void shootAimedBullet(Entity & shooter, list<Bullet>& goodBullets, Entity & target);
 };
 
 //// Tire des projectiles en fonction du style
