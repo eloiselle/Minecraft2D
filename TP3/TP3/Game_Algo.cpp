@@ -45,6 +45,7 @@ void Game::manageFoes()
 	// Manage one foe
 	if (_spider.isGridCentered()) // Pret a se deplacer
 	{
+        _spider.stopMoving();
         tryToMoveRandomDirection(_spider);
 	}
 

@@ -30,6 +30,7 @@ public:
     void setAI(AI_Move ai, AI_Frequency decisionAI); // Change l'intelligence artificielle
     void move();                            // se deplace de 1 vers l'avant
     void startMoving();
+    void stopMoving();
     void turnLeft();                        // change de direction anticlockwise
     void turnRight();                       // change de direction clockwise
 

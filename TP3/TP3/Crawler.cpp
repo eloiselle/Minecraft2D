@@ -46,6 +46,14 @@ void Crawler::startMoving()
     _frameLeftBeforeControl = TILE_SIZE / _speed;
 }
 
+// Arrete de se deplacer
+void Crawler::stopMoving()
+{
+    _isWalking = false;
+    _isControllable = true;
+    _frameLeftBeforeControl = 0;
+}
+
 // Change la direction de 90 degree anti-clockwise
 void Crawler::turnLeft()
 {
