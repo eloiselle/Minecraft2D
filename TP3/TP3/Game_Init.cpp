@@ -59,11 +59,15 @@ void Game::initSprites()
         quitApplication();
 
     // Map
-    _tileSprite[EMPTY_BLOCK] = initOneSprite(0, 2, _tileset);
-    _tileSprite[SOFT_BLOCK] = initOneSprite(10, 5, _tileset);
-    _tileSprite[HARD_BLOCK] = initOneSprite(0, 17, _tileset);
-    _tileSprite[VISITED] = initOneSprite(13, 2, _tileset);
-    _tileSprite[INVALID_BLOCK] = initOneSprite(5, 4, _tileset);
+    for (size_t version = 0; version < 8; version++)
+    {
+        _tileSprite[EMPTY_BLOCK][version]   = initOneSprite(0 + version, 0, _tileset);
+        _tileSprite[SOFT_BLOCK][version]    = initOneSprite(7 + version, 5, _tileset);
+        _tileSprite[HARD_BLOCK][version]    = initOneSprite(8 + version, 8, _tileset);
+        _tileSprite[VISITED][version]       = initOneSprite(13 + version, 2, _tileset);
+        _tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
+    }
+
 
     // Spider
     _spiderImage.createMaskFromColor(Color(255, 255, 255));

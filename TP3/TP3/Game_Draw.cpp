@@ -56,9 +56,10 @@ void Game::drawGrid()
         for (size_t c = 0; c < _map.nbCol(); c++)
         {
             // Choix de la bonne tuile a afficher
-            char tileIndex = _map.at(l, c).getType();
-            _tileSprite[tileIndex].setPosition(c*TILE_SIZE, l*TILE_SIZE);
-            _window.draw(_tileSprite[tileIndex]);
+            BLOCK_TYPE t = _map.at(l, c).getType();
+            int v = _map.at(l, c).getVersion();
+            _tileSprite[t][v].setPosition(c*TILE_SIZE, l*TILE_SIZE);
+            _window.draw(_tileSprite[t][v]);
         }
     }
 }

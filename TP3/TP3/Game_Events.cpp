@@ -34,6 +34,8 @@ void Game::inputActivatedOnlyTheFirstTime()
                 init();
             if (_event.key.code == Keyboard::P)
                 handlePausing();
+            if (_event.key.code == Keyboard::M)
+                _player.changeMode();
             break;
         }
 

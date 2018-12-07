@@ -100,7 +100,7 @@ private:
     Texture _spiderTexture;             // Texture du robot
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _spiderSprite;               // Sprite du robot
-    Sprite _tileSprite[5];              // Ensemble de sprite pour afficher la map
+    Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
     // Etat
     static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application

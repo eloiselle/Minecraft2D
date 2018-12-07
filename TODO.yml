@@ -5,7 +5,6 @@ Priorities: (High to Low)
     Foes        : Changer image de spider (animation et/ou direction)
     Player      : Choisir sprite du personnage
     Player      : Trouver meilleurs graphiques
-    Foes        : Debug spider passe au travers des mur (A)
     Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)
     Weapon      : Faire détruire les bloc par les bullet
     Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED
@@ -15,10 +14,9 @@ Priorities: (High to Low)
     Weapon      : Homing        : appeller Aim() frequemment (E)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
     Foes        : Boss          : 
-    Art         : Faire que les Block ait plusieurs versions differentes
     Art         : Mettre de la musique et du son (C)
     Pathfinding : A* search
-    Meta        : EndGame,Timer,
+    Meta        : EndGame ; Timer
     Map         : Map Editor
 
 
