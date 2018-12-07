@@ -161,6 +161,7 @@ public:
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
 	void manageWeapon();
     void manageFoes();                                  // Gere les ennemis
+    void tryToMoveRandomDirection(Crawler & c);
     void manageBullets();                               // Gere les projectiles
 
     // Movement & Collision

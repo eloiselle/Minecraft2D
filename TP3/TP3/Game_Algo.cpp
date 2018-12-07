@@ -45,21 +45,26 @@ void Game::manageFoes()
 	// Manage one foe
 	if (_spider.isGridCentered()) // Pret a se deplacer
 	{
-		DIRECTION4 randDirection = static_cast<DIRECTION4>(rand() % 4);
-
-		if (_map.isTraversable(
-			_spider.getExactX() + D4[randDirection][X] * TILE_SIZE,
-			_spider.getExactY() + D4[randDirection][Y] * TILE_SIZE))
-		{
-			_spider.setDirection(randDirection);
-			_spider.startMoving();
-		}
+        tryToMoveRandomDirection(_spider);
 	}
 
 	if (_spider.isWalking())
 	{
 		_spider.move();
 	}
+}
+
+void Game::tryToMoveRandomDirection(Crawler& c)
+{
+    DIRECTION4 randDir = static_cast<DIRECTION4>(rand() % 4);
+
+    if (_map.isTraversable(
+        c.getExactX() + D4[randDir][X] * TILE_SIZE,
+        c.getExactY() + D4[randDir][Y] * TILE_SIZE))
+    {
+        c.setDirection(randDir);
+        c.startMoving();
+    }
 }
 
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
