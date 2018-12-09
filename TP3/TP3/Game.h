@@ -62,6 +62,9 @@ constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplac
 
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
 
+constexpr int PLAYER_HEIGHT = 16;
+constexpr int PLAYER_FOOT = 4;
+
 class Game
 {
 private:
@@ -165,6 +168,7 @@ public:
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
 	void manageWeapon();
     void manageFoes();                                  // Gere les ennemis
+    void manageMapExpansion();
     void tryToMoveRandomDirection(Crawler & c);
     void manageBullets();                               // Gere les projectiles
 

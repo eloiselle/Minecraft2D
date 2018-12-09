@@ -49,13 +49,6 @@
       <FileName>Foe.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Game" Collapsed="true">
-    <Position X="9" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>gDXAQJDKi44NMIgihAEhCqEQB6wAMAJQHGMBQEiYABo=</HashCode>
-      <FileName>Game.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Killable" Collapsed="true">
     <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
@@ -87,7 +80,7 @@
   <Class Name="Crawler" Collapsed="true">
     <Position X="10.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAICAAAAAICAAAAAAAAAAAAAQAIAAABACBAEAAA=</HashCode>
+      <HashCode>AAEAAAICAAAAAICAAAAAAAAAAAAAQAIAAQBACBAEAAA=</HashCode>
       <FileName>Crawler.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,7 +108,7 @@
   <Class Name="WorldMap" Collapsed="true">
     <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQCAAIAACBACIgAEAAAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABAAABAAACAAQCAAIAACBACIgAEACAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -152,6 +145,13 @@
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAABAAAAAAAAAAAAAAABAAAAUAAAAAAA=</HashCode>
       <FileName>Nameable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gDXAQJDKi44NMIgihAEhCqEQB6wAMAJQHGMBQEiYARo=</HashCode>
+      <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
   <Typedef Name="degree_t" Collapsed="true">

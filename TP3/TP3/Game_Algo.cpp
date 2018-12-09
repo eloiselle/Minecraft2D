@@ -151,19 +151,19 @@ void Game::managePlayerJump()
         }
     }
 
-    //_debug +=
-    //    " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
-    //    " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
-    //    " HitLand " + to_string(playerIsLanding()) + "\r\n" +
-    //    " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
-    //    " pToFall " + to_string(pixelsToFall()) + "\r\n" +
-    //    " pToRise " + to_string(pixelsToRise()) + "\r\n" +
-    //    " isFall " + to_string(_player.isFalling()) + "\r\n" +
-    //    " isRise " + to_string(_player.isRising()) + "\r\n" +
-    //    " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
-    //    " x " + to_string((int)_player.getExactX()) + "\r\n" +
-    //    " y " + to_string((int)_player.getExactY()) + "\r\n" +
-    //    "  ";
+    _debug +=
+        " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
+        " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
+        " HitLand " + to_string(playerIsLanding()) + "\r\n" +
+        " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
+        " pToFall " + to_string(pixelsToFall()) + "\r\n" +
+        " pToRise " + to_string(pixelsToRise()) + "\r\n" +
+        " isFall " + to_string(_player.isFalling()) + "\r\n" +
+        " isRise " + to_string(_player.isRising()) + "\r\n" +
+        " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
+        " x " + to_string((int)_player.getExactX()) + "\r\n" +
+        " y " + to_string((int)_player.getExactY()) + "\r\n" +
+        "  ";
 }
 
 // END OF MANAGERS
@@ -196,7 +196,7 @@ int Game::pixelsToFall()
 
 bool Game::playerHitTheCeiling()
 {
-    float newExactY = _player.getExactY() - _player.getUpMomentum();
+    float newExactY = _player.getExactY() - _player.getUpMomentum() - PLAYER_HEIGHT;
     return !_map.isTraversable(_player.getExactX(), newExactY);
 }
 
@@ -209,9 +209,15 @@ bool Game::playerIsLanding()
 // Regarde si on peu se déplacer a la nouvelle position // Version Sideway
 void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
 {
+    float testExactX;
     float newExactX = character.getExactX() + D4[dir][X] * character.getSpeed();
 
-    int nextGridX = (newExactX) / TILE_SIZE;
+    if (dir == LEFT)
+        testExactX = newExactX - PLAYER_FOOT;
+    else if ( dir == RIGHT)
+        testExactX = newExactX + PLAYER_FOOT;
+
+    int nextGridX = (testExactX) / TILE_SIZE;
 
     bool onCurrentGridX = nextGridX == character.getGridCol();
 
@@ -223,7 +229,7 @@ void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
     else // Si essaye de changer de case
     {
         // Essaye de se deplacer horizontalement
-        if (_map.isTraversable(newExactX, character.getExactY()))
+        if (_map.isTraversable(testExactX, character.getExactY()))
             character.setPositionExact(newExactX, character.getExactY());
     }
 }
