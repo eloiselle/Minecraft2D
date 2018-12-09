@@ -80,6 +80,7 @@ void Game::tryToMoveRandomDirection(Crawler& c)
     }
 }
 
+ // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
 {
     return cos(base / slowness * PI) * amplitude + minimum;
@@ -88,11 +89,11 @@ double smartCos(double base, double slowness = 1, double amplitude = 1, double m
 void Game::manageBullets()
 {
     // Yoyo : Example d'utilisation de VectorAngle
-    _yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
-    _yoyoString.rotate(30);
+    //_yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
+    _yoyoString.rotate(10);
     _yoyo.setPositionExact(
         _player.getExactX() + _yoyoString.getX(),
-        _player.getExactY() + _yoyoString.getY());
+        _player.getExactY() + _yoyoString.getY() - PLAYER_HEIGHT / 2);
 
     // List of bullets
     bool willVanish; //
@@ -151,19 +152,19 @@ void Game::managePlayerJump()
         }
     }
 
-    _debug +=
-        " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
-        " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
-        " HitLand " + to_string(playerIsLanding()) + "\r\n" +
-        " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
-        " pToFall " + to_string(pixelsToFall()) + "\r\n" +
-        " pToRise " + to_string(pixelsToRise()) + "\r\n" +
-        " isFall " + to_string(_player.isFalling()) + "\r\n" +
-        " isRise " + to_string(_player.isRising()) + "\r\n" +
-        " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
-        " x " + to_string((int)_player.getExactX()) + "\r\n" +
-        " y " + to_string((int)_player.getExactY()) + "\r\n" +
-        "  ";
+    //_debug +=
+    //    " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
+    //    " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
+    //    " HitLand " + to_string(playerIsLanding()) + "\r\n" +
+    //    " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
+    //    " pToFall " + to_string(pixelsToFall()) + "\r\n" +
+    //    " pToRise " + to_string(pixelsToRise()) + "\r\n" +
+    //    " isFall " + to_string(_player.isFalling()) + "\r\n" +
+    //    " isRise " + to_string(_player.isRising()) + "\r\n" +
+    //    " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
+    //    " x " + to_string((int)_player.getExactX()) + "\r\n" +
+    //    " y " + to_string((int)_player.getExactY()) + "\r\n" +
+    //    "  ";
 }
 
 // END OF MANAGERS

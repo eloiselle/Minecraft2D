@@ -2,7 +2,7 @@
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
     Foes        : Changer image de spider (animation et/ou direction)
-    Player      : Implanter les images de WaddleDoo
+    Player      : Implanter les animations de WaddleDoo
     Player      : Modifier les collisions pour le personnage plus gros (A)
     Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)
     Weapon      : Faire détruire les bloc par les bullet

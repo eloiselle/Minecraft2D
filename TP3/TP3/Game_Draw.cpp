@@ -85,6 +85,12 @@ void Game::drawMovableObjects()
         _mouseMagnet.getGridLine() * TILE_SIZE);
     _window.draw(_mouseSquare);
 
+    // player
+    _playerSprite.setPosition(
+        _player.getExactX(),
+        _player.getExactY());
+    _window.draw(_playerSprite);
+
     // Spider
     _spiderSprite.setPosition(
         _spider.getExactX(),

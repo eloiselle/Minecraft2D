@@ -103,10 +103,14 @@ private:
     CircleShape _bulletShape;           // Cercle rouge
 
     // Sprites
+    Image   _playerImage;               // Image du joueur pour modification de transparence
+    Texture _playerTexture;             // Texture du joueur
+    Sprite  _playerSprite;              // Sprite du joueur
+
     Image _spiderImage;                 // Image du robot pour modification de transparence
     Texture _spiderTexture;             // Texture du robot
-    Texture _tileset;                   // Source d'image pour les sprite
     Sprite _spiderSprite;               // Sprite du robot
+    Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
     // Etat

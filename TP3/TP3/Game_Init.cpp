@@ -56,28 +56,39 @@ void Game::initSprites()
     // Load files
     if (!_tileset.loadFromFile("img\\tiles.bmp"))
         quitApplication();
-    if (!_spiderTexture.loadFromFile("img\\spider.bmp"))
+    if (!_spiderTexture.loadFromFile("img\\bat.bmp"))
         quitApplication();
-    if (!_spiderImage.loadFromFile("img\\spider.bmp"))
+    if (!_spiderImage.loadFromFile("img\\bat.bmp"))
+        quitApplication();
+    if (!_playerTexture.loadFromFile("img\\WaddleDoo.bmp"))
+        quitApplication();
+    if (!_playerImage.loadFromFile("img\\WaddleDoo.bmp"))
         quitApplication();
 
-    // Map
-    for (size_t version = 0; version < 8; version++)
-    {
-        _tileSprite[EMPTY_BLOCK][version]   = initOneSprite(0 + version, 0, _tileset);
-        _tileSprite[SOFT_BLOCK][version]    = initOneSprite(7 + version, 5, _tileset);
-        _tileSprite[HARD_BLOCK][version]    = initOneSprite(8 + version, 8, _tileset);
-        _tileSprite[VISITED][version]       = initOneSprite(13 + version, 2, _tileset);
-        _tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
-    }
-
+    // Player
+    _playerImage.createMaskFromColor(Color(47, 54, 153));
+    _playerTexture.update(_playerImage);
+    _playerSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+    _playerSprite.setTexture(_playerTexture);
+    _playerSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE));
 
     // Spider
     _spiderImage.createMaskFromColor(Color(255, 255, 255));
     _spiderTexture.update(_spiderImage);
-    _spiderSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+    _spiderSprite.setTextureRect(IntRect(64, 0, TILE_SIZE, TILE_SIZE));
     _spiderSprite.setTexture(_spiderTexture);
     _spiderSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+
+    // Map
+    for (size_t version = 0; version < 8; version++)
+    {
+        _tileSprite[EMPTY_BLOCK][version] = initOneSprite(0 + version, 0, _tileset);
+        _tileSprite[SOFT_BLOCK][version] = initOneSprite(7 + version, 5, _tileset);
+        _tileSprite[HARD_BLOCK][version] = initOneSprite(8 + version, 8, _tileset);
+        _tileSprite[VISITED][version] = initOneSprite(13 + version, 2, _tileset);
+        _tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
+    }
+
 }
 
 // Recupere un sprite a partir des parametres
@@ -120,14 +131,14 @@ void Game::initTexts()
 void Game::initShapes()
 {
     _playerShape.setFillColor(Color::Green);
-    _playerShape.setSize(Vector2f(8, 8));
-    _playerShape.setOrigin(4, 4);
+    _playerShape.setSize(Vector2f(3, 3));
+    _playerShape.setOrigin(2, 2);
 
     // Bullet
     _bulletShape.setRadius(2);
     _bulletShape.setOrigin(1, 1);
-    _bulletShape.setFillColor(Color::Red);
-    _bulletShape.setOutlineColor(Color(128, 0, 0));
+    _bulletShape.setFillColor(Color::White);
+    _bulletShape.setOutlineColor(Color::Cyan);
     _bulletShape.setOutlineThickness(1);
 
     // Coord de la souris sans la view
