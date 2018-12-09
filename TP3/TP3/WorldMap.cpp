@@ -18,9 +18,15 @@ void WorldMap::randomize()
 
     resize(25, 25);
 
+    fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
 
+    // Quelques premieres lignes vides
+    for (size_t l = 1; l < NBR_EMPTY_LINE_ON_TOP; l++)
+    {
+        fillLine(l, EMPTY_BLOCK);
+    }
     // On remplace les characteres par celui de l'entree
-    for (int l = 1; l < _nbL; l++)      // Lignes
+    for (int l = NBR_EMPTY_LINE_ON_TOP; l < _nbL; l++)      // Lignes
     {
         randomizeLine(l);
     }
@@ -31,25 +37,36 @@ void WorldMap::randomize()
         _map[l][0].set(HARD_BLOCK);
         _map[l][_nbL-1].set(HARD_BLOCK);
     }
-    //for (size_t c = 0; c < _nbL; c++)
-    //{
-    //    _map[0][c].set(HARD_BLOCK);
-    //    _map[_nbC-1][c].set(HARD_BLOCK);
-    //}
+
 }
 
 void WorldMap::randomizeLine(int line)
 {
-    BLOCK_TYPE blockByID[3] = { EMPTY_BLOCK, SOFT_BLOCK, HARD_BLOCK };
+    BLOCK_TYPE blockByID[5] = { 
+        EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
+        SOFT_BLOCK, 
+        HARD_BLOCK };
 
     for (int c = 1; c < _nbC - 1; c++)  // Colonnes
     {
-        _map[line][c].set(blockByID[rand() % 3]);
+        _map[line][c].set(blockByID[rand() % 5]);
     }
 
     _map[line][0].set(HARD_BLOCK);
     _map[line][_nbC-1].set(HARD_BLOCK);
 }
+
+void WorldMap::fillLine(int line, BLOCK_TYPE bt)
+{
+    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
+    {
+        _map[line][c].set(bt);
+    }
+
+    _map[line][0].set(HARD_BLOCK);
+    _map[line][_nbC - 1].set(HARD_BLOCK);
+}
+
 
 void WorldMap::readGrid(istream& is)
 {

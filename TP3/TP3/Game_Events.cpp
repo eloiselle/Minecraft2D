@@ -36,7 +36,9 @@ void Game::inputActivatedOnlyTheFirstTime()
                 handlePausing();
             if (_event.key.code == Keyboard::M)
                 _player.changeMode();
-            if (_event.key.code == Keyboard::T && isMouseInWindow())
+            if (_event.key.code == Keyboard::T
+                && isMouseInWindow()
+                && !areOnTheSameSquare(_mouseMagnet, _player))
                 _player.setPosition(_mouseMagnet);
         }
 
@@ -132,7 +134,7 @@ void Game::handleArrowKeys()
 {
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
-        Keyboard::isKeyPressed(Keyboard::W) || 
+        Keyboard::isKeyPressed(Keyboard::W) ||
         Keyboard::isKeyPressed(Keyboard::Space))
     {
         _view[CAMERA].move(0, -ARROW_EXPLORE);
@@ -176,14 +178,14 @@ void Game::handleMouseButtonPressed()
 {
     if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
     {
-        if (isMouseInMap() && 
-            !areOnTheSameSquare(_mouseMagnet, _player) &&
-            _player.getIsBuildingEnabled())
+        if (isMouseInMap()
+            && !areOnTheSameSquare(_mouseMagnet, _player)
+            && _player.getIsBuildingEnabled())
             changeBlockAtMouse();
 
         if (_player.getIsWeaponEnabled())
         {
-        shootBullet();
+            shootBullet();
         }
     }
 }

@@ -14,6 +14,7 @@ Goal  : Wrapper de Map<char> qui contient les positions de depart et arrivee
 #include "Block.h"
 using namespace std;
 
+constexpr int NBR_EMPTY_LINE_ON_TOP = 5;
 
 class WorldMap : public ResizableMap<Block>, FileOpener {
 private:
@@ -31,19 +32,20 @@ public:
     int xFin()const;       // Retourne la valeur X d'arrivee
     int yFin()const;       // Retourne la valeur Y d'arrivee
 
-    void randomize();
-    void randomizeLine(int line);
+    void randomize();                           //
+    void randomizeLine(int line);               //
+    void fillLine(int line, BLOCK_TYPE bt);     //
 
     bool isTraversable(pixel_t x, pixel_t y);   //
     bool isTraversable(tile_t x, tile_t y);     //
     bool isTraversable(MagnetPosition& mp);     //
 
-    bool isDestructible(pixel_t x, pixel_t y);
-    bool isDestructible(tile_t x, tile_t y);
-    bool isDestructible(MagnetPosition & mp);
+    bool isDestructible(pixel_t x, pixel_t y);  //
+    bool isDestructible(tile_t x, tile_t y);    //
+    bool isDestructible(MagnetPosition & mp);   //
 
-    void readGrid(istream& is = cin);   // Lit la matrice de la map dans le flux
+    void readGrid(istream& is = cin);           // Lit la matrice de la map dans le flux
     bool readFile(const char* nomFichier);      // Lit la map
-    bool blockIsTraversable(Block& cm);
-    bool blockIsDestructible(Block& cm);
+    bool blockIsTraversable(Block& cm);         //
+    bool blockIsDestructible(Block& cm);        //
 };
