@@ -18,15 +18,11 @@ void WorldMap::randomize()
 
     resize(25, 25);
 
-    BLOCK_TYPE blockByID[3] = { EMPTY_BLOCK, SOFT_BLOCK, HARD_BLOCK };
 
     // On remplace les characteres par celui de l'entree
-    for (int l = 1; l < _nbL-1; l++)      // Lignes
+    for (int l = 1; l < _nbL; l++)      // Lignes
     {
-        for (int c = 1; c < _nbC-1; c++)  // Colonnes
-        {
-            _map[l][c].set(blockByID[rand() % 3]);
-        }
+        randomizeLine(l);
     }
 
     // Rempli les bordures
@@ -35,11 +31,24 @@ void WorldMap::randomize()
         _map[l][0].set(HARD_BLOCK);
         _map[l][_nbL-1].set(HARD_BLOCK);
     }
-    for (size_t c = 0; c < _nbL; c++)
+    //for (size_t c = 0; c < _nbL; c++)
+    //{
+    //    _map[0][c].set(HARD_BLOCK);
+    //    _map[_nbC-1][c].set(HARD_BLOCK);
+    //}
+}
+
+void WorldMap::randomizeLine(int line)
+{
+    BLOCK_TYPE blockByID[3] = { EMPTY_BLOCK, SOFT_BLOCK, HARD_BLOCK };
+
+    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
     {
-        _map[0][c].set(HARD_BLOCK);
-        _map[_nbC-1][c].set(HARD_BLOCK);
+        _map[line][c].set(blockByID[rand() % 3]);
     }
+
+    _map[line][0].set(HARD_BLOCK);
+    _map[line][_nbC-1].set(HARD_BLOCK);
 }
 
 void WorldMap::readGrid(istream& is)
@@ -127,6 +136,7 @@ bool WorldMap::isDestructible(MagnetPosition & mp)
 {
     return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
+
 
 
 //char& WorldMap::at(MagnetPosition & mp)const

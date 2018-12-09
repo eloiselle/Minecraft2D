@@ -36,7 +36,8 @@ void Game::inputActivatedOnlyTheFirstTime()
                 handlePausing();
             if (_event.key.code == Keyboard::M)
                 _player.changeMode();
-            break;
+            if (_event.key.code == Keyboard::T && isMouseInWindow())
+                _player.setPosition(_mouseMagnet);
         }
 
         if (_appState == RUNNING)
@@ -89,6 +90,7 @@ View& Game::handleResizeWindow()
     _view[NEUTRAL] = View(FloatRect(0.f, 0.f, size.x, size.y));
     _view[CAMERA] = View(FloatRect(0.f, 0.f, size.x, size.y));
     _view[FOLLOW] = View(FloatRect(0.f, 0.f, size.x, size.y));
+    _view[FOLLOW_Y] = View(FloatRect(0.f, 0.f, size.x, size.y));
 
     return _view[NEUTRAL];
 }
@@ -121,7 +123,8 @@ void Game::handleKeypress()
         _currentView = CAMERA;
     else if (Keyboard::isKeyPressed(Keyboard::Num4))
         _currentView = FOLLOW;
-
+    else if (Keyboard::isKeyPressed(Keyboard::Num5))
+        _currentView = FOLLOW_Y;
 
 }
 
@@ -189,7 +192,7 @@ void Game::handleMouseButtonPressed()
 bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
 {
     return (mp1.getGridCol() == mp2.getGridCol()
-        && mp2.getGridLine() == mp2.getGridLine());
+        && mp1.getGridLine() == mp2.getGridLine());
 }
 
 void Game::shootBullet()
@@ -207,15 +210,9 @@ void Game::changeBlockAtMouse()
 
     switch (_map.at(l, c).getType())
     {
-    case EMPTY_BLOCK:
-        _map.at(l, c) = SOFT_BLOCK;
-        break;
-    case SOFT_BLOCK:
-        _map.at(l, c) = EMPTY_BLOCK;
-        break;
-    case HARD_BLOCK:
-        _map.at(l, c) = EMPTY_BLOCK;
-        break;
+    case EMPTY_BLOCK:       _map.at(l, c) = SOFT_BLOCK;         break;
+    case SOFT_BLOCK:        _map.at(l, c) = EMPTY_BLOCK;        break;
+    case HARD_BLOCK:        _map.at(l, c) = EMPTY_BLOCK;        break;
     default:
         break;
     }

@@ -32,6 +32,7 @@ public:
     int yFin()const;       // Retourne la valeur Y d'arrivee
 
     void randomize();
+    void randomizeLine(int line);
 
     bool isTraversable(pixel_t x, pixel_t y);   //
     bool isTraversable(tile_t x, tile_t y);     //

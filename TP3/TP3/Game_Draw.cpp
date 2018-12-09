@@ -25,18 +25,28 @@ void Game::updateViews()
     _view[FOLLOW].setCenter(
         _player.getExactX(),
         _player.getExactY());
+
+    _view[FOLLOW_Y].setCenter(
+        _map.nbCol() * TILE_SIZE /2,
+        _player.getExactY());
 }
 
 // Met a jour le titre de la fenetre
 void Game::updateWindowTitle()
 {
     // Ajoute de l'information dans le titre
-    _extraTitle += "Mouse: " +
-        to_string((int)_mouseMagnet.getExactX()) + " " +
-        to_string((int)_mouseMagnet.getExactY());
-    _extraTitle += "  Coord: " +
-        to_string(_mouseMagnet.getGridCol()) + " " +
-        to_string(_mouseMagnet.getGridLine());
+    //_extraTitle += "Mouse: " +
+    //    to_string((int)_mouseMagnet.getExactX()) + " " +
+    //    to_string((int)_mouseMagnet.getExactY());
+    //_extraTitle += "  Coord: " +
+    //    to_string(_mouseMagnet.getGridCol()) + " " +
+    //    to_string(_mouseMagnet.getGridLine());
+
+
+    if (_player.getIsBuildingEnabled())
+        _extraTitle += " Build_Mode";
+    else if (_player.getIsWeaponEnabled())
+        _extraTitle += " Weapon_Mode";
 
     if (_extraTitle != "")
         _extraTitle = " : " + _extraTitle;
@@ -45,7 +55,7 @@ void Game::updateWindowTitle()
     _window.setTitle(WINDOW_TITLE + _extraTitle);
 
     // Reinitialise pour la prochain iteration
-    _extraTitle = ".";
+    _extraTitle = "";
 }
 
 // Affiche la grille du labyrinthe
@@ -111,7 +121,7 @@ void Game::drawMovableObjects()
 void Game::drawThingsDirectlyOnTheScreen()
 {
     _window.setView(_view[NULL_VIEW]);
-    
+
     // Ecran de pause
     if (_appState == PAUSED)
     {
@@ -142,7 +152,7 @@ void Game::flipSpriteHorizontal(Sprite& s)
 void Game::printMap()
 {
     _debug += "\r\n";
-    for (size_t l= 0; l < 20; l++)
+    for (size_t l = 0; l < 20; l++)
     {
         for (size_t c = 0; c < 20; c++)
         {

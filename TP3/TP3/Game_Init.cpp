@@ -25,6 +25,7 @@ void Game::init()
     initGameElements();
     initTexts();
 
+    _currentView == FOLLOW_Y;
     _frameRun = 0;
     _frameTotal = 0;
 }
@@ -37,10 +38,12 @@ void Game::initWindow()
         WINDOW_TITLE, Style::Default, _settings);
     _settings.antialiasingLevel = ANTI_ALIASING_LEVEL;
 
+
+    //_currentView = NULL_VIEW;
+
     _window.setFramerateLimit(FRAMERATE);
     handleResizeWindow();
 
-    // View
     _window.setView(_view[CAMERA]);
 
     // Icon
@@ -163,6 +166,9 @@ void Game::initWorldMap(const char* fileName)
 
 void Game::initViews()
 {
+    // DO NOT CHANGE _currentView HERE
+    //_currentView = CAMERA; == BAD
+
     // Zoom
     float maxDim = MAX(_map.nbCol(), _map.nbLine());
     _view[NULL_VIEW] = handleResizeWindow();
@@ -178,13 +184,16 @@ void Game::initViews()
     _view[CAMERA].setCenter(
         _map.nbCol() * TILE_SIZE / 2,
         _map.nbLine() * TILE_SIZE / 2);
+
+    _view[FOLLOW_Y].zoom(0.8);
+
 }
 
 // Initialize les element du jeu
 void Game::initGameElements()
 {
     // Player
-    _player.setPositionInGrid(15, 1);
+    _player.setPositionInGrid(15, 10);
     _player.setSpeed(4);
     _map.at(_player.getGridLine(), _player.getGridCol());
 

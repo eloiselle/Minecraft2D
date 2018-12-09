@@ -29,7 +29,9 @@ INSTRUCTIONS
 
 Press [Backspace] to call init()
 
-Press [Space] to pause/unpause.
+Press [P] to pause/unpause.
+Press [M] to change Mode (bullet vs editor)
+Press [T] to Teleport
 
 Press [1] to [4] to change the view
 
@@ -58,6 +60,8 @@ constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
 
+constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
+
 class Game
 {
 private:
@@ -74,8 +78,8 @@ private:
     // Window
     ContextSettings _settings;          // Settings de la _window
     RenderWindow _window;               // Fenetre d'affichage principal
-    View _view[4];
-    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW };
+    View _view[5];
+    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
     ChoosenView _currentView = NULL_VIEW;
 
     MagnetPosition _mouseMagnet;        // Position magnetique de la souris
