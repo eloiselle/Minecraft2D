@@ -109,15 +109,23 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num0))
 		initWorldMap("Labyrinthe1.txt");
 
-	// Change View
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
-		_currentView = NULL_VIEW;
-	else if (Keyboard::isKeyPressed(Keyboard::Num2))
-		_currentView = NEUTRAL;
-	else if (Keyboard::isKeyPressed(Keyboard::Num3))
-		_currentView = CAMERA;
-	else if (Keyboard::isKeyPressed(Keyboard::Num4))
-		_currentView = FOLLOW;
+		_player.setBuildingEnabled();
+	if (Keyboard::isKeyPressed(Keyboard::Num2))
+	{
+		_player.setWeaponEnabled();
+		_player.setUzi();
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num3))
+	{
+		_player.setWeaponEnabled();
+		_player.setAssault();
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num4))
+	{
+		_player.setWeaponEnabled();
+		_player.setSniper();
+	}
 }
 
 void Game::handleArrowKeys()

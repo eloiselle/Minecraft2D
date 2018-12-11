@@ -75,7 +75,7 @@ private:
 	RenderWindow _window;               // Fenetre d'affichage principal
 	View _view[4];
 	static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW };
-	ChoosenView _currentView = NULL_VIEW;
+	ChoosenView _currentView = FOLLOW;
 
 	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
@@ -93,6 +93,7 @@ private:
 	RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
 	RectangleShape _playerShape;        // Carre vert
 	CircleShape _bulletShape;           // Cercle rouge
+	CircleShape _mouseCursor;
 
 	// Sprites
 	Image _spiderImage;                 // Image du robot pour modification de transparence
