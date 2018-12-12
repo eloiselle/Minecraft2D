@@ -174,14 +174,25 @@ void Game::handleMouseWheelMoved()
 // Gere quand un bouton de souris est clicker
 void Game::handleMouseButtonPressed()
 {
-	if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
+	if (isMouseInWindow())
 	{
-		if (isMouseInMap() && _player.getIsBuildingEnabled())
-			changeBlockAtMouse();
+		int c = _mouseCoord.getPosition().x / TILE_SIZE;
+		int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
-		if (_player.getIsWeaponEnabled())
+		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			shootBullet();
+			if (isMouseInMap() && _player.getIsBuildingEnabled())
+				insertBlockAtMouse(c, l);
+
+			if (_player.getIsWeaponEnabled())
+			{
+				shootBullet();
+			}
+		}
+		if (Mouse::isButtonPressed(Mouse::Right))
+		{
+			if (isMouseInMap() && _player.getIsBuildingEnabled())
+				removeBlockAtMouse(c, l);
 		}
 	}
 }
@@ -194,24 +205,19 @@ void Game::shootBullet()
 	_bullets.back().setLength(100);
 }
 
-void Game::changeBlockAtMouse()
+void Game::insertBlockAtMouse(int c, int l)
 {
-	int c = _mouseCoord.getPosition().x / TILE_SIZE;
-	int l = _mouseCoord.getPosition().y / TILE_SIZE;
-
-	switch (_map.at(l, c).getType())
+	if (_map.at(l, c).getType() == EMPTY_BLOCK)
 	{
-	case EMPTY_BLOCK:
 		_map.at(l, c) = SOFT_BLOCK;
-		break;
-	case SOFT_BLOCK:
+	}
+}
+
+void Game::removeBlockAtMouse(int c, int l)
+{
+	if (_map.at(l, c).getType() == SOFT_BLOCK || _map.at(l, c).getType() == HARD_BLOCK)
+	{
 		_map.at(l, c) = EMPTY_BLOCK;
-		break;
-	case HARD_BLOCK:
-		_map.at(l, c) = EMPTY_BLOCK;
-		break;
-	default:
-		break;
 	}
 }
 
