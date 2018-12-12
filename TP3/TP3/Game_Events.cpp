@@ -34,7 +34,12 @@ void Game::inputActivatedOnlyTheFirstTime()
 				init();
 			if (_event.key.code == Keyboard::P)
 				handlePausing();
-			break;
+            //if (_event.key.code == Keyboard::M)
+            //    _player.changeMode();
+            if (_event.key.code == Keyboard::T
+                && isMouseInWindow()
+                && !areOnTheSameSquare(_mouseMagnet, _player))
+                _player.setPosition(_mouseMagnet);
 		}
 
 		if (_appState == RUNNING)
@@ -109,6 +114,7 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num0))
 		initWorldMap("Labyrinthe1.txt");
 
+    // Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
 		_player.setBuildingEnabled();
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
@@ -176,6 +182,10 @@ void Game::handleMouseButtonPressed()
 {
 	if (isMouseInWindow())
 	{
+        if (isMouseInMap()
+            && !areOnTheSameSquare(_mouseMagnet, _player)
+            && _player.getIsBuildingEnabled())
+			changeBlockAtMouse();
 		int c = _mouseCoord.getPosition().x / TILE_SIZE;
 		int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
@@ -195,6 +205,13 @@ void Game::handleMouseButtonPressed()
 				removeBlockAtMouse(c, l);
 		}
 	}
+}
+
+// Retourne si deux objet sont sue la meme case
+bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
+{
+    return (mp1.getGridCol() == mp2.getGridCol()
+        && mp1.getGridLine() == mp2.getGridLine());
 }
 
 void Game::shootBullet()

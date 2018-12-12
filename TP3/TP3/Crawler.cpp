@@ -1,3 +1,4 @@
+#pragma once
 #include "Crawler.h"
 
 // Constructeur
@@ -32,21 +33,7 @@ void Crawler::setAI(AI_Move ai, AI_Frequency decisionAI)
 //Change sa position de 1 dans la direction
 void Crawler::move()
 {
-    switch (_direction)
-    {
-    case UP:
-        setPositionExact(getExactX(), getExactY() - _speed);
-        break;
-    case RIGHT:
-        setPositionExact(getExactX() + _speed, getExactY());
-        break;
-    case DOWN:
-        setPositionExact(getExactX(), getExactY() + _speed);
-        break;
-    case LEFT:
-        setPositionExact(getExactX() - _speed, getExactY());
-        break;
-    }
+    setPositionExact(getExactX() + D4[_direction][X], getExactY() + D4[_direction][Y]);
     updateGridPosition();
     _frameLeftBeforeControl--;
 }
@@ -59,16 +46,24 @@ void Crawler::startMoving()
     _frameLeftBeforeControl = TILE_SIZE / _speed;
 }
 
+// Arrete de se deplacer
+void Crawler::stopMoving()
+{
+    _isWalking = false;
+    _isControllable = true;
+    _frameLeftBeforeControl = 0;
+}
+
 // Change la direction de 90 degree anti-clockwise
 void Crawler::turnLeft()
 {
-    _direction = static_cast<DIRECTION8>((_direction + 6) % 8);
+    _direction = static_cast<DIRECTION4>((_direction + 3) % 4);
 }
 
 // Change la direction de 90 degree clockwise
 void Crawler::turnRight()
 {
-    _direction = static_cast<DIRECTION8>((_direction + 2) % 8);
+    _direction = static_cast<DIRECTION4>((_direction + 1) % 4);
 }
 
 // Effectu les operation de routine a chaque refresh

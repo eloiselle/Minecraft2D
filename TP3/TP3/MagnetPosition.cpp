@@ -1,3 +1,4 @@
+#pragma once
 #include "MagnetPosition.h"
 
 // Copie la position

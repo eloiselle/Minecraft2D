@@ -1,3 +1,4 @@
+#pragma once
 #include "WorldMap.h"
 
 using namespace std;
@@ -7,6 +8,83 @@ int WorldMap::xDepart() const { return _xDepart; }
 int WorldMap::yDepart() const { return _yDepart; }
 int WorldMap::xFin() const { return _xFin; }
 int WorldMap::yFin() const { return _yFin; }
+
+void WorldMap::randomize()
+{
+    //assert(_map != nullptr);
+    //assert(_nbL > 0);
+    //assert(_nbC > 0);
+
+
+    resize(25, 25);
+
+    fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
+
+    // Quelques premieres lignes vides
+    for (size_t l = 1; l < NBR_EMPTY_LINE_ON_TOP; l++)
+    {
+        fillLine(l, EMPTY_BLOCK);
+    }
+    // On remplace les characteres par celui de l'entree
+    for (int l = NBR_EMPTY_LINE_ON_TOP; l < _nbL; l++)      // Lignes
+    {
+        randomizeLine(l);
+    }
+
+    // Rempli les bordures
+    for (size_t l = 0; l < _nbL; l++)
+    {
+        _map[l][0].set(HARD_BLOCK);
+        _map[l][_nbL-1].set(HARD_BLOCK);
+    }
+
+}
+
+void WorldMap::randomizeLine(int line)
+{
+    BLOCK_TYPE blockByID[5] = { 
+        EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
+        SOFT_BLOCK, 
+        HARD_BLOCK };
+
+    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
+    {
+        _map[line][c].set(blockByID[rand() % 5]);
+    }
+
+    _map[line][0].set(HARD_BLOCK);
+    _map[line][_nbC-1].set(HARD_BLOCK);
+}
+
+void WorldMap::fillLine(int line, BLOCK_TYPE bt)
+{
+    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
+    {
+        _map[line][c].set(bt);
+    }
+
+    _map[line][0].set(HARD_BLOCK);
+    _map[line][_nbC - 1].set(HARD_BLOCK);
+}
+
+
+void WorldMap::readGrid(istream& is)
+{
+    assert(_map != nullptr);
+    assert(_nbL > 0);
+    assert(_nbC > 0);
+
+    // On remplace les characteres par celui de l'entree
+    for (int l = 0; l < _nbL; l++)      // Lignes
+    {
+        for (int c = 0; c < _nbC; c++)  // Colonnes
+        {
+            int val;
+            is >> val;          // Remplace le char suivant
+            _map[l][c].set(static_cast<BLOCK_TYPE>(val));
+        }
+    }
+}
 
 // Lecture du fichier et extrait la map
 bool WorldMap::readFile(const char* nomFichier)
@@ -23,7 +101,6 @@ bool WorldMap::readFile(const char* nomFichier)
 
         resize(nbL, nbC);
 
-        // Lecture de la grille
         readGrid(_ifs);
 
         // Prend les positions de depart et d'arrivee
@@ -76,6 +153,7 @@ bool WorldMap::isDestructible(MagnetPosition & mp)
 {
     return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
+
 
 
 //char& WorldMap::at(MagnetPosition & mp)const

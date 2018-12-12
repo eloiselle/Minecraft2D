@@ -39,14 +39,14 @@ public:
 
     // Methodes
     void resize(unsigned int nbLine, unsigned int nbCol, bool keepContenu = true);    // Resize la matrice
-    void addBottomLines(unsigned int nbLine, bool fill);
+    void addBottomLines(unsigned int nbLine);
     void fill(const T& element);                                // Remplit la matrice avec l'element
     void fillLine(const T& element, unsigned int line);         // Remplit la line avec l'element
     void fillCol(const T& element, unsigned int col);           // Remplit la line avec l'element
 
     void printMeta(ostream& os = cout)const;                    // Output le nom et la taille de la matrice
     void print(ostream& os = cout)const;                        // Output la matrice (sans le nom)
-    void readGrid(istream& is = cin);                           // Lit la matrice de la map dans le flux
+    virtual void readGrid(istream& is = cin);                   // Lit la matrice de la map dans le flux
 
     const ResizableMap<T>& operator=(const ResizableMap<T> & m);// Assigne une map sur une autre
 };
@@ -204,12 +204,12 @@ void ResizableMap<T>::resize(unsigned int newNbL, unsigned int newNbC, bool keep
 }
 
 template<class T>
-void ResizableMap<T>::addBottomLines(unsigned int nbLine, bool fill)
+void ResizableMap<T>::addBottomLines(unsigned int nbLine)
 {
     if (nbLine == 0)
         return;
 
-    int total = nbLine + nbLine;
+    int total = _nbL + nbLine;
 
     T **newMap = new T*[total];
 
@@ -223,15 +223,6 @@ void ResizableMap<T>::addBottomLines(unsigned int nbLine, bool fill)
     for (size_t l = _nbL; l < total; l++)
     {
         newMap[l] = new T[_nbC];
-    }
-
-    // Rempli les cases
-    if (fill)
-    {
-        for (size_t l = _nbL; l < total; l++)
-        {
-            fillLine(T(), l);
-        }
     }
 
     _nbL = total;

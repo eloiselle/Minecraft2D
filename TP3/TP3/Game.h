@@ -28,7 +28,9 @@ INSTRUCTIONS
 
 Press [Backspace] to call init()
 
-Press [Space] to pause/unpause.
+Press [P] to pause/unpause.
+Press [M] to change Mode (bullet vs editor)
+Press [T] to Teleport
 
 Press [1] to [4] to change the view
 
@@ -56,6 +58,12 @@ constexpr int FRAMERATE = 60;                               // Nombre de frame p
 constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu avant le prochain step
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
+constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
+
+constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
+constexpr int PLAYER_FOOT = 4;                              // Demi-Largeur de l'avatar du joueur pour les collisions
+
+constexpr int NB_STARTING_BATS = 3;                         // Nombre d'ennemis a creer au debut
 
 class Game
 {
@@ -67,14 +75,15 @@ private:
 	Bullet _yoyo;                       // Tourne a l'entour de _player
 	VectorAngle _yoyoString;            // Distance entre _yoyo et _player
 	Crawler _spider;                    // Ennemi qui se promene dans la grille
+    vector<Crawler> _bats;              //
 
 	list<Bullet> _bullets;              // Liste des projectiles
 
 	// Window
 	ContextSettings _settings;          // Settings de la _window
 	RenderWindow _window;               // Fenetre d'affichage principal
-	View _view[4];
-	static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW };
+    View _view[5];
+    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
 	ChoosenView _currentView = FOLLOW;
 
 	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
@@ -96,11 +105,14 @@ private:
 	CircleShape _mouseCursor;
 
 	// Sprites
+    Image   _playerImage;               // Image du joueur pour modification de transparence
+    Texture _playerTexture;             // Texture du joueur
+    Sprite  _playerSprite;              // Sprite du joueur
 	Image _spiderImage;                 // Image du robot pour modification de transparence
 	Texture _spiderTexture;             // Texture du robot
+    Sprite _spiderSprite;               // Sprite du robot
 	Texture _tileset;                   // Source d'image pour les sprite
-	Sprite _spiderSprite;               // Sprite du robot
-	Sprite _tileSprite[5];              // Ensemble de sprite pour afficher la map
+    Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
 	// Etat
 	static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
@@ -140,6 +152,7 @@ public:
 	void handleArrowKeys();                             // Handler des fleches du clavier et WASD
 	void handleMouseWheelMoved();                       // Handler de la roulette de souris
 	void handleMouseButtonPressed();                    // Handler des boutons de souris
+    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
 	void shootBullet();                                 // Tire une balle
 	void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
 	void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
@@ -160,6 +173,8 @@ public:
 	void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
 	void manageWeapon();
 	void manageFoes();                                  // Gere les ennemis
+    void manageMapExpansion();
+    void tryToMoveRandomDirection(Crawler & c);
 	void manageBullets();                               // Gere les projectiles
 
 	// Movement & Collision
@@ -172,8 +187,8 @@ public:
 	int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
 	bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
 	bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
-	void tryToMove(int dir, SidewayCharacter& player);  // SidewayCharacter essaye de se deplacer
-	void tryToMove(DIRECTION8 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
 
 	// Draw
 	void drawWindow();                                  // Met a jour le contenu de la window
@@ -183,4 +198,5 @@ public:
 	void drawGrid();                                    // Affiche la grille de application
 	void drawMovableObjects();                          // Affiche les objets mobiles
 	void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
+    void printMap();
 };
