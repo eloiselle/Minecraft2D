@@ -23,6 +23,9 @@ void Game::init()
 
     initGameElements();
     initTexts();
+	initMusic();
+	initSounds();
+
 
     _currentView == FOLLOW_Y;
     _frameRun = 0;
@@ -75,7 +78,6 @@ void Game::initSprites()
     _spiderSprite.setTextureRect(IntRect(64, 0, TILE_SIZE, TILE_SIZE));
     _spiderSprite.setTexture(_spiderTexture);
     _spiderSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
-
     // Map
     for (size_t version = 0; version < 8; version++)
     {
@@ -176,6 +178,27 @@ void Game::initWorldMap(const char* fileName)
     initViews();
 }
 
+void Game::initMusic()
+{
+	if (MUSIQUE)
+	{
+		_music.openFromFile("zelda.wav");
+		_music.play();
+	}
+}
+
+void Game::initSounds()
+{
+	if (MUSIQUE)
+	{
+		_buffB.loadFromFile("pew.wav");
+		_soundBullet.setBuffer(_buffB);
+
+		_buffF.loadFromFile("flap.wav");
+		_soundFlap.setBuffer(_buffF);
+
+	}
+}
 void Game::initViews()
 {
     // DO NOT CHANGE _currentView HERE
