@@ -218,6 +218,9 @@ void Game::shootBullet()
 	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
 	_bullets.back().setDamage(_player.getWeaponDamage());
 	_player.delayReset(_frameRun);
+
+	if (MUSIQUE)
+		_soundBullet.play();
 }
 
 void Game::insertBlockAtMouse(int c, int l)
