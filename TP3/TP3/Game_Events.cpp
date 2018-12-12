@@ -189,7 +189,7 @@ void Game::handleMouseButtonPressed()
 			if (isMouseInMap() && _player.getIsBuildingEnabled())
 				insertBlockAtMouse(c, l);
 
-			if (_player.getIsWeaponEnabled() && _player.isReady(_frameRun))
+			if (_player.getIsWeaponEnabled() && _player.delayIsReady(_frameRun))
 			{
 				shootBullet();
 			}
@@ -215,7 +215,9 @@ void Game::shootBullet()
 	_bullets.back().setPosition(_player);
 	_bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y);
 	_bullets.back().setLength(100);
-	_player.reset(_frameRun);
+	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
+	_bullets.back().setDamage(_player.getWeaponDamage());
+	_player.delayReset(_frameRun);
 }
 
 void Game::insertBlockAtMouse(int c, int l)

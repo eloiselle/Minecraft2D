@@ -20,9 +20,11 @@ protected:
 
 	float _accuracy;			//Détermine une variation dans _angle
 	float _bulletSpeed;			//Vitesse des bullets
-	float _damageMultiplier;	//Multiplicateur de dommages
+	float _damage;	//Multiplicateur de dommages
 
-	AngleDegree _fireAngle;			//Angle où les balles sont tirés
+	AngleDegree _fireAngle;		//Angle où les balles sont tirés
+
+	string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
 
 public:
 
@@ -31,17 +33,19 @@ public:
 	void setSniper(int _frameRun);
 	void setCustom(float, int, float, float, int);
 
-	float getAccuracy();
-	int getRateOfFire();
-	float getBulletSpeed();
-	float getDamageMultiplier();
-	AngleDegree getFireAngle();
+	string getWeaponName();
+	float getWeaponAccuracy();
+	int getWeaponRateOfFire();
+	float getWeaponBulletSpeed();
+	float getWeaponDamage();
+	AngleDegree getWeaponFireAngle();
 
-	void setAccuracy(float);
-	void setRateOfFire(int);
-	void setBulletSpeed(float);
-	void getDamageMultiplier(float);
-	void setFireAngle(AngleDegree);
+	void setWeaponName(string);
+	void setWeaponAccuracy(float);
+	void setWeaponRateOfFire(int);
+	void setWeaponBulletSpeed(float);
+	void setWeaponDamage(float);
+	void setWeaponFireAngle(AngleDegree);
 
 	//void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
 	//void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);
