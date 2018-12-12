@@ -40,6 +40,16 @@ void Game::manageMapExpansion()
     {
         _map.addBottomLines(1);
         _map.randomizeLine(_map.nbLine() - 1);
+
+        if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
+        {
+            // Create new bat on last line
+            int l = _map.nbLine() - 2;
+            int c = (rand() % (_map.nbCol() - 5)) + 3;
+            _bats.push_back(Crawler());
+            _bats.back().setPositionInGrid(c, l);
+            _map.at(l, c).set(EMPTY_BLOCK);
+        }
     }
 }
 
@@ -109,17 +119,34 @@ void Game::manageBullets()
 
         if (isInMap(*b))
         {
-            //if (_map.isDestructible(*b))
-            //{
-            //    //softBlock.affectHealth(-1);
-            //    //_map.at(b->getGridLine(), b->getGridCol()) == TRAIL;
-            //    willVanish = true;
-            //}
+            if (!_map.isTraversable(*b))
+            {
+                willVanish = true;
+            }
 
-            //if (!_map.isTraversable(*b))
-            //{
-            //    willVanish = true;
-            //}
+            if (_map.isDestructible(*b))
+            {
+                //softBlock.affectHealth(-1);
+                _map.at(b->getGridLine(), b->getGridCol()) = EMPTY_BLOCK;
+                willVanish = true;
+            }
+
+            list<Crawler>::iterator c = _bats.begin();
+            while (c != _bats.end())
+            {
+                if (areOnTheSameSquare(*b, *c))
+                {
+                    willVanish = true;
+                    c = _bats.erase(c);
+                }
+                else
+                {
+                    c++;
+                }
+            }
+
+
+
         }
         else
             willVanish = true;
@@ -219,8 +246,9 @@ void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
         testExactX = newExactX - PLAYER_FOOT;
     else if (dir == RIGHT)
         testExactX = newExactX + PLAYER_FOOT;
+    else testExactX = newExactX;
 
-    int nextGridX = (testExactX) / TILE_SIZE;
+    int nextGridX = testExactX / TILE_SIZE;
 
     bool onCurrentGridX = nextGridX == character.getGridCol();
 
