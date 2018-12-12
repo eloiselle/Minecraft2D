@@ -1,36 +1,40 @@
 #pragma once
 #include "Weapon.h"
 
-void Weapon::setUzi()
+void Weapon::setUzi(int _frameRun)
 {
 	_accuracy = 2;
-	_totalDelay = 5;
+	_totalDelay = 3 * _delayMultiplier;
 	_bulletSpeed = 1;
 	_damageMultiplier = 1;
+	init(_frameRun, _totalDelay);
 }
 
-void Weapon::setAssault()
+void Weapon::setAssault(int _frameRun)
 {
 	_accuracy = 1;
-	_totalDelay = 3;
+	_totalDelay = 10 * _delayMultiplier;
 	_bulletSpeed = 1.5;
 	_damageMultiplier = 2;
+	init(_frameRun, _totalDelay);
 }
 
-void Weapon::setSniper()
+void Weapon::setSniper(int _frameRun)
 {
 	_accuracy = 1;
-	_totalDelay = 10;
+	_totalDelay = 50 * _delayMultiplier;
 	_bulletSpeed = 4;
 	_damageMultiplier = 4;
+	init(_frameRun, _totalDelay);
 }
 
-void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier)
+void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier, int _frameRun)
 {
 	_accuracy = accuracy;
-	_totalDelay = rateOfFire;
+	_totalDelay = rateOfFire * _delayMultiplier;
 	_bulletSpeed = bulletSpeed;
 	_damageMultiplier = damageMultiplier;
+	init(_frameRun, _totalDelay);
 }
 
 float Weapon::getAccuracy()

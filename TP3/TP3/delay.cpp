@@ -10,7 +10,7 @@ void Delay::init(int now, int delay)
 // Si c'est pret
 bool Delay::isReady(int now)
 {
-	return _readyAt >= now;
+	return _readyAt < now;
 }
 
 // Remet le "compteur" a zero

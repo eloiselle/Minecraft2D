@@ -3,7 +3,6 @@
 
 Player::Player()
 {
-	setUzi();
 	_buildingEnabled = true;
 	_weaponEnabled = false;
 }

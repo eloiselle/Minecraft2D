@@ -16,6 +16,8 @@ class Weapon : public Delay
 {
 protected:
 
+	int _delayMultiplier = 1;
+
 	float _accuracy;			//Détermine une variation dans _angle
 	float _bulletSpeed;			//Vitesse des bullets
 	float _damageMultiplier;	//Multiplicateur de dommages
@@ -24,10 +26,10 @@ protected:
 
 public:
 
-	void setUzi();
-	void setAssault();
-	void setSniper();
-	void setCustom(float, int, float, float);
+	void setUzi(int _frameRun);
+	void setAssault(int _frameRun);
+	void setSniper(int _frameRun);
+	void setCustom(float, int, float, float, int);
 
 	float getAccuracy();
 	int getRateOfFire();

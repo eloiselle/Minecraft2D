@@ -118,17 +118,17 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
 	{
 		_player.setWeaponEnabled();
-		_player.setUzi();
+		_player.setUzi(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num3))
 	{
 		_player.setWeaponEnabled();
-		_player.setAssault();
+		_player.setAssault(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num4))
 	{
 		_player.setWeaponEnabled();
-		_player.setSniper();
+		_player.setSniper(_frameRun);
 	}
 }
 
@@ -189,7 +189,7 @@ void Game::handleMouseButtonPressed()
 			if (isMouseInMap() && _player.getIsBuildingEnabled())
 				insertBlockAtMouse(c, l);
 
-			if (_player.getIsWeaponEnabled())
+			if (_player.getIsWeaponEnabled() && _player.isReady(_frameRun))
 			{
 				shootBullet();
 			}
@@ -215,6 +215,7 @@ void Game::shootBullet()
 	_bullets.back().setPosition(_player);
 	_bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y);
 	_bullets.back().setLength(100);
+	_player.reset(_frameRun);
 }
 
 void Game::insertBlockAtMouse(int c, int l)
