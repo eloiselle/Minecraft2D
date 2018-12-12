@@ -213,7 +213,7 @@ void Game::shootBullet()
 {
 	_bullets.push_back(Bullet());
 	_bullets.back().setPosition(_player);
-	_bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y);
+	_bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y, _player.getWeaponAccuracy());
 	_bullets.back().setLength(100);
 	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
 	_bullets.back().setDamage(_player.getWeaponDamage());

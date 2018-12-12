@@ -15,9 +15,9 @@ void Bullet::advance()
 }
 
 // Change l'angle en fonction de coords
-void Bullet::aim(int x, int y)
+void Bullet::aim(int x, int y, int accuracy)
 {
-	setAngleFromXY(x - _exactX, y - _exactY);
+	setAngleFromXY((x - _exactX) + (rand() % accuracy), (y - _exactY) + (rand() % accuracy));
 }
 
 // Change l'angle en fonction d'un objet

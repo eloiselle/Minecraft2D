@@ -4,7 +4,7 @@
 void Weapon::setUzi(int _frameRun)
 {
 	_nameEquippedWeapon = "Uzi";
-	_accuracy = 2;
+	_accuracy = 60;
 	_totalDelay = 3 * _delayMultiplier;
 	_bulletSpeed = 1;
 	_damage = 1;
@@ -45,7 +45,7 @@ string Weapon::getWeaponName()
 	return _nameEquippedWeapon;
 }
 
-float Weapon::getWeaponAccuracy()
+int Weapon::getWeaponAccuracy()
 {
 	return _accuracy;
 }
@@ -75,7 +75,7 @@ void Weapon::setWeaponName(string name)
 	_nameEquippedWeapon = name;
 }
 
-void Weapon::setWeaponAccuracy(float accuracy)
+void Weapon::setWeaponAccuracy(int accuracy)
 {
 	_accuracy = accuracy;
 }

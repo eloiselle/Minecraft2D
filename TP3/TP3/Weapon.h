@@ -18,7 +18,7 @@ protected:
 
 	int _delayMultiplier = 1;
 
-	float _accuracy;			//Détermine une variation dans _angle
+	int _accuracy;			//Détermine une variation dans _angle
 	float _bulletSpeed;			//Vitesse des bullets
 	float _damage;	//Multiplicateur de dommages
 
@@ -34,14 +34,14 @@ public:
 	void setCustom(float, int, float, float, int);
 
 	string getWeaponName();
-	float getWeaponAccuracy();
+	int getWeaponAccuracy();
 	int getWeaponRateOfFire();
 	float getWeaponBulletSpeed();
 	float getWeaponDamage();
 	AngleDegree getWeaponFireAngle();
 
 	void setWeaponName(string);
-	void setWeaponAccuracy(float);
+	void setWeaponAccuracy(int);
 	void setWeaponRateOfFire(int);
 	void setWeaponBulletSpeed(float);
 	void setWeaponDamage(float);
