@@ -110,6 +110,11 @@ void Game::manageBullets()
 
         if (isInMap(*b))
         {
+            if (!_map.isTraversable(*b))
+            {
+                willVanish = true;
+            }
+
             //if (_map.isDestructible(*b))
             //{
             //    //softBlock.affectHealth(-1);
@@ -117,10 +122,7 @@ void Game::manageBullets()
             //    willVanish = true;
             //}
 
-            //if (!_map.isTraversable(*b))
-            //{
-            //    willVanish = true;
-            //}
+
         }
         else
             willVanish = true;
