@@ -130,6 +130,16 @@ void Game::handleKeypress()
 		_player.setWeaponEnabled();
 		_player.setSniper(_frameRun);
 	}
+	if (Keyboard::isKeyPressed(Keyboard::Num5))
+	{
+		_player.setWeaponEnabled();
+		_player.setShotgun(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num6))
+	{
+		_player.setWeaponEnabled();
+		_player.setDestroyer(_frameRun);
+	}
 }
 
 void Game::handleArrowKeys()
@@ -191,7 +201,10 @@ void Game::handleMouseButtonPressed()
 
 			if (_player.getIsWeaponEnabled() && _player.delayIsReady(_frameRun))
 			{
-				shootBullet();
+				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
+				{
+					shootBullet();
+				}
 			}
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
