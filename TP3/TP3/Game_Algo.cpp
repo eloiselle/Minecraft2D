@@ -16,7 +16,6 @@ void Game::mainLoop()
             manageBullets();
             manageMapExpansion();
 
-
             _frameRun++;
         }
 
@@ -56,9 +55,9 @@ void Game::manageFoes()
 {
     for (Crawler& c : _bats)
     {
-        // Manage one foe
+    // Manage one foe
         if (c.isGridCentered()) // Pret a se deplacer
-        {
+    {
             c.stopMoving();
             tryToMoveRandomDirection(c);
         }
@@ -67,11 +66,11 @@ void Game::manageFoes()
         {
             c.move();
         }
+        }
     }
-}
-
+    
 void Game::tryToMoveRandomDirection(Crawler& c)
-{
+    {
     DIRECTION4 randDir = static_cast<DIRECTION4>(rand() % 4);
 
     if (_map.isTraversable(
