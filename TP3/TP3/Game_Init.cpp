@@ -170,7 +170,7 @@ void Game::initWorldMap(const char* fileName)
 
     _map.randomize();
 
-    _spider.setPositionInGrid(1, 1);
+
 
     initViews();
 }
@@ -213,6 +213,19 @@ void Game::initGameElements()
     // Foes
     _spider.setPositionInGrid(12, 8);
     _spider.setSpeed(4);
+
+    // Initialise Foes
+    for (int i = 0; i < NB_STARTING_BATS; i++)
+    {
+        _bats.push_back(Crawler());
+
+    }
+    for (int i = 0; i < NB_STARTING_BATS; i++) // TODO : Trouver pourquoi l'union des deux boucle fait que juste la derniere _bat est correct
+    {
+        _bats[i].setPositionInGrid(6 * i + 4, 1);
+    }
+
+
     // Bullets
     _bullets.clear();
 }

@@ -62,8 +62,10 @@ constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplac
 
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
 
-constexpr int PLAYER_HEIGHT = 16;
-constexpr int PLAYER_FOOT = 4;
+constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
+constexpr int PLAYER_FOOT = 4;                              // Demi-Largeur de l'avatar du joueur pour les collisions
+
+constexpr int NB_STARTING_BATS = 3;                         // Nombre d'ennemis a creer au debut
 
 class Game
 {
@@ -75,6 +77,7 @@ private:
     Bullet _yoyo;                       // Tourne a l'entour de _player
     VectorAngle _yoyoString;            // Distance entre _yoyo et _player
     Crawler _spider;                    // Ennemi qui se promene dans la grille
+    vector<Crawler> _bats;              //
 
     list<Bullet> _bullets;              // Liste des projectiles
 

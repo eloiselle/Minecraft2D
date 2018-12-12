@@ -92,10 +92,19 @@ void Game::drawMovableObjects()
     _window.draw(_playerSprite);
 
     // Spider
-    _spiderSprite.setPosition(
-        _spider.getExactX(),
-        _spider.getExactY());
-    _window.draw(_spiderSprite);
+    //_spiderSprite.setPosition(
+    //    _spider.getExactX(),
+    //    _spider.getExactY());
+    //_window.draw(_spiderSprite);
+
+    for (Crawler& c : _bats)
+    {
+        _spiderSprite.setPosition(
+            c.getExactX(),
+            c.getExactY());
+        _window.draw(_spiderSprite);
+    }
+
 
     // Player
     _playerShape.setPosition(_player.getExactX(), _player.getExactY());

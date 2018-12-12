@@ -54,16 +54,19 @@ void Game::manageWeapon()
 
 void Game::manageFoes()
 {
-    // Manage one foe
-    if (_spider.isGridCentered()) // Pret a se deplacer
+    for (Crawler& c : _bats)
     {
-        _spider.stopMoving();
-        tryToMoveRandomDirection(_spider);
-    }
+        // Manage one foe
+        if (c.isGridCentered()) // Pret a se deplacer
+        {
+            c.stopMoving();
+            tryToMoveRandomDirection(c);
+        }
 
-    if (_spider.isWalking())
-    {
-        _spider.move();
+        if (c.isWalking())
+        {
+            c.move();
+        }
     }
 }
 
@@ -80,7 +83,7 @@ void Game::tryToMoveRandomDirection(Crawler& c)
     }
 }
 
- // TODO supprimer si necessaire
+// TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
 {
     return cos(base / slowness * PI) * amplitude + minimum;
@@ -215,7 +218,7 @@ void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
 
     if (dir == LEFT)
         testExactX = newExactX - PLAYER_FOOT;
-    else if ( dir == RIGHT)
+    else if (dir == RIGHT)
         testExactX = newExactX + PLAYER_FOOT;
 
     int nextGridX = (testExactX) / TILE_SIZE;
