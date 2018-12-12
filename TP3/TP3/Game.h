@@ -74,8 +74,8 @@ private:
 	Player _player;                     // Avatar controlled by user
 	Bullet _yoyo;                       // Tourne a l'entour de _player
 	VectorAngle _yoyoString;            // Distance entre _yoyo et _player
-	Crawler _spider;                    // Ennemi qui se promene dans la grille
-    vector<Crawler> _bats;              //
+	//Crawler _spider;                    // Ennemi qui se promene dans la grille
+    list<Crawler> _bats;              //
 
 	list<Bullet> _bullets;              // Liste des projectiles
 
@@ -134,6 +134,7 @@ public:
 	void initTexts();                   // Initialization des polices de caracteres
 	void initShapes();                  // Initialization des formes geometriques
 	void initViews();                   // Initialization des view
+    void initFoes();                    //
 	void initGameElements();            // Initialization des elements qui se deplacent
 	void initWorldMap(const char* fileName = DEFAULT_FILENAME);   // Initialization du labyrinthe
 	Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,

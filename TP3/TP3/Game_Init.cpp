@@ -170,9 +170,6 @@ void Game::initWorldMap(const char* fileName)
 
     _map.randomize();
 
-    // Prepare search
-    _spider.setPositionInGrid(1, 1);
-
     initViews();
 }
 
@@ -205,25 +202,34 @@ void Game::initViews()
 void Game::initGameElements()
 {
     // Player
-    _player.setPositionInGrid(15, 10);
+    _player.setPositionInGrid(15, 4);
     _player.setSpeed(4);
     _map.at(_player.getGridLine(), _player.getGridCol());
 
     _yoyoString.init(25, 0.71, 0.71);
 
-    // Foes
-    _spider.setPositionInGrid(12, 8);
-    _spider.setSpeed(4);
-    // Initialise Foes
+
+    initFoes();
+
+    // Bullets
+    _bullets.clear();
+}
+
+// Initialise Foes
+void Game::initFoes()
+{
+    
     for (int i = 0; i < NB_STARTING_BATS; i++)
     {
         _bats.push_back(Crawler());
+    }
 
-    }
-    for (int i = 0; i < NB_STARTING_BATS; i++) // TODO : Trouver pourquoi l'union des deux boucle fait que juste la derniere _bat est correct
+    int position_x = 4;
+
+    for (list<Crawler>::iterator it = _bats.begin(); it != _bats.end(); it++)
     {
-        _bats[i].setPositionInGrid(6 * i + 4, 1);
+        it->setPositionInGrid(position_x, 1);
+        position_x += 6;
     }
-    // Bullets
-    _bullets.clear();
+
 }

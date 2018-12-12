@@ -122,6 +122,21 @@ void Game::manageBullets()
                 willVanish = true;
             }
 
+            list<Crawler>::iterator c = _bats.begin();
+            while (c != _bats.end())
+            {
+                if (areOnTheSameSquare(*b, *c))
+                {
+                    willVanish = true;
+                    c = _bats.erase(c);
+                }
+                else
+                {
+                    c++;
+                }
+            }
+            
+
 
         }
         else
