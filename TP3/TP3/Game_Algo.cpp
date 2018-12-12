@@ -220,8 +220,9 @@ void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
         testExactX = newExactX - PLAYER_FOOT;
     else if (dir == RIGHT)
         testExactX = newExactX + PLAYER_FOOT;
+    else testExactX = newExactX;
 
-    int nextGridX = (testExactX) / TILE_SIZE;
+    int nextGridX = testExactX / TILE_SIZE;
 
     bool onCurrentGridX = nextGridX == character.getGridCol();
 

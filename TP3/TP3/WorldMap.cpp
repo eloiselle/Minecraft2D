@@ -15,8 +15,7 @@ void WorldMap::randomize()
     //assert(_nbL > 0);
     //assert(_nbC > 0);
 
-
-    resize(25, 25);
+    resize(25, 30);
 
     fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
 

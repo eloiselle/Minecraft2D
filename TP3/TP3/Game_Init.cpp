@@ -196,6 +196,9 @@ void Game::initViews()
         _map.nbCol() * TILE_SIZE / 2,
         _map.nbLine() * TILE_SIZE / 2);
     _view[FOLLOW_Y].zoom(0.8);
+
+    _currentView = FOLLOW_Y;
+    _view[FOLLOW_Y] = handleResizeWindow();
 }
 
 // Initialize les element du jeu

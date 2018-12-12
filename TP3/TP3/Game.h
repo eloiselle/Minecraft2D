@@ -61,7 +61,7 @@ constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplac
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
 
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
-constexpr int PLAYER_FOOT = 4;                              // Demi-Largeur de l'avatar du joueur pour les collisions
+constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
 constexpr int NB_STARTING_BATS = 3;                         // Nombre d'ennemis a creer au debut
 
@@ -84,7 +84,7 @@ private:
 	RenderWindow _window;               // Fenetre d'affichage principal
     View _view[5];
     static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
-	ChoosenView _currentView = FOLLOW;
+	ChoosenView _currentView = NULL_VIEW;
 
 	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
