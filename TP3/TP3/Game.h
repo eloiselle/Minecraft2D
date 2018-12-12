@@ -67,7 +67,11 @@ private:
     Bullet _yoyo;                       // Tourne a l'entour de _player
     VectorAngle _yoyoString;            // Distance entre _yoyo et _player
     Crawler _spider;                    // Ennemi qui se promene dans la grille
-	Sound _sounds;						// sons 
+
+	SoundBuffer _buffB,
+				_buffF;					// buffer des sons
+	Sound _soundBullet,
+			_soundFlap;						// sons 
 	Music _music;						// musique
 
 

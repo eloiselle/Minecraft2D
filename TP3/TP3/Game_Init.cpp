@@ -164,13 +164,24 @@ void Game::initWorldMap(const char* fileName)
 
 void Game::initMusic()
 {
-	_music.openFromFile("zelda.wav");
-	_music.play();
+	if (MUSIQUE)
+	{
+		_music.openFromFile("zelda.wav");
+		_music.play();
+	}
 }
 
 void Game::initSounds()
 {
+	if (MUSIQUE)
+	{
+		_buffB.loadFromFile("pew.wav");
+		_soundBullet.setBuffer(_buffB);
 
+		_buffF.loadFromFile("flap.wav");
+		_soundFlap.setBuffer(_buffF);
+
+	}
 }
 
 void Game::initViews()

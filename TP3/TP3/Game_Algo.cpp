@@ -44,6 +44,8 @@ void Game::manageFoes()
         {
             _spider.setDirection(randDirection);
             _spider.startMoving();
+			if(MUSIQUE)
+				_soundFlap.play(); 
         }
     }
     
