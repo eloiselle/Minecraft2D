@@ -1,4 +1,3 @@
-#pragma once
 #include "Game.h"
 
 // ############################################################################
@@ -38,13 +37,11 @@ void Game::initWindow()
         WINDOW_TITLE, Style::Default, _settings);
     _settings.antialiasingLevel = ANTI_ALIASING_LEVEL;
 
-
-    //_currentView = NULL_VIEW;
-
     _window.setFramerateLimit(FRAMERATE);
     handleResizeWindow();
 
-    _window.setView(_view[CAMERA]);
+    // View
+	_window.setView(_view[FOLLOW]);
 
     // Icon
     //_window.setIcon(image.GetWidth(), image.GetHeight(), image.GetPixelsPtr());
@@ -88,7 +85,6 @@ void Game::initSprites()
         _tileSprite[VISITED][version] = initOneSprite(13 + version, 2, _tileset);
         _tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
     }
-
 }
 
 // Recupere un sprite a partir des parametres
@@ -145,6 +141,10 @@ void Game::initShapes()
     _mouseCoord.setFillColor(Color::Red);
     _mouseCoord.setRadius(2);
     _mouseCoord.setOrigin(2, 2);
+	// Aiming Sight
+	_mouseCursor.setFillColor(Color::Blue);
+	_mouseCursor.setRadius(2);
+	_mouseCursor.setOrigin(2, 2);
 
     // Mouse Square
     int tk = 3;
@@ -170,7 +170,8 @@ void Game::initWorldMap(const char* fileName)
 
     _map.randomize();
 
-
+    // Prepare search
+    _spider.setPositionInGrid(1, 1);
 
     initViews();
 }
@@ -179,7 +180,6 @@ void Game::initViews()
 {
     // DO NOT CHANGE _currentView HERE
     //_currentView = CAMERA; == BAD
-
     // Zoom
     float maxDim = MAX(_map.nbCol(), _map.nbLine());
     _view[NULL_VIEW] = handleResizeWindow();
@@ -195,9 +195,7 @@ void Game::initViews()
     _view[CAMERA].setCenter(
         _map.nbCol() * TILE_SIZE / 2,
         _map.nbLine() * TILE_SIZE / 2);
-
     _view[FOLLOW_Y].zoom(0.8);
-
 }
 
 // Initialize les element du jeu
@@ -213,7 +211,6 @@ void Game::initGameElements()
     // Foes
     _spider.setPositionInGrid(12, 8);
     _spider.setSpeed(4);
-
     // Initialise Foes
     for (int i = 0; i < NB_STARTING_BATS; i++)
     {
@@ -224,8 +221,6 @@ void Game::initGameElements()
     {
         _bats[i].setPositionInGrid(6 * i + 4, 1);
     }
-
-
     // Bullets
     _bullets.clear();
 }

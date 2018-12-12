@@ -8,12 +8,6 @@ Player::Player()
 	_weaponEnabled = false;
 }
 
-void Player::changeMode()
-{
-	_buildingEnabled = !_buildingEnabled;
-	_weaponEnabled = !_weaponEnabled;
-}
-
 bool Player::getIsBuildingEnabled()
 {
 	return _buildingEnabled;
@@ -22,4 +16,16 @@ bool Player::getIsBuildingEnabled()
 bool Player::getIsWeaponEnabled()
 {
 	return _weaponEnabled;
+}
+
+void Player::setBuildingEnabled()
+{
+	_buildingEnabled = true;
+	_weaponEnabled = false;
+}
+
+void Player::setWeaponEnabled()
+{
+	_buildingEnabled = false;
+	_weaponEnabled = true;
 }

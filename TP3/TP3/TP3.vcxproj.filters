@@ -84,7 +84,7 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="delay.cpp">
+    <ClCompile Include="Delay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MapRandomizer.cpp">

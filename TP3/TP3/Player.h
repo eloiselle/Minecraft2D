@@ -24,7 +24,8 @@ public:
 
 	Player();
 
-	void changeMode();
 	bool getIsBuildingEnabled();
 	bool getIsWeaponEnabled();
+	void setBuildingEnabled();
+	void setWeaponEnabled();
 };

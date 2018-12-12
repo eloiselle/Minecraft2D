@@ -1,4 +1,3 @@
-#pragma once
 #include "Game.h"
 
 // ############################################################################
@@ -22,13 +21,29 @@ void Game::drawWindow()
 // Met a jour les view
 void Game::updateViews()
 {
+    //if ((_view->getCenter().x) - (_view->getSize().x) <= _view->getSize().x / 2)
+    //{
+    //	_view[FOLLOW].setCenter(
+    //		_view->getCenter().x,
+    //		_player.getExactY());
+    //}
+    //if ((_view->getCenter().y * 2) - (_view->getSize().y) <= _view->getSize().y / 2)
+    //{
+    //	_view[FOLLOW].setCenter(
+    //		_player.getExactX(),
+    //		_view->getCenter().y);
+    //}
+ //   if ((_view->getCenter().y * 2) - (_view->getSize().y) > _view->getSize().y / 2
+ //       && (_view->getCenter().x) - (_view->getSize().x) > _view->getSize().x / 2)
+ //   {
     _view[FOLLOW].setCenter(
         _player.getExactX(),
         _player.getExactY());
 
     _view[FOLLOW_Y].setCenter(
-        _map.nbCol() * TILE_SIZE /2,
+        _map.nbCol() * TILE_SIZE / 2,
         _player.getExactY());
+    ////}
 }
 
 // Met a jour le titre de la fenetre
@@ -80,10 +95,20 @@ void Game::drawMovableObjects()
     _mouseMagnet.setPositionExact(
         _mouseCoord.getPosition().x,
         _mouseCoord.getPosition().y);
-    _mouseSquare.setPosition(
-        _mouseMagnet.getGridCol() * TILE_SIZE,
-        _mouseMagnet.getGridLine() * TILE_SIZE);
-    _window.draw(_mouseSquare);
+    if (_player.getIsBuildingEnabled())
+    {
+        _mouseSquare.setPosition(
+            _mouseMagnet.getGridCol() * TILE_SIZE,
+            _mouseMagnet.getGridLine() * TILE_SIZE);
+        _window.draw(_mouseSquare);
+    }
+    if (_player.getIsWeaponEnabled())
+    {
+        _mouseCursor.setPosition(
+            _mouseCursor.getPosition().x,
+            _mouseCursor.getPosition().y);
+        _window.draw(_mouseCursor);
+    }
 
     // player
     _playerSprite.setPosition(
@@ -104,7 +129,6 @@ void Game::drawMovableObjects()
             c.getExactY());
         _window.draw(_spiderSprite);
     }
-
 
     // Player
     _playerShape.setPosition(_player.getExactX(), _player.getExactY());
