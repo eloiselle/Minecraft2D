@@ -23,7 +23,7 @@ public:
 	Bullet(float x, float y, float speed = 1.f);    // Constructeur avec parametres
 
 	void advance();          // Se deplace dans la direction du vecteur d'angle
-	void aim(int x, int y, int accuracy);                         // Change l'angle en fonction de coord
+	void aim(int x, int y, int accuracy);           // Change l'angle en fonction de coord et une donné pour rendre aléatoire
 	void aim(MagnetPosition & mp);                  // Change l'angle an fonction de un objet
 
 	void setSpeed(float);
