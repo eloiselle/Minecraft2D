@@ -59,14 +59,14 @@ constexpr int FRAMERATE = 60;                               // Nombre de frame p
 constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu avant le prochain step
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
-constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;                // Nb de line entre le joueur et le bas de la map pour aggrandir
+constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre le joueur et le bas de la map pour aggrandir
 
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
-constexpr int PLAYER_FOOT = 4;                              // Demi-Largeur de l'avatar du joueur pour les collisions
+constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
 // Musique
-constexpr bool MUSIQUE = true;                              // 
-constexpr int NB_STARTING_BATS = 3;                         // Nombre d'ennemis a creer au debut
+constexpr bool MUSIQUE = false;                             // 
+constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 
 class Game
 {
@@ -77,9 +77,7 @@ private:
 	Player _player;                     // Avatar controlled by user
 	Bullet _yoyo;                       // Tourne a l'entour de _player
 	VectorAngle _yoyoString;            // Distance entre _yoyo et _player
-
-	list<Crawler> _bats;                //
-
+	list<Crawler> _bats;     
 	list<Bullet> _bullets;              // Liste des projectiles
 
 	// Window
@@ -90,7 +88,6 @@ private:
 	ChoosenView _currentView = NULL_VIEW;
 
 	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
-
 	// Audio
 	SoundBuffer _buffB,
 		_buffF;					        // buffer des sons
@@ -167,8 +164,10 @@ public:
 	void handleMouseButtonPressed();                    // Handler des boutons de souris
 	bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
 	void shootBullet();                                 // Tire une balle
-	void changeBlockAtMouse();                          // Change un block a la position de la souris
+	void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
+	void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
 	void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
+
 
 	// Window View
 	bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map

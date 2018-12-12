@@ -1,84 +1,101 @@
 #pragma once
 #include "Weapon.h"
 
-void Weapon::setUzi()
+void Weapon::setUzi(int _frameRun)
 {
-	_accuracy = 2;
-	_totalDelay = 5;
+	_nameEquippedWeapon = "Uzi";
+	_accuracy = 60;
+	_totalDelay = 3 * _delayMultiplier;
 	_bulletSpeed = 1;
-	_damageMultiplier = 1;
+	_damage = 1;
+	delayInit(_frameRun, _totalDelay);
 }
 
-void Weapon::setAssault()
+void Weapon::setAssault(int _frameRun)
 {
+	_nameEquippedWeapon = "Assault";
 	_accuracy = 1;
-	_totalDelay = 3;
+	_totalDelay = 10 * _delayMultiplier;
 	_bulletSpeed = 1.5;
-	_damageMultiplier = 2;
+	_damage = 2;
+	delayInit(_frameRun, _totalDelay);
 }
 
-void Weapon::setSniper()
+void Weapon::setSniper(int _frameRun)
 {
+	_nameEquippedWeapon = "Sniper";
 	_accuracy = 1;
-	_totalDelay = 10;
+	_totalDelay = 50 * _delayMultiplier;
 	_bulletSpeed = 4;
-	_damageMultiplier = 4;
+	_damage = 4;
+	delayInit(_frameRun, _totalDelay);
 }
 
-void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier)
+void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier, int _frameRun)
 {
 	_accuracy = accuracy;
-	_totalDelay = rateOfFire;
+	_totalDelay = rateOfFire * _delayMultiplier;
 	_bulletSpeed = bulletSpeed;
-	_damageMultiplier = damageMultiplier;
+	_damage = damageMultiplier;
+	delayInit(_frameRun, _totalDelay);
 }
 
-float Weapon::getAccuracy()
+string Weapon::getWeaponName()
+{
+	return _nameEquippedWeapon;
+}
+
+int Weapon::getWeaponAccuracy()
 {
 	return _accuracy;
 }
 
-int Weapon::getRateOfFire()
+int Weapon::getWeaponRateOfFire()
 {
 	return _totalDelay;
 }
 
-float Weapon::getBulletSpeed()
+float Weapon::getWeaponBulletSpeed()
 {
 	return _bulletSpeed;
 }
 
-float Weapon::getDamageMultiplier()
+float Weapon::getWeaponDamage()
 {
-	return _damageMultiplier;
+	return _damage;
 }
 
-AngleDegree Weapon::getFireAngle()
+AngleDegree Weapon::getWeaponFireAngle()
 {
 	return _fireAngle;
 }
 
-void Weapon::setAccuracy(float accuracy)
+void Weapon::setWeaponName(string name)
+{
+	_nameEquippedWeapon = name;
+}
+
+void Weapon::setWeaponAccuracy(int accuracy)
 {
 	_accuracy = accuracy;
 }
 
-void Weapon::setRateOfFire(int rateOfFire)
+void Weapon::setWeaponRateOfFire(int rateOfFire)
 {
 	_totalDelay = rateOfFire;
 }
 
-void Weapon::setBulletSpeed(float bulletSpeed)
+void Weapon::setWeaponBulletSpeed(float bulletSpeed)
 {
 	_bulletSpeed = bulletSpeed;
 }
 
-void Weapon::getDamageMultiplier(float damageMultiplier)
+void Weapon::setWeaponDamage(float damageMultiplier)
 {
-	_damageMultiplier = damageMultiplier;
+	_damage = damageMultiplier;
 }
 
-void Weapon::setFireAngle(AngleDegree fireAngle)
+void Weapon::setWeaponFireAngle(AngleDegree fireAngle)
 {
 	_fireAngle = fireAngle;
 }

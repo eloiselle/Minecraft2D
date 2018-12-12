@@ -41,14 +41,14 @@ void WorldMap::randomize()
 
 void WorldMap::randomizeLine(int line)
 {
-    BLOCK_TYPE blockByID[5] = { 
+    BLOCK_TYPE blockByID[6] = { 
         EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
-        SOFT_BLOCK, 
+        SOFT_BLOCK, SOFT_BLOCK,
         HARD_BLOCK };
 
     for (int c = 1; c < _nbC - 1; c++)  // Colonnes
     {
-        _map[line][c].set(blockByID[rand() % 5]);
+        _map[line][c].set(blockByID[rand() % 6]);
     }
 
     _map[line][0].set(HARD_BLOCK);
