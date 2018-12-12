@@ -34,21 +34,16 @@ void Game::inputActivatedOnlyTheFirstTime()
 				init();
 			if (_event.key.code == Keyboard::P)
 				handlePausing();
-            //if (_event.key.code == Keyboard::M)
-            //    _player.changeMode();
-            if (_event.key.code == Keyboard::T
-                && isMouseInWindow()
-                && !areOnTheSameSquare(_mouseMagnet, _player))
-                _player.setPosition(_mouseMagnet);
+			if (_event.key.code == Keyboard::T
+				&& isMouseInWindow()
+				&& !areOnTheSameSquare(_mouseMagnet, _player))
+				_player.setPosition(_mouseMagnet);
 		}
 
 		if (_appState == RUNNING)
 		{
 			if (_event.type == Event::MouseWheelMoved)
 				handleMouseWheelMoved();
-
-			if (_event.type == Event::MouseButtonPressed)
-				handleMouseButtonPressed();
 		}
 	}
 }
@@ -61,6 +56,9 @@ void Game::inputActivatedInContinu()
 	{
 		if (_currentView == CAMERA && isMouseInWindow())
 			handleMouseOnWindowBorders();
+
+		if (Mouse::isButtonPressed(Mouse::Left) || Mouse::isButtonPressed(Mouse::Right))
+			handleMouseButtonPressed();
 	}
 
 	updateViewlessMouseCoord();
@@ -114,7 +112,7 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num0))
 		initWorldMap("Labyrinthe1.txt");
 
-    // Change weapon
+	// Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
 		_player.setBuildingEnabled();
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
@@ -180,12 +178,9 @@ void Game::handleMouseWheelMoved()
 // Gere quand un bouton de souris est clicker
 void Game::handleMouseButtonPressed()
 {
-	if (isMouseInWindow())
+	if (isMouseInWindow()
+		&& !areOnTheSameSquare(_mouseMagnet, _player))
 	{
-        if (isMouseInMap()
-            && !areOnTheSameSquare(_mouseMagnet, _player)
-            && _player.getIsBuildingEnabled())
-			changeBlockAtMouse();
 		int c = _mouseCoord.getPosition().x / TILE_SIZE;
 		int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
@@ -210,8 +205,8 @@ void Game::handleMouseButtonPressed()
 // Retourne si deux objet sont sue la meme case
 bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
 {
-    return (mp1.getGridCol() == mp2.getGridCol()
-        && mp1.getGridLine() == mp2.getGridLine());
+	return (mp1.getGridCol() == mp2.getGridCol()
+		&& mp1.getGridLine() == mp2.getGridLine());
 }
 
 void Game::shootBullet()
