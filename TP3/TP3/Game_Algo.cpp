@@ -49,6 +49,7 @@ void Game::manageMapExpansion()
             int c = (rand() % (_map.nbCol() - 5)) + 3;
             _bats.push_back(Crawler());
             _bats.back().setPositionInGrid(c, l);
+            _map.at(l, c).set(EMPTY_BLOCK);
         }
     }
 }
