@@ -41,6 +41,15 @@ void Game::manageMapExpansion()
     {
         _map.addBottomLines(1);
         _map.randomizeLine(_map.nbLine() - 1);
+
+        if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
+        {
+            // Create new bat on last line
+            int l = _map.nbLine() - 2;
+            int c = (rand() % (_map.nbCol() - 5)) + 3;
+            _bats.push_back(Crawler());
+            _bats.back().setPositionInGrid(c, l);
+        }
     }
 }
 
@@ -135,7 +144,7 @@ void Game::manageBullets()
                     c++;
                 }
             }
-            
+
 
 
         }

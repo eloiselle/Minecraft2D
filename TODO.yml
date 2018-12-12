@@ -2,6 +2,7 @@
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
     Foes        : Changer image de spider (animation et/ou direction)
+    Debug       : Mur dans l'entete de la map (A)
     Player      : Implanter les animations de WaddleDoo (C)
     Player      : Modifier les collisions pour le personnage plus gros (A)
     Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)

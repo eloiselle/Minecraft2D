@@ -58,12 +58,12 @@ constexpr int FRAMERATE = 60;                               // Nombre de frame p
 constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu avant le prochain step
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
-constexpr int NB_LINE_BEFORE_EXPAND_MAP = 8;                // Nb de line entre le joueur et le bas de la map pour aggrandir
+constexpr int NB_LINE_BEFORE_EXPAND_MAP = 10;                // Nb de line entre le joueur et le bas de la map pour aggrandir
 
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
 constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
-constexpr int NB_STARTING_BATS = 3;                         // Nombre d'ennemis a creer au debut
+constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 
 class Game
 {
