@@ -115,12 +115,12 @@ void Game::manageBullets()
                 willVanish = true;
             }
 
-            //if (_map.isDestructible(*b))
-            //{
-            //    //softBlock.affectHealth(-1);
-            //    //_map.at(b->getGridLine(), b->getGridCol()) == TRAIL;
-            //    willVanish = true;
-            //}
+            if (_map.isDestructible(*b))
+            {
+                //softBlock.affectHealth(-1);
+                _map.at(b->getGridLine(), b->getGridCol()) = EMPTY_BLOCK;
+                willVanish = true;
+            }
 
 
         }

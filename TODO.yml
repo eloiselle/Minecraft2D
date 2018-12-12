@@ -1,19 +1,16 @@
 
 Priorities: (High to Low)
-    View        : S'entendre sur comment utiliser les view (E et A) Game_Draw
     Remise      : Trouver comment faire le vidéo
     Foes        : Changer image de spider (animation et/ou direction)
-    Player      : Implanter les animations de WaddleDoo
+    Player      : Implanter les animations de WaddleDoo (C)
     Player      : Modifier les collisions pour le personnage plus gros (A)
     Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)
-    Weapon      : Faire détruire les bloc par les bullet
     Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED
     Weapon      : Uzi           : Attaque en continue qui ne detruit pas les block (E)
     Weapon      : Bulletshield  : Reutiliser le yoyo mais ne pas modifier la longueur avec smartCos() (E)
     Weapon      : Slow-mo       : Faire que que manageFoes() est appellé une fois sur deux quand c'est Actif
     Weapon      : Homing        : appeller Aim() frequemment (E)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
-    Art         : Mettre de la musique et du son (C)
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46)
     Pathfinding : A* search
     Foes        : Boss          : 

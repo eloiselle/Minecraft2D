@@ -206,7 +206,7 @@ void Game::shootBullet()
 	_bullets.push_back(Bullet());
 	_bullets.back().setPosition(_player);
 	_bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y);
-	_bullets.back().setLength(100);
+	_bullets.back().setLength(10);
 }
 
 void Game::changeBlockAtMouse()
