@@ -8,7 +8,7 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 #pragma once
 #include "pch.h"
 
-#include "SFML\Audio.hpp"
+
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -24,18 +24,17 @@ constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
 // Messages
 constexpr const char * DEFAULT_MESSAGE =
 R"(******************** MINECRAFT 2D ********************
-
 INSTRUCTIONS
 
 Press [Backspace] to call init()
 
 Press [P] to pause/unpause.
-Press [M] to change Mode (bullet vs editor)
+Press the arrow/WASD keys to move around
+Press [Space] to jump
 Press [T] to Teleport
 
-Press [1] to [4] to change the view
-
-Press the arrow/WASD keys to move around
+Press [1] to select the Build tool
+Press [2] to [5] to change weapon
 
 Roll the mousewheel to zoom-in/zoom-out
 
@@ -50,7 +49,7 @@ constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel 
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
 
 // Size
-//constexpr pixel_t TILE_SIZE = 32;                           // Taille des tiles normaux
+//constexpr pixel_t TILE_SIZE = 32;                         // Taille des tiles normaux
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -64,9 +63,11 @@ constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre 
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
 constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
-// Musique
-constexpr bool MUSIQUE = false;                             // 
+// Game
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
+
+// OPTIONS
+constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
 
 class Game
 {
@@ -88,11 +89,10 @@ private:
 	ChoosenView _currentView = NULL_VIEW;
 
 	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
+
 	// Audio
-	SoundBuffer _buffB,
-		_buffF;					        // buffer des sons
-	Sound _soundBullet,
-		_soundFlap;						// sons 
+	SoundBuffer _buffB, _buffF;			// buffer des sons
+	Sound _soundBullet, _soundFlap;		// sons 
 	Music _music;						// musique
 
 	// Text

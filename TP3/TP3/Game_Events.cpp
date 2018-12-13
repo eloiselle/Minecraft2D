@@ -12,7 +12,7 @@ void Game::quitApplication()
 	exit(1);
 }
 
-// Gere les evenements globaux de l'application
+// Gere les input qui doivent etre active une seule fois par repetition
 void Game::inputActivatedOnlyTheFirstTime()
 {
 	// Window Controls
@@ -48,6 +48,7 @@ void Game::inputActivatedOnlyTheFirstTime()
 	}
 }
 
+// Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
 	handleKeypress(); // TODO event allow to do it only once
@@ -57,7 +58,8 @@ void Game::inputActivatedInContinu()
 		if (_currentView == CAMERA && isMouseInWindow())
 			handleMouseOnWindowBorders();
 
-		if (Mouse::isButtonPressed(Mouse::Left) || Mouse::isButtonPressed(Mouse::Right))
+		if (Mouse::isButtonPressed(Mouse::Left) 
+            || Mouse::isButtonPressed(Mouse::Right))
 			handleMouseButtonPressed();
 	}
 
@@ -89,7 +91,7 @@ View& Game::handleResizeWindow()
 	_view[NEUTRAL] = View(FloatRect(0.f, 0.f, size.x, size.y));
 	_view[CAMERA] = View(FloatRect(0.f, 0.f, size.x, size.y));
 	_view[FOLLOW] = View(FloatRect(0.f, 0.f, size.x, size.y));
-    _view[FOLLOW_Y] = View(FloatRect(0.f, 0.f, size.x, size.y));
+	_view[FOLLOW_Y] = View(FloatRect(0.f, 0.f, size.x, size.y));
 
 	return _view[NEUTRAL];
 }
@@ -116,6 +118,7 @@ void Game::handleKeypress()
 	// Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
 		_player.setBuildingEnabled();
+
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
 	{
 		_player.setWeaponEnabled();
@@ -165,7 +168,7 @@ void Game::handleArrowKeys()
 		Keyboard::isKeyPressed(Keyboard::S))
 	{
 		_view[CAMERA].move(0, ARROW_EXPLORE);
-		tryToMove(DOWN, _player);
+		//tryToMove(DOWN, _player);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Left) ||
 		Keyboard::isKeyPressed(Keyboard::A))
@@ -174,10 +177,6 @@ void Game::handleArrowKeys()
 		tryToMove(LEFT, _player);
 	}
 }
-
-// ############################################################################
-//              MOUSE
-// ############################################################################
 
 // Gere quand la roulette de souris a changer
 void Game::handleMouseWheelMoved()
@@ -216,23 +215,16 @@ void Game::handleMouseButtonPressed()
 	}
 }
 
-// Retourne si deux objet sont sue la meme case
-bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
-{
-	return (mp1.getGridCol() == mp2.getGridCol()
-		&& mp1.getGridLine() == mp2.getGridLine());
-}
-
 void Game::shootBullet()
 {
 	_bullets.push_back(Bullet());
-    _bullets.back().setPositionExact(
-        _player.getExactX(), 
-        _player.getExactY() - HALF_TILE_SIZE);
+	_bullets.back().setPositionExact(
+		_player.getExactX(), 
+		_player.getExactY() - HALF_TILE_SIZE);
 	_bullets.back().aim(
-        _mouseCoord.getPosition().x,
-        _mouseCoord.getPosition().y, 
-        _player.getWeaponAccuracy());
+		_mouseCoord.getPosition().x,
+		_mouseCoord.getPosition().y, 
+		_player.getWeaponAccuracy());
 	_bullets.back().setLength(10);
 	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
 	_bullets.back().setDamage(_player.getWeaponDamage());
@@ -240,114 +232,4 @@ void Game::shootBullet()
 
 	if (MUSIQUE)
 		_soundBullet.play();
-}
-
-void Game::insertBlockAtMouse(int c, int l)
-{
-	if (_map.at(l, c).getType() == EMPTY_BLOCK)
-	{
-		_map.at(l, c) = SOFT_BLOCK;
-	}
-}
-
-void Game::removeBlockAtMouse(int c, int l)
-{
-	if (_map.at(l, c).getType() == SOFT_BLOCK 
-        || _map.at(l, c).getType() == HARD_BLOCK)
-	{
-		_map.at(l, c) = EMPTY_BLOCK;
-	}
-}
-
-// Push sur les bordures de l'ecran a l'aide d'un ratio de proximite de la bordure de window
-void Game::handleMouseOnWindowBorders()
-{
-	// Horizontal
-	if (Mouse::getPosition(_window).x < BORDURE)                                    // Gauche
-	{
-		_proximityRatio = (BORDURE - Mouse::getPosition(_window).x) / BORDURE;
-		_view[CAMERA].move(-MOUSE_EXPLORE * _proximityRatio, 0);
-	}
-	else if (Mouse::getPosition(_window).x > DEF_WINDOW_WIDTH - BORDURE)            // Droite
-	{
-		_proximityRatio = (BORDURE - DEF_WINDOW_WIDTH + Mouse::getPosition(_window).x) / BORDURE;
-		_view[CAMERA].move(MOUSE_EXPLORE * _proximityRatio, 0);
-	}
-
-	// Vertical
-	if (Mouse::getPosition(_window).y < BORDURE)                                    // Haut
-	{
-		_proximityRatio = (BORDURE - Mouse::getPosition(_window).y) / BORDURE;
-		_view[CAMERA].move(0, -MOUSE_EXPLORE * _proximityRatio);
-	}
-	else if (Mouse::getPosition(_window).y > DEF_WINDOW_HEIGHT - BORDURE)           // Bas
-	{
-		_proximityRatio = (BORDURE - DEF_WINDOW_HEIGHT + Mouse::getPosition(_window).y) / BORDURE;
-		_view[CAMERA].move(0, MOUSE_EXPLORE * _proximityRatio);
-	}
-}
-
-// Retourne si les coords sont a l'interieur de la map
-bool Game::isInMap(int x, int y)const
-{
-	return(
-		(x > 0) && (x < _map.nbCol()*TILE_SIZE) &&
-		(y > 0) && (y < _map.nbLine()*TILE_SIZE));
-}
-
-// Retourne si la position est a l'interieur de la map
-bool Game::isInMap(MagnetPosition & mp) const
-{
-	return(
-		(mp.getExactX() > 0) && (mp.getExactX() < _map.nbCol()*TILE_SIZE) &&
-		(mp.getExactY() > 0) && (mp.getExactY() < _map.nbLine()*TILE_SIZE));
-}
-
-// Retourne si la souris est a l'interieur de la map
-bool Game::isMouseInMap()const
-{
-	return(
-		(_mouseCoord.getPosition().x > 0) && (_mouseCoord.getPosition().x < _map.nbCol()*TILE_SIZE) &&
-		(_mouseCoord.getPosition().y > 0) && (_mouseCoord.getPosition().y < _map.nbLine()*TILE_SIZE));
-}
-
-// Retourne si la souris est a l'interieur de la fenetre
-bool Game::isMouseInWindow()const
-{
-	return(
-		(Mouse::getPosition(_window).x > 0) && (Mouse::getPosition(_window).x < _window.getSize().x) &&
-		(Mouse::getPosition(_window).y > 0) && (Mouse::getPosition(_window).y < _window.getSize().y));
-}
-
-// Retourne si les coords sont a l'interieur de la fenetre
-bool Game::isInWindow(int x, int y)const
-{
-	return(
-		(x > 0) && (x < _window.getSize().x) &&
-		(y > 0) && (y < _window.getSize().y));
-}
-
-bool Game::isInWindow(MagnetPosition & mp) const
-{
-	return( // Not-tested : Can bug because of the view
-		(mp.getExactX() > 0) && (mp.getExactX() < _window.getSize().x) &&
-		(mp.getExactY() > 0) && (mp.getExactY() < _window.getSize().y));
-}
-
-// Retourne si l'objet est a l'interieur de la fenetre
-bool Game::isInWindow(Vector2i& v)const
-{
-	return( // Not-tested : Can bug because of the view
-		(v.x > 0) && (v.x < _window.getSize().x) &&
-		(v.y > 0) && (v.y < _window.getSize().y));
-}
-
-// Trouve les coordonnes internes de la souris sans la view
-void Game::updateViewlessMouseCoord()
-{
-	// Convertion de : Mouse.position => Generic.Coord => Mouse.Coord
-
-	_mouseCoord.setPosition(
-		_window.mapPixelToCoords(
-			Mouse::getPosition(_window), _view[_currentView]));
 }

@@ -160,6 +160,7 @@
     <ClCompile Include="Crawler.cpp" />
     <ClCompile Include="Delay.cpp" />
     <ClCompile Include="FileOpener.cpp" />
+    <ClCompile Include="Game_Position.cpp" />
     <ClCompile Include="Killable.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Foe.cpp" />

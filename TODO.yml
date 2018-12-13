@@ -1,13 +1,12 @@
 
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
-    Foes        : Changer image de spider (animation et/ou direction)
+    Foes        : Changer image de spider (animation et/ou direction) (C)
     Debug       : Mur dans l'entete de la map (A)
     Player      : Implanter les animations de WaddleDoo (C)
     Player      : Modifier les collisions pour le personnage plus gros (A)
     Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)
-    Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED
-    Weapon      : Uzi           : Attaque en continue qui ne detruit pas les block (E)
+    Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED (E)
     Weapon      : Bulletshield  : Reutiliser le yoyo mais ne pas modifier la longueur avec smartCos() (E)
     Weapon      : Slow-mo       : Faire que que manageFoes() est appellé une fois sur deux quand c'est Actif
     Weapon      : Homing        : appeller Aim() frequemment (E)
@@ -20,6 +19,7 @@ Priorities: (High to Low)
 
 Taches pre-remise:
     Faire la video
+    Editer la video
     Code:
         Mettre des entete de fichier dans tous les fichiers
         Mettre des commentaires aux endroit necessaire
