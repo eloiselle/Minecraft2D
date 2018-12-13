@@ -106,14 +106,14 @@ void Game::handleKeypress()
 		// Game Controls
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			_yoyo.setPosition(_player);
+			//_shieldSphere.setPosition(_player);
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 		quitApplication();
 
 	if (Keyboard::isKeyPressed(Keyboard::Num0))
-		initWorldMap("Labyrinthe1.txt");
+		initWorldMap();
 
 	// Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))

@@ -65,6 +65,8 @@ constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l
 
 // Game
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
+constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
+constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 
 // OPTIONS
 constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
@@ -76,10 +78,10 @@ private:
 	// Game Elements
 	WorldMap _map;                      // World map
 	Player _player;                     // Avatar controlled by user
-	Bullet _yoyo;                       // Tourne a l'entour de _player
-	VectorAngle _yoyoString;            // Distance entre _yoyo et _player
-	list<Crawler> _bats;     
+	Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
+	VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
 	list<Bullet> _bullets;              // Liste des projectiles
+	list<Crawler> _bats;                //
 
 	// Window
 	ContextSettings _settings;          // Settings de la _window
@@ -143,9 +145,9 @@ public:
 	void initViews();                   // Initialization des view
 	void initFoes();                    //
 	void initGameElements();            // Initialization des elements qui se deplacent
-	void initWorldMap(const char* fileName = DEFAULT_FILENAME);   // Initialization du labyrinthe
-	void initMusic();
-	void initSounds();
+	void initWorldMap();                // Initialization du labyrinthe
+	void initMusic();                   //
+	void initSounds();                  //
 	Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
 		unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
 	// Initialize un seul sprite a partir de ses proprietes

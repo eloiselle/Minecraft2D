@@ -100,12 +100,17 @@ double smartCos(double base, double slowness = 1, double amplitude = 1, double m
 
 void Game::manageBullets()
 {
-	// Yoyo : Example d'utilisation de VectorAngle
-	//_yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
-	_yoyoString.rotate(10);
-	_yoyo.setPositionExact(
-		_player.getExactX() + _yoyoString.getX(),
-		_player.getExactY() + _yoyoString.getY() - PLAYER_HEIGHT / 2);
+	// Shield
+	for (size_t i = 0; i < NB_SHIELD; i++)
+	{
+		// Yoyo : Example d'utilisation de VectorAngle
+		//_yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
+		_shieldVA[i].rotate(3);
+		_shieldSphere[i].setPositionExact(
+			_player.getExactX() + _shieldVA[i].getX(),
+			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT / 2);
+
+	}
 
 	// List of bullets
 	bool willVanish; //

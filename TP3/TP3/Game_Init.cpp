@@ -162,9 +162,9 @@ void Game::initShapes()
 }
 
 // Initialize la carte de terrain
-void Game::initWorldMap(const char* fileName)
+void Game::initWorldMap()
 {
-	assert(strlen(fileName) > 0);
+	//assert(strlen(fileName) > 0);
 
 	//// Read file
 	//if (!_map.readFile(fileName))
@@ -229,7 +229,13 @@ void Game::initGameElements()
 	_player.setSpeed(4);
 	_map.at(_player.getGridLine(), _player.getGridCol());
 
-	_yoyoString.init(25, 0.71, 0.71);
+	// Shield
+	for (size_t i = 0; i < NB_SHIELD; i++)
+	{
+		_shieldVA[i].init(25, 0, 1);
+		_shieldVA[i].rotate(i * SHIELD_ANGLE);
+	}
+	
 
 
 	initFoes();

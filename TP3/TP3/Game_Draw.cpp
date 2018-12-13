@@ -128,8 +128,12 @@ void Game::drawMovableObjects()
 	_window.draw(_playerShape);
 
 	// Bullet
-	_bulletShape.setPosition(_yoyo.getExactX(), _yoyo.getExactY());
-	_window.draw(_bulletShape);
+    for (size_t i = 0; i < NB_SHIELD; i++)
+    {
+	    _bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
+	    _window.draw(_bulletShape);
+    }
+
 
 	//Bullets
 	_debug += "\r\nB: " + to_string(_bullets.size());
