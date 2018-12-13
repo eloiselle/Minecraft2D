@@ -57,10 +57,7 @@ void Game::updateWindowTitle()
 	//    to_string(_mouseMagnet.getGridCol()) + " " +
 	//    to_string(_mouseMagnet.getGridLine());
 
-	if (_player.getIsBuildingEnabled())
-		_extraTitle += " Build_Mode";
-	else if (_player.getIsWeaponEnabled())
-		_extraTitle += " Weapon_Mode : " + _player.getWeaponName();
+	_extraTitle += toolName[_currentTool];
 
 	if (_extraTitle != "")
 		_extraTitle = " : " + _extraTitle;
@@ -94,14 +91,14 @@ void Game::drawMovableObjects()
 	_mouseMagnet.setPositionExact(
 		_mouseCoord.getPosition().x,
 		_mouseCoord.getPosition().y);
-	if (_player.getIsBuildingEnabled())
+	if (_currentTool == BUILD)
 	{
 		_mouseSquare.setPosition(
 			_mouseMagnet.getGridCol() * TILE_SIZE,
 			_mouseMagnet.getGridLine() * TILE_SIZE);
 		_window.draw(_mouseSquare);
 	}
-	if (_player.getIsWeaponEnabled())
+	if (toolIsAShooter())
 	{
 		_mouseCursor.setPosition(
 			_mouseCursor.getPosition().x,
@@ -128,11 +125,11 @@ void Game::drawMovableObjects()
 	_window.draw(_playerShape);
 
 	// Bullet
-    for (size_t i = 0; i < NB_SHIELD; i++)
-    {
-	    _bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
-	    _window.draw(_bulletShape);
-    }
+	for (size_t i = 0; i < NB_SHIELD; i++)
+	{
+		_bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
+		_window.draw(_bulletShape);
+	}
 
 
 	//Bullets

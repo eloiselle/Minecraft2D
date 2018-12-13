@@ -2,20 +2,18 @@
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
     Foes        : Changer image de spider (animation et/ou direction) (C)
-    Debug       : Mur dans l'entete de la map (A)
     Player      : Implanter les animations de WaddleDoo (C)
-    Player      : Modifier les collisions pour le personnage plus gros (A)
-    Weapon      : Utiliser la classe Weapon pour gérer les bullet (E)
+    Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
     Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED (E)
-    Weapon      : Bulletshield  : Reutiliser le yoyo mais ne pas modifier la longueur avec smartCos() (E)
-    Weapon      : Slow-mo       : Faire que que manageFoes() est appellé une fois sur deux quand c'est Actif
+    Weapon      : Bulletshield  : Implanter les collisions
     Weapon      : Homing        : appeller Aim() frequemment (E)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
-    Art         : Mettre une icone de fenetre (Game_Init.cpp line:46)
+    Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
     Pathfinding : A* search
     Foes        : Boss          : 
     Meta        : EndGame ; Timer
-    Map         : Map Editor
+    Map         : Map Editor Sauvegarder la map et la loader
+
 
 Taches pre-remise:
     Faire la video

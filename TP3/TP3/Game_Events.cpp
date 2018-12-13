@@ -59,7 +59,7 @@ void Game::inputActivatedInContinu()
 			handleMouseOnWindowBorders();
 
 		if (Mouse::isButtonPressed(Mouse::Left) 
-            || Mouse::isButtonPressed(Mouse::Right))
+			|| Mouse::isButtonPressed(Mouse::Right))
 			handleMouseButtonPressed();
 	}
 
@@ -117,31 +117,38 @@ void Game::handleKeypress()
 
 	// Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
-		_player.setBuildingEnabled();
+	{
+		_currentTool = BUILD;
+	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
 	{
-		_player.setWeaponEnabled();
+		_currentTool = UZI;
 		_player.setUzi(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num3))
 	{
-		_player.setWeaponEnabled();
+		_currentTool = ASSAULT;
 		_player.setAssault(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num4))
 	{
-		_player.setWeaponEnabled();
+		_currentTool = SNIPER;
 		_player.setSniper(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num5))
 	{
-		_player.setWeaponEnabled();
+		_currentTool = SHOT_GUN;
 		_player.setShotgun(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num6))
 	{
-		_player.setWeaponEnabled();
+		_currentTool = BULLET_HELL;
+		_player.setDestroyer(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num7))
+	{
+		_currentTool = SLOW_MO;
 		_player.setDestroyer(_frameRun);
 	}
 }
@@ -196,20 +203,20 @@ void Game::handleMouseButtonPressed()
 
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			if (isMouseInMap() && _player.getIsBuildingEnabled())
+			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
-			if (_player.getIsWeaponEnabled() && _player.delayIsReady(_frameRun))
+			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
 			{
 				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
 				{
-				shootBullet();
+				    shootBullet();
 				}
 			}
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
 		{
-			if (isMouseInMap() && _player.getIsBuildingEnabled())
+			if (isMouseInMap() && _currentTool == BUILD)
 				removeBlockAtMouse(c, l);
 		}
 	}

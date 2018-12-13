@@ -21,7 +21,7 @@ protected:
 	int _accuracy;				//Détermine une variation dans _angle
 	float _bulletSpeed;			//Vitesse des bullets
 	float _damage;				//Dommages
-	string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
+	//string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
 
 public:
 
@@ -32,14 +32,14 @@ public:
 	void setDestroyer(int _frameRun);
 	void setCustom(float, int, float, float, int);
 
-	string getWeaponName();
+	//string getWeaponName();
 	int getWeaponNbBulletsFired();
 	int getWeaponAccuracy();
 	int getWeaponRateOfFire();
 	float getWeaponBulletSpeed();
 	float getWeaponDamage();
 
-	void setWeaponName(string);
+	//void setWeaponName(string);
 	void setWeaponNbBulletsFired(int);
 	void setWeaponAccuracy(int);
 	void setWeaponRateOfFire(int);
