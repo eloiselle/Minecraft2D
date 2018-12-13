@@ -119,6 +119,7 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
 	{
 		_currentTool = BUILD;
+		_player.setNoWeapon(_frameRun);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Num2))
@@ -144,12 +145,12 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Num6))
 	{
 		_currentTool = BULLET_HELL;
-		_player.setDestroyer(_frameRun);
+		_player.setBulletHell(_frameRun);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num7))
 	{
 		_currentTool = SLOW_MO;
-		_player.setDestroyer(_frameRun);
+		_player.setNoWeapon(_frameRun);
 	}
 }
 
@@ -210,7 +211,7 @@ void Game::handleMouseButtonPressed()
 			{
 				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
 				{
-				    shootBullet();
+					shootBullet();
 				}
 			}
 		}

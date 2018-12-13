@@ -1,6 +1,34 @@
 #pragma once
 #include "Weapon.h"
 
+void Weapon::setWeapon(Tool tool, int _frameRun)
+{
+    switch (tool)
+    {
+    case BUILD:             setNoWeapon(_frameRun);         break;
+    case UZI:               setUzi(_frameRun);              break;
+    case ASSAULT:           setAssault(_frameRun);          break;
+    case SNIPER:            setSniper(_frameRun);           break;
+    case SHOT_GUN:          setShotgun(_frameRun);          break;
+    case BULLET_HELL:       setBulletHell(_frameRun);        break;
+    case SLOW_MO:           setNoWeapon(_frameRun);         break;
+    default:
+        break;
+    }
+}
+
+void Weapon::setNoWeapon(int _frameRun)
+{
+    //_nameEquippedWeapon = "Uzi";
+    _nbBulletsFired = 0;
+    _accuracy = 1;
+    _totalDelay = 60 * _delayMultiplier;
+    _bulletSpeed = 1;
+    _damage = 1;
+    delayInit(_frameRun, _totalDelay);
+}
+
+
 void Weapon::setUzi(int _frameRun)
 {
     //_nameEquippedWeapon = "Uzi";
@@ -45,11 +73,11 @@ void Weapon::setShotgun(int _frameRun)
     delayInit(_frameRun, _totalDelay);
 }
 
-void Weapon::setDestroyer(int _frameRun)
+void Weapon::setBulletHell(int _frameRun)
 {
     //_nameEquippedWeapon = "What is this";
     _nbBulletsFired = 25;
-    _accuracy = 90;
+    _accuracy = 360;
     _totalDelay = 1;
     _bulletSpeed = 1;
     _damage = 1;

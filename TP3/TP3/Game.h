@@ -128,8 +128,7 @@ private:
     static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application
 
-    static enum Tool { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO };
-    const string toolName[7] = { "BUILD", "UZI", "ASSAULT", "SNIPER", "SHOTGUN", "BULLET_HELL", "SLOW-MO" };
+
     Tool _currentTool = BUILD;
 
     long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
