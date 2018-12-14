@@ -11,6 +11,7 @@ Goal  : Projectiles
 #include "Entity.h"
 #include "Position.h"
 #include "VectorAngle.h"
+#include "Character.h"
 
 class Bullet : public Entity, public VectorAngle
 {
@@ -18,7 +19,7 @@ private:
 	int _damage;
 	float _speed;
 
-	MagnetPosition* _target;
+	Character* _target;
 
 	sf::Sound _sound;
 	sf::SoundBuffer _buffer;
@@ -28,15 +29,15 @@ public:
 
 	void advance();									// Se deplace dans la direction du vecteur d'angle
 	void aim(int x, int y, int accuracy);           // Change l'angle en fonction de coord et une donné pour rendre aléatoire
-	void aim(MagnetPosition & mp);                  // Change l'angle an fonction de un objet
+	void aim(Character & ch);                  // Change l'angle an fonction de un objet
 
 	void setSpeed(float);
 	void setDamage(int);
-	void setTarget(MagnetPosition & mp);
+	void setTarget(Character * ch);
 
 	float getSpeed();
 	int getDamage();
-	MagnetPosition& getTarget();
+	Character& getTarget();
 	bool getHoming();
 
 	void play(sf::SoundBuffer & buff);

@@ -216,14 +216,19 @@ void Game::handleMouseButtonPressed()
 			//Tirer le nombre de bullets
 			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
 			{
-				MagnetPosition* target = nullptr;
+				Character* target = nullptr;
 
-				if (_currentTool == HOMING && _bats.size() != 0)
+				if (_currentTool == HOMING)
 				{
-					Crawler& c = *_bats.begin();
-
-					//Détermine la target
-					target = &c;
+					for (Crawler& c : _bats)
+					{
+						//Détermine la target
+						if (areOnTheSameSquare(_mouseMagnet, c))
+						{
+							target = &c;
+							break;
+						}
+					}
 				}
 
 				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
@@ -241,7 +246,7 @@ void Game::handleMouseButtonPressed()
 	}
 }
 
-void Game::shootBullet(MagnetPosition *target)
+void Game::shootBullet(Character *target)
 {
 	_bullets.push_back(Bullet());
 
@@ -261,7 +266,7 @@ void Game::shootBullet(MagnetPosition *target)
 	}
 	else
 	{
-		_bullets.back().setTarget(*target);
+		_bullets.back().setTarget(target);
 		_bullets.back().aim(*target);
 	}
 

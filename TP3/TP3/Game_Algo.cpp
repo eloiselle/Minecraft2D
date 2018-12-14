@@ -133,7 +133,11 @@ void Game::manageBullets()
 
 		if (b->getHoming())
 		{
-			b->aim(b->getTarget());
+			if (b->getTarget().isAlive())
+				b->aim(b->getTarget());
+
+			else
+				b->setTarget(nullptr);
 		}
 
 		b->advance();
@@ -166,6 +170,7 @@ void Game::manageBullets()
 				}
 			}
 		}
+
 		else
 			willVanish = true;
 

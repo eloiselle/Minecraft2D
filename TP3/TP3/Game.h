@@ -168,7 +168,7 @@ public:
 	void handleMouseWheelMoved();                       // Handler de la roulette de souris
 	void handleMouseButtonPressed();                    // Handler des boutons de souris
 	bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
-	void shootBullet(MagnetPosition*);                                 // Tire une balle
+	void shootBullet(Character*);                                 // Tire une balle
 	void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
 	void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
 	void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran

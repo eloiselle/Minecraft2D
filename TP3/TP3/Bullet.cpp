@@ -21,20 +21,20 @@ void Bullet::aim(int x, int y, int accuracy)
 }
 
 // Change l'angle en fonction d'un objet
-void Bullet::aim(MagnetPosition& mp)
+void Bullet::aim(Character& ch)
 {
 	setAngleFromXY(
-		mp.getExactX() - _exactX,
-		mp.getExactY() - _exactY);
+		ch.getExactX() - _exactX,
+		ch.getExactY() - _exactY);
 }
 
 void Bullet::setSpeed(float speed) { _speed = speed; }
 void Bullet::setDamage(int damage) { _damage = damage; }
-void Bullet::setTarget(MagnetPosition & mp) { _target = &mp; }
+void Bullet::setTarget(Character * ch) { _target = ch; }
 
 float Bullet::getSpeed() { return _speed; }
 int Bullet::getDamage() { return _damage; }
-MagnetPosition& Bullet::getTarget() { return *_target; }
+Character& Bullet::getTarget() { return *_target; }
 bool Bullet::getHoming() { return _target != nullptr; }
 
 void Bullet::play(sf::SoundBuffer & buff)
