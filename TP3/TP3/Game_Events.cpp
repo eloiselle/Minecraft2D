@@ -69,10 +69,14 @@ void Game::inputActivatedInContinu()
 // Evalue si l'etat de pause est change
 void Game::handlePausing()
 {
-	if (_appState == PAUSED)
-		_appState = RUNNING;
-	else if (_appState == RUNNING)
-		_appState = PAUSED;
+    switch (_appState)
+    {
+    case Game::RUNNING:         _appState = PAUSED;             break;
+    case Game::PAUSED:          _appState = RUNNING;            break;
+    case Game::BOSS_KILLED:     init();                         break;
+    default:        break;
+    }
+
 }
 
 // Gere quand la fenetre est redimensionner

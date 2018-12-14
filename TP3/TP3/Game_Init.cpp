@@ -109,12 +109,12 @@ void Game::initTexts()
         quitApplication();
 
     // Text Instructions
-    _texteInstructions.setFont(_fontInvasion2000);
-    _texteInstructions.setCharacterSize(36);                // In pixels
-    _texteInstructions.setFillColor(Color(255, 255, 255));  // White
-    _texteInstructions.setOutlineColor(Color(64, 64, 64));  // Dark grey
-    _texteInstructions.setOutlineThickness(3);
-    _texteInstructions.setPosition(32, 32);
+    _pauseMessage.setFont(_fontInvasion2000);
+    _pauseMessage.setCharacterSize(36);                // In pixels
+    _pauseMessage.setFillColor(Color(255, 255, 255));  // White
+    _pauseMessage.setOutlineColor(Color(64, 64, 64));  // Dark grey
+    _pauseMessage.setOutlineThickness(3);
+    _pauseMessage.setPosition(32, 32);
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
@@ -149,12 +149,20 @@ void Game::initShapes()
     _mouseCursor.setOrigin(2, 2);
 
     // Mouse Square
-    int tk = 3;
+    int tk = 3; // thickness
     _mouseSquare.setOrigin(-tk, -tk);
     _mouseSquare.setSize(Vector2f(TILE_SIZE - tk * 2, TILE_SIZE - tk * 2));
     _mouseSquare.setFillColor(Color(0, 0, 0, 0));
     _mouseSquare.setOutlineColor(Color::Black);
     _mouseSquare.setOutlineThickness(tk);
+
+    // Boss Health Bar
+    //_bossHealthBar.setOrigin(_map.nbCol() * TILE_SIZE /2 -tk, -tk);
+    //_bossHealthBar.setPosition(_map.nbCol() * TILE_SIZE /2+ tk, 0);
+    _bossHealthBar.setFillColor(Color::Red);
+    _bossHealthBar.setOutlineColor(Color(128, 0, 0));
+    _bossHealthBar.setOutlineThickness(tk);
+
 
     // Shader pour l'ecran de pause
     _shader.setSize(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
@@ -238,6 +246,9 @@ void Game::initGameElements()
 
     _boss.setPositionInGrid(_map.nbCol() / 2, 1);
     _boss.setSpeed(4);
+    _boss.setHpMax(100);
+    _boss.setHp(100);
+
     initFoes();
 
     // Bullets

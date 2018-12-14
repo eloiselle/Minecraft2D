@@ -103,7 +103,7 @@ private:
     string _extraTitle = "";            // Restant du titre de la fenetre
     string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
-    Text _texteInstructions;            // Text afficher par dessus toute la scene
+    Text _pauseMessage;            // Text afficher par dessus toute la scene
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -113,7 +113,8 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     CircleShape _bulletShape;           // Cercle rouge
-    CircleShape _mouseCursor;
+    CircleShape _mouseCursor;           //
+    RectangleShape _bossHealthBar;      //
 
     // Sprites
     Image   _playerImage;               // Image du joueur pour modification de transparence
@@ -126,7 +127,7 @@ private:
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
     // Etat
-    static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
+    static enum AppState { RUNNING, PAUSED, BOSS_KILLED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application
 
 

@@ -7,12 +7,11 @@ float Killable::getHpMax() { return _hpMax; }
 int Killable::getTimeOfDeath() { return _timeOfDeath; }
 
 bool Killable::isAlive() { return _hp > 0; }
-bool Killable::isDead() { return _hp < 0; }
+bool Killable::isDead() { return _hp == 0; }
 
 // Set
 void Killable::setHp(int hp) { _hp = hp; }
 void Killable::setHpMax(int hpMax) { _hpMax = hpMax; }
-void Killable::isAlive(bool isAlive) { _isAlive = isAlive; }
 
 void Killable::loseHp(int hpLost)
 {

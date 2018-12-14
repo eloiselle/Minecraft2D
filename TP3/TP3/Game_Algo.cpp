@@ -13,7 +13,8 @@ void Game::mainLoop()
         {
             managePlayer();
             manageFoes();
-            manageBoss();
+            if (_boss.isAlive())
+                manageBoss();
             manageBullets();
             manageMapExpansion();
 
@@ -73,23 +74,28 @@ void Game::manageBoss()
         {
             _boss.setDirection(DOWN);
             _boss.startMoving();
+
+            for (int c = 1; c < _map.nbCol() - 1; c++)
+            {
+                _map.at(_boss.getGridLine() + 3, c) = EMPTY_BLOCK;
+            }
         }
         else
         {
-            if (_boss.getGridCol() == 1)
+            if (_boss.getGridCol() == 1) // A gauche completement
             {
                 _boss.setDirection(RIGHT);
                 _boss.startMoving();
             }
-            else if (_boss.getGridCol() == _map.nbCol() - 2)
+            else if (_boss.getGridCol() == _map.nbCol() - 2) // A droite completement
             {
                 _boss.setDirection(LEFT);
                 _boss.startMoving();
             }
-            else
+            else // quelque part au centre
             {
-                DIRECTION4 gd[2] = {LEFT, RIGHT};
-                _boss.setDirection(gd[rand()%2]);
+                DIRECTION4 gaucheOuDroite[2] = { LEFT, RIGHT };
+                _boss.setDirection(gaucheOuDroite[rand() % 2]);
                 _boss.startMoving();
             }
 
@@ -102,9 +108,11 @@ void Game::manageBoss()
         {
             _boss.move();
         }
-        
+
     }
 
+    if (_boss.isDead())
+        _appState = BOSS_KILLED;
 }
 
 
@@ -127,6 +135,14 @@ void Game::manageFoes()
             }
         }
     }
+
+    if (_boss.getHp() <= 0)
+    {
+        _pauseMessage.setString("Boss killed !! :)");
+        _appState = PAUSED; // TODO faire une fin de jeu plus standard
+    }
+
+
 
 }
 
@@ -182,6 +198,7 @@ void Game::manageBullets()
 
         if (isInMap(*b))
         {
+            // Block
             if (!_map.isTraversable(*b))
             {
                 willVanish = true;
@@ -192,7 +209,7 @@ void Game::manageBullets()
                 // Collision entre bullet et block
                 int l = b->getGridLine();
                 int c = b->getGridCol();
-                _map.at(l, c).loseHp(1);
+                _map.at(l, c).loseHp(1); // TODO utiliser les damage de bullet
 
                 if (_map.at(l, c).getHp() <= 0)
                     _map.at(l, c) = EMPTY_BLOCK;
@@ -200,6 +217,7 @@ void Game::manageBullets()
                 willVanish = true;
             }
 
+            // Chauve souris
             list<Crawler>::iterator c = _bats.begin();
             while (c != _bats.end())
             {
@@ -213,6 +231,17 @@ void Game::manageBullets()
                     c++;
                 }
             }
+
+            // Boss
+            if (areOnTheSameSquare(*b, _boss))
+            {
+                willVanish = true;
+                _boss.loseHp(1);// TODO mettre les damage du bullet
+            }
+
+
+
+
         }
         else
             willVanish = true;
