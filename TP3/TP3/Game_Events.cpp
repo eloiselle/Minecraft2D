@@ -122,6 +122,9 @@ void Game::handleKeypress()
 
 void Game::handleArrowKeys()
 {
+	_iSprite = 0;
+	_jSprite = 0;
+
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
         Keyboard::isKeyPressed(Keyboard::W) || 
@@ -129,12 +132,19 @@ void Game::handleArrowKeys()
     {
         _view[CAMERA].move(0, -ARROW_EXPLORE);
 
+		_iSprite = 0;
+		_jSprite = 3;
+
+
         if (playerIsOnTheGround())
             _player.startJump();
     }
     if (Keyboard::isKeyPressed(Keyboard::Right) ||
         Keyboard::isKeyPressed(Keyboard::D))
     {
+		_iSprite = 0;
+		_jSprite = 2;
+
         _view[CAMERA].move(ARROW_EXPLORE, 0);
         tryToMove(RIGHT, _player);
     }
@@ -147,6 +157,9 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Left) ||
         Keyboard::isKeyPressed(Keyboard::A))
     {
+		_iSprite = 0;
+		_jSprite = 4;
+
         _view[CAMERA].move(-ARROW_EXPLORE, 0);
         tryToMove(LEFT, _player);
     }

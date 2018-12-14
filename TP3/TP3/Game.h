@@ -108,6 +108,14 @@ private:
     Sprite _spiderSprite;               // Sprite du robot
     Sprite _tileSprite[5];              // Ensemble de sprite pour afficher la map
 
+	Image _playerImage;					// Image de l'avatar
+	Texture _playerTexture;				// Texture de l'avatar
+	Sprite _playerSprites[4][8];		// Sprites de l'avatar
+
+	int _iSprite = 3;					// indice i du tableau de sprites
+	int _jSprite = 0;					// indice j du tableau de sprites
+	int _motion = 0;					// quelle partie du mouvement
+
     // Etat
     static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application

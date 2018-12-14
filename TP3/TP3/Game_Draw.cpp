@@ -80,8 +80,8 @@ void Game::drawMovableObjects()
     _window.draw(_spiderSprite);
 
     // Player
-    _playerShape.setPosition(_player.getExactX(), _player.getExactY());
-    _window.draw(_playerShape);
+	_playerSprites[_iSprite][_jSprite].setPosition(_player.getExactX(), _player.getExactY());
+	_window.draw(_playerSprites[_iSprite][_jSprite]);
 
     // Bullet
     _bulletShape.setPosition(_yoyo.getExactX(), _yoyo.getExactY());

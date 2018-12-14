@@ -105,40 +105,52 @@ void Game::manageBullets()
 
 void Game::managePlayerJump()
 {
-    if (playerHitTheCeiling())
-    {
-        _player.fallBy(MAX_FALL_SPEED + 1);
-    }
-    else
-    {
-        _player.applyMomentum(pixelsToRise() - pixelsToFall());
-    }
+	_iSprite = 0;
+	_jSprite = 0;
 
-    if (pixelsBeforeBottomBorder() > 0) // In air
-    {
-        if (_player.isRising() && playerHitTheCeiling())
-        {
-            _player.stopMomentum();
-        }
-        if (_player.isFalling() && playerIsLanding())
-        {
-            _player.stopMomentum();
-        }
-    }
+	if (playerHitTheCeiling())
+	{
+		_player.fallBy(MAX_FALL_SPEED + 1);
+	}
+	else
+	{
 
-    //_debug +=
-    //    " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
-    //    " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
-    //    " HitLand " + to_string(playerIsLanding()) + "\r\n" +
-    //    " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
-    //    " pToFall " + to_string(pixelsToFall()) + "\r\n" +
-    //    " pToRise " + to_string(pixelsToRise()) + "\r\n" +
-    //    " isFall " + to_string(_player.isFalling()) + "\r\n" +
-    //    " isRise " + to_string(_player.isRising()) + "\r\n" +
-    //    " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
-    //    " x " + to_string((int)_player.getExactX()) + "\r\n" +
-    //    " y " + to_string((int)_player.getExactY()) + "\r\n" +
-    //    "  ";
+		_player.applyMomentum(pixelsToRise() - pixelsToFall());
+	}
+
+	if (pixelsBeforeBottomBorder() > 0) // In air
+	{
+		if (_player.isFalling())
+		{
+			_iSprite = 3;
+			_jSprite = 2;
+		}
+		if (_player.isRising() && playerHitTheCeiling())
+		{
+			_player.stopMomentum();
+		}
+		if (_player.isFalling() && playerIsLanding())
+		{
+
+
+			_player.stopMomentum();
+		}
+
+	}
+
+	//_debug +=
+	//    " BBorder " + to_string(pixelsBeforeBottomBorder()) + "\r\n" +
+	//    " TBorder " + to_string(pixelsBeforeTopBorder()) + "\r\n" +
+	//    " HitLand " + to_string(playerIsLanding()) + "\r\n" +
+	//    " HitCeil " + to_string(playerHitTheCeiling()) + "\r\n" +
+	//    " pToFall " + to_string(pixelsToFall()) + "\r\n" +
+	//    " pToRise " + to_string(pixelsToRise()) + "\r\n" +
+	//    " isFall " + to_string(_player.isFalling()) + "\r\n" +
+	//    " isRise " + to_string(_player.isRising()) + "\r\n" +
+	//    " upMomentum " + to_string(_player.getUpMomentum()) + "\r\n" +
+	//    " x " + to_string((int)_player.getExactX()) + "\r\n" +
+	//    " y " + to_string((int)_player.getExactY()) + "\r\n" +
+	//    "  ";
 }
 
 // END OF MANAGERS

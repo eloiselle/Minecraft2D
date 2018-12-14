@@ -52,20 +52,41 @@ void Game::initWindow()
 // Initialize les sprites
 void Game::initSprites()
 {
-    // Load files
-    if (!_tileset.loadFromFile("img\\tiles.bmp"))
-        quitApplication();
-    if (!_spiderTexture.loadFromFile("img\\spider.bmp"))
-        quitApplication();
-    if (!_spiderImage.loadFromFile("img\\spider.bmp"))
-        quitApplication();
+	// Load files
+	if (!_tileset.loadFromFile("img\\tiles.bmp"))
+		quitApplication();
 
-    // Map
-    _tileSprite[EMPTY_BLOCK - 48] = initOneSprite(0, 2, _tileset);
-    _tileSprite[SOFT_BLOCK - 48] = initOneSprite(10, 5, _tileset);
-    _tileSprite[HARD_BLOCK - 48] = initOneSprite(0, 17, _tileset);
-    _tileSprite[VISITED - 48] = initOneSprite(13, 2, _tileset);
-    _tileSprite[CHECKPOINT - 48] = initOneSprite(5, 4, _tileset);
+	if (!_spiderTexture.loadFromFile("img\\spider.bmp"))
+		quitApplication();
+	if (!_spiderImage.loadFromFile("img\\spider.bmp"))
+		quitApplication();
+
+	if (!_playerTexture.loadFromFile("img\\waddle_doo.bmp"))
+		quitApplication();
+	if (!_playerImage.loadFromFile("img\\waddle_doo.bmp"))
+		quitApplication();
+
+	// Map
+	_tileSprite[EMPTY_BLOCK - 48] = initOneSprite(0, 2, _tileset);
+	_tileSprite[SOFT_BLOCK - 48] = initOneSprite(10, 5, _tileset);
+	_tileSprite[HARD_BLOCK - 48] = initOneSprite(0, 17, _tileset);
+	_tileSprite[VISITED - 48] = initOneSprite(13, 2, _tileset);
+	_tileSprite[CHECKPOINT - 48] = initOneSprite(5, 4, _tileset);
+
+	// Player
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 8; j++) // initialiser toutes les sprites
+		{
+			_playerSprites[i][j] = initOneSprite(i, j, _playerTexture);
+			_playerImage.createMaskFromColor(Color(255, 255, 255));
+			_playerTexture.update(_playerImage);
+			_playerSprites[i][j].setTextureRect(IntRect(i*30, j*30, 30, 30));
+			_playerSprites[i][j].setTexture(_playerTexture);
+			_playerSprites[i][j].setOrigin(Vector2f(15, 30));
+		}
+	_playerImage.createMaskFromColor(Color(255, 255, 255));
+	_playerTexture.update(_playerImage);
+
 
     // Spider
     _spiderImage.createMaskFromColor(Color(255, 255, 255));
@@ -114,9 +135,9 @@ void Game::initTexts()
 // Initialize les shapes
 void Game::initShapes()
 {
-    _playerShape.setFillColor(Color::Green);
-    _playerShape.setSize(Vector2f(8, 8));
-    _playerShape.setOrigin(4, 4);
+    // _playerShape.setFillColor(Color::Green);
+    // _playerShape.setSize(Vector2f(8, 8));
+    // _playerShape.setOrigin(4, 4);
 
     // Bullet
     _bulletShape.setRadius(2);
