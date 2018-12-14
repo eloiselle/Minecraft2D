@@ -58,7 +58,7 @@ void Game::inputActivatedInContinu()
 		if (_currentView == CAMERA && isMouseInWindow())
 			handleMouseOnWindowBorders();
 
-		if (Mouse::isButtonPressed(Mouse::Left) 
+		if (Mouse::isButtonPressed(Mouse::Left)
 			|| Mouse::isButtonPressed(Mouse::Right))
 			handleMouseButtonPressed();
 	}
@@ -152,6 +152,11 @@ void Game::handleKeypress()
 		_currentTool = SLOW_MO;
 		_player.setNoWeapon(_frameRun);
 	}
+	if (Keyboard::isKeyPressed(Keyboard::Num8))
+	{
+		_currentTool = HOMING;
+		_player.setHoming(_frameRun);
+	}
 }
 
 void Game::handleArrowKeys()
@@ -204,26 +209,39 @@ void Game::handleMouseButtonPressed()
 
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
+			//Placer un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
+			//Tirer le nombre de bullets
 			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
 			{
+				MagnetPosition* target = nullptr;
+
+				if (_currentTool == HOMING && _bats.size() != 0)
+				{
+					Crawler& c = *_bats.begin();
+
+					//Détermine la target
+					target = &c;
+				}
+
 				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
 				{
-					shootBullet();
+					shootBullet(target);
 				}
 			}
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
 		{
+			//Enlever un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				removeBlockAtMouse(c, l);
 		}
 	}
 }
 
-void Game::shootBullet()
+void Game::shootBullet(MagnetPosition *target)
 {
 	_bullets.push_back(Bullet());
 
@@ -231,16 +249,24 @@ void Game::shootBullet()
 		_bullets.back().play(_buffBullet);
 
 	_bullets.back().setPositionExact(
-		_player.getExactX(), 
+		_player.getExactX(),
 		_player.getExactY() - HALF_TILE_SIZE);
-	_bullets.back().aim(
-		_mouseCoord.getPosition().x,
-		_mouseCoord.getPosition().y, 
-		_player.getWeaponAccuracy());
+
+	if (target == nullptr)
+	{
+		_bullets.back().aim(
+			_mouseCoord.getPosition().x,
+			_mouseCoord.getPosition().y,
+			_player.getWeaponAccuracy());
+	}
+	else
+	{
+		_bullets.back().setTarget(*target);
+		_bullets.back().aim(*target);
+	}
+
 	_bullets.back().setLength(10);
 	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
 	_bullets.back().setDamage(_player.getWeaponDamage());
 	_player.delayReset(_frameRun);
-
-
 }
