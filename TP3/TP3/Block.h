@@ -7,12 +7,14 @@ Goal  : Bloc a chaque espace dans la grille
 #pragma once
 #include "pch.h"
 
+#include "Killable.h"
+
 using namespace std;
 
 const enum BLOCK_TYPE { EMPTY_BLOCK = 0, SOFT_BLOCK, HARD_BLOCK, VISITED, INVALID_BLOCK };
 
 
-class Block
+class Block : public Killable
 {
 private:
     BLOCK_TYPE _type;                                       // Type de block

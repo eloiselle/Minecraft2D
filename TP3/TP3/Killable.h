@@ -17,7 +17,7 @@ protected:
     unsigned int _timeOfDeath;
 
 public:
-    Killable() : _hp(1), _hpMax(1), _isAlive(true), _timeOfDeath(0) {}; // Constructeur
+    Killable() : _hp(5), _hpMax(5), _isAlive(true), _timeOfDeath(0) {}; // Constructeur
 
     float getHp();                 // Retourne les HP
     float getHpMax();              // Retourne le nombre de HP Max

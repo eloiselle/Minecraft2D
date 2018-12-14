@@ -141,8 +141,14 @@ void Game::manageBullets()
 
             if (_map.isDestructible(*b))
             {
-                //softBlock.affectHealth(-1);
-                _map.at(b->getGridLine(), b->getGridCol()) = EMPTY_BLOCK;
+                // Collision entre bullet et block
+                int l = b->getGridLine();
+                int c = b->getGridCol();
+                _map.at(l, c).loseHp(1);
+                
+                if (_map.at(l, c).getHp() <= 0)
+                    _map.at(l, c) = EMPTY_BLOCK;
+
                 willVanish = true;
             }
 

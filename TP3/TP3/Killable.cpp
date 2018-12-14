@@ -6,8 +6,8 @@ float Killable::getHp() { return _hp; }
 float Killable::getHpMax() { return _hpMax; }
 int Killable::getTimeOfDeath() { return _timeOfDeath; }
 
-bool Killable::isAlive() { return _isAlive; }
-bool Killable::isDead() { return !_isAlive; }
+bool Killable::isAlive() { return _hp > 0; }
+bool Killable::isDead() { return _hp < 0; }
 
 // Set
 void Killable::setHp(int hp) { _hp = hp; }
