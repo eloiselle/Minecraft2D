@@ -226,6 +226,10 @@ void Game::handleMouseButtonPressed()
 void Game::shootBullet()
 {
 	_bullets.push_back(Bullet());
+
+	if (MUSIQUE)
+		_bullets.back().play(_buffBullet);
+
 	_bullets.back().setPositionExact(
 		_player.getExactX(), 
 		_player.getExactY() - HALF_TILE_SIZE);
@@ -238,6 +242,5 @@ void Game::shootBullet()
 	_bullets.back().setDamage(_player.getWeaponDamage());
 	_player.delayReset(_frameRun);
 
-	if (MUSIQUE)
-		_soundBullet.play();
+
 }

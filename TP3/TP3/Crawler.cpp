@@ -66,6 +66,14 @@ void Crawler::turnRight()
     _direction = static_cast<DIRECTION4>((_direction + 1) % 4);
 }
 
+void Crawler::play(sf::SoundBuffer & buff)
+{
+	//_buffer.loadFromFile("flap.wav");
+	_sound.setBuffer(buff);
+	_sound.play();
+
+}
+
 // Effectu les operation de routine a chaque refresh
 //void Crawler::update(int time, FixedGrid& map)
 //{

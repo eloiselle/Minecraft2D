@@ -70,7 +70,7 @@ constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les s
 constexpr int SLOW_MO_EFFECT = 4;
 
 // OPTIONS
-constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
+constexpr bool MUSIQUE = true;                             // Option pour desactiver l'audio
 
 class Game
 {
@@ -94,8 +94,7 @@ private:
     MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
     // Audio
-    SoundBuffer _buffB, _buffF;			// buffer des sons
-    Sound _soundBullet, _soundFlap;		// sons 
+    SoundBuffer _buffBullet, _buffFoes;			// buffer des sons
     Music _music;						// musique
 
     // Text
@@ -153,6 +152,7 @@ public:
     void initWorldMap();                // Initialization du labyrinthe
     void initMusic();                   //
     void initSounds();                  //
+
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes

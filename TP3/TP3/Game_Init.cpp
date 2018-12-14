@@ -26,7 +26,6 @@ void Game::init()
 	initMusic();
 	initSounds();
 
-
 	_currentView == FOLLOW_Y;
 	_frameRun = 0;
 	_frameTotal = 0;
@@ -188,14 +187,11 @@ void Game::initSounds()
 {
 	if (MUSIQUE)
 	{
-		_buffB.loadFromFile("pew.wav");
-		_soundBullet.setBuffer(_buffB);
-
-		_buffF.loadFromFile("flap.wav");
-		_soundFlap.setBuffer(_buffF);
-
+		_buffBullet.loadFromFile("pew.wav");
+		_buffFoes.loadFromFile("flap.wav");
 	}
 }
+
 void Game::initViews()
 {
 	// DO NOT CHANGE _currentView HERE

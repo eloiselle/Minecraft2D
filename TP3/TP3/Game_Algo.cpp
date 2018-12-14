@@ -70,7 +70,11 @@ void Game::manageFoes()
             // Manage one foe
             if (c.isGridCentered()) // Pret a se deplacer
             {
-                c.stopMoving();
+				if (_frameRun % 24 == 12 && MUSIQUE)
+				{
+					_bats.back().play(_buffFoes);
+				}
+				c.stopMoving();
                 tryToMoveRandomDirection(c);
             }
 

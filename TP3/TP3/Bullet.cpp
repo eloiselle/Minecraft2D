@@ -33,3 +33,10 @@ void Bullet::setDamage(int damage) { _damage = damage; }
 
 float Bullet::getSpeed() { return _speed; }
 int Bullet::getDamage() { return _damage; }
+
+void Bullet::play(sf::SoundBuffer & buff)
+{
+	//_buffer.loadFromFile("pew.wav");
+	_sound.setBuffer(buff);
+	_sound.play();
+}
