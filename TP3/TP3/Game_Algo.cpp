@@ -13,6 +13,7 @@ void Game::mainLoop()
         {
             managePlayer();
             manageFoes();
+            manageBoss();
             manageBullets();
             manageMapExpansion();
 
@@ -61,6 +62,52 @@ void Game::manageWeapon()
     }
 }
 
+void Game::manageBoss()
+{
+    // Decide next move
+    if (_boss.isGridCentered()) // Pret a se deplacer
+    {
+        _boss.stopMoving();
+
+        if (_boss.getGridLine() < _player.getGridLine() - 9)
+        {
+            _boss.setDirection(DOWN);
+            _boss.startMoving();
+        }
+        else
+        {
+            if (_boss.getGridCol() == 1)
+            {
+                _boss.setDirection(RIGHT);
+                _boss.startMoving();
+            }
+            else if (_boss.getGridCol() == _map.nbCol() - 2)
+            {
+                _boss.setDirection(LEFT);
+                _boss.startMoving();
+            }
+            else
+            {
+                DIRECTION4 gd[2] = {LEFT, RIGHT};
+                _boss.setDirection(gd[rand()%2]);
+                _boss.startMoving();
+            }
+
+        }
+    }
+
+    if (_boss.isWalking())
+    {
+        for (size_t i = 0; i < _boss.getSpeed(); i++)
+        {
+            _boss.move();
+        }
+        
+    }
+
+}
+
+
 void Game::manageFoes()
 {
     if (_currentTool != SLOW_MO || !(_frameRun % SLOW_MO_EFFECT))
@@ -71,7 +118,7 @@ void Game::manageFoes()
             if (c.isGridCentered()) // Pret a se deplacer
             {
                 c.stopMoving();
-                tryToMoveRandomDirection(c);
+                tryToMoveInDirection(c, static_cast<DIRECTION4>(rand() % 4));
             }
 
             if (c.isWalking())
@@ -89,18 +136,19 @@ bool Game::toolIsAShooter()
         || _currentTool != SLOW_MO);
 }
 
-void Game::tryToMoveRandomDirection(Crawler& c)
-{
-    DIRECTION4 randDir = static_cast<DIRECTION4>(rand() % 4);
 
+
+void Game::tryToMoveInDirection(Crawler& c, DIRECTION4 dir)
+{
     if (_map.isTraversable(
-        c.getExactX() + D4[randDir][X] * TILE_SIZE,
-        c.getExactY() + D4[randDir][Y] * TILE_SIZE))
+        c.getExactX() + D4[dir][X] * TILE_SIZE,
+        c.getExactY() + D4[dir][Y] * TILE_SIZE))
     {
-        c.setDirection(randDir);
+        c.setDirection(dir);
         c.startMoving();
     }
 }
+
 
 // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
@@ -145,7 +193,7 @@ void Game::manageBullets()
                 int l = b->getGridLine();
                 int c = b->getGridCol();
                 _map.at(l, c).loseHp(1);
-                
+
                 if (_map.at(l, c).getHp() <= 0)
                     _map.at(l, c) = EMPTY_BLOCK;
 

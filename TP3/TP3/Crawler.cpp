@@ -33,7 +33,9 @@ void Crawler::setAI(AI_Move ai, AI_Frequency decisionAI)
 //Change sa position de 1 dans la direction
 void Crawler::move()
 {
-    setPositionExact(getExactX() + D4[_direction][X], getExactY() + D4[_direction][Y]);
+    setPositionExact(
+        getExactX() + D4[_direction][X], 
+        getExactY() + D4[_direction][Y]);
     updateGridPosition();
     _frameLeftBeforeControl--;
 }

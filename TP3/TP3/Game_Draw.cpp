@@ -114,17 +114,21 @@ void Game::drawMovableObjects()
 
 	for (Crawler& c : _bats)
 	{
-		_spiderSprite.setPosition(
+		_batSprite.setPosition(
 			c.getExactX(),
 			c.getExactY());
-		_window.draw(_spiderSprite);
+		_window.draw(_batSprite);
 	}
 
 	// Player
 	_playerShape.setPosition(_player.getExactX(), _player.getExactY());
 	_window.draw(_playerShape);
 
-	// Bullet
+	// Boss
+	_batSprite.setPosition(_boss.getExactX(), _boss.getExactY());
+	_window.draw(_batSprite);
+
+	// Bullet Shield
 	for (size_t i = 0; i < NB_SHIELD; i++)
 	{
 		_bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());

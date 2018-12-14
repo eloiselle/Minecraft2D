@@ -82,7 +82,8 @@ private:
     Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
     VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
-    list<Crawler> _bats;                //
+    list<Crawler> _bats;                // 
+    Crawler _boss;                      // 
 
     // Window
     ContextSettings _settings;          // Settings de la _window
@@ -118,9 +119,9 @@ private:
     Image   _playerImage;               // Image du joueur pour modification de transparence
     Texture _playerTexture;             // Texture du joueur
     Sprite  _playerSprite;              // Sprite du joueur
-    Image _spiderImage;                 // Image du robot pour modification de transparence
-    Texture _spiderTexture;             // Texture du robot
-    Sprite _spiderSprite;               // Sprite du robot
+    Image _batImage;                    // Image du bat pour modification de transparence
+    Texture _batTexture;                // Texture du bat
+    Sprite _batSprite;                  // Sprite du bat
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
@@ -190,9 +191,11 @@ public:
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
     void manageWeapon();                                //
+    void manageBoss();                                  //
     void manageFoes();                                  // Gere les ennemis
     void manageMapExpansion();                          //
     void tryToMoveRandomDirection(Crawler & c);         //
+    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter();                              //
 
