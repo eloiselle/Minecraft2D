@@ -1,17 +1,13 @@
 #pragma once
 #include "Nameable.h"
 
-
-
 Nameable::Nameable()
 {
 }
 
-
 Nameable::~Nameable()
 {
 }
-
 
 // Retourne le nom
 const char* Nameable::getName() const
@@ -35,7 +31,6 @@ void Nameable::setName(const char* name)
         strcpy_s(_name, nameLength + 1, name);
     }
 }
-
 
 // Vide le nom
 void Nameable::clearName()

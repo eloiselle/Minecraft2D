@@ -23,10 +23,10 @@ void Game::init()
 
     initGameElements();
     initTexts();
-
     initMusic();
     initSounds();
 
+    _currentView == FOLLOW_Y;
     _frameRun = 0;
     _frameTotal = 0;
 }
@@ -55,14 +55,35 @@ void Game::initSprites()
     // Load files
     if (!_tileset.loadFromFile("img\\tiles.bmp"))
         quitApplication();
-    if (!_spiderTexture.loadFromFile("img\\bat.bmp"))
+    if (!_batTexture.loadFromFile("img\\bat.bmp"))
         quitApplication();
-    if (!_spiderImage.loadFromFile("img\\bat.bmp"))
+    if (!_batImage.loadFromFile("img\\bat.bmp"))
         quitApplication();
-    if (!_playerTexture.loadFromFile("img\\WaddleDoo.bmp"))
+    if (!_playerTexture.loadFromFile("img\\waddle_doo.bmp"))
         quitApplication();
-    if (!_playerImage.loadFromFile("img\\WaddleDoo.bmp"))
+    if (!_playerImage.loadFromFile("img\\waddle_doo.bmp"))
         quitApplication();
+
+    // Player
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 8; j++) // initialiser toutes les sprites
+        {
+            _playerSprites[i][j] = initOneSprite(i, j, _playerTexture);
+            _playerImage.createMaskFromColor(Color(255, 255, 255));
+            _playerTexture.update(_playerImage);
+            _playerSprites[i][j].setTextureRect(IntRect(i * 30, j * 30, 30, 30));
+            _playerSprites[i][j].setTexture(_playerTexture);
+            _playerSprites[i][j].setOrigin(Vector2f(15, 30));
+        }
+    }
+
+    // Bat
+    _batImage.createMaskFromColor(Color(255, 255, 255));
+    _batTexture.update(_batImage);
+    _batSprite.setTextureRect(IntRect(64, 0, TILE_SIZE, TILE_SIZE));
+    _batSprite.setTexture(_batTexture);
+    _batSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
 
     // Map
     for (size_t version = 0; version < 8; version++)
@@ -73,13 +94,6 @@ void Game::initSprites()
         _tileSprite[VISITED][version] = initOneSprite(13 + version, 2, _tileset);
         _tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
     }
-
-    // Spider
-    _spiderImage.createMaskFromColor(Color(255, 255, 255));
-    _spiderTexture.update(_spiderImage);
-    _spiderSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
-    _spiderSprite.setTexture(_spiderTexture);
-    _spiderSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
 }
 
 // Recupere un sprite a partir des parametres
@@ -98,16 +112,16 @@ Sprite Game::initOneSprite(unsigned int line, unsigned int col, Texture& texture
 void Game::initTexts()
 {
     // Font
-    if (!_fontInvasion2000.loadFromFile("INVASION2000_.TTF"))
+    if (!_fontInvasion2000.loadFromFile("INVASION2000.TTF"))
         quitApplication();
 
     // Text Instructions
-    _texteInstructions.setFont(_fontInvasion2000);
-    _texteInstructions.setCharacterSize(36);                // In pixels
-    _texteInstructions.setFillColor(Color(255, 255, 255));  // White
-    _texteInstructions.setOutlineColor(Color(64, 64, 64));  // Dark grey
-    _texteInstructions.setOutlineThickness(3);
-    _texteInstructions.setPosition(32, 32);
+    _pauseMessage.setFont(_fontInvasion2000);
+    _pauseMessage.setCharacterSize(36);                // In pixels
+    _pauseMessage.setFillColor(Color(255, 255, 255));  // White
+    _pauseMessage.setOutlineColor(Color(64, 64, 64));  // Dark grey
+    _pauseMessage.setOutlineThickness(3);
+    _pauseMessage.setPosition(32, 32);
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
@@ -142,12 +156,18 @@ void Game::initShapes()
     _mouseCursor.setOrigin(2, 2);
 
     // Mouse Square
-    int tk = 3;
+    int tk = 3; // thickness
     _mouseSquare.setOrigin(-tk, -tk);
     _mouseSquare.setSize(Vector2f(TILE_SIZE - tk * 2, TILE_SIZE - tk * 2));
     _mouseSquare.setFillColor(Color(0, 0, 0, 0));
     _mouseSquare.setOutlineColor(Color::Black);
     _mouseSquare.setOutlineThickness(tk);
+    // Boss Health Bar
+    //_bossHealthBar.setOrigin(_map.nbCol() * TILE_SIZE /2 -tk, -tk);
+    //_bossHealthBar.setPosition(_map.nbCol() * TILE_SIZE /2+ tk, 0);
+    _bossHealthBar.setFillColor(Color::Red);
+    _bossHealthBar.setOutlineColor(Color(128, 0, 0));
+    _bossHealthBar.setOutlineThickness(tk);
 
     // Shader pour l'ecran de pause
     _shader.setSize(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
@@ -172,7 +192,7 @@ void Game::initMusic()
 {
     if (MUSIQUE)
     {
-        _music.openFromFile("zelda.wav");
+        _music.openFromFile("music\\zelda.wav");
         _music.play();
     }
 }
@@ -181,19 +201,18 @@ void Game::initSounds()
 {
     if (MUSIQUE)
     {
-        _buffBullet.loadFromFile("pew.wav");
+        _buffBullet.loadFromFile("music\\pew.wav");
         _soundBullet.setBuffer(_buffBullet);
 
-        _buffFoes.loadFromFile("flap.wav");
+        _buffFoes.loadFromFile("music\\flap.wav");
         _soundFlap.setBuffer(_buffFoes);
-
     }
 }
-
 void Game::initViews()
 {
     // DO NOT CHANGE _currentView HERE
     //_currentView = CAMERA; == BAD
+
     // Zoom
     float maxDim = MAX(_map.nbCol(), _map.nbLine());
     _view[NULL_VIEW] = handleResizeWindow();
@@ -211,6 +230,7 @@ void Game::initViews()
         _map.nbLine() * TILE_SIZE / 2);
     _view[FOLLOW_Y].zoom(0.8);
 
+    // Setup
     _currentView = FOLLOW_Y;
     _view[FOLLOW_Y] = handleResizeWindow();
 }
@@ -230,7 +250,12 @@ void Game::initGameElements()
         _shieldVA[i].rotate(i * SHIELD_ANGLE);
     }
 
+    _boss.setPositionInGrid(_map.nbCol() / 2, 1);
+    _boss.setSpeed(4);
+    _boss.setHpMax(100);
+    _boss.setHp(100);
     initFoes();
+
     // Bullets
     _bullets.clear();
 }
@@ -238,7 +263,7 @@ void Game::initGameElements()
 // Initialise Foes
 void Game::initFoes()
 {
-    
+    _bats.clear();
     for (int i = 0; i < NB_STARTING_BATS; i++)
     {
         _bats.push_back(Crawler());

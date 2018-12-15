@@ -3,8 +3,8 @@
 
 Player::Player()
 {
-	//_buildingEnabled = true;
-	//_weaponEnabled = false;
+    //_buildingEnabled = true;
+    //_weaponEnabled = false;
 }
 
 //bool Player::getIsBuildingEnabled()

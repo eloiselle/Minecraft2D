@@ -5,7 +5,6 @@
 BLOCK_TYPE Block::getType() { return _type; }
 unsigned int Block::getVersion() { return _version; }
 
-
 // Change le type de block et choisi une version au hasard
 void Block::set(BLOCK_TYPE type, unsigned int version)
 {
@@ -24,7 +23,6 @@ void Block::set(BLOCK_TYPE type, unsigned int version)
         }
     }
 }
-
 
 // Operateur = pour assignation
 BLOCK_TYPE Block::operator=(BLOCK_TYPE c)

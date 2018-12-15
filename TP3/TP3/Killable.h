@@ -11,13 +11,13 @@ Goal  : Permet d'etre tuable avec des hp
 class Killable
 {
 protected:
-    unsigned int _hp;
-    unsigned int _hpMax;
+    int _hp;
+    int _hpMax;
     bool _isAlive;
     unsigned int _timeOfDeath;
 
 public:
-    Killable() : _hp(1), _hpMax(1), _isAlive(true), _timeOfDeath(0) {}; // Constructeur
+    Killable() : _hp(5), _hpMax(5), _isAlive(true), _timeOfDeath(0) {}; // Constructeur
 
     float getHp();                 // Retourne les HP
     float getHpMax();              // Retourne le nombre de HP Max
@@ -29,7 +29,6 @@ public:
     void loseHp(int hpLost);       // Fait perdre des HP
     void die(int timeOfDeath);     // Le personnage meurt
 
-    void isAlive(bool isAlive);    // Setter de _isAlive
     bool isAlive();                // Retourne si est en vie
     bool isDead();                 // Retourne si est mort
 };

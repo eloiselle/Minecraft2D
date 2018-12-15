@@ -34,14 +34,13 @@ void WorldMap::randomize()
     for (size_t l = 0; l < _nbL; l++)
     {
         _map[l][0].set(HARD_BLOCK);
-        _map[l][_nbC-1].set(HARD_BLOCK);
+        _map[l][_nbC - 1].set(HARD_BLOCK);
     }
-
 }
 
 void WorldMap::randomizeLine(int line)
 {
-    BLOCK_TYPE blockByID[6] = { 
+    BLOCK_TYPE blockByID[6] = {
         EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
         SOFT_BLOCK, SOFT_BLOCK,
         HARD_BLOCK };
@@ -52,7 +51,7 @@ void WorldMap::randomizeLine(int line)
     }
 
     _map[line][0].set(HARD_BLOCK);
-    _map[line][_nbC-1].set(HARD_BLOCK);
+    _map[line][_nbC - 1].set(HARD_BLOCK);
 }
 
 void WorldMap::fillLine(int line, BLOCK_TYPE bt)
@@ -65,7 +64,6 @@ void WorldMap::fillLine(int line, BLOCK_TYPE bt)
     _map[line][0].set(HARD_BLOCK);
     _map[line][_nbC - 1].set(HARD_BLOCK);
 }
-
 
 void WorldMap::readGrid(istream& is)
 {
@@ -118,7 +116,6 @@ bool WorldMap::readFile(const char* nomFichier)
 bool WorldMap::blockIsTraversable(Block& cm) { return cm.getType() == EMPTY_BLOCK; }
 bool WorldMap::blockIsDestructible(Block& cm) { return cm.getType() == SOFT_BLOCK; }
 
-
 bool WorldMap::isTraversable(pixel_t x, pixel_t y)
 {
     MagnetPosition mp;
@@ -153,8 +150,6 @@ bool WorldMap::isDestructible(MagnetPosition & mp)
     return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
 
-
-
 //char& WorldMap::at(MagnetPosition & mp)const
 //{
 //    assert(_map != nullptr);
@@ -162,6 +157,6 @@ bool WorldMap::isDestructible(MagnetPosition & mp)
 //    assert(mp.getGridCol() > 0);
 //    assert(mp.getGridLine() < _nbL);
 //    assert(mp.getGridCol() < _nbC);
-//    
+//
 //    return _map[mp.getGridLine()][mp.getGridCol()]; // Retourne l'element pour acceder ou modifier.
 //}

@@ -1,7 +1,6 @@
 #pragma once
 #include "MapRandomizer.h"
 
-
 MapRandomizer::MapRandomizer(WorldMap& wm) : flip(true)
 {
     nbCol = wm.nbCol();
@@ -22,14 +21,13 @@ MapRandomizer::MapRandomizer(WorldMap& wm) : flip(true)
     }
 }
 
-
 void MapRandomizer::randomizePure(bool flip)
 {
     for (char l = 0; l < nbCol; l++)
     {
         for (char c = 0; c < nbLine; c++)
         {
-            BLOCK_TYPE bl[5] = { EMPTY_BLOCK , SOFT_BLOCK};
+            BLOCK_TYPE bl[5] = { EMPTY_BLOCK , SOFT_BLOCK };
             int type = rand() % 2;
             _world[l][c][flip] = bl[type];
         }
@@ -94,7 +92,7 @@ BLOCK_TYPE MapRandomizer::getBlockType(int line, int col)
     int voisins = getVoisins(line, col);
     BLOCK_TYPE type = _world[line][col][flip];
 
-    if (type == SOFT_BLOCK) 
+    if (type == SOFT_BLOCK)
     {
         switch (voisins)
         {
@@ -106,7 +104,7 @@ BLOCK_TYPE MapRandomizer::getBlockType(int line, int col)
             return type;
         }
     }
-    else if(type == EMPTY_BLOCK)
+    else if (type == EMPTY_BLOCK)
     {
         switch (voisins)
         {
@@ -119,4 +117,3 @@ BLOCK_TYPE MapRandomizer::getBlockType(int line, int col)
         }
     }
 }
-

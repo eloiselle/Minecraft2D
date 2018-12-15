@@ -35,7 +35,6 @@ void VectorAngle::setAngleDegree(degree_t degree)
     _normalizedY = sin(degree * PI / 180.0);
 }
 
-
 void VectorAngle::setAngleRadian(radian_t radian)
 {
     _degree = toDegree(radian);
@@ -46,7 +45,6 @@ void VectorAngle::setAngleRadian(radian_t radian)
 void VectorAngle::setAngleFromXY(float x, float y)
 {
     setAngleDegree(degreeFromXY(x, y));
-
 }
 
 void VectorAngle::rotate(degree_t rotation)

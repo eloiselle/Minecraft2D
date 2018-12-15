@@ -7,7 +7,7 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 **********************************************************/
 #pragma once
 #include "pch.h"
-#include "SFML\Audio.hpp"
+
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -23,7 +23,6 @@ constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
 // Messages
 constexpr const char * DEFAULT_MESSAGE =
 R"(******************** MINECRAFT 2D ********************
-
 INSTRUCTIONS
 
 Press [Backspace] to call init()
@@ -49,7 +48,7 @@ constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel 
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
 
 // Size
-//constexpr pixel_t TILE_SIZE = 32;                           // Taille des tiles normaux
+//constexpr pixel_t TILE_SIZE = 32;                         // Taille des tiles normaux
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -70,7 +69,7 @@ constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les s
 constexpr int SLOW_MO_EFFECT = 4;
 
 // OPTIONS
-constexpr bool MUSIQUE = true;                             // Option pour desactiver l'audio
+constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
 
 class Game
 {
@@ -81,15 +80,14 @@ private:
     Player _player;                     // Avatar controlled by user
     Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
     VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
-
-    list<Crawler> _bats;
     list<Bullet> _bullets;              // Liste des projectiles
-
+    list<Crawler> _bats;                //
+    Crawler _boss;                      //
 
     // Window
     ContextSettings _settings;          // Settings de la _window
     RenderWindow _window;               // Fenetre d'affichage principal
-    View _view[4];
+    View _view[5];
     static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
     ChoosenView _currentView = NULL_VIEW;
 
@@ -99,7 +97,7 @@ private:
     string _extraTitle = "";            // Restant du titre de la fenetre
     string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
-    Text _texteInstructions;            // Text afficher par dessus toute la scene
+    Text _pauseMessage;            // Text afficher par dessus toute la scene
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -109,7 +107,8 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     CircleShape _bulletShape;           // Cercle rouge
-    CircleShape _mouseCursor;
+    CircleShape _mouseCursor;           //
+    RectangleShape _bossHealthBar;      //
 
     // Sprites
     Image   _playerImage;               // Image du joueur pour modification de transparence
@@ -120,9 +119,9 @@ private:
     int _jSprite = 0;					// indice j du tableau de sprites
     int _motion = 0;                    // quelle partie du mouvement
 
-    Image _spiderImage;                 // Image du robot pour modification de transparence
-    Texture _spiderTexture;             // Texture du robot
-    Sprite _spiderSprite;               // Sprite du robot
+    Image _batImage;                 // Image du robot pour modification de transparence
+    Texture _batTexture;             // Texture du robot
+    Sprite _batSprite;               // Sprite du robot
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
@@ -131,14 +130,15 @@ private:
     SoundBuffer _buffFlap;				// buffer des sons
     SoundBuffer _buffFoes;				// buffer des sons
     Sound _soundBullet;
-    Sound _soundFlap;					// sons 
+    Sound _soundFlap;					// sons
     Music _music;						// musique
 
-
     // Etat
-    static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
+    static enum AppState { RUNNING, PAUSED, BOSS_KILLED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application
+
     Tool _currentTool = BUILD;
+
     long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
     long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
     Event _event;                       // Event presentement en evaluation
@@ -183,7 +183,6 @@ public:
     void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
-
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map
     bool isInMap(MagnetPosition & mp) const;            // Retourne si la MagnetPosition est dans la map
@@ -197,9 +196,11 @@ public:
     // Game Logic
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
+    void manageBoss();                                  //
     void manageFoes();                                  // Gere les ennemis
     void manageMapExpansion();                          //
     void tryToMoveRandomDirection(Crawler & c);         //
+    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter();                              //
 

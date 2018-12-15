@@ -33,7 +33,6 @@ public:
     unsigned int nbLine()const;                                 // Retourne le nb de lignes
     unsigned int nbCol()const;                                  // Retourne le nb de colonnes
 
-
     T& at(unsigned int line, unsigned int col)const;            // Retourne une réference a un element
     T* operator[](unsigned int line);                           // Retourne une réference a un element
 
@@ -146,7 +145,6 @@ void ResizableMap<T>::clearMap()
     _nbL = _nbC = 0;
 }
 
-
 // Retourne le nb de ligne
 template <class T>
 unsigned int ResizableMap<T>::nbLine()const
@@ -160,7 +158,6 @@ unsigned int ResizableMap<T>::nbCol()const
 {
     return _nbC;
 }
-
 
 // Resize
 template <class T>
@@ -262,7 +259,6 @@ void ResizableMap<T>::fillCol(const T& element, unsigned int col)
         _map[l][col] = element;
     }
 }
-
 
 // Getter/Setter pour un element
 template <class T>

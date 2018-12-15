@@ -1,15 +1,12 @@
 #pragma once
 #include "Game.h"
 
-
 // Retourne si deux objet sont sue la meme case
 bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
 {
     return (mp1.getGridCol() == mp2.getGridCol()
         && mp1.getGridLine() == mp2.getGridLine());
 }
-
-
 
 void Game::insertBlockAtMouse(int c, int l)
 {

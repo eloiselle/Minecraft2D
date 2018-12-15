@@ -33,7 +33,9 @@ void Crawler::setAI(AI_Move ai, AI_Frequency decisionAI)
 //Change sa position de 1 dans la direction
 void Crawler::move()
 {
-    setPositionExact(getExactX() + D4[_direction][X], getExactY() + D4[_direction][Y]);
+    setPositionExact(
+        getExactX() + D4[_direction][X],
+        getExactY() + D4[_direction][Y]);
     updateGridPosition();
     _frameLeftBeforeControl--;
 }
@@ -68,10 +70,9 @@ void Crawler::turnRight()
 
 void Crawler::play(sf::SoundBuffer & buff)
 {
-	//_buffer.loadFromFile("flap.wav");
-	_sound.setBuffer(buff);
-	_sound.play();
-
+    //_buffer.loadFromFile("flap.wav");
+    _sound.setBuffer(buff);
+    _sound.play();
 }
 
 // Effectu les operation de routine a chaque refresh

@@ -11,15 +11,15 @@ Goal  : Memorize un moment futur pour pouvoir comparer si c'est pret
 class Delay
 {
 protected:
-	int _totalDelay;                    // Temps total entre chaque
-	int _readyAt;                       // Moment que ça va etre pret
+    int _totalDelay;                    // Temps total entre chaque
+    int _readyAt;                       // Moment que ça va etre pret
 
 public:
-	Delay(int now = 0, int delay = 0)
-		: _readyAt(now), _totalDelay(delay) {};  // Constructor
+    Delay(int now = 0, int delay = 0)
+        : _readyAt(now), _totalDelay(delay) {};  // Constructor
 
-	void delayInit(int now, int delay);      // Remet le delai courant au maximum
+    void delayInit(int now, int delay);      // Remet le delai courant au maximum
 
-	bool delayIsReady(int now);              // Si pret
-	void delayReset(int now);                // Remet le delai courant au maximum
+    bool delayIsReady(int now);              // Si pret
+    void delayReset(int now);                // Remet le delai courant au maximum
 };

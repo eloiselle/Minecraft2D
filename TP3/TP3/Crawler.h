@@ -15,7 +15,6 @@ Goal  : Personnage controlé par l'ordinateur
 #include "Foe.h"
 #include "ResizableMap.hpp"
 
-
 enum AI_Move { NONE, RANDOM, RANDOM_NOT_BACK, BACK_AND_FORTH, ALWAYS_LEFT, ALWAYS_RIGHT };
 enum AI_Frequency { EVERY_MEET_WALL, EVERY_SQUARE, EVERY_SECOND };
 
@@ -36,7 +35,7 @@ public:
     void turnLeft();                        // change de direction anticlockwise
     void turnRight();                       // change de direction clockwise
 
-	void play(sf::SoundBuffer & buff);
+    void play(sf::SoundBuffer & buff);
 
     // Operations
     //void chooseNextMove(FixedGrid& map);    // Utilise l'AI pour change de strategy
@@ -48,7 +47,6 @@ protected:
     bool _isControllable = true;
     int _frameLeftBeforeControl;
 
-	sf::Sound _sound;
-	sf::SoundBuffer _buffer;
-
+    sf::Sound _sound;
+    sf::SoundBuffer _buffer;
 };

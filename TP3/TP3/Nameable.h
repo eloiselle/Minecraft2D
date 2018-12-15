@@ -11,16 +11,13 @@ using namespace std;
 
 class Nameable
 {
-protected: 
+protected:
     char *_name;        // Pointeur sur le nom
 public:
     Nameable();
     ~Nameable();
 
     void clearName();                   // Vide le nom
-    void setName(const char* name);     // Modifie le nom 
+    void setName(const char* name);     // Modifie le nom
     const char* getName()const;         // Retourne le nom
-
-
 };
-

@@ -22,5 +22,4 @@ private:
     void randomizePure(bool flip = true);
 public:
     MapRandomizer(WorldMap & wm);
-
 };
