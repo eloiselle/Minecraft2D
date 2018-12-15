@@ -251,7 +251,7 @@ void Game::initGameElements()
     }
 
     _boss.setPositionInGrid(_map.nbCol() / 2, 2);
-    _boss.setSpeed(4);
+    _boss.setSpeed(5);
     _boss.setHpMax(100);
     _boss.setHp(100);
     initFoes();

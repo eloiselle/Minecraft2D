@@ -145,7 +145,7 @@ private:
 
     // Controles
     float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
-
+    bool _bulletWillVanish;             //
 public:
 
     // Init
@@ -198,12 +198,16 @@ public:
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
     void manageBoss();                                  //
+    void moveBoss();                                    //
     void manageFoes();                                  // Gere les ennemis
     void manageMapExpansion();                          //
-    void tryToMoveRandomDirection(Crawler & c);         //
-    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);
+
+    void manageSphereShield();
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter();                              //
+
+    void collisionBulletBlock(Bullet& b);               //
+    void collisionBulletFoes(Bullet& b);                //
 
     // Movement & Collision
     void managePlayerJump();
@@ -217,6 +221,7 @@ public:
     bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
     void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
     void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
+    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window

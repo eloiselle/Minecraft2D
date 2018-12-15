@@ -18,11 +18,13 @@ void WorldMap::randomize()
     resize(25, 32);
 
     fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
+    randomizeLineVersion(0);
 
     // Quelques premieres lignes vides
     for (size_t l = 1; l < NBR_EMPTY_LINE_ON_TOP; l++)
     {
         fillLine(l, EMPTY_BLOCK);
+        randomizeLineVersion(l);
     }
     // On remplace les characteres par celui de l'entree
     for (int l = NBR_EMPTY_LINE_ON_TOP; l < _nbL; l++)      // Lignes
@@ -33,8 +35,10 @@ void WorldMap::randomize()
     // Rempli les bordures
     for (size_t l = 0; l < _nbL; l++)
     {
-        _map[l][0].set(HARD_BLOCK);
-        _map[l][_nbC - 1].set(HARD_BLOCK);
+        _map[l][0].setType(HARD_BLOCK);
+        _map[l][0].setRandomVersion();
+        _map[l][_nbC - 1].setType(HARD_BLOCK);
+        _map[l][_nbC - 1].setRandomVersion();
     }
 }
 
@@ -47,22 +51,34 @@ void WorldMap::randomizeLine(int line)
 
     for (int c = 1; c < _nbC - 1; c++)  // Colonnes
     {
-        _map[line][c].set(blockByID[rand() % 6]);
+        _map[line][c].setType(blockByID[rand() % 6]);
+        _map[line][c].setRandomVersion();
     }
 
-    _map[line][0].set(HARD_BLOCK);
-    _map[line][_nbC - 1].set(HARD_BLOCK);
+    _map[line][0].setType(HARD_BLOCK);
+    _map[line][0].setRandomVersion();
+    _map[line][_nbC - 1].setType(HARD_BLOCK);
+    _map[line][_nbC - 1].setRandomVersion();
 }
 
 void WorldMap::fillLine(int line, BLOCK_TYPE bt)
 {
     for (int c = 1; c < _nbC - 1; c++)  // Colonnes
     {
-        _map[line][c].set(bt);
+        _map[line][c].setType(bt);
     }
 
-    _map[line][0].set(HARD_BLOCK);
-    _map[line][_nbC - 1].set(HARD_BLOCK);
+    _map[line][0].setType(HARD_BLOCK);
+    _map[line][_nbC - 1].setType(HARD_BLOCK);
+}
+
+void WorldMap::randomizeLineVersion(int line)
+{
+    for (int c = 0; c < _nbC - 1; c++)  // Colonnes
+    {
+        _map[line][c].setRandomVersion();
+    }
+
 }
 
 void WorldMap::readGrid(istream& is)
@@ -78,7 +94,8 @@ void WorldMap::readGrid(istream& is)
         {
             int val;
             is >> val;          // Remplace le char suivant
-            _map[l][c].set(static_cast<BLOCK_TYPE>(val));
+            _map[l][c].setType(static_cast<BLOCK_TYPE>(val));
+            _map[l][c].setRandomVersion();
         }
     }
 }

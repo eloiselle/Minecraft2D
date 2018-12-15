@@ -36,6 +36,8 @@ public:
     void randomizeLine(int line);               //
     void fillLine(int line, BLOCK_TYPE bt);     //
 
+    void randomizeLineVersion(int line);
+
     bool isTraversable(pixel_t x, pixel_t y);   //
     bool isTraversable(tile_t x, tile_t y);     //
     bool isTraversable(MagnetPosition& mp);     //

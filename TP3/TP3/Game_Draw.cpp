@@ -13,6 +13,9 @@ void Game::drawWindow()
     drawGrid();
     updateViews();
     drawMovableObjects();
+
+
+
     drawThingsDirectlyOnTheScreen();
 
     _window.display();
@@ -115,7 +118,7 @@ void Game::drawMovableObjects()
         _batSprite.setPosition(_boss.getExactX(), _boss.getExactY());
         _window.draw(_batSprite);
     }
-    
+
     // Bullet Shield
     for (size_t i = 0; i < NB_SHIELD; i++)
     {
