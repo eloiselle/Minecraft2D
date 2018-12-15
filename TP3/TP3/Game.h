@@ -3,11 +3,11 @@ File  : Game.h
 Author: Anthony Cote
 Date  : 2018-10-20
 Goal  : Solutionne un labyrinthe visuellement en SFML
-		avec l'aide d'une stack de deplacement
+        avec l'aide d'une stack de deplacement
 **********************************************************/
 #pragma once
 #include "pch.h"
-
+#include "SFML\Audio.hpp"
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -23,6 +23,7 @@ constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
 // Messages
 constexpr const char * DEFAULT_MESSAGE =
 R"(******************** MINECRAFT 2D ********************
+
 INSTRUCTIONS
 
 Press [Backspace] to call init()
@@ -48,7 +49,7 @@ constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel 
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
 
 // Size
-//constexpr pixel_t TILE_SIZE = 32;                         // Taille des tiles normaux
+//constexpr pixel_t TILE_SIZE = 32;                           // Taille des tiles normaux
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -75,143 +76,153 @@ class Game
 {
 private:
 
-	// Game Elements
-	WorldMap _map;                      // World map
-	Player _player;                     // Avatar controlled by user
-	Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
-	VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
-	list<Bullet> _bullets;              // Liste des projectiles
-	list<Crawler> _bats;                //
+    // Game Elements
+    WorldMap _map;                      // World map
+    Player _player;                     // Avatar controlled by user
+    Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
+    VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
 
-	// Window
-	ContextSettings _settings;          // Settings de la _window
-	RenderWindow _window;               // Fenetre d'affichage principal
-	View _view[5];
-	static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
-	ChoosenView _currentView = NULL_VIEW;
+    list<Crawler> _bats;
+    list<Bullet> _bullets;              // Liste des projectiles
 
-	MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
-	// Audio
-	SoundBuffer _buffBullet, _buffFoes;			// buffer des sons
-	Music _music;						// musique
+    // Window
+    ContextSettings _settings;          // Settings de la _window
+    RenderWindow _window;               // Fenetre d'affichage principal
+    View _view[4];
+    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
+    ChoosenView _currentView = NULL_VIEW;
 
-	// Text
-	string _extraTitle = "";            // Restant du titre de la fenetre
-	string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
-	Font _fontInvasion2000;             // Font retro avec des gros pixels
-	Text _texteInstructions;            // Text afficher par dessus toute la scene
-	Text _debugInfo;                    // Text afficher par dessus toute la scene
-	string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
+    MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
-	// Shapes
-	RectangleShape _shader;             // Shader qui applique une couche noir transparente sur l'ecran
-	CircleShape _mouseCoord;            // Position de la souris qui ignore le changement fait par _view
-	RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
-	RectangleShape _playerShape;        // Carre vert
-	CircleShape _bulletShape;           // Cercle rouge
-	CircleShape _mouseCursor;
+    // Text
+    string _extraTitle = "";            // Restant du titre de la fenetre
+    string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
+    Font _fontInvasion2000;             // Font retro avec des gros pixels
+    Text _texteInstructions;            // Text afficher par dessus toute la scene
+    Text _debugInfo;                    // Text afficher par dessus toute la scene
+    string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
-	// Sprites
-	Image   _playerImage;               // Image du joueur pour modification de transparence
-	Texture _playerTexture;             // Texture du joueur
-	Sprite  _playerSprite;              // Sprite du joueur
-	Image _spiderImage;                 // Image du robot pour modification de transparence
-	Texture _spiderTexture;             // Texture du robot
-	Sprite _spiderSprite;               // Sprite du robot
-	Texture _tileset;                   // Source d'image pour les sprite
-	Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
+    // Shapes
+    RectangleShape _shader;             // Shader qui applique une couche noir transparente sur l'ecran
+    CircleShape _mouseCoord;            // Position de la souris qui ignore le changement fait par _view
+    RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
+    RectangleShape _playerShape;        // Carre vert
+    CircleShape _bulletShape;           // Cercle rouge
+    CircleShape _mouseCursor;
 
-	// Etat
-	static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
-	AppState _appState = RUNNING;       // Etat actuel de application
+    // Sprites
+    Image   _playerImage;               // Image du joueur pour modification de transparence
+    Texture _playerTexture;             // Texture du joueur
+    Sprite _playerSprites[4][8];		// Sprites de l'avatar
 
-	Tool _currentTool = BUILD;
+    int _iSprite = 3;					// indice i du tableau de sprites
+    int _jSprite = 0;					// indice j du tableau de sprites
+    int _motion = 0;                    // quelle partie du mouvement
 
-	long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
-	long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
-	Event _event;                       // Event presentement en evaluation
+    Image _spiderImage;                 // Image du robot pour modification de transparence
+    Texture _spiderTexture;             // Texture du robot
+    Sprite _spiderSprite;               // Sprite du robot
+    Texture _tileset;                   // Source d'image pour les sprite
+    Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
-	// Controles
-	float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
+    // Music
+    SoundBuffer _buffBullet;
+    SoundBuffer _buffFlap;				// buffer des sons
+    SoundBuffer _buffFoes;				// buffer des sons
+    Sound _soundBullet;
+    Sound _soundFlap;					// sons 
+    Music _music;						// musique
+
+
+    // Etat
+    static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
+    AppState _appState = RUNNING;       // Etat actuel de application
+    Tool _currentTool = BUILD;
+    long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
+    long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
+    Event _event;                       // Event presentement en evaluation
+
+    // Controles
+    float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
 
 public:
 
-	// Init
-	Game();                             // Constructeur
-	void init();                        // Initialization globale
-	void initWindow();                  // Initialization de la fenetre
-	void initSprites();                 // Initialization des images/textures
-	void initTexts();                   // Initialization des polices de caracteres
-	void initShapes();                  // Initialization des formes geometriques
-	void initViews();                   // Initialization des view
-	void initFoes();                    //
-	void initGameElements();            // Initialization des elements qui se deplacent
-	void initWorldMap();                // Initialization du labyrinthe
-	void initMusic();                   //
-	void initSounds();                  //
+    // Init
+    Game();                             // Constructeur
+    void init();                        // Initialization globale
+    void initWindow();                  // Initialization de la fenetre
+    void initSprites();                 // Initialization des images/textures
+    void initTexts();                   // Initialization des polices de caracteres
+    void initShapes();                  // Initialization des formes geometriques
+    void initViews();                   // Initialization des view
+    void initFoes();                    //
+    void initGameElements();            // Initialization des elements qui se deplacent
+    void initWorldMap();                // Initialization du labyrinthe
+    void initMusic();                   //
+    void initSounds();                  //
+    Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
+        unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
+    // Initialize un seul sprite a partir de ses proprietes
 
-	Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
-		unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
-	// Initialize un seul sprite a partir de ses proprietes
+    // Event
+    void quitApplication();                             // Quitte l'application
+    void inputActivatedOnlyTheFirstTime();              // Get input une seule fois
+    void inputActivatedInContinu();                     // Get input a repetition
 
-	// Event
-	void quitApplication();                             // Quitte l'application
-	void inputActivatedOnlyTheFirstTime();              // Get input une seule fois
-	void inputActivatedInContinu();                     // Get input a repetition
+    // Handler
+    void handlePausing();                               // Verifi si on doit changer l'etat de pause
+    View& handleResizeWindow();                         // Handler le redimensionnement de la fenetre
+    void handleKeypress();                              // Handler des touches de clavier
+    void handleArrowKeys();                             // Handler des fleches du clavier et WASD
+    void handleMouseWheelMoved();                       // Handler de la roulette de souris
+    void handleMouseButtonPressed();                    // Handler des boutons de souris
+    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
+    void shootBullet(Character*);                                 // Tire une balle
+    void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
+    void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
+    void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
-	// Handler
-	void handlePausing();                               // Verifi si on doit changer l'etat de pause
-	View& handleResizeWindow();                         // Handler le redimensionnement de la fenetre
-	void handleKeypress();                              // Handler des touches de clavier
-	void handleArrowKeys();                             // Handler des fleches du clavier et WASD
-	void handleMouseWheelMoved();                       // Handler de la roulette de souris
-	void handleMouseButtonPressed();                    // Handler des boutons de souris
-	bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
-	void shootBullet(Character*);                                 // Tire une balle
-	void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
-	void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
-	void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
-	// Window View
-	bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map
-	bool isInMap(MagnetPosition & mp) const;            // Retourne si la MagnetPosition est dans la map
-	bool isMouseInWindow()const;                        // Retourne si la souris est dans la fenetre
-	bool isInWindow(int x, int y) const;                // Retourne si les coords sont a l'interieur de la fenetre
-	bool isInWindow(MagnetPosition & mp) const;         // Retourne si la MagnetPosition est dans la fenetre
-	bool isInWindow(Vector2i & v) const;                // Retourne si l'objet est a l'interieur de la fenetre
-	bool isMouseInMap()const;                           // Retourne si la souris est dans la map
-	void updateViewlessMouseCoord();                    // Calcule la position interne de la souris
+    // Window View
+    bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map
+    bool isInMap(MagnetPosition & mp) const;            // Retourne si la MagnetPosition est dans la map
+    bool isMouseInWindow()const;                        // Retourne si la souris est dans la fenetre
+    bool isInWindow(int x, int y) const;                // Retourne si les coords sont a l'interieur de la fenetre
+    bool isInWindow(MagnetPosition & mp) const;         // Retourne si la MagnetPosition est dans la fenetre
+    bool isInWindow(Vector2i & v) const;                // Retourne si l'objet est a l'interieur de la fenetre
+    bool isMouseInMap()const;                           // Retourne si la souris est dans la map
+    void updateViewlessMouseCoord();                    // Calcule la position interne de la souris
 
-	// Game Logic
-	void mainLoop();                                    // Boucle principale d'iteration
-	void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
-	void manageFoes();                                  // Gere les ennemis
-	void manageMapExpansion();                          //
-	void tryToMoveRandomDirection(Crawler & c);         //
-	void manageBullets();                               // Gere les projectiles
-	bool toolIsAShooter();                              //
+    // Game Logic
+    void mainLoop();                                    // Boucle principale d'iteration
+    void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
+    void manageFoes();                                  // Gere les ennemis
+    void manageMapExpansion();                          //
+    void tryToMoveRandomDirection(Crawler & c);         //
+    void manageBullets();                               // Gere les projectiles
+    bool toolIsAShooter();                              //
 
-	// Movement & Collision
-	void managePlayerJump();
-	bool playerIsOnTheGround();
-	// Gere les collision et le deplacement du jump
-	int pixelsBeforeTopBorder();                        // Nombre de pixel avant de tomber dans l'autre case du haut
-	int pixelsBeforeBottomBorder();                     // Nombre de pixel avant de tomber dans l'autre case du bas
-	int pixelsToRise();                                 // Nombre de pixel qu'on peux monter sans collision avec momentum
-	int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
-	bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
-	bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
-	void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
-	void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
+    // Movement & Collision
+    void managePlayerJump();
+    bool playerIsOnTheGround();
+    // Gere les collision et le deplacement du jump
+    int pixelsBeforeTopBorder();                        // Nombre de pixel avant de tomber dans l'autre case du haut
+    int pixelsBeforeBottomBorder();                     // Nombre de pixel avant de tomber dans l'autre case du bas
+    int pixelsToRise();                                 // Nombre de pixel qu'on peux monter sans collision avec momentum
+    int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
+    bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
+    bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
+    void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
 
-	// Draw
-	void drawWindow();                                  // Met a jour le contenu de la window
-	void updateViews();                                 // met a jour les view
-	void updateWindowTitle();                           // Met a jour le titre de la fenetre
-	void drawThingsDirectlyOnTheScreen();               // Affiche les elements non affecter par la view
-	void drawGrid();                                    // Affiche la grille de application
-	void drawMovableObjects();                          // Affiche les objets mobiles
-	void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
-	void printMap();
+    // Draw
+    void drawWindow();                                  // Met a jour le contenu de la window
+    void updateViews();                                 // met a jour les view
+    void updateWindowTitle();                           // Met a jour le titre de la fenetre
+    void drawThingsDirectlyOnTheScreen();               // Affiche les elements non affecter par la view
+    void drawGrid();                                    // Affiche la grille de application
+    void drawMovableObjects();                          // Affiche les objets mobiles
+    void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
+    void printMap();
 };

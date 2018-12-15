@@ -1,4 +1,3 @@
-#pragma once
 #include "Game.h"
 
 // ############################################################################
@@ -44,6 +43,7 @@ void Game::inputActivatedOnlyTheFirstTime()
 		{
 			if (_event.type == Event::MouseWheelMoved)
 				handleMouseWheelMoved();
+
 		}
 	}
 }
@@ -103,11 +103,6 @@ void Game::handleKeypress()
 	{
 		handleArrowKeys();
 
-		// Game Controls
-		if (Keyboard::isKeyPressed(Keyboard::Space))
-		{
-			//_shieldSphere.setPosition(_player);
-		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 		quitApplication();
@@ -163,17 +158,21 @@ void Game::handleArrowKeys()
 {
 	// Keyboard Arrow
 	if (Keyboard::isKeyPressed(Keyboard::Up) ||
-		Keyboard::isKeyPressed(Keyboard::W) ||
+		Keyboard::isKeyPressed(Keyboard::W) || 
 		Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		_view[CAMERA].move(0, -ARROW_EXPLORE);
 
+		_iSprite = 0;
+		_jSprite = 3;
 		if (playerIsOnTheGround())
 			_player.startJump();
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Right) ||
 		Keyboard::isKeyPressed(Keyboard::D))
 	{
+		_iSprite = 0;
+		_jSprite = 2;
 		_view[CAMERA].move(ARROW_EXPLORE, 0);
 		tryToMove(RIGHT, _player);
 	}
@@ -190,6 +189,7 @@ void Game::handleArrowKeys()
 		tryToMove(LEFT, _player);
 	}
 }
+
 
 // Gere quand la roulette de souris a changer
 void Game::handleMouseWheelMoved()
@@ -208,7 +208,7 @@ void Game::handleMouseButtonPressed()
 		int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
 		if (Mouse::isButtonPressed(Mouse::Left))
-		{
+{
 			//Placer un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
@@ -222,7 +222,7 @@ void Game::handleMouseButtonPressed()
 				{
 					for (Crawler& c : _bats)
 					{
-						//Détermine la target
+						//DÃ©termine la target
 						if (areOnTheSameSquare(_mouseMagnet, c))
 						{
 							target = &c;
@@ -268,7 +268,7 @@ void Game::shootBullet(Character *target)
 	{
 		_bullets.back().setTarget(target);
 		_bullets.back().aim(*target);
-	}
+}
 
 	_bullets.back().setLength(10);
 	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
