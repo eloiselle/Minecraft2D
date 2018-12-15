@@ -7,7 +7,9 @@
 // Constructeur
 Game::Game()
 {
-    initWindow();
+    // initWindow() n'est pas dans init pour pouvoir faire un reset
+    // avec init() sans reconstruire la fenetre
+    initWindow(); 
     init();
 }
 
@@ -21,7 +23,13 @@ void Game::init()
     initSprites();
     initShapes();
 
-    initGameElements();
+
+    initPlayer();
+    initShield();
+    initFoes();
+    initBoss();
+    _bullets.clear();
+
     initTexts();
     initMusic();
     initSounds();
@@ -125,9 +133,9 @@ void Game::initTexts()
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
-    _debugInfo.setCharacterSize(24);                // In pixels
-    _debugInfo.setFillColor(Color(255, 255, 255, 128));  // White
-    _debugInfo.setOutlineColor(Color(64, 64, 64, 128));  // Dark grey
+    _debugInfo.setCharacterSize(24);                    // In pixels
+    _debugInfo.setFillColor(Color(255, 255, 255, 128)); // White
+    _debugInfo.setOutlineColor(Color(64, 64, 64, 128)); // Dark grey
     _debugInfo.setOutlineThickness(3);
     _debugInfo.setPosition(32, 32);
 }
@@ -163,8 +171,6 @@ void Game::initShapes()
     _mouseSquare.setOutlineColor(Color::Black);
     _mouseSquare.setOutlineThickness(tk);
     // Boss Health Bar
-    //_bossHealthBar.setOrigin(_map.nbCol() * TILE_SIZE /2 -tk, -tk);
-    //_bossHealthBar.setPosition(_map.nbCol() * TILE_SIZE /2+ tk, 0);
     _bossHealthBar.setFillColor(Color::Red);
     _bossHealthBar.setOutlineColor(Color(128, 0, 0));
     _bossHealthBar.setOutlineThickness(tk);
@@ -177,12 +183,6 @@ void Game::initShapes()
 // Initialize la carte de terrain
 void Game::initWorldMap()
 {
-    //assert(strlen(fileName) > 0);
-
-    //// Read file
-    //if (!_map.readFile(fileName))
-    //    return; // Action si fichier non conforme
-
     _map.randomize();
 
     initViews();
@@ -235,29 +235,28 @@ void Game::initViews()
     _view[FOLLOW_Y] = handleResizeWindow();
 }
 
-// Initialize les element du jeu
-void Game::initGameElements()
+void Game::initPlayer()
 {
-    // Player
     _player.setPositionInGrid(15, 4);
     _player.setSpeed(4);
     _map.at(_player.getGridLine(), _player.getGridCol());
+}
 
-    // Shield
+void Game::initShield()
+{
     for (size_t i = 0; i < NB_SHIELD; i++)
     {
         _shieldVA[i].init(25, 0, 1);
         _shieldVA[i].rotate(i * SHIELD_ANGLE);
     }
+}
 
+void Game::initBoss()
+{
     _boss.setPositionInGrid(_map.nbCol() / 2, 2);
     _boss.setSpeed(5);
     _boss.setHpMax(100);
     _boss.setHp(100);
-    initFoes();
-
-    // Bullets
-    _bullets.clear();
 }
 
 // Initialise Foes

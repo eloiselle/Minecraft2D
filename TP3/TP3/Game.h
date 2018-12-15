@@ -66,7 +66,7 @@ constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
-constexpr int SLOW_MO_EFFECT = 4;
+constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
 
 // OPTIONS
 constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
@@ -81,15 +81,15 @@ private:
     Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
     VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
-    list<Crawler> _bats;                //
-    Crawler _boss;                      //
+    list<Crawler> _bats;                // Liste des chauves souris-enemies
+    Crawler _boss;                      // Boss
 
     // Window
     ContextSettings _settings;          // Settings de la _window
     RenderWindow _window;               // Fenetre d'affichage principal
-    View _view[5];
-    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
-    ChoosenView _currentView = NULL_VIEW;
+    View _view[5];                      // View disponibles
+    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };   // Index de view
+    ChoosenView _currentView = NULL_VIEW;   // Index de la view actuelle
 
     MagnetPosition _mouseMagnet;        // Position magnetique de la souris
 
@@ -97,7 +97,7 @@ private:
     string _extraTitle = "";            // Restant du titre de la fenetre
     string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
-    Text _pauseMessage;            // Text afficher par dessus toute la scene
+    Text _pauseMessage;                 // Text afficher par dessus toute la scene
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -107,8 +107,8 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     CircleShape _bulletShape;           // Cercle rouge
-    CircleShape _mouseCursor;           //
-    RectangleShape _bossHealthBar;      //
+    CircleShape _mouseCursor;           // 
+    RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
 
     // Sprites
     Image   _playerImage;               // Image du joueur pour modification de transparence
@@ -119,9 +119,9 @@ private:
     int _jSprite = 0;					// indice j du tableau de sprites
     int _motion = 0;                    // quelle partie du mouvement
 
-    Image _batImage;                 // Image du robot pour modification de transparence
-    Texture _batTexture;             // Texture du robot
-    Sprite _batSprite;               // Sprite du robot
+    Image _batImage;                    // Image du robot pour modification de transparence
+    Texture _batTexture;                // Texture du robot
+    Sprite _batSprite;                  // Sprite du robot
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
@@ -156,11 +156,14 @@ public:
     void initTexts();                   // Initialization des polices de caracteres
     void initShapes();                  // Initialization des formes geometriques
     void initViews();                   // Initialization des view
-    void initFoes();                    //
+    void initPlayer();                  //
+    void initShield();                  //
+    void initBoss();                    // 
+    void initFoes();                    // Initialization des ennemis
     void initGameElements();            // Initialization des elements qui se deplacent
     void initWorldMap();                // Initialization du labyrinthe
-    void initMusic();                   //
-    void initSounds();                  //
+    void initMusic();                   // Initialization de la musique
+    void initSounds();                  // Initialization des effet sonores
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes
@@ -198,31 +201,33 @@ public:
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
     void manageBoss();                                  //
-    void moveBoss();                                    //
     void manageFoes();                                  // Gere les ennemis
-    void manageOneFoe(list<Crawler>::iterator& c);       //
+    void manageOneFoe(list<Crawler>::iterator& c);      //
     void manageMapExpansion();                          //
 
     void manageSphereShield();
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter();                              //
 
-    void collisionBulletBlock(Bullet& b);               //
-    void collisionBulletFoes(Bullet& b);                //
 
-    // Movement & Collision
-    void managePlayerJump();
-    bool playerIsOnTheGround();
-    // Gere les collision et le deplacement du jump
+    // Edge detection
+    void managePlayerJump();                            // Gere la physic du jump du joueur
+    bool playerIsOnTheGround();                         // Retourne si le joueur est en contact avec le sol
     int pixelsBeforeTopBorder();                        // Nombre de pixel avant de tomber dans l'autre case du haut
     int pixelsBeforeBottomBorder();                     // Nombre de pixel avant de tomber dans l'autre case du bas
     int pixelsToRise();                                 // Nombre de pixel qu'on peux monter sans collision avec momentum
     int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
     bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
     bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
-    void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
-    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
-    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);
+
+    // Move
+    void moveBoss();                                    // Deplace le boss en ellipse
+    void tryToMove(DIRECTION4 dir, SidewayCharacter& player);   // SidewayCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);    // TopDownCharacter essaye de se deplacer
+    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
+    void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
+    void collisionBulletFoes(Bullet& b);                //
+
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window
@@ -232,5 +237,5 @@ public:
     void drawGrid();                                    // Affiche la grille de application
     void drawMovableObjects();                          // Affiche les objets mobiles
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
-    void printMap();
+    void printMap();                                    // Affiche le contenu de la map dans _debug
 };
