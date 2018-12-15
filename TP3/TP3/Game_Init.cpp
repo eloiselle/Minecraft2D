@@ -250,7 +250,7 @@ void Game::initGameElements()
         _shieldVA[i].rotate(i * SHIELD_ANGLE);
     }
 
-    _boss.setPositionInGrid(_map.nbCol() / 2, 1);
+    _boss.setPositionInGrid(_map.nbCol() / 2, 2);
     _boss.setSpeed(4);
     _boss.setHpMax(100);
     _boss.setHp(100);

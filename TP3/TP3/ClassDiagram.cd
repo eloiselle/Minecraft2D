@@ -1,24 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AngleDegree" Collapsed="true">
-    <Position X="11.25" Y="2.25" Width="1.5" />
+    <Position X="9.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAgAAAAAAAAMQEIAAAAAAACAAAAAAAAEAAAA=</HashCode>
       <FileName>AngleDegree.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Bullet" Collapsed="true">
-    <Position X="11" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAgAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
-      <FileName>Bullet.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Delay" Collapsed="true">
-    <Position X="3" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>iAAAAAAEAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>Delay.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entity" Collapsed="true">
@@ -29,28 +15,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FileOpener" Collapsed="true">
-    <Position X="4.75" Y="1" Width="1.5" />
+    <Position X="13.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BIAAAAAAAQAAAAQIAACAAAAAQAQAAAQAIAAAAAEAAAA=</HashCode>
       <FileName>FileOpener.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FixedGrid&lt;T, NB_LINE, NB_COL&gt;" Collapsed="true">
-    <Position X="4.75" Y="2" Width="1.5" />
+    <Position X="13.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAgAAAAAAAAIAAAAAgAAEAAAIAgAgQAAAAAAA=</HashCode>
       <FileName>FixedGrid.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Foe" Collapsed="true">
-    <Position X="11.75" Y="6.5" Width="1.5" />
+    <Position X="10.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Foe.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Killable" Collapsed="true">
-    <Position X="5.5" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABgAgCCBAQAAAAAQAAAAAABAAAEAUAAAACAEAAAA=</HashCode>
       <FileName>Killable.h</FileName>
@@ -64,23 +50,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Position" Collapsed="true">
-    <Position X="14.5" Y="3.5" Width="1.5" />
+    <Position X="12.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAQAAACgAAAGAAACAAABAAAAAAAAAGAAAAA=</HashCode>
       <FileName>Position.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ResizableMap&lt;T&gt;" Collapsed="true">
-    <Position X="3" Y="1" Width="1.5" />
+    <Position X="12" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BEQABABAAAAAAAIAAAALIBACAAEgAAAAgUggAAAAAAA=</HashCode>
       <FileName>ResizableMap.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Crawler" Collapsed="true">
-    <Position X="10.75" Y="7.75" Width="1.5" />
+    <Position X="9.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAICAAAAAICAAAAAAAAAAAAAQAIAAQBACBAEAAA=</HashCode>
+      <HashCode>AAEAAAIiAAAAAICAAAAAAAAAAACAQAIAAQBAChAEAAA=</HashCode>
       <FileName>Crawler.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -92,23 +78,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TopDownCharacter" Collapsed="true">
-    <Position X="9.75" Y="6.5" Width="1.5" />
+    <Position X="8.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAEAACAAAAAAAAAAAAIAIIAAAEoAAAAIAA=</HashCode>
       <FileName>TopDownCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VectorAngle" Collapsed="true">
-    <Position X="11.25" Y="3.5" Width="1.5" />
+    <Position X="9.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAABAAAAEAAAABAEQAAABACABAAJBBAAgIGEAAAA=</HashCode>
       <FileName>VectorAngle.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WorldMap" Collapsed="true">
-    <Position X="3" Y="2.25" Width="1.5" />
+    <Position X="12" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAABAAACAAQCAAIAACBACIgAEACAAAgAEQAAACAA=</HashCode>
+      <HashCode>AABABABAAACAAQCAAIAACBACIgAEACAAAgAEQAAACAA=</HashCode>
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -119,81 +105,130 @@
       <FileName>Character.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Player" Collapsed="true">
-    <Position X="4.5" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAABAAAAAgAAAAAAAAAAAAAAAAAAACAAAAAQAAQAA=</HashCode>
-      <FileName>Player.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Weapon" Collapsed="true">
-    <Position X="3" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAQBAAIAAAAAAAAACAAAAEDC1CAAI=</HashCode>
-      <FileName>Weapon.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MapRandomizer" Collapsed="true">
-    <Position X="14.5" Y="2.5" Width="1.5" />
+    <Position X="12.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQACAAAAAAAgAAwAAAgAAAgEAEA=</HashCode>
       <FileName>MapRandomizer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Nameable" Collapsed="true">
-    <Position X="0.75" Y="0.75" Width="1.5" />
+    <Position X="12" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAABAAAAAAAAAAAAAAABAAAAUAAAAAAA=</HashCode>
       <FileName>Nameable.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game" Collapsed="true">
-    <Position X="9" Y="0.5" Width="1.5" />
+    <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gDXAQJDKi44NMIgihAEhCqEQB6wAMAJQHGMBQEiYARo=</HashCode>
+      <HashCode>gHVMQLDKi8YdMogihAEhCglUB6wIeBpQmGMBAGiYwRo=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Bullet" Collapsed="true">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgACiBgAAABAAAAAAAAAAAAQACQAQABBAAAAgAQAAA=</HashCode>
+      <FileName>Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delay" Collapsed="true">
+    <Position X="3.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iAAAAAAAAAAAAAAAAAAAAAAAACAMAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Delay.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="3.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAABAACEAQAAQQBAAAAgACBBggAEQAAAFKAkARAA=</HashCode>
+      <FileName>Weapon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Block" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAgIAQAAAQAAAAAAQAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Typedef Name="degree_t" Collapsed="true">
-    <Position X="14.5" Y="7.5" Width="1.5" />
+    <Position X="14.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AngleDegree.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="radian_t" Collapsed="true">
-    <Position X="16.25" Y="8.25" Width="1.5" />
+    <Position X="16.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AngleDegree.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="pixel_t" Collapsed="true">
-    <Position X="16.25" Y="7.5" Width="1.5" />
+    <Position X="16.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>pch.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="tile_t" Collapsed="true">
-    <Position X="14.5" Y="8.25" Width="1.5" />
+    <Position X="14.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>pch.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Enum Name="AI_Move" Collapsed="true">
-    <Position X="16.25" Y="5.75" Width="1.5" />
+    <Position X="16.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAQBCEAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Crawler.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AI_Frequency" Collapsed="true">
-    <Position X="14.5" Y="5.75" Width="1.5" />
+    <Position X="14.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Crawler.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BLOCK_TYPE" Collapsed="true">
+    <Position X="14.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAQAAIAAAAA=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DIRECTION4" Collapsed="true">
+    <Position X="14.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAgAAAAAAAAAAAAICAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Direction.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="D4_PROPERTY" Collapsed="true">
+    <Position X="16.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Direction.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Tool" Collapsed="true">
+    <Position X="16.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACAAAAAAABAiAAAgAAAAAAAAEAEAAAAAAAA=</HashCode>
+      <FileName>Weapon.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

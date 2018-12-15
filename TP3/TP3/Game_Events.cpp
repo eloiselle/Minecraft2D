@@ -33,10 +33,10 @@ void Game::inputActivatedOnlyTheFirstTime()
                 init();
             if (_event.key.code == Keyboard::P)
                 handlePausing();
-            if (_event.key.code == Keyboard::T
-                && isMouseInWindow()
-                && !areOnTheSameSquare(_mouseMagnet, _player))
-                _player.setPosition(_mouseMagnet);
+            if (_event.key.code == Keyboard::T && canTeleportAtMouse())
+                _player.setPositionExact(
+                    _mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
+                    _mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
         }
 
         if (_appState == RUNNING)
@@ -45,6 +45,14 @@ void Game::inputActivatedOnlyTheFirstTime()
                 handleMouseWheelMoved();
         }
     }
+}
+
+bool Game::canTeleportAtMouse()
+{
+    return isMouseInWindow()
+        && isInMap(_mouseMagnet)
+        && _map.at(_mouseMagnet.getGridLine(), _mouseMagnet.getGridCol()).getType() == EMPTY_BLOCK
+        && !areOnTheSameSquare(_mouseMagnet, _player);
 }
 
 // Gere les input qui doivent etre activer en continu

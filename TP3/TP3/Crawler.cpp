@@ -40,6 +40,16 @@ void Crawler::move()
     _frameLeftBeforeControl--;
 }
 
+//Change sa position de 1 dans la direction
+void Crawler::move(int x, int y)
+{
+    setPositionExact(
+        getExactX() + x,
+        getExactY() + y);
+    updateGridPosition();
+    _frameLeftBeforeControl--;
+}
+
 // Décide de changer de case et commence le déplacement
 void Crawler::startMoving()
 {

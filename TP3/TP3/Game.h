@@ -192,6 +192,7 @@ public:
     bool isInWindow(Vector2i & v) const;                // Retourne si l'objet est a l'interieur de la fenetre
     bool isMouseInMap()const;                           // Retourne si la souris est dans la map
     void updateViewlessMouseCoord();                    // Calcule la position interne de la souris
+    bool canTeleportAtMouse();                          //
 
     // Game Logic
     void mainLoop();                                    // Boucle principale d'iteration

@@ -115,7 +115,7 @@ void Game::drawMovableObjects()
         _batSprite.setPosition(_boss.getExactX(), _boss.getExactY());
         _window.draw(_batSprite);
     }
-    _extraTitle += _boss.isAlive() + 48;
+    
     // Bullet Shield
     for (size_t i = 0; i < NB_SHIELD; i++)
     {

@@ -39,7 +39,8 @@ void Game::manageMapExpansion()
     if (_player.getGridLine() >= _map.nbLine() - NB_LINE_BEFORE_EXPAND_MAP)
     {
         _map.addBottomLines(1);
-        _map.randomizeLine(_map.nbLine() - 1);
+        _map.randomizeLine(_map.nbLine() - 2);
+        _map.fillLine(_map.nbLine() - 1, HARD_BLOCK);
 
         if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
         {
@@ -53,6 +54,12 @@ void Game::manageMapExpansion()
     }
 }
 
+// TODO supprimer si necessaire
+double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
+{
+    return cos(base / slowness * PI) * amplitude + minimum;
+}
+
 void Game::manageBoss()
 {
     // Decide next move
@@ -62,8 +69,9 @@ void Game::manageBoss()
 
         if (_boss.getGridLine() < _player.getGridLine() - 9)
         {
-            _boss.setDirection(DOWN);
-            _boss.startMoving();
+            _boss.move(0, 1);
+            //_boss.setDirection(DOWN);
+            //_boss.startMoving();
 
             for (int c = 1; c < _map.nbCol() - 1; c++)
             {
@@ -72,32 +80,44 @@ void Game::manageBoss()
         }
         else
         {
-            if (_boss.getGridCol() == 1) // A gauche completement
-            {
-                _boss.setDirection(RIGHT);
-                _boss.startMoving();
-            }
-            else if (_boss.getGridCol() == _map.nbCol() - 2) // A droite completement
-            {
-                _boss.setDirection(LEFT);
-                _boss.startMoving();
-            }
-            else // quelque part au centre
-            {
-                DIRECTION4 gaucheOuDroite[2] = { LEFT, RIGHT };
-                _boss.setDirection(gaucheOuDroite[rand() % 2]);
-                _boss.startMoving();
-            }
+            //if (_boss.getGridCol() == 1) // A gauche completement
+            //{
+            //    _boss.setDirection(RIGHT);
+            //    _boss.startMoving();
+            //}
+            //else if (_boss.getGridCol() == _map.nbCol() - 2) // A droite completement
+            //{
+            //    _boss.setDirection(LEFT);
+            //    _boss.startMoving();
+            //}
+            //else // quelque part au centre
+            //{
+            //    DIRECTION4 gaucheOuDroite[2] = { LEFT, RIGHT };
+            //    _boss.setDirection(gaucheOuDroite[rand() % 2]);
+            //    _boss.startMoving();
+            //}
+
+
         }
     }
 
-    if (_boss.isWalking())
-    {
-        for (size_t i = 0; i < _boss.getSpeed(); i++)
-        {
-            _boss.move();
-        }
-    }
+    // deplacement du boss
+    float round = cos(_frameRun / 100.f);//smartCos(_frameRun, 100, 10, 12) / 2;
+    float minimum = TILE_SIZE * 2;
+    float maximum = MAP_WIDTH_PIXELS - TILE_SIZE * 2;
+    float amplitude = (maximum - minimum) / 2;
+    float x = amplitude * round + amplitude + minimum;
+    float y = cos(_frameRun / 16.f);// *TILE_SIZE + (TILE_SIZE * 3);
+
+    _boss.setPositionExact(x, y + _boss.getExactY());
+
+    //if (_boss.isWalking())
+    //{
+    //    for (size_t i = 0; i < _boss.getSpeed(); i++)
+    //    {
+    //        _boss.move();
+    //    }
+    //}
 
     if (_boss.isDead())
         _appState = BOSS_KILLED;
@@ -150,11 +170,7 @@ void Game::tryToMoveInDirection(Crawler& c, DIRECTION4 dir)
     }
 }
 
-// TODO supprimer si necessaire
-double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
-{
-    return cos(base / slowness * PI) * amplitude + minimum;
-}
+
 
 void Game::manageBullets()
 {

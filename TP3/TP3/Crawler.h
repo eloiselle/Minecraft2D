@@ -30,6 +30,7 @@ public:
     void init(int x, int y, AI_Move Random, AI_Frequency WhenCannotWalk); // Re-set tout
     void setAI(AI_Move ai, AI_Frequency decisionAI); // Change l'intelligence artificielle
     void move();                            // se deplace de 1 vers l'avant
+    void move(int x, int y);
     void startMoving();
     void stopMoving();
     void turnLeft();                        // change de direction anticlockwise
