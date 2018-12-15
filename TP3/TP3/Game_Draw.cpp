@@ -47,6 +47,8 @@ void Game::updateWindowTitle()
 
     _extraTitle += toolName[_currentTool];
 
+    _extraTitle += " Score : " + to_string(_score);
+
     if (_extraTitle != "")
         _extraTitle = " : " + _extraTitle;
 

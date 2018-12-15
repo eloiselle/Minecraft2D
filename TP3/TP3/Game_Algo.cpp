@@ -66,6 +66,7 @@ void Game::manageBoss()
     {
         _appState = BOSS_KILLED;
         _pauseMessage.setString("Boss killed !! :)");
+        _score += SCORE_BOSS_KILLED;
         return;
     }
 

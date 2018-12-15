@@ -1,18 +1,24 @@
 
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
-    Foes        : Changer image de spider (animation et/ou direction) (C)
+    Foes        : Changer image de bat (animation et direction) (C)
+    Foes        : Changer image de _boss (C)
     Player      : Implanter les animations de WaddleDoo (C)
+    State       : Faire un ecran de fin quand _appState == BOSS_KILLED
+    Boss        : Faire que le boss lance des bullet
+    Bullet      : Detecter les collision de bullet avec le joueur
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
     Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED (E)
     Weapon      : Bulletshield  : Implanter les collisions
     Weapon      : Homing        : appeller Aim() frequemment (E)
-    Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
+    Weapon      : Explosion qui tire dans toutes les directions avec un grod delai (E)
+    Weapon      : 
     Bullet      : Les bullet doivent memoriser les damage de l'arme (E)
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
-    Pathfinding : A* search
-    Foes        : Boss          : 
-    Meta        : EndGame ; Timer
+
+    Meta        : Timer qui compte en descendant (A)
+    Meta        : Score pour la destruction de bloc et de bats (A)
+    Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
     Map         : Map Editor Sauvegarder la map et la loader
 
 

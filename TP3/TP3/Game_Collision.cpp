@@ -18,6 +18,8 @@ void Game::collisionBulletBlock(Bullet& b)
         if (_map.at(l, c).getHp() <= 0)
             _map.at(l, c) = EMPTY_BLOCK;
         _bulletWillVanish = true;
+
+        _score += SCORE_BLOCK;
     }
 
 }
@@ -32,6 +34,7 @@ void Game::collisionBulletFoes(Bullet& b)
         {
             _bulletWillVanish = true;
             c = _bats.erase(c);
+            _score += SCORE_BAT;
         }
         else
         {

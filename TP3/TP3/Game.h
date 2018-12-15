@@ -68,6 +68,11 @@ constexpr int NB_SHIELD = 6;                                // Nombre de spheres
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
 
+// Score
+constexpr int SCORE_BOSS_KILLED = 10000; 
+constexpr int SCORE_BAT = 100;
+constexpr int SCORE_BLOCK = 10;
+
 // OPTIONS
 constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
 
@@ -83,6 +88,7 @@ private:
     list<Bullet> _bullets;              // Liste des projectiles
     list<Crawler> _bats;                // Liste des chauves souris-enemies
     Crawler _boss;                      // Boss
+    unsigned int _score;                // Score du joueur
 
     // Window
     ContextSettings _settings;          // Settings de la _window
