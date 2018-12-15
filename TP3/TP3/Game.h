@@ -200,6 +200,7 @@ public:
     void manageBoss();                                  //
     void moveBoss();                                    //
     void manageFoes();                                  // Gere les ennemis
+    void manageOneFoe(list<Crawler>::iterator& c);       //
     void manageMapExpansion();                          //
 
     void manageSphereShield();

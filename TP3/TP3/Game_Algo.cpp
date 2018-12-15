@@ -65,14 +65,15 @@ void Game::manageBoss()
     if (_boss.isDead())
     {
         _appState = BOSS_KILLED;
+        _pauseMessage.setString("Boss killed !! :)");
         return;
     }
 
-    if(_boss.isWalking())
+    if (_boss.isWalking())
         _boss.move();   // Descente avec le joueur
 
     if (_boss.getGridLine() < _player.getGridLine() - 9)
-      
+
     {
         _boss.setDirection(DOWN);
         _boss.startMoving();
@@ -99,32 +100,36 @@ void Game::manageFoes()
 {
     if (_currentTool != SLOW_MO || !(_frameRun % SLOW_MO_EFFECT))
     {
-        for (Crawler& c : _bats)
+        list<Crawler>::iterator c = _bats.begin();
+        while (c != _bats.end())
         {
-            // Manage one foe
-            if (c.isGridCentered()) // Pret a se deplacer
-            {
-                if (_frameRun % 24 == 12 && MUSIQUE)
-                {
-                    _bats.back().play(_buffFoes);
-                }
-                c.stopMoving();
-                tryToMoveInDirection(c, static_cast<DIRECTION4>(rand() % 4));
-            }
-
-            if (c.isWalking())
-            {
-                c.move();
-            }
+            manageOneFoe(c);
         }
     }
+}
 
-
-    if (_boss.isDead())
+void Game::manageOneFoe(list<Crawler>::iterator& c)
+{
+    // Manage one foe
+    if (c->isGridCentered()) // Pret a se deplacer
     {
-        _pauseMessage.setString("Boss killed !! :)");
-        _appState = PAUSED; // TODO faire une fin de jeu plus standard
+        if (_frameRun % 24 == 12 && MUSIQUE)
+        {
+            _bats.back().play(_buffFoes);
+        }
+        c->stopMoving();
+        tryToMoveInDirection(*c, static_cast<DIRECTION4>(rand() % 4));
     }
+
+    if (c->isWalking())
+        c->move();
+
+    // Nettoyage de bat trop haut dans la map
+    if (c->getExactY() < _boss.getExactY() - TILE_SIZE * 5)
+        c = _bats.erase(c);
+    else
+        c++;
+
 }
 
 bool Game::toolIsAShooter()
@@ -164,7 +169,6 @@ void Game::manageBullets()
         {
             if (b->getTarget().isAlive())
                 b->aim(b->getTarget());
-
             else
                 b->setTarget(nullptr);
         }
@@ -177,6 +181,9 @@ void Game::manageBullets()
             collisionBulletFoes(*b);
         }
         else
+            _bulletWillVanish = true;
+
+        if (b->getExactY() < _boss.getExactY() - TILE_SIZE * 5)
             _bulletWillVanish = true;
 
         if (_bulletWillVanish)
