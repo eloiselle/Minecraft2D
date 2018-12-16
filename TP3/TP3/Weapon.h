@@ -12,8 +12,8 @@ Goal  : TODO : Gere des pattern compliquer de bullet
 #include "Delay.h"
 //#include "AngleDegree.hpp"
 
-const enum Tool { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO, HOMING };
-const string toolName[8] = { "Build", "Uzi", "Assault", "Sniper", "Shotgun", "BulletHell", "Slow-Mo", "Homing" };
+const enum TOOL { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO, HOMING, SPHERE_SHIELD };
+const string toolName[9] = { "Build", "Uzi", "Assault", "Sniper", "Shotgun", "BulletHell", "Slow-Mo", "Homing", "Sphere Shield" };
 
 class Weapon : public Delay
 {
@@ -27,7 +27,7 @@ protected:
     //string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
 
 public:
-    void setWeapon(Tool tool, int _frameRun);
+    void setWeapon(TOOL tool, int _frameRun);
     void setNoWeapon(int _frameRun);
     void setUzi(int _frameRun);
     void setAssault(int _frameRun);

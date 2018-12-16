@@ -161,6 +161,7 @@
     <ClCompile Include="Delay.cpp" />
     <ClCompile Include="FileOpener.cpp" />
     <ClCompile Include="Game_Collision.cpp" />
+    <ClCompile Include="Game_GameHandler.cpp" />
     <ClCompile Include="Game_Move.cpp" />
     <ClCompile Include="Game_Position.cpp" />
     <ClCompile Include="Killable.cpp" />

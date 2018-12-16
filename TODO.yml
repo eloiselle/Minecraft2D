@@ -4,20 +4,18 @@ Priorities: (High to Low)
     Foes        : Changer image de bat (animation et direction) (C)
     Foes        : Changer image de _boss (C)
     Player      : Implanter les animations de WaddleDoo (C)
-    State       : Faire un ecran de fin quand _appState == BOSS_KILLED
+    State       : Faire un ecran de fin quand _appState == BOSS_KILLED (A)
     Boss        : Faire que le boss lance des bullet
-    Bullet      : Detecter les collision de bullet avec le joueur
+    Bullet      : Detecter les collision de bullet avec le joueur (A)
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
-    Weapon      : Menu pour choisir les armes : Faire une fonction menuPause() seulement si not PAUSED (E)
-    Weapon      : Bulletshield  : Implanter les collisions
+    Weapon      : Bulletshield  : Implanter les collisions (E)
     Weapon      : Homing        : appeller Aim() frequemment (E)
     Weapon      : Explosion qui tire dans toutes les directions avec un grod delai (E)
-    Weapon      : 
+    Debug       : Enlever le nombre de Bullet dans _debug
     Bullet      : Les bullet doivent memoriser les damage de l'arme (E)
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
 
     Meta        : Timer qui compte en descendant (A)
-    Meta        : Score pour la destruction de bloc et de bats (A)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
     Map         : Map Editor Sauvegarder la map et la loader
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Weapon.h"
 
-void Weapon::setWeapon(Tool tool, int _frameRun)
+void Weapon::setWeapon(TOOL tool, int _frameRun)
 {
     switch (tool)
     {
@@ -13,6 +13,7 @@ void Weapon::setWeapon(Tool tool, int _frameRun)
     case BULLET_HELL:       setBulletHell(_frameRun);       break;
     case SLOW_MO:           setNoWeapon(_frameRun);         break;
     case HOMING:			setHoming(_frameRun);			break;
+    case SPHERE_SHIELD:     setNoWeapon(_frameRun);         break;
     default:
         break;
     }

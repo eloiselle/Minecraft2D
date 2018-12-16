@@ -21,7 +21,7 @@ using namespace sf;
 constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
 
 // Messages
-constexpr const char * DEFAULT_MESSAGE =
+constexpr const char * STR_INSTRUCTIONS =
 R"(******************** MINECRAFT 2D ********************
 INSTRUCTIONS
 
@@ -38,6 +38,8 @@ Press [2] to [5] to change weapon
 Roll the mousewheel to zoom-in/zoom-out
 
 Click on the map to modify it.)";
+
+constexpr const char* STR_BOSS_KILLED = "Boss Killed";
 
 // Window
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
@@ -101,9 +103,9 @@ private:
 
     // Text
     string _extraTitle = "";            // Restant du titre de la fenetre
-    string _message = DEFAULT_MESSAGE;  // Message pendant l'ecran de pause
+    string _message = STR_INSTRUCTIONS;  // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
-    Text _pauseMessage;                 // Text afficher par dessus toute la scene
+    Text _messageOnShader;                 // Text afficher par dessus toute la scene
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -143,7 +145,7 @@ private:
     static enum AppState { RUNNING, PAUSED, BOSS_KILLED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application
 
-    Tool _currentTool = BUILD;
+    TOOL _currentTool = BUILD;
 
     long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
     long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
@@ -191,6 +193,12 @@ public:
     void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
     void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
+
+    // Game Handler
+    void manageBossHeight();
+    void handleBossMovingDown();                        //
+    void handleBossDeath();
+    void handleBatCreation();
 
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map

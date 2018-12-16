@@ -122,14 +122,15 @@ void Game::initTexts()
     // Font
     if (!_fontInvasion2000.loadFromFile("INVASION2000.TTF"))
         quitApplication();
-
+    
     // Text Instructions
-    _pauseMessage.setFont(_fontInvasion2000);
-    _pauseMessage.setCharacterSize(36);                // In pixels
-    _pauseMessage.setFillColor(Color(255, 255, 255));  // White
-    _pauseMessage.setOutlineColor(Color(64, 64, 64));  // Dark grey
-    _pauseMessage.setOutlineThickness(3);
-    _pauseMessage.setPosition(32, 32);
+    _messageOnShader.setFont(_fontInvasion2000);
+    _messageOnShader.setCharacterSize(36);                // In pixels
+    _messageOnShader.setFillColor(Color(255, 255, 255));  // White
+    _messageOnShader.setOutlineColor(Color(64, 64, 64));  // Dark grey
+    _messageOnShader.setOutlineThickness(3);
+    _messageOnShader.setPosition(32, 32);
+    _messageOnShader.setString(STR_INSTRUCTIONS); 
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);

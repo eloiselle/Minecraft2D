@@ -78,9 +78,16 @@ void Game::handlePausing()
 {
     switch (_appState)
     {
-    case Game::RUNNING:         _appState = PAUSED;             break;
-    case Game::PAUSED:          _appState = RUNNING;            break;
-    case Game::BOSS_KILLED:     init();                         break;
+    case Game::RUNNING:         
+        _appState = PAUSED;             
+        break;
+    case Game::PAUSED:          
+        _appState = RUNNING;            
+        break;
+    case Game::BOSS_KILLED:     
+        init();       
+        _appState = RUNNING;
+        break;
     default:        break;
     }
 }
@@ -125,7 +132,6 @@ void Game::handleKeypress()
         _currentTool = BUILD;
         _player.setNoWeapon(_frameRun);
     }
-
     if (Keyboard::isKeyPressed(Keyboard::Num2))
     {
         _currentTool = UZI;
@@ -160,6 +166,11 @@ void Game::handleKeypress()
     {
         _currentTool = HOMING;
         _player.setHoming(_frameRun);
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Num9))
+    {
+        _currentTool = SPHERE_SHIELD;
+        _player.setNoWeapon(_frameRun);
     }
 }
 

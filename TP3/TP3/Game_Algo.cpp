@@ -42,17 +42,10 @@ void Game::manageMapExpansion()
         _map.randomizeLine(_map.nbLine() - 2);
         _map.fillLine(_map.nbLine() - 1, HARD_BLOCK);
 
-        if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
-        {
-            // Create new bat on last line
-            int l = _map.nbLine() - 2;
-            int c = (rand() % (_map.nbCol() - 5)) + 3;
-            _bats.push_back(Crawler());
-            _bats.back().setPositionInGrid(c, l);
-            _map.at(l, c).setType(EMPTY_BLOCK);
-        }
+        handleBatCreation();
     }
 }
+
 
 // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
@@ -64,37 +57,14 @@ void Game::manageBoss()
 {
     if (_boss.isDead())
     {
-        _appState = BOSS_KILLED;
-        _pauseMessage.setString("Boss killed !! :)");
-        _score += SCORE_BOSS_KILLED;
+        handleBossDeath();
         return;
     }
 
-    if (_boss.isWalking())
-        _boss.move();   // Descente avec le joueur
-
-    if (_boss.getGridLine() < _player.getGridLine() - 9)
-
-    {
-        _boss.setDirection(DOWN);
-        _boss.startMoving();
-
-        for (int c = 1; c < _map.nbCol() - 1; c++)
-        {
-            _map.at(_boss.getGridLine() + 3, c).setType(EMPTY_BLOCK);
-        }
-
-
-    }
-    else
-    {
-        _boss.stopMoving();
-    }
-
+    manageBossHeight();
     moveBoss();     // Deplacement horizontal et legere variation verticale
-
-
 }
+
 
 
 void Game::manageFoes()
@@ -143,7 +113,9 @@ bool Game::toolIsAShooter()
 
 void Game::manageSphereShield()
 {
-    // Shield
+    if (_currentTool != SPHERE_SHIELD)
+        return;
+
     for (size_t i = 0; i < NB_SHIELD; i++)
     {
         // Yoyo : Example d'utilisation de VectorAngle

@@ -122,10 +122,13 @@ void Game::drawMovableObjects()
     }
 
     // Bullet Shield
-    for (size_t i = 0; i < NB_SHIELD; i++)
+    if (_currentTool == SPHERE_SHIELD)
     {
-        _bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
-        _window.draw(_bulletShape);
+        for (size_t i = 0; i < NB_SHIELD; i++)
+        {
+            _bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
+            _window.draw(_bulletShape);
+        }
     }
 
     //Bullets
@@ -158,15 +161,22 @@ void Game::drawThingsDirectlyOnTheScreen()
     }
 
     // Ecran de pause
-    if (_appState == PAUSED)
+    switch (_appState)
     {
-        // Shader
-        _window.draw(_shader);
-
-        // Text Overlay
-        _pauseMessage.setString(_message);
-        _window.draw(_pauseMessage);
+    case Game::RUNNING:
+        break;
+    case Game::PAUSED:
+        _window.draw(_shader); // Shader
+        _window.draw(_messageOnShader);
+        break;
+    case Game::BOSS_KILLED:
+        _window.draw(_shader); // Shader
+        _window.draw(_messageOnShader);
+        break;
+    default:
+        break;
     }
+
     _debugInfo.setString(_debug);
     _window.draw(_debugInfo);
     _debug = "";
