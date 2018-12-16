@@ -2,28 +2,17 @@
 #include "Killable.h"
 
 // Get
-float Killable::getHp() { return _hp; }
-float Killable::getHpMax() { return _hpMax; }
-int Killable::getTimeOfDeath() { return _timeOfDeath; }
+int Killable::getHp() { return _hp; }
+int Killable::getHpMax() { return _hpMax; }
 
 bool Killable::isAlive() { return _hp > 0; }
-bool Killable::isDead() { return _hp == 0; }
+bool Killable::isDead() { return _hp <= 0; }
 
 // Set
 void Killable::setHp(int hp) { _hp = hp; }
 void Killable::setHpMax(int hpMax) { _hpMax = hpMax; }
 
-void Killable::loseHp(int hpLost)
-{
-    _hp = MAX(0, _hp - hpLost);
-}
-
-// Fait mourir le personnage
-void Killable::die(int timeOfDeath)
-{
-    if (_isAlive)
-    {
-        _isAlive = false;
-        _timeOfDeath = timeOfDeath;
-    }
-}
+// Methods
+void Killable::loseHp(int hpLost) { _hp = MAX(0, _hp - hpLost); }
+void Killable::die() { _hp = 0; }
+void Killable::refillHp() { _hp = _hpMax; }

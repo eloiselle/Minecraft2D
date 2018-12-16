@@ -1,13 +1,20 @@
 #pragma once
 #include "Game.h"
 
+void Game::handlePlayerDeath()
+{
+    _appState = GAME_OVER;
+    _messageOnShader.setString(STR_GAME_OVER);
+}
+
+
 void Game::manageBossHeight()
 {
     // Descente du boss
     if (_boss.isWalking())
         _boss.move();   // Descente avec le joueur
 
-    if (_boss.getGridLine() < _player.getGridLine() - 9)
+    if (_boss.getGridLine() < _player.getGridLine() - NB_LINE_BETWEEN_BOSS_AND_PLAYER)
         handleBossMovingDown();
     else
         _boss.stopMoving();
@@ -16,8 +23,8 @@ void Game::manageBossHeight()
 
 void Game::handleBossDeath()
 {
-    _appState = BOSS_KILLED;
     _score += SCORE_BOSS_KILLED;
+    _appState = BOSS_KILLED;
     _messageOnShader.setString(STR_BOSS_KILLED);
 }
 

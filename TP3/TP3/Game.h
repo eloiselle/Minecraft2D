@@ -40,6 +40,7 @@ Roll the mousewheel to zoom-in/zoom-out
 Click on the map to modify it.)";
 
 constexpr const char* STR_BOSS_KILLED = "Boss Killed";
+constexpr const char* STR_GAME_OVER = "GAME OVER";
 
 // Window
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
@@ -48,9 +49,6 @@ constexpr int MIN_WINDOW_HEIGHT = 300;                      // Hauteur minimum e
 constexpr int DEF_WINDOW_WIDTH = 1024;                      // Largeur en pixel de l'ecran par defaut
 constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel de l'ecran par defaut
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
-
-// Size
-//constexpr pixel_t TILE_SIZE = 32;                         // Taille des tiles normaux
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -60,7 +58,9 @@ constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre le joueur et le bas de la map pour aggrandir
+constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 9;          //
 
+// Character size
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
 constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
@@ -71,9 +71,9 @@ constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les s
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
 
 // Score
-constexpr int SCORE_BOSS_KILLED = 10000; 
-constexpr int SCORE_BAT = 100;
-constexpr int SCORE_BLOCK = 10;
+constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
+constexpr int SCORE_BAT = 100;                              // Bonus de score pour tuer un bat
+constexpr int SCORE_BLOCK = 10;                             // Bonus de score pour detruire un block
 
 // OPTIONS
 constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
@@ -142,7 +142,8 @@ private:
     Music _music;						// musique
 
     // Etat
-    static enum AppState { RUNNING, PAUSED, BOSS_KILLED };                           // Etat possibles de application
+    static enum AppState { RUNNING, PAUSED, BOSS_KILLED, GAME_OVER };   // Etat possibles de application
+    string _appStateName[4] = { "Running", "Paused", "Boss Killed", "Game Over" };
     AppState _appState = RUNNING;       // Etat actuel de application
 
     TOOL _currentTool = BUILD;
@@ -195,6 +196,7 @@ public:
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
     // Game Handler
+    void handlePlayerDeath();
     void manageBossHeight();
     void handleBossMovingDown();                        //
     void handleBossDeath();

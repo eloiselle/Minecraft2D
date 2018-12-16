@@ -14,6 +14,7 @@ Priorities: (High to Low)
     Debug       : Enlever le nombre de Bullet dans _debug
     Bullet      : Les bullet doivent memoriser les damage de l'arme (E)
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
+    View        : Remettre une facon de changer la view
 
     Meta        : Timer qui compte en descendant (A)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)

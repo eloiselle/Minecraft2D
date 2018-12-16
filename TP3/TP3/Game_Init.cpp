@@ -241,6 +241,9 @@ void Game::initViews()
 
 void Game::initPlayer()
 {
+    _player.setHpMax(3);
+    _player.setHp(3);
+
     _player.setPositionInGrid(15, 4);
     _player.setSpeed(4);
     _map.at(_player.getGridLine(), _player.getGridCol());

@@ -31,8 +31,15 @@ void Game::mainLoop()
 
 void Game::managePlayer()
 {
+    if (_player.isDead())
+        handlePlayerDeath();
+
     managePlayerJump();
+
+    if (areOnTheSameSquare(_player, _boss))
+        _player.loseHp(1);
 }
+
 
 void Game::manageMapExpansion()
 {
@@ -95,8 +102,12 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
     if (c->isWalking())
         c->move();
 
-    // Nettoyage de bat trop haut dans la map
-    if (c->getExactY() < _boss.getExactY() - TILE_SIZE * 5)
+    if (areOnTheSameSquare(_player, *c))
+    {
+        _player.loseHp(1);
+        c = _bats.erase(c);
+    }
+    else if (c->getExactY() < _boss.getExactY() - TILE_SIZE * 5)// Nettoyage de bat trop haut dans la map
         c = _bats.erase(c);
     else
         c++;

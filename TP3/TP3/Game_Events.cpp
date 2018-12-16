@@ -88,6 +88,10 @@ void Game::handlePausing()
         init();       
         _appState = RUNNING;
         break;
+    case Game::GAME_OVER:
+        init();
+        _appState = RUNNING;
+        break;
     default:        break;
     }
 }

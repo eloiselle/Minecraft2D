@@ -47,7 +47,9 @@ void Game::updateWindowTitle()
 
     _extraTitle += toolName[_currentTool];
 
-    _extraTitle += " Score : " + to_string(_score);
+    _extraTitle += "        Lives : " + to_string((int)_player.getHp()) + "/" + to_string((int)_player.getHpMax());
+    _extraTitle += "        Game State : " + _appStateName[_appState];
+    _extraTitle += "        Score : " + to_string(_score);
 
     if (_extraTitle != "")
         _extraTitle = " : " + _extraTitle;
@@ -165,14 +167,18 @@ void Game::drawThingsDirectlyOnTheScreen()
     // Ecran de pause
     switch (_appState)
     {
-    case Game::RUNNING:
+    case RUNNING:
         break;
-    case Game::PAUSED:
-        _window.draw(_shader); // Shader
+    case PAUSED:
+        _window.draw(_shader);
         _window.draw(_messageOnShader);
         break;
-    case Game::BOSS_KILLED:
-        _window.draw(_shader); // Shader
+    case BOSS_KILLED:
+        _window.draw(_shader);
+        _window.draw(_messageOnShader);
+        break;
+    case GAME_OVER:
+        _window.draw(_shader);
         _window.draw(_messageOnShader);
         break;
     default:

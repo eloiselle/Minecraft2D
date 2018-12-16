@@ -13,22 +13,20 @@ class Killable
 protected:
     int _hp;
     int _hpMax;
-    bool _isAlive;
-    unsigned int _timeOfDeath;
 
 public:
-    Killable() : _hp(5), _hpMax(5), _isAlive(true), _timeOfDeath(0) {}; // Constructeur
+    Killable() : _hp(5), _hpMax(5) {};  // Constructeur
 
-    float getHp();                 // Retourne les HP
-    float getHpMax();              // Retourne le nombre de HP Max
-    int getTimeOfDeath();          // Retourne le moment de la mort
+    int getHp();                        // Retourne les HP
+    int getHpMax();                     // Retourne le nombre de HP Max
 
-    void setHp(int hp);            // Change les HP
-    void setHpMax(int hpMax);      // Change le nombre de HP max
+    void setHp(int hp);                 // Change les HP
+    void setHpMax(int hpMax);           // Change le nombre de HP max
 
-    void loseHp(int hpLost);       // Fait perdre des HP
-    void die(int timeOfDeath);     // Le personnage meurt
+    void loseHp(int hpLost);            // Fait perdre des HP
+    void die();                         // Le personnage meurt
+    void refillHp();
 
-    bool isAlive();                // Retourne si est en vie
-    bool isDead();                 // Retourne si est mort
+    bool isAlive();                     // Retourne si est en vie
+    bool isDead();                      // Retourne si est mort
 };
