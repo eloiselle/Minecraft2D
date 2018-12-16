@@ -14,7 +14,7 @@ Goal  : Wrapper de Map<char> qui contient les positions de depart et arrivee
 #include "Block.h"
 using namespace std;
 
-constexpr int NBR_EMPTY_LINE_ON_TOP = 5;
+constexpr int NBR_EMPTY_LINE_ON_TOP = 12;
 
 class WorldMap : public ResizableMap<Block>, FileOpener {
 private:

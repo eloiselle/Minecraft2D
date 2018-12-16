@@ -144,10 +144,6 @@ void Game::initTexts()
 // Initialize les shapes
 void Game::initShapes()
 {
-    //_playerShape.setFillColor(Color::Green);
-    //_playerShape.setSize(Vector2f(3, 3));
-    //_playerShape.setOrigin(2, 2);
-
     // Bullet
     _bulletShape.setRadius(2);
     _bulletShape.setOrigin(1, 1);
@@ -244,9 +240,13 @@ void Game::initPlayer()
     _player.setHpMax(3);
     _player.setHp(3);
 
-    _player.setPositionInGrid(15, 4);
+    _player.setPositionExact(
+        PLAYER_START_C * TILE_SIZE + HALF_TILE_SIZE,
+        PLAYER_START_L * TILE_SIZE + TILE_SIZE - 1);
+
     _player.setSpeed(4);
-    _map.at(_player.getGridLine(), _player.getGridCol());
+    _map.at(_player.getGridLine(), _player.getGridCol()) = EMPTY_BLOCK;
+    _map.at(_player.getGridLine() + 1, _player.getGridCol()) = SOFT_BLOCK;
 }
 
 void Game::initShield()
@@ -275,11 +275,11 @@ void Game::initFoes()
         _bats.push_back(Crawler());
     }
 
-    int position_x = 4;
+    int position_x = SPACE_BETWEEN_BATS;
 
     for (list<Crawler>::iterator it = _bats.begin(); it != _bats.end(); it++)
     {
-        it->setPositionInGrid(position_x, 1);
-        position_x += 6;
+        it->setPositionInGrid(position_x, NBR_EMPTY_LINE_ON_TOP / 2);
+        position_x += SPACE_BETWEEN_BATS;
     }
 }
