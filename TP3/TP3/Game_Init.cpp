@@ -87,11 +87,17 @@ void Game::initSprites()
     }
 
     // Bat
-    _batImage.createMaskFromColor(Color(255, 255, 255));
-    _batTexture.update(_batImage);
-    _batSprite.setTextureRect(IntRect(64, 0, TILE_SIZE, TILE_SIZE));
-    _batSprite.setTexture(_batTexture);
-    _batSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+    for (size_t i = 0; i < 4; i++)
+    {
+        for (size_t j = 0; j < 4; j++)
+        {
+            _batImage.createMaskFromColor(Color(255, 255, 255));
+            _batTexture.update(_batImage);
+            _batSprite[i][j].setTextureRect(IntRect(TILE_SIZE * i, TILE_SIZE * j, TILE_SIZE, TILE_SIZE));
+            _batSprite[i][j].setTexture(_batTexture);
+            _batSprite[i][j].setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+        }
+    }
 
     // Map
     for (size_t version = 0; version < 8; version++)
@@ -260,7 +266,7 @@ void Game::initShield()
 
 void Game::initBoss()
 {
-    _boss.setPositionInGrid(_map.nbCol() / 2, 2);
+    _boss.setPositionInGrid(_map.nbCol() / 2, 3);
     _boss.setSpeed(5);
     _boss.setHpMax(100);
     _boss.setHp(100);

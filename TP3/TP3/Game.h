@@ -58,7 +58,7 @@ constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre le joueur et le bas de la map pour aggrandir
-constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 9;          //
+constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 8;          //
 
 // Character size
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
@@ -130,9 +130,9 @@ private:
     int _jSprite = 0;					// indice j du tableau de sprites
     int _motion = 0;                    // quelle partie du mouvement
 
-    Image _batImage;                    // Image du robot pour modification de transparence
-    Texture _batTexture;                // Texture du robot
-    Sprite _batSprite;                  // Sprite du robot
+    Image _batImage;                    // Image du bat pour modification de transparence
+    Texture _batTexture;                // Texture du bat
+    Sprite _batSprite[4][4];            // Sprite du bat
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 

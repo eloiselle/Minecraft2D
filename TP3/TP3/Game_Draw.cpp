@@ -100,10 +100,10 @@ void Game::drawMovableObjects()
 
     for (Crawler& c : _bats)
     {
-        _batSprite.setPosition(
+        _batSprite[_frameRun / 5 % 4][c.getDirection()].setPosition(
             c.getExactX(),
             c.getExactY());
-        _window.draw(_batSprite);
+        _window.draw(_batSprite[_frameRun / 5 % 4][c.getDirection()]);
     }
 
     // Player
@@ -113,8 +113,10 @@ void Game::drawMovableObjects()
     // Boss
     if (_boss.isAlive())
     {
-        _batSprite.setPosition(_boss.getExactX(), _boss.getExactY());
-        _window.draw(_batSprite);
+        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(2,2));
+        _batSprite[_frameRun / 5 % 4][2].setPosition(_boss.getExactX(), _boss.getExactY());
+        _window.draw(_batSprite[_frameRun / 5 % 4][2]);
+        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(1, 1));
     }
 
     // Bullet Shield
