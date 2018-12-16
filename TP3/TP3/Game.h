@@ -39,8 +39,14 @@ Roll the mousewheel to zoom-in/zoom-out
 
 Click on the map to modify it.)";
 
-constexpr const char* STR_BOSS_KILLED = "Boss Killed";
-constexpr const char* STR_GAME_OVER = "GAME OVER";
+constexpr const char* STR_BOSS_KILLED = 
+R"(Boss Killed :D
+
+Press[P] to start a new game)";
+constexpr const char* STR_GAME_OVER = 
+R"(GAME OVER :(
+
+Press[P] to start a new game)";
 
 // Window
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
@@ -149,7 +155,7 @@ private:
     string _appStateName[4] = { "Running", "Paused", "Boss Killed", "Game Over" };
     AppState _appState = RUNNING;       // Etat actuel de application
 
-    TOOL _currentTool = BUILD;
+    TOOL _currentTool;                  // Arme actuellement utiliser
 
     long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
     long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
@@ -157,7 +163,7 @@ private:
 
     // Controles
     float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
-    bool _bulletWillVanish;             //
+    bool _bulletWillVanish;             // Si la balle va disparaitre
 public:
 
     // Init
@@ -168,11 +174,10 @@ public:
     void initTexts();                   // Initialization des polices de caracteres
     void initShapes();                  // Initialization des formes geometriques
     void initViews();                   // Initialization des view
-    void initPlayer();                  //
-    void initShield();                  //
-    void initBoss();                    // 
+    void initPlayer();                  // Initialization du joueur
+    void initShield();                  // Initialization du bouclier
+    void initBoss();                    // Initialization du Boss
     void initFoes();                    // Initialization des ennemis
-    void initGameElements();            // Initialization des elements qui se deplacent
     void initWorldMap();                // Initialization du labyrinthe
     void initMusic();                   // Initialization de la musique
     void initSounds();                  // Initialization des effet sonores
@@ -193,17 +198,17 @@ public:
     void handleMouseWheelMoved();                       // Handler de la roulette de souris
     void handleMouseButtonPressed();                    // Handler des boutons de souris
     bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
-    void shootBullet(Character*);                                 // Tire une balle
+    void shootBullet(Character*);                       // Tire une balle
     void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
     void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
     // Game Handler
-    void handlePlayerDeath();
-    void manageBossHeight();
-    void handleBossMovingDown();                        //
-    void handleBossDeath();
-    void handleBatCreation();
+    void handlePlayerDeath();                           // Gere quand le joueur meurt
+    void manageBossHeight();                            // Gere la hauteur du boss dans la map
+    void handleBossMovingDown();                        // Gere quand le boss doit descendre dans la map
+    void handleBossDeath();                             // Gere quand le boss meurt
+    void handleBatCreation();                           // Gere la creation de chauve-souris
 
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map
@@ -214,19 +219,19 @@ public:
     bool isInWindow(Vector2i & v) const;                // Retourne si l'objet est a l'interieur de la fenetre
     bool isMouseInMap()const;                           // Retourne si la souris est dans la map
     void updateViewlessMouseCoord();                    // Calcule la position interne de la souris
-    bool canTeleportAtMouse();                          //
+    bool canTeleportAtMouse();                          // Verify si on peux se teleporter sur la souris
 
     // Game Logic
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
-    void manageBoss();                                  //
+    void manageBoss();                                  // Gere le boss
     void manageFoes();                                  // Gere les ennemis
-    void manageOneFoe(list<Crawler>::iterator& c);      //
-    void manageMapExpansion();                          //
+    void manageOneFoe(list<Crawler>::iterator& c);      // Gere un seul ennemi
+    void manageMapExpansion();                          // Gere quand on doit agrandir la map
 
-    void manageSphereShield();
+    void manageSphereShield();                          // Gere le bouclier
     void manageBullets();                               // Gere les projectiles
-    bool toolIsAShooter();                              //
+    bool toolIsAShooter();                              // Regarde si _currentTool lance des bullets
 
 
     // Edge detection
@@ -245,13 +250,14 @@ public:
     void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);    // TopDownCharacter essaye de se deplacer
     void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
     void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
-    void collisionBulletFoes(Bullet& b);                //
+    void collisionBulletFoes(Bullet& b);                // Check les collision et les bullet et les ennemis
 
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window
     void updateViews();                                 // met a jour les view
     void updateWindowTitle();                           // Met a jour le titre de la fenetre
+    void drawBossHealthBar();                           // Affiche la barre de hp du boss
     void drawThingsDirectlyOnTheScreen();               // Affiche les elements non affecter par la view
     void drawGrid();                                    // Affiche la grille de application
     void drawMovableObjects();                          // Affiche les objets mobiles

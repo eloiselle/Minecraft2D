@@ -130,8 +130,6 @@ void Game::drawMovableObjects()
     }
 
     //Bullets
-    _debug += "\r\nB: " + to_string(_bullets.size());
-
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
         _bulletShape.setPosition(b->getExactX(), b->getExactY());
@@ -152,41 +150,36 @@ void Game::drawMovableObjects()
     }
 }
 
-// Affiche les objets qui ne sont pas affecter par la view
-void Game::drawThingsDirectlyOnTheScreen()
+void Game::drawBossHealthBar()
 {
-    _window.setView(_view[NULL_VIEW]);
     // Boss health bar
     if (_boss.isAlive())
     {
-        float hpRatio = _boss.getHp() / _boss.getHpMax();
-        int largeurEcran = _map.nbCol() * TILE_SIZE - 6;
-        _bossHealthBar.setSize(Vector2f(largeurEcran * hpRatio, 16));
+        float hpRatio = (float)_boss.getHp() / _boss.getHpMax();
+        _bossHealthBar.setSize(Vector2f(
+            (MAP_WIDTH_PIXELS - 6) * hpRatio, // Le 6 est pour 2 fois la thickness de la bar
+            16));
         _bossHealthBar.setPosition(3, 3);
         _window.draw(_bossHealthBar);
     }
 
-    // Ecran de pause
-    switch (_appState)
+}
+
+// Affiche les objets qui ne sont pas affecter par la view
+void Game::drawThingsDirectlyOnTheScreen()
+{
+    _window.setView(_view[NULL_VIEW]);
+
+    drawBossHealthBar();
+
+    // Affichage du shader
+    if( _appState != RUNNING)
     {
-    case RUNNING:
-        break;
-    case PAUSED:
         _window.draw(_shader);
         _window.draw(_messageOnShader);
-        break;
-    case BOSS_KILLED:
-        _window.draw(_shader);
-        _window.draw(_messageOnShader);
-        break;
-    case GAME_OVER:
-        _window.draw(_shader);
-        _window.draw(_messageOnShader);
-        break;
-    default:
-        break;
     }
 
+    // Debug info
     _debugInfo.setString(_debug);
     _window.draw(_debugInfo);
     _debug = "";

@@ -243,6 +243,9 @@ void Game::initViews()
 
 void Game::initPlayer()
 {
+    _currentTool = BULLET_HELL;
+    _player.setBulletHell(0);
+
     _player.setHpMax(3);
     _player.setHp(3);
 
