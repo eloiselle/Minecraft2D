@@ -9,7 +9,7 @@ Game::Game()
 {
     // initWindow() n'est pas dans init pour pouvoir faire un reset
     // avec init() sans reconstruire la fenetre
-    initWindow(); 
+    initWindow();
     init();
 }
 
@@ -122,7 +122,7 @@ void Game::initTexts()
     // Font
     if (!_fontInvasion2000.loadFromFile("INVASION2000.TTF"))
         quitApplication();
-    
+
     // Text Instructions
     _messageOnShader.setFont(_fontInvasion2000);
     _messageOnShader.setCharacterSize(36);                // In pixels
@@ -130,7 +130,7 @@ void Game::initTexts()
     _messageOnShader.setOutlineColor(Color(64, 64, 64));  // Dark grey
     _messageOnShader.setOutlineThickness(3);
     _messageOnShader.setPosition(32, 32);
-    _messageOnShader.setString(STR_INSTRUCTIONS); 
+    _messageOnShader.setString(STR_INSTRUCTIONS);
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
@@ -159,10 +159,13 @@ void Game::initShapes()
     _mouseCoord.setFillColor(Color::Red);
     _mouseCoord.setRadius(2);
     _mouseCoord.setOrigin(2, 2);
+
     // Aiming Sight
-    _mouseCursor.setFillColor(Color::Blue);
-    _mouseCursor.setRadius(2);
-    _mouseCursor.setOrigin(2, 2);
+    _aimingSight.setFillColor(Color::Transparent);
+    _aimingSight.setOutlineColor(Color(0, 255, 255, 64));
+    _aimingSight.setOutlineThickness(1);
+    _aimingSight.setRadius(TILE_SIZE / 2);
+    _aimingSight.setOrigin(TILE_SIZE / 2, TILE_SIZE / 2);
 
     // Mouse Square
     int tk = 3; // thickness

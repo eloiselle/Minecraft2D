@@ -115,7 +115,7 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     CircleShape _bulletShape;           // Cercle rouge
-    CircleShape _mouseCursor;           // 
+    CircleShape _aimingSight;           // 
     RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
 
     // Sprites

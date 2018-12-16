@@ -88,13 +88,7 @@ void Game::drawMovableObjects()
             _mouseMagnet.getGridLine() * TILE_SIZE);
         _window.draw(_mouseSquare);
     }
-    if (toolIsAShooter())
-    {
-        _mouseCursor.setPosition(
-            _mouseCursor.getPosition().x,
-            _mouseCursor.getPosition().y);
-        _window.draw(_mouseCursor);
-    }
+
 
     // Player
     _playerSprites[_iSprite][_jSprite].setPosition(
@@ -143,6 +137,14 @@ void Game::drawMovableObjects()
         //    to_string(b->getExactX()) + " " +
         //    to_string(b->getExactY()) + " " +
         //    to_string(b->getLength());
+    }
+
+    if (toolIsAShooter())
+    {
+        _aimingSight.setPosition(
+            _mouseCoord.getPosition().x,
+            _mouseCoord.getPosition().y);
+        _window.draw(_aimingSight);
     }
 }
 

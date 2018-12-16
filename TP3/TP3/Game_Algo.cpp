@@ -105,8 +105,22 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
 
 bool Game::toolIsAShooter()
 {
-    return (_currentTool != BUILD
-        || _currentTool != SLOW_MO);
+    switch (_currentTool)
+    {
+    case BUILD:    
+    case SLOW_MO:    
+    case SPHERE_SHIELD:
+        return false;       break;
+    case UZI:    
+    case ASSAULT:    
+    case SNIPER:    
+    case SHOT_GUN:    
+    case BULLET_HELL:    
+    case HOMING:
+        return true;        break;
+    default:                break;
+    }
+
 }
 
 
