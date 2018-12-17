@@ -1,16 +1,17 @@
 /*****************************************************************************
-File  : Foe.cpp
+File  : Boss.cpp
 Author: Anthony Cote
-Date  : 2017-01-01
+Date  : 2018-12-17
 Goal  : Defini les ennemis du joueur
 ******************************************************************************/
 
 #pragma once
 #include "pch.h"
+#include "Crawler.h"
 
-class Foe
+class Boss : public Crawler
 {
 public:
-    Foe() {};               // Constructeur
-    Foe(const Foe& foe);    // Copieur
+    Boss() {};               // Constructeur
+    Boss(const Boss& boss);    // Copieur
 };

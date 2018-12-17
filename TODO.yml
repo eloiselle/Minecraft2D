@@ -1,18 +1,16 @@
 
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
-    Foes        : Changer image de bat (animation et direction) (C)
     Foes        : Changer image de _boss (C)
     Player      : Implanter les animations de WaddleDoo (C)
-    State       : Faire un ecran de fin quand _appState == BOSS_KILLED (A)
-    Boss        : Faire que le boss lance des bullet
+    Boss        : Faire que le boss lance des bullet (A)
     Bullet      : Detecter les collision de bullet avec le joueur (A)
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
     Weapon      : Bulletshield  : Implanter les collisions (E)
     Weapon      : Homing        : appeller Aim() frequemment (E)
     Weapon      : Explosion qui tire dans toutes les directions avec un grod delai (E)
-    Debug       : Enlever le nombre de Bullet dans _debug
     Bullet      : Les bullet doivent memoriser les damage de l'arme (E)
+    Map         : Faire rapetisser la map (A)
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
     View        : Remettre une facon de changer la view
 
@@ -48,6 +46,7 @@ Final : 20 décembre à 8h30
             Delay
             Angle
             Constexpr
+            DataStructures: Pair Tuple Set Tree HashMap Heap AssocMap/Dict Graph
         Conclusion
 
 

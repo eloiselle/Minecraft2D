@@ -12,13 +12,12 @@ Goal  : Personnage controlé par l'ordinateur
 #include <SFML/Audio.hpp>
 
 #include "TopDownCharacter.h"
-#include "Foe.h"
 #include "ResizableMap.hpp"
 
 enum AI_Move { NONE, RANDOM, RANDOM_NOT_BACK, BACK_AND_FORTH, ALWAYS_LEFT, ALWAYS_RIGHT };
 enum AI_Frequency { EVERY_MEET_WALL, EVERY_SQUARE, EVERY_SECOND };
 
-class Crawler : public TopDownCharacter, public Foe
+class Crawler : public TopDownCharacter
 {
 public:
     Crawler();

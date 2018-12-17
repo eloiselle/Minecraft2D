@@ -11,8 +11,8 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
-#include "TopDownCharacter.h"
 #include "Crawler.h"
+#include "Boss.h"
 
 using namespace std;
 using namespace sf;
@@ -98,7 +98,7 @@ private:
     VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
     list<Crawler> _bats;                // Liste des chauves souris-enemies
-    Crawler _boss;                      // Boss
+    Boss _boss;                         // Boss
     unsigned int _score;                // Score du joueur
 
     // Window
