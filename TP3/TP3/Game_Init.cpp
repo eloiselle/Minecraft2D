@@ -151,11 +151,17 @@ void Game::initTexts()
 void Game::initShapes()
 {
     // Bullet
-    _bulletShape.setRadius(2);
-    _bulletShape.setOrigin(1, 1);
-    _bulletShape.setFillColor(Color::White);
-    _bulletShape.setOutlineColor(Color::Cyan);
-    _bulletShape.setOutlineThickness(1);
+    _bulletShape[UNFRIENDLY].setRadius(2);
+    _bulletShape[UNFRIENDLY].setOrigin(1, 1);
+    _bulletShape[UNFRIENDLY].setFillColor(Color::Red);
+    _bulletShape[UNFRIENDLY].setOutlineColor(Color(128,0,0));
+    _bulletShape[UNFRIENDLY].setOutlineThickness(1);
+
+    _bulletShape[FRIENDLY].setRadius(2);
+    _bulletShape[FRIENDLY].setOrigin(1, 1);
+    _bulletShape[FRIENDLY].setFillColor(Color::White);
+    _bulletShape[FRIENDLY].setOutlineColor(Color::Cyan);
+    _bulletShape[FRIENDLY].setOutlineThickness(1);
 
     // Coord de la souris sans la view
     _mouseCoord.setFillColor(Color::Red);
@@ -271,8 +277,11 @@ void Game::initBoss()
 {
     _boss.setPositionInGrid(_map.nbCol() / 2, 3);
     _boss.setSpeed(5);
+
     _boss.setHpMax(100);
     _boss.setHp(100);
+
+    _boss.setWeaponBoss(0);
 }
 
 // Initialise Foes

@@ -81,10 +81,21 @@ void Weapon::setBulletHell(int _frameRun)
 
 void Weapon::setHoming(int _frameRun)
 {
+    _friendly = false;
     _nbBulletsFired = 1;
     _accuracy = 60;
     _totalDelay = 3 * _delayMultiplier;
     _bulletSpeed = 1;
+    _damage = 1;
+    delayInit(_frameRun, _totalDelay);
+}
+
+void Weapon::setWeaponBoss(int _frameRun)
+{
+    _nbBulletsFired = 1;
+    _accuracy = 1;
+    _totalDelay = 300 * _delayMultiplier;
+    _bulletSpeed = 0.5;
     _damage = 1;
     delayInit(_frameRun, _totalDelay);
 }
@@ -104,6 +115,15 @@ int Weapon::getWeaponAccuracy() { return _accuracy; }
 int Weapon::getWeaponRateOfFire() { return _totalDelay; }
 float Weapon::getWeaponBulletSpeed() { return _bulletSpeed; }
 float Weapon::getWeaponDamage() { return _damage; }
+
+Bullet Weapon::getBullet()
+{
+    Bullet b;
+    b.setDamage(_damage);
+    b.setLength(_bulletSpeed);
+    b.setFriendly(_friendly);
+    return b;
+}
 
 //void Weapon::setWeaponName(string name) { _nameEquippedWeapon = name; }
 void Weapon::setWeaponNbBulletsFired(int nb) { _nbBulletsFired = nb; }

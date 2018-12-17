@@ -39,11 +39,11 @@ Roll the mousewheel to zoom-in/zoom-out
 
 Click on the map to modify it.)";
 
-constexpr const char* STR_BOSS_KILLED = 
+constexpr const char* STR_BOSS_KILLED =
 R"(Boss Killed :D
 
 Press[P] to start a new game)";
-constexpr const char* STR_GAME_OVER = 
+constexpr const char* STR_GAME_OVER =
 R"(GAME OVER :(
 
 Press[P] to start a new game)";
@@ -78,6 +78,9 @@ constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace en
 constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
+
+constexpr int NB_BOSS_BULLET = 180;
+constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -123,7 +126,9 @@ private:
     CircleShape _mouseCoord;            // Position de la souris qui ignore le changement fait par _view
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
-    CircleShape _bulletShape;           // Cercle rouge
+
+    static enum { UNFRIENDLY = 0, FRIENDLY };   // Si les balles blesse le joueur ou le boss
+    CircleShape _bulletShape[2];        // 
     CircleShape _aimingSight;           // 
     RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
 
@@ -209,6 +214,8 @@ public:
     void handleBossMovingDown();                        // Gere quand le boss doit descendre dans la map
     void handleBossDeath();                             // Gere quand le boss meurt
     void handleBatCreation();                           // Gere la creation de chauve-souris
+    void manageBossWeapon();
+    void bossShootBullet();
 
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map

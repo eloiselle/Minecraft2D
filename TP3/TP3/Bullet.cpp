@@ -32,10 +32,20 @@ void Bullet::setSpeed(float speed) { _speed = speed; }
 void Bullet::setDamage(int damage) { _damage = damage; }
 void Bullet::setTarget(Character * ch) { _target = ch; }
 
+void Bullet::setFriendly(bool friendly)
+{
+    _friendly = friendly;
+}
+
 float Bullet::getSpeed() { return _speed; }
 int Bullet::getDamage() { return _damage; }
 Character& Bullet::getTarget() { return *_target; }
 bool Bullet::getHoming() { return _target != nullptr; }
+
+bool Bullet::isFriendly()
+{
+    return _friendly;
+}
 
 void Bullet::play(sf::SoundBuffer & buff)
 {

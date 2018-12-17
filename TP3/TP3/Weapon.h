@@ -12,44 +12,47 @@ Goal  : TODO : Gere des pattern compliquer de bullet
 #include "Delay.h"
 //#include "AngleDegree.hpp"
 
-const enum TOOL { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO, HOMING, SPHERE_SHIELD };
-const string toolName[9] = { "Build", "Uzi", "Assault", "Sniper", "Shotgun", "BulletHell", "Slow-Mo", "Homing", "Sphere Shield" };
+const enum TOOL { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO, HOMING, SPHERE_SHIELD, BOSS };
+const string toolName[10] = { 
+    "Build", "Uzi", "Assault", "Sniper", "Shotgun",
+    "BulletHell", "Slow-Mo", "Homing", "Sphere Shield", "Boss" };
 
 class Weapon : public Delay
 {
 protected:
 
-    int _delayMultiplier = 1;	//Multiplicateur sur le délai
-    int _nbBulletsFired;
-    int _accuracy;				//Détermine une variation dans _angle
-    float _bulletSpeed;			//Vitesse des bullets
-    float _damage;				//Dommages
-    //string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
+    bool _friendly = false;     // Alliee du joueur
+    int _delayMultiplier = 1;	// Multiplicateur sur le délai
+    int _nbBulletsFired;           
+    int _accuracy;				// Détermine une variation dans _angle
+    float _bulletSpeed;			// Vitesse des bullets
+    float _damage;				// Dommages
 
 public:
-    void setWeapon(TOOL tool, int _frameRun);
-    void setNoWeapon(int _frameRun);
-    void setUzi(int _frameRun);
-    void setAssault(int _frameRun);
-    void setSniper(int _frameRun);
-    void setShotgun(int _framerun);
-    void setBulletHell(int _frameRun);
-    void setHoming(int _frameRun);
-    void setCustom(float, int, float, float, int);
-
-    //string getWeaponName();
-    int getWeaponNbBulletsFired();
-    int getWeaponAccuracy();
-    int getWeaponRateOfFire();
-    float getWeaponBulletSpeed();
-    float getWeaponDamage();
-
-    //void setWeaponName(string);
-    void setWeaponNbBulletsFired(int);
-    void setWeaponAccuracy(int);
-    void setWeaponRateOfFire(int);
-    void setWeaponBulletSpeed(float);
-    void setWeaponDamage(float);
+    void setWeapon(TOOL tool, int _frameRun);           //
+    void setNoWeapon(int _frameRun);                    //
+    void setUzi(int _frameRun);                         //
+    void setAssault(int _frameRun);                     //
+    void setSniper(int _frameRun);                      //
+    void setShotgun(int _framerun);                     //
+    void setBulletHell(int _frameRun);                  //
+    void setHoming(int _frameRun);                      //
+    void setWeaponBoss(int _frameRun);                  //
+    void setCustom(float, int, float, float, int);      //
+                                                        
+    int getWeaponNbBulletsFired();                      //
+    int getWeaponAccuracy();                            //
+    int getWeaponRateOfFire();                          //
+    float getWeaponBulletSpeed();                       //
+    float getWeaponDamage();                            //
+    Bullet getBullet();                                 //
+                                                        
+                                                        
+    void setWeaponNbBulletsFired(int);                  //
+    void setWeaponAccuracy(int);                        //
+    void setWeaponRateOfFire(int);                      //
+    void setWeaponBulletSpeed(float);                   //
+    void setWeaponDamage(float);                        //
 
     //void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
     //void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);

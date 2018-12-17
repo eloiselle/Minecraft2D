@@ -124,16 +124,16 @@ void Game::drawMovableObjects()
     {
         for (size_t i = 0; i < NB_SHIELD; i++)
         {
-            _bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
-            _window.draw(_bulletShape);
+            _bulletShape[FRIENDLY].setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
+            _window.draw(_bulletShape[FRIENDLY]);
         }
     }
 
     //Bullets
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
-        _bulletShape.setPosition(b->getExactX(), b->getExactY());
-        _window.draw(_bulletShape);
+        _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
+        _window.draw(_bulletShape[b->isFriendly()]);
         //_debug += "\r\n" +
         //    to_string(b->getDirectionDegree()) + " " +
         //    to_string(b->getExactX()) + " " +

@@ -16,6 +16,7 @@ Goal  : Projectiles
 class Bullet : public Entity, public VectorAngle
 {
 private:
+    bool _friendly = true;
     int _damage;
     float _speed;
 
@@ -34,11 +35,13 @@ public:
     void setSpeed(float);
     void setDamage(int);
     void setTarget(Character * ch);
+    void setFriendly(bool);
 
     float getSpeed();
     int getDamage();
     Character& getTarget();
     bool getHoming();
+    bool isFriendly();
 
     void play(sf::SoundBuffer & buff);
 };

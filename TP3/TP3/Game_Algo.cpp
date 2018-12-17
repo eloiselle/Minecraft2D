@@ -70,8 +70,10 @@ void Game::manageBoss()
 
     manageBossHeight();
     moveBoss();     // Deplacement horizontal et legere variation verticale
-}
 
+
+    manageBossWeapon();
+}
 
 
 void Game::manageFoes()
@@ -176,7 +178,11 @@ void Game::manageBullets()
         if (isInMap(*b))
         {
             collisionBulletBlock(*b);
-            collisionBulletFoes(*b);
+            if ( b->isFriendly())
+            {
+                collisionBulletFoes(*b);
+            }
+
         }
         else
             _bulletWillVanish = true;

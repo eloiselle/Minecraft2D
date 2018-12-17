@@ -42,6 +42,7 @@ void Game::collisionBulletFoes(Bullet& b)
         }
     }
     // Boss
+
     if (areOnTheSameSquare(b, _boss))
     {
         _bulletWillVanish = true;
