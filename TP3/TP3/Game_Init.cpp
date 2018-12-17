@@ -27,6 +27,7 @@ void Game::init()
 	initMusic();
 	initSounds();
 
+	_currentView == FOLLOW_Y;
     _frameRun = 0;
     _frameTotal = 0;
 }
@@ -43,7 +44,7 @@ void Game::initWindow()
     handleResizeWindow();
 
     // View
-    _window.setView(_view[CAMERA]);
+	_window.setView(_view[FOLLOW]);
 
     // Icon
     //_window.setIcon(image.GetWidth(), image.GetHeight(), image.GetPixelsPtr());
@@ -52,30 +53,23 @@ void Game::initWindow()
 // Initialize les sprites
 void Game::initSprites()
 {
-	// Load files
-	if (!_tileset.loadFromFile("img\\tiles.bmp"))
-		quitApplication();
-
-	if (!_spiderTexture.loadFromFile("img\\spider.bmp"))
-		quitApplication();
-	if (!_spiderImage.loadFromFile("img\\spider.bmp"))
+    // Load files
+    if (!_tileset.loadFromFile("img\\tiles.bmp"))
+        quitApplication();
+	if (!_spiderTexture.loadFromFile("img\\bat.bmp"))
+        quitApplication();
+	if (!_spiderImage.loadFromFile("img\\bat.bmp"))
 		quitApplication();
 
 	if (!_playerTexture.loadFromFile("img\\waddle_doo.bmp"))
 		quitApplication();
 	if (!_playerImage.loadFromFile("img\\waddle_doo.bmp"))
-		quitApplication();
+        quitApplication();
 
-	// Map
-	_tileSprite[EMPTY_BLOCK - 48] = initOneSprite(0, 2, _tileset);
-	_tileSprite[SOFT_BLOCK - 48] = initOneSprite(10, 5, _tileset);
-	_tileSprite[HARD_BLOCK - 48] = initOneSprite(0, 17, _tileset);
-	_tileSprite[VISITED - 48] = initOneSprite(13, 2, _tileset);
-	_tileSprite[CHECKPOINT - 48] = initOneSprite(5, 4, _tileset);
 
 	// Player
 	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 8; j++) // initialiser toutes les sprites
+		for (int j = 0; j < 9; j++) // initialiser toutes les sprites
 		{
 			_playerSprites[i][j] = initOneSprite(i, j, _playerTexture);
 			_playerImage.createMaskFromColor(Color(255, 255, 255));
@@ -94,6 +88,15 @@ void Game::initSprites()
     _spiderSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
     _spiderSprite.setTexture(_spiderTexture);
     _spiderSprite.setOrigin(Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+	// Map
+	for (size_t version = 0; version < 8; version++)
+	{
+		_tileSprite[EMPTY_BLOCK][version] = initOneSprite(0 + version, 0, _tileset);
+		_tileSprite[SOFT_BLOCK][version] = initOneSprite(7 + version, 5, _tileset);
+		_tileSprite[HARD_BLOCK][version] = initOneSprite(8 + version, 8, _tileset);
+		_tileSprite[VISITED][version] = initOneSprite(13 + version, 2, _tileset);
+		_tileSprite[INVALID_BLOCK][version] = initOneSprite(5 + version, 4, _tileset);
+	}
 }
 
 // Recupere un sprite a partir des parametres
@@ -135,21 +138,25 @@ void Game::initTexts()
 // Initialize les shapes
 void Game::initShapes()
 {
-    // _playerShape.setFillColor(Color::Green);
-    // _playerShape.setSize(Vector2f(8, 8));
-    // _playerShape.setOrigin(4, 4);
+	_playerShape.setFillColor(Color::Green);
+	_playerShape.setSize(Vector2f(3, 3));
+	_playerShape.setOrigin(2, 2);
 
     // Bullet
     _bulletShape.setRadius(2);
     _bulletShape.setOrigin(1, 1);
-    _bulletShape.setFillColor(Color::Red);
-    _bulletShape.setOutlineColor(Color(128, 0, 0));
+	_bulletShape.setFillColor(Color::White);
+	_bulletShape.setOutlineColor(Color::Cyan);
     _bulletShape.setOutlineThickness(1);
 
     // Coord de la souris sans la view
     _mouseCoord.setFillColor(Color::Red);
     _mouseCoord.setRadius(2);
     _mouseCoord.setOrigin(2, 2);
+	// Aiming Sight
+	_mouseCursor.setFillColor(Color::Blue);
+	_mouseCursor.setRadius(2);
+	_mouseCursor.setOrigin(2, 2);
 
     // Mouse Square
     int tk = 3;
@@ -165,20 +172,15 @@ void Game::initShapes()
 }
 
 // Initialize la carte de terrain
-void Game::initWorldMap(const char* fileName)
+void Game::initWorldMap()
 {
-    assert(strlen(fileName) > 0);
+	//assert(strlen(fileName) > 0);
 
-    // Read file
-    if (!_map.readFile(fileName))
-        return; // Action si fichier non conforme
+	//// Read file
+	//if (!_map.readFile(fileName))
+	//    return; // Action si fichier non conforme
 
-    // Read Start & Finish
-    //_map.at(_lab.xDepart(), _lab.yDepart()) = CHECKPOINT; // Depart
-    _map.at(_map.xFin(), _map.yFin()) = CHECKPOINT;       // Arrivee
-
-    // Prepare search
-    _spider.setPositionInGrid(1, 1);
+	_map.randomize();
 
     initViews();
 }
@@ -196,17 +198,15 @@ void Game::initSounds()
 {
 	if (MUSIQUE)
 	{
-		_buffB.loadFromFile("pew.wav");
-		_soundBullet.setBuffer(_buffB);
-
-		_buffF.loadFromFile("flap.wav");
-		_soundFlap.setBuffer(_buffF);
-
+		_buffBullet.loadFromFile("pew.wav");
+		_buffFoes.loadFromFile("flap.wav");
 	}
 }
 
 void Game::initViews()
 {
+	// DO NOT CHANGE _currentView HERE
+	//_currentView = CAMERA; == BAD
     // Zoom
     float maxDim = MAX(_map.nbCol(), _map.nbLine());
     _view[NULL_VIEW] = handleResizeWindow();
@@ -222,20 +222,50 @@ void Game::initViews()
     _view[CAMERA].setCenter(
         _map.nbCol() * TILE_SIZE / 2,
         _map.nbLine() * TILE_SIZE / 2);
+	_view[FOLLOW_Y].zoom(0.8);
+
+	_currentView = FOLLOW_Y;
+	_view[FOLLOW_Y] = handleResizeWindow();
 }
 
 // Initialize les element du jeu
 void Game::initGameElements()
 {
     // Player
-    _player.setPositionInGrid(15, 1);
+	_player.setPositionInGrid(15, 4);
     _player.setSpeed(4);
+	_map.at(_player.getGridLine(), _player.getGridCol());
 
-    _yoyoString.init(25, 0.71, 0.71);
+	// Shield
+	for (size_t i = 0; i < NB_SHIELD; i++)
+	{
+		_shieldVA[i].init(25, 0, 1);
+		_shieldVA[i].rotate(i * SHIELD_ANGLE);
+	}
 
-    // Foes
-    _spider.setPositionInGrid(12, 8);
-    _spider.setSpeed(4);
+
+
+	initFoes();
+
     // Bullets
     _bullets.clear();
+}
+
+// Initialise Foes
+void Game::initFoes()
+{
+	
+	for (int i = 0; i < NB_STARTING_BATS; i++)
+	{
+		_bats.push_back(Crawler());
+	}
+
+	int position_x = 4;
+
+	for (list<Crawler>::iterator it = _bats.begin(); it != _bats.end(); it++)
+	{
+		it->setPositionInGrid(position_x, 1);
+		position_x += 6;
+	}
+
 }

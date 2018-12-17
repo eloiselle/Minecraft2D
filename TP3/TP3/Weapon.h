@@ -9,22 +9,51 @@ Goal  : TODO : Gere des pattern compliquer de bullet
 #include "pch.h"
 
 #include "Bullet.h"
-#include "Delay.hpp"
+#include "Delay.h"
 //#include "AngleDegree.hpp"
+
+const enum Tool { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO };
+const string toolName[7] = { "Build", "Uzi", "Assault", "Sniper", "Shotgun", "BulletHell", "Slow-Mo" };
 
 class Weapon : public Delay
 {
-public:
-
-    //void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
-    //void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);
-
-    //void shootAimedBullet(Entity & shooter, list<Bullet>& goodBullets, Entity & target);
-
 protected:
 
-    //AngleDegree _angle;
-    //float _shootDirectionDegree;  // Direction vers laquelle e shoot
+	int _delayMultiplier = 1;	//Multiplicateur sur le délai
+	int _nbBulletsFired;
+	int _accuracy;				//Détermine une variation dans _angle
+	float _bulletSpeed;			//Vitesse des bullets
+	float _damage;				//Dommages
+	//string _nameEquippedWeapon;	//Contient le nom de l'arme actuelle
+
+public:
+	void setWeapon(Tool tool, int _frameRun);
+	void setNoWeapon(int _frameRun);
+	void setUzi(int _frameRun);
+	void setAssault(int _frameRun);
+	void setSniper(int _frameRun);
+	void setShotgun(int _framerun);
+	void setBulletHell(int _frameRun);
+	void setCustom(float, int, float, float, int);
+
+	//string getWeaponName();
+	int getWeaponNbBulletsFired();
+	int getWeaponAccuracy();
+	int getWeaponRateOfFire();
+	float getWeaponBulletSpeed();
+	float getWeaponDamage();
+
+	//void setWeaponName(string);
+	void setWeaponNbBulletsFired(int);
+	void setWeaponAccuracy(int);
+	void setWeaponRateOfFire(int);
+	void setWeaponBulletSpeed(float);
+	void setWeaponDamage(float);
+
+	//void shootBullets(Entity& shooter, list<Bullet>& goodBullets, int pattern, Entity& target);
+	//void shootStraightBullet(Entity& shooter, list<Bullet>& goodBullets, int degree = 0);
+
+	//void shootAimedBullet(Entity & shooter, list<Bullet>& goodBullets, Entity & target);
 };
 
 //// Tire des projectiles en fonction du style

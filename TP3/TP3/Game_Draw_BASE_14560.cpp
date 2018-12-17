@@ -55,10 +55,9 @@ void Game::drawGrid()
         for (size_t c = 0; c < _map.nbCol(); c++)
         {
             // Choix de la bonne tuile a afficher
-			BLOCK_TYPE t = _map.at(l, c).getType();
-			int v = _map.at(l, c).getVersion();
-            _tileSprite[t][v].setPosition(c*TILE_SIZE, l*TILE_SIZE);
-            _window.draw(_tileSprite[t][v]);
+            char tileIndex = _map.at(l, c).getType() - 48;
+            _tileSprite[tileIndex].setPosition(c*TILE_SIZE, l*TILE_SIZE);
+            _window.draw(_tileSprite[tileIndex]);
         }
     }
 }
@@ -74,25 +73,19 @@ void Game::drawMovableObjects()
         _mouseMagnet.getGridLine() * TILE_SIZE);
     _window.draw(_mouseSquare);
 
-    // Player
-	_playerSprites[_iSprite][_jSprite].setPosition(_player.getExactX(), _player.getExactY());
-	_window.draw(_playerSprites[_iSprite][_jSprite]);
+    // Spider
+    _spiderSprite.setPosition(
+        _spider.getExactX(),
+        _spider.getExactY());
+    _window.draw(_spiderSprite);
 
-	for (Crawler& c : _bats)
-	{
-		_spiderSprite.setPosition(
-			c.getExactX(),
-			c.getExactY());
-		_window.draw(_spiderSprite);
-	}
+    // Player
+    _playerShape.setPosition(_player.getExactX(), _player.getExactY());
+    _window.draw(_playerShape);
 
     // Bullet
-	for (size_t i = 0; i < NB_SHIELD; i++)
-	{
-		_bulletShape.setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
+    _bulletShape.setPosition(_yoyo.getExactX(), _yoyo.getExactY());
     _window.draw(_bulletShape);
-	}
-
 
     //Bullets
     _debug += "\r\nB: " + to_string(_bullets.size());
@@ -141,18 +134,4 @@ void Game::flipSpriteHorizontal(Sprite& s)
 {
     s.setOrigin({ s.getLocalBounds().width, 0 });
     s.setScale({ -1, 1 });
-}
-
-// Affiche le contenu de map dans le _debug
-void Game::printMap()
-{
-	_debug += "\r\n";
-	for (size_t l = 0; l < 20; l++)
-	{
-		for (size_t c = 0; c < 20; c++)
-		{
-			_debug += _map.at(l, c).getType() + 48;
-		}
-		_debug += "\r\n";
-	}
 }

@@ -1,34 +1,34 @@
+#pragma once
 #include "TopDownCharacter.h"
 
 void TopDownCharacter::init()
 {
     _direction = DOWN;
-    //_length = 1;
     _isWalking = false;
 }
 
 // Get
-DIRECTION8 TopDownCharacter::getDirection() { return _direction; }
+DIRECTION4 TopDownCharacter::getDirection() { return _direction; }
 //float TopDownCharacter::getLength() { return _length; }
 bool TopDownCharacter::isWalking() { return _isWalking; }
 void TopDownCharacter::stayThere() { move(0, 0); }
 
 // Set
 //void TopDownCharacter::setDirection(int dir) { _direction = dir; } TODO casting
-void TopDownCharacter::setDirection(DIRECTION8 dir) { _direction = dir; }
+void TopDownCharacter::setDirection(DIRECTION4 dir) { _direction = dir; }
 void TopDownCharacter::isWalking(bool isWalking) { _isWalking = isWalking; }
 
 // Se déplace automatiquement en fonction de la direction et de la vitesse
 void TopDownCharacter::move()
 {
-    move(D8_x[_direction] * _speed, D8_y[_direction] * _speed);
+    move(D4[_direction][X] * _speed, D4[_direction][Y] * _speed);
 }
 
 // Deplace dans une direction
-void TopDownCharacter::move(DIRECTION8 dir)
+void TopDownCharacter::move(DIRECTION4 dir)
 {
     _direction = dir;
-    move(D8_x[dir] * _speed, D8_y[dir] * _speed);
+    move(D4[dir][X] * _speed, D4[dir][Y] * _speed);
 }
 
 // Change la position exacte et recalcule la position sur la grille

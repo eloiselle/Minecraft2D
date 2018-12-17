@@ -1,3 +1,4 @@
+#pragma once
 #include "MagnetPosition.h"
 
 // Copie la position
@@ -30,10 +31,11 @@ void MagnetPosition::setPositionExact(pixel_t x, pixel_t y)
 // Teleporte le personnage
 void MagnetPosition::move(pixel_t x, pixel_t y)
 {
-    _exactX += x / RATIO;
-    _exactY += y / RATIO;
-    _gridC = x;
-    _gridL = y;
+    setPositionExact(_exactX + x, _exactY + y);
+    //_exactX += x / RATIO;
+    //_exactY += y / RATIO;
+    //_gridC += x;
+    //_gridL += y;
 }
 
 // Met a jour la position dans la grille selon la position exacte

@@ -14,11 +14,12 @@ void Game::mainLoop()
             managePlayer();
             manageFoes();
             manageBullets();
+            manageMapExpansion();
 
             _frameRun++;
         }
 
-        // Update
+		// Update
         drawWindow();
         _frameTotal++;
     }
@@ -29,32 +30,83 @@ void Game::mainLoop()
 void Game::managePlayer()
 {
     managePlayerJump();
+    manageWeapon();
+
+}
+
+void Game::manageMapExpansion()
+{
+    if (_player.getGridLine() >= _map.nbLine() - NB_LINE_BEFORE_EXPAND_MAP)
+    {
+        _map.addBottomLines(1);
+        _map.randomizeLine(_map.nbLine() - 1);
+
+        if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
+        {
+            // Create new bat on last line
+            int l = _map.nbLine() - 2;
+            int c = (rand() % (_map.nbCol() - 5)) + 3;
+            _bats.push_back(Crawler());
+            _bats.back().setPositionInGrid(c, l);
+            _map.at(l, c).set(EMPTY_BLOCK);
+        }
+    }
+}
+
+void Game::manageWeapon()
+{
+    if (_player.delayIsReady(_frameRun))
+    {
+        _player.delayReset(_frameRun);
+    }
 }
 
 void Game::manageFoes()
 {
-    // Manage one foe
-    if (_spider.isGridCentered()) // Pret a se deplacer
+    if (_currentTool != SLOW_MO || !(_frameRun % SLOW_MO_EFFECT))
     {
-        DIRECTION8 randDirection = static_cast<DIRECTION8>(rand() % 8 * 2);
-
-        if (_map.isTraversable(
-            _spider.getExactX() + D8_x[randDirection] * TILE_SIZE,
-            _spider.getExactY() + D8_y[randDirection] * TILE_SIZE))
+        for (Crawler& c : _bats)
         {
-            _spider.setDirection(randDirection);
-            _spider.startMoving();
-			if(MUSIQUE)
-				_soundFlap.play(); 
+            // Manage one foe
+            if (c.isGridCentered()) // Pret a se deplacer
+            {
+				if (_frameRun % 24 == 12 && MUSIQUE)
+				{
+					_bats.back().play(_buffFoes);
+				}
+				c.stopMoving();
+                tryToMoveRandomDirection(c);
+            }
+
+            if (c.isWalking())
+            {
+                c.move();
+            }
         }
     }
-    
-    if (_spider.isWalking())
+
+}
+
+bool Game::toolIsAShooter()
+{
+    return (_currentTool != BUILD
+        || _currentTool != SLOW_MO);
+}
+
+void Game::tryToMoveRandomDirection(Crawler& c)
+{
+    DIRECTION4 randDir = static_cast<DIRECTION4>(rand() % 4);
+
+    if (_map.isTraversable(
+        c.getExactX() + D4[randDir][X] * TILE_SIZE,
+        c.getExactY() + D4[randDir][Y] * TILE_SIZE))
     {
-        _spider.move();
+        c.setDirection(randDir);
+        c.startMoving();
     }
 }
 
+// TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
 {
     return cos(base / slowness * PI) * amplitude + minimum;
@@ -62,12 +114,17 @@ double smartCos(double base, double slowness = 1, double amplitude = 1, double m
 
 void Game::manageBullets()
 {
-    // Yoyo : Example d'utilisation de VectorAngle
-    _yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
-    _yoyoString.rotate(30);
-    _yoyo.setPositionExact(
-        _player.getExactX() + _yoyoString.getX(),
-        _player.getExactY() + _yoyoString.getY());
+    // Shield
+    for (size_t i = 0; i < NB_SHIELD; i++)
+    {
+        // Yoyo : Example d'utilisation de VectorAngle
+        //_yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
+        _shieldVA[i].rotate(3);
+        _shieldSphere[i].setPositionExact(
+            _player.getExactX() + _shieldVA[i].getX(),
+            _player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT / 2);
+
+    }
 
     // List of bullets
     bool willVanish; //
@@ -81,17 +138,31 @@ void Game::manageBullets()
 
         if (isInMap(*b))
         {
-            //if (_map.isDestructible(*b))
-            //{
-            //    //softBlock.affectHealth(-1);
-            //    //_map.at(b->getGridLine(), b->getGridCol()) == TRAIL;
-            //    willVanish = true;
-            //}
+            if (!_map.isTraversable(*b))
+            {
+                willVanish = true;
+            }
 
-            //if (!_map.isTraversable(*b))
-            //{
-            //    willVanish = true;
-            //}
+            if (_map.isDestructible(*b))
+            {
+                //softBlock.affectHealth(-1);
+                _map.at(b->getGridLine(), b->getGridCol()) = EMPTY_BLOCK;
+                willVanish = true;
+            }
+
+            list<Crawler>::iterator c = _bats.begin();
+            while (c != _bats.end())
+            {
+                if (areOnTheSameSquare(*b, *c))
+                {
+                    willVanish = true;
+                    c = _bats.erase(c);
+                }
+                else
+                {
+                    c++;
+                }
+            }
         }
         else
             willVanish = true;
@@ -105,8 +176,8 @@ void Game::manageBullets()
 
 void Game::managePlayerJump()
 {
-	_iSprite = 0;
-	_jSprite = 0;
+	//_iSprite = 0;
+	//_jSprite = 0;
 
 	if (playerHitTheCeiling())
 	{
@@ -120,11 +191,6 @@ void Game::managePlayerJump()
 
 	if (pixelsBeforeBottomBorder() > 0) // In air
 	{
-		if (_player.isFalling())
-		{
-			_iSprite = 3;
-			_jSprite = 2;
-		}
 		if (_player.isRising() && playerHitTheCeiling())
 		{
 			_player.stopMomentum();
@@ -183,7 +249,7 @@ int Game::pixelsToFall()
 
 bool Game::playerHitTheCeiling()
 {
-    float newExactY = _player.getExactY() - _player.getUpMomentum();
+    float newExactY = _player.getExactY() - _player.getUpMomentum() - PLAYER_HEIGHT;
     return !_map.isTraversable(_player.getExactX(), newExactY);
 }
 
@@ -194,11 +260,18 @@ bool Game::playerIsLanding()
 }
 
 // Regarde si on peu se déplacer a la nouvelle position // Version Sideway
-void Game::tryToMove(int dir, SidewayCharacter& character)
+void Game::tryToMove(DIRECTION4 dir, SidewayCharacter& character)
 {
-    float newExactX = character.getExactX() + D8_x[dir] * character.getSpeed();
+    float testExactX;
+    float newExactX = character.getExactX() + D4[dir][X] * character.getSpeed();
 
-    int nextGridX = (newExactX) / TILE_SIZE;
+    if (dir == LEFT)
+        testExactX = newExactX - PLAYER_FOOT;
+    else if (dir == RIGHT)
+        testExactX = newExactX + PLAYER_FOOT;
+    else testExactX = newExactX;
+
+    int nextGridX = testExactX / TILE_SIZE;
 
     bool onCurrentGridX = nextGridX == character.getGridCol();
 
@@ -210,16 +283,16 @@ void Game::tryToMove(int dir, SidewayCharacter& character)
     else // Si essaye de changer de case
     {
         // Essaye de se deplacer horizontalement
-        if (_map.isTraversable(newExactX, character.getExactY()))
+        if (_map.isTraversable(testExactX, character.getExactY()))
             character.setPositionExact(newExactX, character.getExactY());
     }
 }
 
 // Regarde si on peu se déplacer a la nouvelle position // Version Top-down
-void Game::tryToMove(DIRECTION8 dir, TopDownCharacter& character)
+void Game::tryToMove(DIRECTION4 dir, TopDownCharacter& character)
 {
-    float newExactX = character.getExactX() + D8_x[dir] * character.getSpeed();
-    float newExactY = character.getExactY() + D8_y[dir] * character.getSpeed();
+    float newExactX = character.getExactX() + D4[dir][X] * character.getSpeed();
+    float newExactY = character.getExactY() + D4[dir][Y] * character.getSpeed();
 
     int nextGridX = (newExactX) / TILE_SIZE;
     int nextGridY = (newExactY) / TILE_SIZE;
@@ -245,3 +318,5 @@ void Game::tryToMove(DIRECTION8 dir, TopDownCharacter& character)
 
     character.setDirection(dir);
 }
+
+

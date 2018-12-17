@@ -1,8 +1,11 @@
+#pragma once
 #include "Game.h"
 
 // ############################################################################
 //              EVENTS
 // ############################################################################
+
+
 
 // Quitte l'application
 void Game::quitApplication()
@@ -11,7 +14,7 @@ void Game::quitApplication()
     exit(1);
 }
 
-// Gere les evenements globaux de l'application
+// Gere les input qui doivent etre active une seule fois par repetition
 void Game::inputActivatedOnlyTheFirstTime()
 {
     // Window Controls
@@ -33,7 +36,10 @@ void Game::inputActivatedOnlyTheFirstTime()
                 init();
             if (_event.key.code == Keyboard::P)
                 handlePausing();
-            break;
+			if (_event.key.code == Keyboard::T
+				&& isMouseInWindow()
+				&& !areOnTheSameSquare(_mouseMagnet, _player))
+				_player.setPosition(_mouseMagnet);
         }
 
         if (_appState == RUNNING)
@@ -47,6 +53,7 @@ void Game::inputActivatedOnlyTheFirstTime()
     }
 }
 
+// Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
     handleKeypress(); // TODO event allow to do it only once
@@ -56,6 +63,9 @@ void Game::inputActivatedInContinu()
         if (_currentView == CAMERA && isMouseInWindow())
             handleMouseOnWindowBorders();
 
+		if (Mouse::isButtonPressed(Mouse::Left) 
+			|| Mouse::isButtonPressed(Mouse::Right))
+			handleMouseButtonPressed();
     }
 
     updateViewlessMouseCoord();
@@ -86,6 +96,7 @@ View& Game::handleResizeWindow()
     _view[NEUTRAL] = View(FloatRect(0.f, 0.f, size.x, size.y));
     _view[CAMERA] = View(FloatRect(0.f, 0.f, size.x, size.y));
     _view[FOLLOW] = View(FloatRect(0.f, 0.f, size.x, size.y));
+	_view[FOLLOW_Y] = View(FloatRect(0.f, 0.f, size.x, size.y));
 
     return _view[NEUTRAL];
 }
@@ -100,70 +111,216 @@ void Game::handleKeypress()
         // Game Controls
         if (Keyboard::isKeyPressed(Keyboard::Space))
         {
-            _yoyo.setPosition(_player);
+			//_shieldSphere.setPosition(_player);
         }
     }
     if (Keyboard::isKeyPressed(Keyboard::Escape))
         quitApplication();
 
     if (Keyboard::isKeyPressed(Keyboard::Num0))
-        initWorldMap("Labyrinthe1.txt");
+		initWorldMap();
 
-    // Change View
+	// Change weapon
     if (Keyboard::isKeyPressed(Keyboard::Num1))
-        _currentView = NULL_VIEW;
-    else if (Keyboard::isKeyPressed(Keyboard::Num2))
-        _currentView = NEUTRAL;
-    else if (Keyboard::isKeyPressed(Keyboard::Num3))
-        _currentView = CAMERA;
-    else if (Keyboard::isKeyPressed(Keyboard::Num4))
-        _currentView = FOLLOW;
+	{
+		_currentTool = BUILD;
+		_player.setNoWeapon(_frameRun);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Num2))
+	{
+		_currentTool = UZI;
+		_player.setUzi(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num3))
+	{
+		_currentTool = ASSAULT;
+		_player.setAssault(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num4))
+	{
+		_currentTool = SNIPER;
+		_player.setSniper(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num5))
+	{
+		_currentTool = SHOT_GUN;
+		_player.setShotgun(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num6))
+	{
+		_currentTool = BULLET_HELL;
+		_player.setBulletHell(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num7))
+	{
+		_currentTool = SLOW_MO;
+		_player.setNoWeapon(_frameRun);
+	}
 }
 
 void Game::handleArrowKeys()
 {
-	_iSprite = 0;
-	_jSprite = 0;
+	
+	animIdle();
 
-    // Keyboard Arrow
-    if (Keyboard::isKeyPressed(Keyboard::Up) ||
-        Keyboard::isKeyPressed(Keyboard::W) || 
-        Keyboard::isKeyPressed(Keyboard::Space))
-    {
-        _view[CAMERA].move(0, -ARROW_EXPLORE);
+	/* animation joueur tombe */
+	if (_player.isFalling() && _map.isTraversable(_player.getExactX(), _player.getExactY() + TILE_SIZE))
+	{
+		_iSprite = 3;
+		_jSprite = 2;
+	}
 
+
+
+	// Keyboard Arrow
+	if (Keyboard::isKeyPressed(Keyboard::Up) ||
+		Keyboard::isKeyPressed(Keyboard::W) ||
+		Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		_view[CAMERA].move(0, -ARROW_EXPLORE);
+
+		/* Animation saut */
 		_iSprite = 0;
 		_jSprite = 3;
 
 
-        if (playerIsOnTheGround())
-            _player.startJump();
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Right) ||
-        Keyboard::isKeyPressed(Keyboard::D))
-    {
-		_iSprite = 0;
-		_jSprite = 2;
+		if (playerIsOnTheGround())
+			_player.startJump();
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Right) ||
+		Keyboard::isKeyPressed(Keyboard::D))
+	{
+		animRight();
 
-        _view[CAMERA].move(ARROW_EXPLORE, 0);
-        tryToMove(RIGHT, _player);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Down) ||
-        Keyboard::isKeyPressed(Keyboard::S))
-    {
-        _view[CAMERA].move(0, ARROW_EXPLORE);
-        tryToMove(DOWN, _player);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Left) ||
-        Keyboard::isKeyPressed(Keyboard::A))
-    {
-		_iSprite = 0;
-		_jSprite = 4;
+		_view[CAMERA].move(ARROW_EXPLORE, 0);
+		tryToMove(RIGHT, _player);
+	}
 
-        _view[CAMERA].move(-ARROW_EXPLORE, 0);
-        tryToMove(LEFT, _player);
-    }
+	if (Keyboard::isKeyPressed(Keyboard::Down) ||
+		Keyboard::isKeyPressed(Keyboard::S))
+	{
+		_view[CAMERA].move(0, ARROW_EXPLORE);
+		tryToMove(DOWN, _player);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Left) ||
+		Keyboard::isKeyPressed(Keyboard::A))
+	{
+		animLeft();
+
+		_view[CAMERA].move(-ARROW_EXPLORE, 0);
+		tryToMove(LEFT, _player);
+	}
+
 }
+
+// animations de l'image déplacement à droite
+void Game::animRight()
+{
+	if (_frameRun % 49 < 7)
+	{
+		_iSprite = 0;
+		_jSprite = 6;
+	}
+	else if (_frameRun % 49 < 14)
+	{
+		_iSprite = 1;
+		_jSprite = 6;
+	}
+	else if (_frameRun % 49 < 21)
+	{
+		_iSprite = 2;
+		_jSprite = 6;
+	}
+	else if (_frameRun % 49 < 27)
+	{
+		_iSprite = 3;
+		_jSprite = 6;
+	}
+	else if (_frameRun % 49 < 34)
+	{
+		_iSprite = 3;
+		_jSprite = 6;
+	}
+	else if (_frameRun % 49 < 40)
+	{
+		_iSprite = 2;
+		_jSprite = 6;
+	}
+	else
+	{
+		_iSprite = 1;
+		_jSprite = 6;
+	}
+}
+
+// animations de l'image déplacement à gauche
+void Game::animLeft()
+{
+	if (_frameRun % 49 < 7)
+	{
+		_iSprite = 3;
+		_jSprite = 8;
+	}
+	else if (_frameRun % 49 < 14)
+	{
+		_iSprite = 2;
+		_jSprite = 8;
+	}
+	else if (_frameRun % 49 < 21)
+	{
+		_iSprite = 2;
+		_jSprite = 8;
+	}
+	else if (_frameRun % 49 < 27)
+	{
+		_iSprite = 1;
+		_jSprite = 8;
+	}
+	else if (_frameRun % 49 < 34)
+	{
+		_iSprite = 0;
+		_jSprite = 8;
+	}
+	else if (_frameRun % 49 < 40)
+	{
+		_iSprite = 2;
+		_jSprite = 7;
+	}
+	else
+	{
+		_iSprite = 3;
+		_jSprite = 7;
+	}
+}
+
+// animations image lorsque ne bouge pas
+void Game::animIdle()
+{
+	if (_frameRun % 100 < 24)
+	{
+		_iSprite = 0;
+		_jSprite = 0;
+	}
+	else if (_frameRun % 100 < 49)
+	{
+		_iSprite = 1;
+		_jSprite = 0;
+	}
+	else if (_frameRun % 100 < 74)
+	{
+		_iSprite = 3;
+		_jSprite = 0;
+	}
+	else
+	{
+		_iSprite = 1;
+		_jSprite = 0;
+	}
+}
+
+
 
 // ############################################################################
 //              MOUSE
@@ -179,138 +336,70 @@ void Game::handleMouseWheelMoved()
 // Gere quand un bouton de souris est clicker
 void Game::handleMouseButtonPressed()
 {
-    if (Mouse::isButtonPressed(Mouse::Left) && isMouseInWindow())
-    {
-        if (isMouseInMap() && !(_player.getGridCol() == _mouseMagnet.getGridCol() && _player.getGridLine() == _mouseMagnet.getGridLine()))
-            changeBlockAtMouse();
+	if (isMouseInWindow()
+		&& !areOnTheSameSquare(_mouseMagnet, _player))
+	{
 
-        shootBullet();
-    }
+		int c = _mouseCoord.getPosition().x / TILE_SIZE;
+		int l = _mouseCoord.getPosition().y / TILE_SIZE;
+
+		if (Mouse::isButtonPressed(Mouse::Left))
+		{
+			if (isMouseInMap() && _currentTool == BUILD)
+				insertBlockAtMouse(c, l);
+
+			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
+			{
+				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
+				{
+					shootBullet();
+				}
+			}
+			else if (Mouse::getPosition(_window).x > DEF_WINDOW_WIDTH - BORDURE)            // Droite
+			{
+				_proximityRatio = (BORDURE - DEF_WINDOW_WIDTH + Mouse::getPosition(_window).x) / BORDURE;
+				_view[CAMERA].move(MOUSE_EXPLORE * _proximityRatio, 0);
+			}
+
+			// Vertical
+			if (Mouse::getPosition(_window).y < BORDURE)                                    // Haut
+			{
+				_proximityRatio = (BORDURE - Mouse::getPosition(_window).y) / BORDURE;
+				_view[CAMERA].move(0, -MOUSE_EXPLORE * _proximityRatio);
+			}
+			if (Mouse::isButtonPressed(Mouse::Right))
+			{
+				if (isMouseInMap() && _currentTool == BUILD)
+					removeBlockAtMouse(c, l);
+			}
+		}
+	}
 }
+
 
 void Game::shootBullet()
 {
-    _bullets.push_back(Bullet());
-    _bullets.back().setPosition(_player);
-    _bullets.back().aim(_mouseCoord.getPosition().x, _mouseCoord.getPosition().y);
-    _bullets.back().setLength(100);
+	_bullets.push_back(Bullet());
 
-	if(MUSIQUE)
-		_soundBullet.play();
-}
+	if (MUSIQUE)
+		_bullets.back().play(_buffBullet);
 
-void Game::changeBlockAtMouse()
-{
-    int c = _mouseCoord.getPosition().x / TILE_SIZE;
-    int l = _mouseCoord.getPosition().y / TILE_SIZE;
-
-    switch (_map.at(l, c).getType())
-    {
-    case EMPTY_BLOCK:
-        _map.at(l, c) = SOFT_BLOCK;
-        break;
-    case SOFT_BLOCK:
-        _map.at(l, c) = EMPTY_BLOCK;
-        break;
-    case HARD_BLOCK:
-        _map.at(l, c) = EMPTY_BLOCK;
-        break;
-    default:
-        break;
-    }
-}
-
-// Push sur les bordures de l'ecran a l'aide d'un ratio de proximite de la bordure de window
-void Game::handleMouseOnWindowBorders()
-{
-    // Horizontal
-    if (Mouse::getPosition(_window).x < BORDURE)                                    // Gauche
-    {
-        _proximityRatio = (BORDURE - Mouse::getPosition(_window).x) / BORDURE;
-        _view[CAMERA].move(-MOUSE_EXPLORE * _proximityRatio, 0);
-    }
-    else if (Mouse::getPosition(_window).x > DEF_WINDOW_WIDTH - BORDURE)            // Droite
-    {
-        _proximityRatio = (BORDURE - DEF_WINDOW_WIDTH + Mouse::getPosition(_window).x) / BORDURE;
-        _view[CAMERA].move(MOUSE_EXPLORE * _proximityRatio, 0);
-    }
-
-    // Vertical
-    if (Mouse::getPosition(_window).y < BORDURE)                                    // Haut
-    {
-        _proximityRatio = (BORDURE - Mouse::getPosition(_window).y) / BORDURE;
-        _view[CAMERA].move(0, -MOUSE_EXPLORE * _proximityRatio);
-    }
-    else if (Mouse::getPosition(_window).y > DEF_WINDOW_HEIGHT - BORDURE)           // Bas
-    {
-        _proximityRatio = (BORDURE - DEF_WINDOW_HEIGHT + Mouse::getPosition(_window).y) / BORDURE;
-        _view[CAMERA].move(0, MOUSE_EXPLORE * _proximityRatio);
-    }
-}
-
-// Retourne si les coords sont a l'interieur de la map
-bool Game::isInMap(int x, int y)const
-{
-    return(
-        (x > 0) && (x < _map.nbCol()*TILE_SIZE) &&
-        (y > 0) && (y < _map.nbLine()*TILE_SIZE));
-}
-
-// Retourne si la position est a l'interieur de la map
-bool Game::isInMap(MagnetPosition & mp) const
-{
-    return(
-        (mp.getExactX() > 0) && (mp.getExactX() < _map.nbCol()*TILE_SIZE) &&
-        (mp.getExactY() > 0) && (mp.getExactY() < _map.nbLine()*TILE_SIZE));
+	_bullets.back().setPositionExact(
+		_player.getExactX(),
+		_player.getExactY() - HALF_TILE_SIZE);
+	_bullets.back().aim(
+		_mouseCoord.getPosition().x,
+		_mouseCoord.getPosition().y,
+		_player.getWeaponAccuracy());
+	_bullets.back().setLength(10);
+	_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
+	_bullets.back().setDamage(_player.getWeaponDamage());
+	_player.delayReset(_frameRun);
 }
 
 
-// Retourne si la souris est a l'interieur de la map
-bool Game::isMouseInMap()const
-{
-    return(
-        (_mouseCoord.getPosition().x > 0) && (_mouseCoord.getPosition().x < _map.nbCol()*TILE_SIZE) &&
-        (_mouseCoord.getPosition().y > 0) && (_mouseCoord.getPosition().y < _map.nbLine()*TILE_SIZE));
-}
 
-// Retourne si la souris est a l'interieur de la fenetre
-bool Game::isMouseInWindow()const
-{
-    return(
-        (Mouse::getPosition(_window).x > 0) && (Mouse::getPosition(_window).x < _window.getSize().x) &&
-        (Mouse::getPosition(_window).y > 0) && (Mouse::getPosition(_window).y < _window.getSize().y));
-}
 
-// Retourne si les coords sont a l'interieur de la fenetre
-bool Game::isInWindow(int x, int y)const
-{
-    return(
-        (x > 0) && (x < _window.getSize().x) &&
-        (y > 0) && (y < _window.getSize().y));
-}
 
-bool Game::isInWindow(MagnetPosition & mp) const
-{
-    return( // Not-tested : Can bug because of the view
-        (mp.getExactX() > 0) && (mp.getExactX() < _window.getSize().x) &&
-        (mp.getExactY() > 0) && (mp.getExactY() < _window.getSize().y));
-}
 
-// Retourne si l'objet est a l'interieur de la fenetre
-bool Game::isInWindow(Vector2i& v)const
-{
-    return( // Not-tested : Can bug because of the view
-        (v.x > 0) && (v.x < _window.getSize().x) &&
-        (v.y > 0) && (v.y < _window.getSize().y));
-}
 
-// Trouve les coordonnes internes de la souris sans la view
-void Game::updateViewlessMouseCoord()
-{
-    // Convertion de : Mouse.position => Generic.Coord => Mouse.Coord
-
-    _mouseCoord.setPosition(
-        _window.mapPixelToCoords(
-            Mouse::getPosition(_window), _view[_currentView]));
-
-}

@@ -158,11 +158,14 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Crawler.cpp" />
+    <ClCompile Include="Delay.cpp" />
     <ClCompile Include="FileOpener.cpp" />
+    <ClCompile Include="Game_Position.cpp" />
     <ClCompile Include="Killable.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Foe.cpp" />
     <ClCompile Include="Game_Algo.cpp" />
+    <ClCompile Include="MapRandomizer.cpp" />
     <ClCompile Include="Nameable.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SidewayCharacter.cpp" />
@@ -170,6 +173,7 @@
     <ClCompile Include="Game_Init.cpp" />
     <ClCompile Include="Game_Draw.cpp" />
     <ClCompile Include="Game_Events.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WorldMap.cpp" />
     <ClCompile Include="MagnetPosition.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,9 +194,10 @@
     <ClInclude Include="Direction.h" />
     <ClInclude Include="FileOpener.h" />
     <ClInclude Include="Killable.h" />
-    <ClInclude Include="Delay.hpp" />
+    <ClInclude Include="Delay.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Foe.h" />
+    <ClInclude Include="MapRandomizer.h" />
     <ClInclude Include="Nameable.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SidewayCharacter.h" />
@@ -205,7 +210,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="VectorAngle.h" />
-    <ClInclude Include="Weapon.hpp" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="dungeon.bmp" />

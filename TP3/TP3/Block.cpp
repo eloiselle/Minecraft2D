@@ -1,3 +1,4 @@
+#pragma once
 
 #include "Block.h"
 
@@ -15,11 +16,11 @@ void Block::set(BLOCK_TYPE type, unsigned int version)
         // Choisi une version de l'image au hasard
         switch (_type)
         {
-        case EMPTY_BLOCK:       _version = rand() % 8;      break;
-        case HARD_BLOCK:        _version = rand() % 11;     break;
-        case SOFT_BLOCK:        _version = rand() % 15;     break;
+        case EMPTY_BLOCK:       _version = rand() % 4;      break;
+        case HARD_BLOCK:        _version = rand() % 4;      break;
+        case SOFT_BLOCK:        _version = rand() % 4;      break;
         default:
-            _type = HARD_BLOCK; _version = 0;               break;
+            _type = INVALID_BLOCK; _version = 0;               break;
         }
     }
 }

@@ -7,7 +7,8 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 **********************************************************/
 #pragma once
 #include "pch.h"
-#include "SFML\Audio.hpp"
+
+
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -23,16 +24,17 @@ constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
 // Messages
 constexpr const char * DEFAULT_MESSAGE =
 R"(******************** MINECRAFT 2D ********************
-
 INSTRUCTIONS
 
 Press [Backspace] to call init()
 
-Press [Space] to pause/unpause.
-
-Press [1] to [4] to change the view
-
+Press [P] to pause/unpause.
 Press the arrow/WASD keys to move around
+Press [Space] to jump
+Press [T] to Teleport
+
+Press [1] to select the Build tool
+Press [2] to [5] to change weapon
 
 Roll the mousewheel to zoom-in/zoom-out
 
@@ -47,7 +49,7 @@ constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel 
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
 
 // Size
-//constexpr pixel_t TILE_SIZE = 32;                           // Taille des tiles normaux
+//constexpr pixel_t TILE_SIZE = 32;                         // Taille des tiles normaux
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -56,6 +58,19 @@ constexpr int FRAMERATE = 60;                               // Nombre de frame p
 constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu avant le prochain step
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
+constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre le joueur et le bas de la map pour aggrandir
+
+constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions
+constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
+
+// Game
+constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
+constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
+constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
+constexpr int SLOW_MO_EFFECT = 4;
+
+// OPTIONS
+constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
 
 class Game
 {
@@ -64,27 +79,23 @@ private:
     // Game Elements
     WorldMap _map;                      // World map
     Player _player;                     // Avatar controlled by user
-    Bullet _yoyo;                       // Tourne a l'entour de _player
-    VectorAngle _yoyoString;            // Distance entre _yoyo et _player
-    Crawler _spider;                    // Ennemi qui se promene dans la grille
-
-	SoundBuffer _buffB,
-				_buffF;					// buffer des sons
-	Sound _soundBullet,
-			_soundFlap;						// sons 
-	Music _music;						// musique
-
-
+    Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
+    VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
+    list<Crawler> _bats;                //
 
     // Window
     ContextSettings _settings;          // Settings de la _window
     RenderWindow _window;               // Fenetre d'affichage principal
-    View _view[4];
-    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW };
+    View _view[5];
+    static enum ChoosenView { NULL_VIEW = 0, NEUTRAL, CAMERA, FOLLOW, FOLLOW_Y };
     ChoosenView _currentView = NULL_VIEW;
 
     MagnetPosition _mouseMagnet;        // Position magnetique de la souris
+
+    // Audio
+    SoundBuffer _buffBullet, _buffFoes;			// buffer des sons
+    Music _music;						// musique
 
     // Text
     string _extraTitle = "";            // Restant du titre de la fenetre
@@ -100,25 +111,29 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     CircleShape _bulletShape;           // Cercle rouge
+    CircleShape _mouseCursor;
 
     // Sprites
     Image _spiderImage;                 // Image du robot pour modification de transparence
     Texture _spiderTexture;             // Texture du robot
-    Texture _tileset;                   // Source d'image pour les sprite
     Sprite _spiderSprite;               // Sprite du robot
-    Sprite _tileSprite[5];              // Ensemble de sprite pour afficher la map
+    Texture _tileset;                   // Source d'image pour les sprite
+    Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
 	Image _playerImage;					// Image de l'avatar
 	Texture _playerTexture;				// Texture de l'avatar
-	Sprite _playerSprites[4][8];		// Sprites de l'avatar
+	Sprite _playerSprites[4][9];		// Sprites de l'avatar
 
 	int _iSprite = 3;					// indice i du tableau de sprites
 	int _jSprite = 0;					// indice j du tableau de sprites
-	int _motion = 0;					// quelle partie du mouvement
 
     // Etat
     static enum AppState { RUNNING, PAUSED };                           // Etat possibles de application
     AppState _appState = RUNNING;       // Etat actuel de application
+
+
+    Tool _currentTool = BUILD;
+
     long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
     long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
     Event _event;                       // Event presentement en evaluation
@@ -136,13 +151,20 @@ public:
     void initTexts();                   // Initialization des polices de caracteres
     void initShapes();                  // Initialization des formes geometriques
     void initViews();                   // Initialization des view
+    void initFoes();                    //
     void initGameElements();            // Initialization des elements qui se deplacent
-    void initWorldMap(const char* fileName = DEFAULT_FILENAME);   // Initialization du labyrinthe
-	void initMusic();
-	void initSounds();
+    void initWorldMap();                // Initialization du labyrinthe
+    void initMusic();                   // Initialisation de la musique
+    void initSounds();                  // Initialisation des sons
+
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes
+
+
+	void animRight();
+	void animLeft();
+	void animIdle();
 
     // Event
     void quitApplication();                             // Quitte l'application
@@ -156,8 +178,10 @@ public:
     void handleArrowKeys();                             // Handler des fleches du clavier et WASD
     void handleMouseWheelMoved();                       // Handler de la roulette de souris
     void handleMouseButtonPressed();                    // Handler des boutons de souris
+    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
     void shootBullet();                                 // Tire une balle
-    void changeBlockAtMouse();                          // Change un block a la position de la souris
+    void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
+    void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
 
 
@@ -171,11 +195,15 @@ public:
     bool isMouseInMap()const;                           // Retourne si la souris est dans la map
     void updateViewlessMouseCoord();                    // Calcule la position interne de la souris
 
-    // Terraria
+    // Game Logic
     void mainLoop();                                    // Boucle principale d'iteration
     void managePlayer();                                // Gere l'avatar du joueur mais pas les controles
+    void manageWeapon();                                //
     void manageFoes();                                  // Gere les ennemis
+    void manageMapExpansion();                          //
+    void tryToMoveRandomDirection(Crawler & c);         //
     void manageBullets();                               // Gere les projectiles
+    bool toolIsAShooter();                              //
 
     // Movement & Collision
     void managePlayerJump();
@@ -187,8 +215,8 @@ public:
     int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
     bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
     bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
-    void tryToMove(int dir, SidewayCharacter& player);  // SidewayCharacter essaye de se deplacer
-    void tryToMove(DIRECTION8 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window
@@ -198,4 +226,5 @@ public:
     void drawGrid();                                    // Affiche la grille de application
     void drawMovableObjects();                          // Affiche les objets mobiles
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
+    void printMap();
 };

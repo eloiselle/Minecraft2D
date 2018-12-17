@@ -9,6 +9,8 @@ Goal  : Personnage controlé par l'ordinateur
 #pragma once
 #include "pch.h"
 
+#include <SFML/Audio.hpp>
+
 #include "TopDownCharacter.h"
 #include "Foe.h"
 #include "ResizableMap.hpp"
@@ -30,8 +32,11 @@ public:
     void setAI(AI_Move ai, AI_Frequency decisionAI); // Change l'intelligence artificielle
     void move();                            // se deplace de 1 vers l'avant
     void startMoving();
+    void stopMoving();
     void turnLeft();                        // change de direction anticlockwise
     void turnRight();                       // change de direction clockwise
+
+	void play(sf::SoundBuffer & buff);
 
     // Operations
     //void chooseNextMove(FixedGrid& map);    // Utilise l'AI pour change de strategy
@@ -42,4 +47,8 @@ protected:
     AI_Frequency _aiFreq;                   // Quand le robot prend des decisions
     bool _isControllable = true;
     int _frameLeftBeforeControl;
+
+	sf::Sound _sound;
+	sf::SoundBuffer _buffer;
+
 };

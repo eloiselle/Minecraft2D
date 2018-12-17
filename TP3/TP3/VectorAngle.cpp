@@ -1,3 +1,4 @@
+#pragma once
 #include "VectorAngle.h"
 
 void VectorAngle::init(float length, float normalX, float normalY)
