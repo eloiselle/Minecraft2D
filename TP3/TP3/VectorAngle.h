@@ -24,10 +24,10 @@ public:
     float getNormalizedY()const;                            // Retourne la position normalized y
     float getX()const;                                      // Retourne la position x
     float getY()const;                                      // Retourne la position y
-    float getLength()const;                                 // Retourne la longuer du vecteur
+    virtual float getLength()const;                                 // Retourne la longuer du vecteur
 
-    void setLength(float length);                           // Change la longueur
-    void setLength(float x, float y);                       // Change la longueur selon des coords
+    virtual void setLength(float length);                           // Change la longueur
+    virtual void setLength(float x, float y);                       // Change la longueur selon des coords
     void setAngleDegree(degree_t degree)override;           // Change la direction en degree
     void setAngleRadian(radian_t radian)override;           // Change la direction en radian
     void setAngleFromXY(float x, float y);

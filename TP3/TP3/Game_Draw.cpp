@@ -132,6 +132,7 @@ void Game::drawMovableObjects()
     //Bullets
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
+        _bulletShape[b->isFriendly()].setRadius(b->getDamage() * 2);
         _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
         _window.draw(_bulletShape[b->isFriendly()]);
         //_debug += "\r\n" +

@@ -178,9 +178,14 @@ void Game::manageBullets()
         if (isInMap(*b))
         {
             collisionBulletBlock(*b);
+
             if ( b->isFriendly())
             {
                 collisionBulletFoes(*b);
+            }
+            else
+            {
+                collisionBulletPlayer(*b);
             }
 
         }

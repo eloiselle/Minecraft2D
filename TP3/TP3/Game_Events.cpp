@@ -292,7 +292,6 @@ void Game::shootBullet(Character *target)
         _bullets.back().aim(*target);
     }
 
-    _bullets.back().setLength(10);
     _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
     _bullets.back().setDamage(_player.getWeaponDamage());
     _player.delayReset(_frameRun);

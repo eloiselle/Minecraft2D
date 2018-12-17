@@ -13,7 +13,7 @@ void Game::collisionBulletBlock(Bullet& b)
     {
         int l = b.getGridLine();
         int c = b.getGridCol();
-        _map.at(l, c).loseHp(1); // TODO utiliser les damage de bullet
+        _map.at(l, c).loseHp(b.getDamage()); // TODO utiliser les damage de bullet
 
         if (_map.at(l, c).getHp() <= 0)
             _map.at(l, c) = EMPTY_BLOCK;
@@ -41,11 +41,20 @@ void Game::collisionBulletFoes(Bullet& b)
             c++;
         }
     }
-    // Boss
 
+    // Boss
     if (areOnTheSameSquare(b, _boss))
     {
         _bulletWillVanish = true;
-        _boss.loseHp(1);// TODO mettre les damage du bullet
+        _boss.loseHp(b.getDamage());
+    }
+}
+
+void Game::collisionBulletPlayer(Bullet& b)
+{
+    if (areOnTheSameSquare(b, _player))
+    {
+        _bulletWillVanish = true;
+        _player.loseHp(b.getDamage());
     }
 }

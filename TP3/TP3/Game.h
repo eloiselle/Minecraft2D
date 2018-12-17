@@ -71,6 +71,7 @@ constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avat
 constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
 // Game
+constexpr int NB_LIVES = 10;                                // Nombre de vies du joueurs au debut de partie
 constexpr int PLAYER_START_C = 15;                          // Position Col de depart du joueur
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
@@ -78,9 +79,9 @@ constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace en
 constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
-
-constexpr int NB_BOSS_BULLET = 180;
-constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;
+constexpr int LINE_TO_CREATE_BATS = 5;                      //
+constexpr int NB_BOSS_BULLET = 90;                          //
+constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     //
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -258,6 +259,7 @@ public:
     void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
     void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
     void collisionBulletFoes(Bullet& b);                // Check les collision et les bullet et les ennemis
+    void collisionBulletPlayer(Bullet & b);             // Check les collision entre un bullet et le joueur
 
 
     // Draw
