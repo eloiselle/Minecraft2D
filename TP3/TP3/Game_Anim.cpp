@@ -6,17 +6,16 @@ void Game::managePlayerAnimation()
 {
     if (playerIsOnTheGround())
     {
-        animIdle();
-        if (Keyboard::isKeyPressed(Keyboard::Right) ||
-            Keyboard::isKeyPressed(Keyboard::D) ||
-            Keyboard::isKeyPressed(Keyboard::Left) ||
-            Keyboard::isKeyPressed(Keyboard::A))
+
+        if (_player.isMoving())
         {
             if (_player.isLookingToTheRight())
                 animRight();
             else
                 animLeft();
         }
+        else
+            animIdle();
     }
     else
         animAir();
@@ -25,116 +24,42 @@ void Game::managePlayerAnimation()
 // animations image lorsque ne bouge pas
 void Game::animIdle()
 {
-    _animType = 0;
+    _animType = _player.isLookingToTheRight(); // index bool : 0 ou 1
+    _animFrame = (_frameRun / 10) % 4;
 
-    if (_frameRun % 100 < 24)
-    {
-        _animFrame = 0;
-    }
-    else if (_frameRun % 100 < 49)
-    {
-        _animFrame = 1;
-    }
-    else if (_frameRun % 100 < 74)
-    {
-        _animFrame = 3;
-    }
-    else
-    {
-        _animFrame = 1;
-    }
 }
 
 // animations de l'image déplacement à droite
 void Game::animRight()
 {
-    _animType = 6;
+    _animType = WALK_RIGHT;
+    _animFrame = (_frameRun / 10) % 4;
 
-    if (_frameRun % 49 < 7)
-    {
-        _animFrame = 0;
-    }
-    else if (_frameRun % 49 < 14)
-    {
-        _animFrame = 1;
-    }
-    else if (_frameRun % 49 < 21)
-    {
-        _animFrame = 2;
-    }
-    else if (_frameRun % 49 < 27)
-    {
-        _animFrame = 3;
-    }
-    else if (_frameRun % 49 < 34)
-    {
-        _animFrame = 3;
-    }
-    else if (_frameRun % 49 < 40)
-    {
-        _animFrame = 2;
-    }
-    else
-    {
-        _animFrame = 1;
-    }
 }
 
 // animations de l'image déplacement à gauche
 void Game::animLeft()
 {
-    if (_frameRun % 49 < 7)
-    {
-        _animFrame = 3;
-        _animType = 8;
-    }
-    else if (_frameRun % 49 < 14)
-    {
-        _animFrame = 2;
-        _animType = 8;
-    }
-    else if (_frameRun % 49 < 21)
-    {
-        _animFrame = 2;
-        _animType = 8;
-    }
-    else if (_frameRun % 49 < 27)
-    {
-        _animFrame = 1;
-        _animType = 8;
-    }
-    else if (_frameRun % 49 < 34)
-    {
-        _animFrame = 0;
-        _animType = 8;
-    }
-    else if (_frameRun % 49 < 40)
-    {
-        _animFrame = 2;
-        _animType = 7;
-    }
-    else
-    {
-        _animFrame = 3;
-        _animType = 7;
-    }
+    _animType = WALK_LEFT;
+    _animFrame = (_frameRun / 10) % 4;
+
 }
 
 void Game::animAir()
 {
+    _animType = AIR;
+
     /* animation joueur tombe */
     if (_player.isFalling()
         && _map.isTraversable(
             _player.getExactX(),
             _player.getExactY() + TILE_SIZE))
     {
-        _animFrame = 3;
-        _animType = 2;
+        _animFrame = 2 + _player.isLookingToTheRight(); // 2 == offset
     }
 
     if (_player.isRising())
     {
-        _animFrame = 1;
-        _animType = 3;
+        _animFrame = _player.isLookingToTheRight();
     }
 }

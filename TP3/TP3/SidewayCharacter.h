@@ -19,6 +19,7 @@ class SidewayCharacter : public Character
 {
 private:
     bool _isLookingRight;               // Direction qu'il regarde
+    bool _isMoving;                     // S'il est en train de bouger
     float _upMomentum;                  // Acceleration verticale; Positif == Ascendant
 
 public:
@@ -26,9 +27,11 @@ public:
     int getDownMomentum()const;         // Retourne la vitesse verticale descendante
     bool isLookingToTheRight()const;    // Retourne s'il regarde vers la droite
     bool isLookingToTheLeft()const;     // Retourne s'il regarde vers la gauche
+    bool isMoving()const;               // Retourne s'il est en train de bouger
 
+    void isMoving(bool isMoving);       // Change si il est en train de bouger
     void lookToTheRight(bool isLookingToTheRight = true);  // Change la direction vers lequel il regarde
-    void lookToTheLeft(bool isLookingToTheLeft = false);   // Change la direction vers lequel il regarde
+    void lookToTheLeft(bool isLookingToTheLeft = true);    // Change la direction vers lequel il regarde
 
     bool hasNoMomentum()const;          // Verifi si la position vertical est a 0
     bool isFalling()const;              // Est en train de tomber

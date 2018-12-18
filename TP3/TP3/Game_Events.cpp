@@ -180,6 +180,8 @@ void Game::handleKeypress()
 
 void Game::handleArrowKeys()
 {
+    _player.isMoving(false);
+
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
         Keyboard::isKeyPressed(Keyboard::W) ||
@@ -193,8 +195,8 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Right) ||
         Keyboard::isKeyPressed(Keyboard::D))
     {
+        _player.isMoving(true);
         _player.lookToTheRight();
-
         _view[CAMERA].move(ARROW_EXPLORE, 0);
         tryToMove(RIGHT, _player);
     }
@@ -206,6 +208,7 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Left) ||
         Keyboard::isKeyPressed(Keyboard::A))
     {
+        _player.isMoving(true);
         _player.lookToTheLeft();
         _view[CAMERA].move(-ARROW_EXPLORE, 0);
         tryToMove(LEFT, _player);

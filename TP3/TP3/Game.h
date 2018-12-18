@@ -146,7 +146,11 @@ private:
 
     int _animFrame = 3;					// indice i du tableau de sprites
     int _animType = 0;					// indice j du tableau de sprites
-    static enum ANIM_FRAME { IDLE = 0, WHAT, RUN_RIGHT, DO, DIE, CRY, WALK_RIGHT, RUN_LEFT, WALK_LEFT };
+    static enum ANIM_FRAME {
+        IDLE_LEFT = 0, IDLE_RIGHT = 1, RUN_RIGHT = 2,
+        DO = 3, AIR = 4, CRY = 5,
+        WALK_RIGHT = 6, RUN_LEFT = 7, WALK_LEFT = 8
+    };
 
     Image _batImage;                    // Image du bat pour modification de transparence
     Texture _batTexture;                // Texture du bat

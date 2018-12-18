@@ -6,11 +6,13 @@ int SidewayCharacter::getUpMomentum()const { return _upMomentum; }
 int SidewayCharacter::getDownMomentum()const { return -_upMomentum; }
 bool SidewayCharacter::isLookingToTheRight()const { return _isLookingRight; }
 bool SidewayCharacter::isLookingToTheLeft()const { return !_isLookingRight; }
+bool SidewayCharacter::isMoving() const { return _isMoving; }
 
 bool SidewayCharacter::hasNoMomentum()const { return _upMomentum == 0; }
 bool SidewayCharacter::isFalling()const { return _upMomentum <= 0; }
 bool SidewayCharacter::isRising()const { return _upMomentum > 0; }
 
+void SidewayCharacter::isMoving(bool isMoving) { _isMoving = isMoving; }
 void SidewayCharacter::lookToTheRight(bool isLookingRight) { _isLookingRight = isLookingRight; }
 void SidewayCharacter::lookToTheLeft(bool isLookingLeft) { _isLookingRight = !isLookingLeft; }
 
