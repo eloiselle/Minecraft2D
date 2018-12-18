@@ -1,10 +1,4 @@
 #pragma once
 #include "Character.h"
 
-Character::Character()
-{
-}
-
-Character::~Character()
-{
-}
+// Aucune declaration car la classe fait seulement heriter de deux autres classes

@@ -9,24 +9,23 @@ Goal  : Projectiles
 #include "pch.h"
 #include <SFML/Audio.hpp>
 #include "Entity.h"
-#include "Position.h"
 #include "VectorAngle.h"
 #include "Character.h"
 
 class Bullet : public Entity, public VectorAngle
 {
 private:
-    bool _friendly = true;
-    int _damage;
+    bool _friendly = true;      // Si l'arme est alliee ou ennemie
+    int _damage;                // Degats fait par l'arme
 
-    Character* _target;
+    Character* _target;         // Cible pour homing
 
-    sf::Sound _sound;
-    sf::SoundBuffer _buffer;
+    sf::Sound _sound;           // Son
+    sf::SoundBuffer _buffer;    // Buffer de son
 
-    float getLength()const override { return 0.f; };// Override pour utiliser getSpeed()
-    void setLength(float) override {};              // Override pour utiliser setSpeed()
-    void setLength(float, float) override {};       // Override pour utiliser setSpeed()
+    float getLength()const override { return 0.f; };// desactive pour etre remplacer par getSpeed()
+    void setLength(float) override {};              // desactive pour etre remplacer par setSpeed()
+    void setLength(float, float) override {};       // desactive pour etre remplacer par setSpeed()
 
 public:
     Bullet() { _target = nullptr; };                // Constructeur sans parametres
@@ -36,16 +35,16 @@ public:
     void aim(int x, int y, int accuracy);           // Change l'angle en fonction de coord et une donné pour rendre aléatoire
     void aim(Character & ch);                       // Change l'angle an fonction de un objet
 
-    void setSpeed(float);
-    void setDamage(int);
-    void setTarget(Character * ch);
-    void setFriendly(bool);
+    void setSpeed(float);                           // Change la vitesse de deplacement
+    void setDamage(int);                            // Change les degats lors de collisions
+    void setTarget(Character * ch);                 // Change la cible pour Homing
+    void setFriendly(bool);                         // Change si c'est une balle alliee ou ennemie
 
-    float getSpeed();
-    int getDamage();
-    Character& getTarget();
-    bool getHoming();
-    bool isFriendly();
+    float getSpeed()const;                          // Retourne la vitesse de deplacement
+    int getDamage()const;                           // Retourne le nombre de degat
+    Character& getTarget()const;                    // Retourne la cible
+    bool isHoming()const;                           // Retourne si c'est homing
+    bool isFriendly()const;                         // Retourne si c'est une balle alliee
 
-    void play(sf::SoundBuffer & buff);
+    void play(sf::SoundBuffer & buff);              // Joue un effet sonore
 };

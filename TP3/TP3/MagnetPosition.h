@@ -12,7 +12,6 @@ Goal  : Ensemble de deux positions qui sont coordonnées
 class MagnetPosition
 {
 protected:
-
     pixel_t _exactX;                // La colonne dans la grille
     pixel_t _exactY;                // La ligne dans la grille
     tile_t _gridC;                  // La position x exacte
@@ -23,10 +22,10 @@ public:
         : _exactX(exactX), _exactY(exactY), _gridC(gridC), _gridL(gridL) {};  // Constructeur
 
     // Get
-    tile_t getGridCol() { return _gridC; };         // Get la colonne dans la grille
-    tile_t getGridLine() { return _gridL; };        // Get la ligne dans la grille
-    pixel_t getExactX() { return _exactX; };        // Get la position x exacte
-    pixel_t getExactY() { return _exactY; };        // Get la position y exacte
+    tile_t getGridCol()const;       // Get la colonne dans la grille
+    tile_t getGridLine()const;      // Get la ligne dans la grille
+    pixel_t getExactX()const;       // Get la position x exacte
+    pixel_t getExactY()const;       // Get la position y exacte
 
     // Set
     void setPosition(MagnetPosition& mp);           // Copie une MagnetPosition
@@ -34,6 +33,6 @@ public:
     void setPositionExact(pixel_t x, pixel_t y);    // Change la position exacte
     void move(pixel_t x, pixel_t y);                // Deplacement a partir de la position actuelle
 
-    void updateGridPosition();  // Met a jour la position dans la grille selon la position exacte
-    bool isGridCentered();      // Vérifi si est au centre de la case pour lancer AI
+    void updateGridPosition();      // Met a jour la position dans la grille selon la position exacte
+    bool isGridCentered()const;     // Vérifi si est au centre de la case pour lancer AI
 };

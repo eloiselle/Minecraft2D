@@ -2,13 +2,13 @@
 #include "AngleDegree.h"
 
 // Retourne la direction
-degree_t AngleDegree::getDirectionDegree()
+degree_t AngleDegree::getDirectionDegree()const
 {
     return _degree;
 }
 
 // Retourne la direction
-degree_t AngleDegree::getDirectionRadian()
+degree_t AngleDegree::getDirectionRadian()const
 {
     return toRadian(_degree);
 }

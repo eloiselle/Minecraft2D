@@ -11,7 +11,6 @@ void Game::manageBossWeapon()
 {
     if (_boss.delayIsReady(_frameRun))
     {
-
         for (size_t i = 0; i < NB_BOSS_BULLET; i++)
         {
             bossShootBullet();
@@ -22,7 +21,6 @@ void Game::manageBossWeapon()
     }
 }
 
-
 void Game::bossShootBullet()
 {
     _bullets.push_back(_boss.getBullet());
@@ -31,12 +29,10 @@ void Game::bossShootBullet()
         _boss.getExactX(),
         _boss.getExactY());
 
-
     _bullets.back().aim(_player);
 
     if (MUSIQUE)
         _bullets.back().play(_buffBullet);
-
 }
 
 void Game::manageBossHeight()
@@ -50,7 +46,6 @@ void Game::manageBossHeight()
     else
         _boss.stopMoving();
 }
-
 
 void Game::handleBossDeath()
 {

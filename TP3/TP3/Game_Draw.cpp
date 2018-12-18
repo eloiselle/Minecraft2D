@@ -13,10 +13,10 @@ void Game::drawWindow()
     drawGrid();
     updateViews();
 
-
     drawPlayer();
     drawFoes();
-    drawBulletsAndShield();
+    drawBullets();
+    drawShield();
     drawMovableGui();
 
     drawThingsDirectlyOnTheScreen();
@@ -80,16 +80,14 @@ void Game::drawGrid()
     }
 }
 
-
 void Game::drawPlayer()
 {
     _playerSprites[_animFrame][_animType].setPosition(_player.getExactX(), _player.getExactY());
     _window.draw(_playerSprites[_animFrame][_animType]);
 }
 
-void Game::drawBulletsAndShield()
+void Game::drawShield()
 {
-    // Bullet Shield
     if (_currentTool == SPHERE_SHIELD)
     {
         for (size_t i = 0; i < NB_SHIELD; i++)
@@ -98,8 +96,10 @@ void Game::drawBulletsAndShield()
             _window.draw(_bulletShape[FRIENDLY]);
         }
     }
+}
 
-    //Bullets
+void Game::drawBullets()
+{
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
         _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
@@ -152,7 +152,6 @@ void Game::drawFoes()
     }
 }
 
-
 void Game::drawBossHealthBar()
 {
     // Boss health bar
@@ -165,7 +164,6 @@ void Game::drawBossHealthBar()
         _bossHealthBar.setPosition(3, 3);
         _window.draw(_bossHealthBar);
     }
-
 }
 
 // Affiche les objets qui ne sont pas affecter par la view
@@ -176,7 +174,7 @@ void Game::drawThingsDirectlyOnTheScreen()
     drawBossHealthBar();
 
     // Affichage du shader
-    if( _appState != RUNNING)
+    if (_appState != RUNNING)
     {
         _window.draw(_shader);
         _window.draw(_messageOnShader);

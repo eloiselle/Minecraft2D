@@ -2,11 +2,11 @@
 #include "Killable.h"
 
 // Get
-int Killable::getHp() { return _hp; }
-int Killable::getHpMax() { return _hpMax; }
+int Killable::getHp()const { return _hp; }
+int Killable::getHpMax()const { return _hpMax; }
 
-bool Killable::isAlive() { return _hp > 0; }
-bool Killable::isDead() { return _hp <= 0; }
+bool Killable::isAlive()const { return _hp > 0; }
+bool Killable::isDead()const { return _hp <= 0; }
 
 // Set
 void Killable::setHp(int hp) { _hp = hp; }

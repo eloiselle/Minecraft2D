@@ -32,22 +32,22 @@ public:
     int xFin()const;       // Retourne la valeur X d'arrivee
     int yFin()const;       // Retourne la valeur Y d'arrivee
 
-    void randomize();                           //
-    void randomizeLine(int line);               //
-    void fillLine(int line, BLOCK_TYPE bt);     //
+    void randomize();                               // Cree une map aleatoire
+    void randomizeLine(int line);                   // Met la ligne aleatoire
+    void fillLine(int line, BLOCK_TYPE bt);         // Rempli la ligne
 
-    void randomizeLineVersion(int line);
+    void randomizeLineVersion(int line);            // Met une version de block aleatoire sur toute la ligne
 
-    bool isTraversable(pixel_t x, pixel_t y);   //
-    bool isTraversable(tile_t x, tile_t y);     //
-    bool isTraversable(MagnetPosition& mp);     //
+    bool isTraversable(pixel_t x, pixel_t y)const;  // Retourne si le block est traversable
+    bool isTraversable(tile_t x, tile_t y)const;    // Retourne si le block est traversable
+    bool isTraversable(MagnetPosition& mp)const;    // Retourne si le block est traversable
 
-    bool isDestructible(pixel_t x, pixel_t y);  //
-    bool isDestructible(tile_t x, tile_t y);    //
-    bool isDestructible(MagnetPosition & mp);   //
+    bool isDestructible(pixel_t x, pixel_t y)const; // Retourne si le block est destructible
+    bool isDestructible(tile_t x, tile_t y)const;   // Retourne si le block est destructible
+    bool isDestructible(MagnetPosition & mp)const;  // Retourne si le block est destructible
 
-    void readGrid(istream& is = cin);           // Lit la matrice de la map dans le flux
-    bool readFile(const char* nomFichier);      // Lit la map
-    bool blockIsTraversable(Block& cm);         //
-    bool blockIsDestructible(Block& cm);        //
+    void readGrid(istream& is = cin);               // Lit la matrice de la map dans le flux
+    bool readFile(const char* nomFichier);          // Lit la map
+    bool blockIsTraversable(Block& cm)const;        // Retourne si le block est traversable
+    bool blockIsDestructible(Block& cm)const;       // Retourne si le block est destructible
 };

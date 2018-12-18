@@ -78,14 +78,14 @@ void Game::handlePausing()
 {
     switch (_appState)
     {
-    case Game::RUNNING:         
-        _appState = PAUSED;             
+    case Game::RUNNING:
+        _appState = PAUSED;
         break;
-    case Game::PAUSED:          
-        _appState = RUNNING;            
+    case Game::PAUSED:
+        _appState = RUNNING;
         break;
-    case Game::BOSS_KILLED:     
-        init();       
+    case Game::BOSS_KILLED:
+        init();
         _appState = RUNNING;
         break;
     case Game::GAME_OVER:
@@ -180,15 +180,12 @@ void Game::handleKeypress()
 
 void Game::handleArrowKeys()
 {
-
-
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
         Keyboard::isKeyPressed(Keyboard::W) ||
         Keyboard::isKeyPressed(Keyboard::Space))
     {
         _view[CAMERA].move(0, -ARROW_EXPLORE);
-
 
         if (playerIsOnTheGround())
             _player.startJump();
@@ -293,7 +290,6 @@ void Game::shootBullet(Character *target)
         _bullets.back().setTarget(target);
         _bullets.back().aim(*target);
     }
-
 
     _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
     _bullets.back().setDamage(_player.getWeaponDamage());

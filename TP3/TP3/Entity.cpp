@@ -7,22 +7,8 @@ Entity::Entity(const Entity& e)
     _speed = e._speed;
 }
 
-float Entity::getSpeed()
-{
-    return _speed;
-}
+float Entity::getSpeed()const { return _speed; }
+float Entity::getHitBoxSize()const { return _hitBoxSize; }
 
-void Entity::setSpeed(float speed)
-{
-    _speed = speed;
-}
-
-float Entity::getHitBoxSize()
-{
-    return _hitBoxSize;
-}
-
-void Entity::setHitBoxSize(float size)
-{
-    _hitBoxSize = size;
-}
+void Entity::setSpeed(float speed) { _speed = speed; }
+void Entity::setHitBoxSize(float size) { _hitBoxSize = size; }

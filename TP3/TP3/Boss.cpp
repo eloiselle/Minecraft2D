@@ -1,6 +1,4 @@
 #pragma once
 #include "Boss.h"
 
-Boss::Boss(const Boss & boss)
-{
-}
+// Aucune methodes puisque la classe fait seulement heriter de deux autres classes

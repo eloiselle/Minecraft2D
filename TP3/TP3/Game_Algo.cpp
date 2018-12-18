@@ -31,7 +31,6 @@ void Game::mainLoop()
 
 void Game::managePlayer()
 {
-
     if (_player.isDead())
         handlePlayerDeath();
 
@@ -40,11 +39,8 @@ void Game::managePlayer()
     if (areOnTheSameSquare(_player, _boss))
         _player.loseHp(1);
 
-
     managePlayerAnimation();
 }
-
-
 
 void Game::manageMapExpansion()
 {
@@ -57,7 +53,6 @@ void Game::manageMapExpansion()
         handleBatCreation();
     }
 }
-
 
 // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
@@ -76,10 +71,8 @@ void Game::manageBoss()
     manageBossHeight();
     moveBoss();     // Deplacement horizontal et legere variation verticale
 
-
     manageBossWeapon();
 }
-
 
 void Game::manageFoes()
 {
@@ -100,7 +93,7 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
     {
         if (_frameRun % 24 == 12 && MUSIQUE)
         {
-            _bats.back().play(_buffFoes);
+            _bats.back().playSound(_buffFoes);
         }
         c->stopMoving();
         tryToMoveInDirection(*c, static_cast<DIRECTION4>(rand() % 4));
@@ -118,10 +111,9 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
         c = _bats.erase(c);
     else
         c++;
-
 }
 
-bool Game::toolIsAShooter()
+bool Game::toolIsAShooter()const
 {
     switch (_currentTool)
     {
@@ -138,10 +130,7 @@ bool Game::toolIsAShooter()
         return true;        break;
     default:                break;
     }
-
 }
-
-
 
 void Game::manageSphereShield()
 {
@@ -161,8 +150,6 @@ void Game::manageSphereShield()
 
 void Game::manageBullets()
 {
-
-
     // List of bullets
 
     list<Bullet>::iterator b = _bullets.begin();
@@ -170,7 +157,7 @@ void Game::manageBullets()
     while (b != _bullets.end())
     {
         _bulletWillVanish = false;
-        if (b->getHoming())
+        if (b->isHoming())
         {
             if (b->getTarget().isAlive())
                 b->aim(b->getTarget());
@@ -191,7 +178,6 @@ void Game::manageBullets()
             {
                 collisionBulletPlayer(*b);
             }
-
         }
         else
             _bulletWillVanish = true;

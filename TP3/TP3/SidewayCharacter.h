@@ -11,37 +11,35 @@ Goal  : Defini un personnage qui se deplace vue de côté
 
 #include "Character.h"
 
-constexpr float MAX_FALL_SPEED = 8;
-constexpr float GRAVITY = 0.5;
-constexpr float JUMP_STRENGTH = 8;
+constexpr float MAX_FALL_SPEED = 8;     // Vitesse maximale de descente
+constexpr float GRAVITY = 0.5;          // Diminution periodique de la force verticale
+constexpr float JUMP_STRENGTH = 8;      // Force de depart du saut
 
 class SidewayCharacter : public Character
 {
 private:
-    bool _isLookingRight;   // Direction qu'il regarde
-    float _upMomentum;      // Acceleration verticale; Positif == Ascendant
+    bool _isLookingRight;               // Direction qu'il regarde
+    float _upMomentum;                  // Acceleration verticale; Positif == Ascendant
 
 public:
+    int getUpMomentum()const;           // Retourne la vitesse verticale ascendante
+    int getDownMomentum()const;         // Retourne la vitesse verticale descendante
+    bool isLookingToTheRight()const;    // Retourne s'il regarde vers la droite
+    bool isLookingToTheLeft()const;     // Retourne s'il regarde vers la gauche
 
-    int getUpMomentum();    // Retourne la vitesse verticale ascendante
-    int getDownMomentum();  // Retourne la vitesse verticale descendante
-    bool isLookingToTheRight();
-    bool isLookingToTheLeft();
+    void lookToTheRight(bool isLookingToTheRight = true);  // Change la direction vers lequel il regarde
+    void lookToTheLeft(bool isLookingToTheLeft = false);   // Change la direction vers lequel il regarde
 
-    void lookToTheRight(bool isLookingToTheRight = true);  //
-    void lookToTheLeft(bool isLookingToTheLeft = false);   //
+    bool hasNoMomentum()const;          // Verifi si la position vertical est a 0
+    bool isFalling()const;              // Est en train de tomber
+    bool isRising()const;               // Est en train de monter
 
-    bool hasNoMomentum();   // Verifi si la position vertical est a 0
-    bool isFalling();       // Est en train de tomber
-    bool isRising();        // Est en train de monter
-
-    void tryToJump();            // Commence un saut
+    void tryToJump();                   // Commence un saut
     void startJump();
-    void stopMomentum();    // Arrete le momentum
-    void applyMomentum();   // Effectu les operations de routine
-    void applyMomentum(int upMomentum); //
+    void stopMomentum();                // Arrete le momentum
+    void applyMomentum();               // Effectu les operations de routine
+    void applyMomentum(int upMomentum); // Applique un certain momentum
 
-    void riseBy(int pixels);
-
-    void fallBy(int pixels);
+    void riseBy(int pixels);            // Deplace de exactement p pixels vers le haut
+    void fallBy(int pixels);            // Deplace de exactement p pixels vers le bas
 };

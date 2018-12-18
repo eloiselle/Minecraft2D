@@ -1,32 +1,32 @@
+###############################################################################
 
-Priorities: (High to Low)
-    Remise      : Trouver comment faire le vidéo
-    Player      : Fixer le bug du marche dans les airs (C)
-    Boss        : Faire que le boss lance des bullet (A)
-    Bullet      : Detecter les collision de bullet avec le joueur (A)
-    Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
+Taches Remise   :
+    Video       : Faire la video
+    Video       : Editer la video
+    Code        : Effacer/Commenter ce qui n´est pas utilisé
+    Remise      : Remettre le projet et le video
+    Oral        : Planifier ce qu´on va dire dans l´oral
+
+Should be done  :
+    Player      : Fixer le bug du marche vers la gauche (C)
     Weapon      : Bulletshield  : Implanter les collisions (E)
     Weapon      : Homing        : appeller Aim() frequemment (E)
-    Weapon      : Explosion qui tire dans toutes les directions avec un grod delai (E)
-    Bullet      : Les bullet doivent memoriser les damage de l'arme (E)
-    Map         : Faire rapetisser la map (A)
-    Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
-    View        : Remettre une facon de changer la view
 
+Si on a le temps:
+    View        : Remettre une facon de changer la view
+    Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
+    Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
+    Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
+
+Abandonnes:
+    Map         : Faire rapetisser la map (A)
+    Weapon      : Separer Weapon en deux classes Weapon et Gun
+    Weapon      : Explosion qui tire dans toutes les directions avec un gros delai (E)
     Meta        : Timer qui compte en descendant (A)
     Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
     Map         : Map Editor Sauvegarder la map et la loader
 
 
-Taches pre-remise:
-    Faire la video
-    Editer la video
-    Code:
-        Mettre des entete de fichier dans tous les fichiers
-        Mettre des commentaires aux endroit necessaire
-        Effacer/Commenter ce qui n´est pas utilisé
-    Remettre le projet et le video
-    Planifier ce qu´on va dire dans l´oral
 
 
 Final : 20 décembre à 8h30

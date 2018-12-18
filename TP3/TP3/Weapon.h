@@ -40,12 +40,12 @@ public:
     void setWeaponBoss(int _frameRun);                  //
     void setCustom(float, int, float, float, int);      //
 
-    int getWeaponNbBulletsFired();                      //
-    int getWeaponAccuracy();                            //
-    int getWeaponRateOfFire();                          //
-    float getWeaponBulletSpeed();                       //
-    float getWeaponDamage();                            //
-    Bullet getBullet();                                 //
+    int getWeaponNbBulletsFired()const;                 //
+    int getWeaponAccuracy()const;                       //
+    int getWeaponRateOfFire()const;                     //
+    float getWeaponBulletSpeed()const;                  //
+    float getWeaponDamage()const;                       //
+    Bullet getBullet()const;                            //
 
     void setWeaponNbBulletsFired(int);                  //
     void setWeaponAccuracy(int);                        //

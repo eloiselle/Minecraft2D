@@ -2,8 +2,7 @@
 File  : Crawler.h
 Author: Anthony Cote
 Date  : 2018-04-23
-Goal  : Personnage controlé par l'ordinateur
-        a l'origine c'est des ennemis dans Bomberman
+Goal  : Personnage controlé par l'ordinateur qui se deplace aleatoirement
 ******************************************************************************/
 
 #pragma once
@@ -19,9 +18,17 @@ enum AI_Frequency { EVERY_MEET_WALL, EVERY_SQUARE, EVERY_SECOND };
 
 class Crawler : public TopDownCharacter
 {
+protected:
+    AI_Move _aiMove;                        // Quel genre de decision le robot prend
+    AI_Frequency _aiFreq;                   // Quand le robot prend des decisions
+    bool _isControllable = true;            // Si le crawler est controllable
+    int _frameLeftBeforeControl;            // Nombre de frame avant que le crawler puisse etre controller
+
+    sf::Sound _sound;                       // Son
+    sf::SoundBuffer _buffer;                // Buffer de son
 public:
-    Crawler();
-    Crawler(int x, int y, AI_Move ai, AI_Frequency decisionAI);
+    Crawler();  // Constructeur sans parametres
+    Crawler(int x, int y, AI_Move ai, AI_Frequency decisionAI); // Constructeur avec parametres
 
     // Gets
 
@@ -29,24 +36,17 @@ public:
     void init(int x, int y, AI_Move Random, AI_Frequency WhenCannotWalk); // Re-set tout
     void setAI(AI_Move ai, AI_Frequency decisionAI); // Change l'intelligence artificielle
     void move();                            // se deplace de 1 vers l'avant
-    void move(int x, int y);
-    void startMoving();
-    void stopMoving();
+    void move(int x, int y);                // se deplace selon les coordonnees
+    void startMoving();                     // commence un deplacement automatique
+    void stopMoving();                      // termine un deplacement automatique
     void turnLeft();                        // change de direction anticlockwise
     void turnRight();                       // change de direction clockwise
 
-    void play(sf::SoundBuffer & buff);
+    void playSound(sf::SoundBuffer & buff); // Joue un effet sonore
 
     // Operations
     //void chooseNextMove(FixedGrid& map);    // Utilise l'AI pour change de strategy
     //void update(int time, FixedGrid& map);  // effectu les operation de routine
 
-protected:
-    AI_Move _aiMove;                        // Quel genre de decision le robot prend
-    AI_Frequency _aiFreq;                   // Quand le robot prend des decisions
-    bool _isControllable = true;
-    int _frameLeftBeforeControl;
 
-    sf::Sound _sound;
-    sf::SoundBuffer _buffer;
 };

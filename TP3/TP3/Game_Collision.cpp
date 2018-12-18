@@ -7,7 +7,7 @@ void Game::collisionBulletBlock(Bullet& b)
     {
         _bulletWillVanish = true;
     }
-    
+
     if (_map.isDestructible(b))
     {
         int l = b.getGridLine();
@@ -25,8 +25,6 @@ void Game::collisionBulletBlock(Bullet& b)
             _map.at(l, c) = EMPTY_BLOCK;
 
         _bulletWillVanish = true;
-
-
     }
 }
 

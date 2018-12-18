@@ -2,7 +2,8 @@
 File  : Boss.cpp
 Author: Anthony Cote
 Date  : 2018-12-17
-Goal  : Defini les ennemis du joueur
+Goal  : Represente un ennemi qui peux attaquer
+        La classe fait seulement heriter de deux classes
 ******************************************************************************/
 
 #pragma once
@@ -12,7 +13,5 @@ Goal  : Defini les ennemis du joueur
 
 class Boss : public Crawler, public Weapon
 {
-public:
-    Boss() {};               // Constructeur
-    Boss(const Boss& boss);    // Copieur
+public: // La classe fait seulement heriter de deux classes
 };

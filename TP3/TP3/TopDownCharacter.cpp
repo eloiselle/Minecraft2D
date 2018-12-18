@@ -9,12 +9,9 @@ void TopDownCharacter::init()
 
 // Get
 DIRECTION4 TopDownCharacter::getDirection() { return _direction; }
-//float TopDownCharacter::getLength() { return _length; }
-bool TopDownCharacter::isWalking() { return _isWalking; }
-void TopDownCharacter::stayThere() { move(0, 0); }
+bool TopDownCharacter::isWalking()const { return _isWalking; }
 
 // Set
-//void TopDownCharacter::setDirection(int dir) { _direction = dir; } TODO casting
 void TopDownCharacter::setDirection(DIRECTION4 dir) { _direction = dir; }
 void TopDownCharacter::isWalking(bool isWalking) { _isWalking = isWalking; }
 

@@ -4,7 +4,6 @@
 // Gere les animation du joueur
 void Game::managePlayerAnimation()
 {
-
     if (playerIsOnTheGround())
     {
         animIdle();
@@ -21,9 +20,7 @@ void Game::managePlayerAnimation()
     }
     else
         animAir();
-
 }
-
 
 // animations image lorsque ne bouge pas
 void Game::animIdle()

@@ -100,7 +100,7 @@ void Game::initSprites()
     }
 
     // Map
-    for (size_t version = 0; version < 8; version++)
+    for (size_t version = 0; version < NB_VERSION_BLOCK; version++)
     {
         _tileSprite[EMPTY_BLOCK][version] = initOneSprite(0 + version, 0, _tileset);
         _tileSprite[SOFT_BLOCK][version] = initOneSprite(7 + version, 5, _tileset);

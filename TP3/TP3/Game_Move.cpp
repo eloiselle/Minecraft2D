@@ -3,7 +3,6 @@
 
 void Game::managePlayerJump()
 {
-
     if (playerHitTheCeiling())
     {
         _player.fallBy(MAX_FALL_SPEED + 1);
@@ -15,7 +14,6 @@ void Game::managePlayerJump()
 
     if (pixelsBeforeBottomBorder() > 0) // In air
     {
-
         if (_player.isRising() && playerHitTheCeiling())
         {
             _player.stopMomentum();
@@ -43,39 +41,39 @@ void Game::managePlayerJump()
 
 // END OF MANAGERS
 
-bool Game::playerIsOnTheGround()
+bool Game::playerIsOnTheGround()const
 {
     return (pixelsBeforeBottomBorder() == 1
         && !_map.isTraversable(_player.getExactX(), _player.getExactY() + TILE_SIZE));
 }
 
-int Game::pixelsBeforeTopBorder()
+int Game::pixelsBeforeTopBorder()const
 {
     return -(_player.getGridLine() * TILE_SIZE - _player.getExactY());
 }
 
-int Game::pixelsBeforeBottomBorder()
+int Game::pixelsBeforeBottomBorder()const
 {
     return _player.getGridLine() * TILE_SIZE - _player.getExactY() + 32;
 }
 
-int Game::pixelsToRise()
+int Game::pixelsToRise()const
 {
     return MAX(0, MIN(pixelsBeforeTopBorder(), _player.getUpMomentum()));
 }
 
-int Game::pixelsToFall()
+int Game::pixelsToFall()const
 {
     return MAX(0, MIN(pixelsBeforeBottomBorder(), _player.getDownMomentum()));
 }
 
-bool Game::playerHitTheCeiling()
+bool Game::playerHitTheCeiling()const
 {
     float newExactY = _player.getExactY() - _player.getUpMomentum() - PLAYER_HEIGHT;
     return !_map.isTraversable(_player.getExactX(), newExactY);
 }
 
-bool Game::playerIsLanding()
+bool Game::playerIsLanding()const
 {
     float newExactY = _player.getExactY() + _player.getDownMomentum();
     return !_map.isTraversable(_player.getExactX(), newExactY);

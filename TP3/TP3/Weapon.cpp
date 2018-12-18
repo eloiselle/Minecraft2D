@@ -109,14 +109,13 @@ void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float 
     delayInit(_frameRun, _totalDelay);
 }
 
-//string Weapon::getWeaponName() { return _nameEquippedWeapon; }
-int Weapon::getWeaponNbBulletsFired() { return _nbBulletsFired; }
-int Weapon::getWeaponAccuracy() { return _accuracy; }
-int Weapon::getWeaponRateOfFire() { return _totalDelay; }
-float Weapon::getWeaponBulletSpeed() { return _bulletSpeed; }
-float Weapon::getWeaponDamage() { return _damage; }
+int Weapon::getWeaponNbBulletsFired()const { return _nbBulletsFired; }
+int Weapon::getWeaponAccuracy()const { return _accuracy; }
+int Weapon::getWeaponRateOfFire()const { return _totalDelay; }
+float Weapon::getWeaponBulletSpeed()const { return _bulletSpeed; }
+float Weapon::getWeaponDamage()const { return _damage; }
 
-Bullet Weapon::getBullet()
+Bullet Weapon::getBullet()const
 {
     Bullet b;
     b.setDamage(_damage);
@@ -125,7 +124,6 @@ Bullet Weapon::getBullet()
     return b;
 }
 
-//void Weapon::setWeaponName(string name) { _nameEquippedWeapon = name; }
 void Weapon::setWeaponNbBulletsFired(int nb) { _nbBulletsFired = nb; }
 void Weapon::setWeaponAccuracy(int accuracy) { _accuracy = accuracy; }
 void Weapon::setWeaponRateOfFire(int rateOfFire) { _totalDelay = rateOfFire; }

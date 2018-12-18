@@ -2,8 +2,8 @@
 
 #include "Block.h"
 
-BLOCK_TYPE Block::getType() { return _type; }
-unsigned int Block::getVersion() { return _version; }
+BLOCK_TYPE Block::getType()const { return _type; }
+unsigned int Block::getVersion()const { return _version; }
 
 void Block::setType(BLOCK_TYPE type) { _type = type; }
 void Block::setVersion(int version) { _version = version; }

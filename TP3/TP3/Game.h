@@ -2,8 +2,17 @@
 File  : Game.h
 Author: Anthony Cote
 Date  : 2018-10-20
-Goal  : Solutionne un labyrinthe visuellement en SFML
-        avec l'aide d'une stack de deplacement
+Goal  : Lance une partie de Minecraft2D
+        C'est un jeu de plateforme :
+        - le joueur se deplace avec les fleches ou WASD
+        - le joueur peux selectionner un outil/arme avec les chiffres du clavier
+        - le joueur utilise la souris pour utilise l'outil actif
+        - la touche [P] met sur pause
+        - la touche [T] teleporte le joueur
+        - la roulette de souris permet de zoomer
+        - les blocs sont destructibles apres un nombre de dommage
+        - les ennemi peuvent etre tuer
+        - Le boss a une barre de vie en haut de l'ecran
 **********************************************************/
 #pragma once
 #include "pch.h"
@@ -15,13 +24,10 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 #include "Boss.h"
 
 using namespace std;
-using namespace sf;
-
-// Map
-constexpr char DEFAULT_FILENAME[] = "dataGrid.txt";
+using namespace sf;     // librairie SFML pour les graphiques et l'audio
 
 // Messages
-constexpr const char * STR_INSTRUCTIONS =
+constexpr const char * STR_INSTRUCTIONS =   // String a afficher a l'ecran de pause
 R"(******************** MINECRAFT 2D ********************
 INSTRUCTIONS
 
@@ -33,17 +39,17 @@ Press [Space] to jump
 Press [T] to Teleport
 
 Press [1] to select the Build tool
-Press [2] to [5] to change weapon
+Press [2] to [9] to change weapon
 
 Roll the mousewheel to zoom-in/zoom-out
 
 Click on the map to modify it.)";
 
-constexpr const char* STR_BOSS_KILLED =
+constexpr const char* STR_BOSS_KILLED =     // String a afficher apres avoir tuer le boss
 R"(Boss Killed :D
 
 Press[P] to start a new game)";
-constexpr const char* STR_GAME_OVER =
+constexpr const char* STR_GAME_OVER =       // String a afficher quand le joueur est mort
 R"(GAME OVER :(
 
 Press[P] to start a new game)";
@@ -79,9 +85,9 @@ constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace en
 constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
-constexpr int LINE_TO_CREATE_BATS = 5;                      //
-constexpr int NB_BOSS_BULLET = 90;                          //
-constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     //
+constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
+constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
+constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaque balle du boss
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -102,7 +108,7 @@ private:
     VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
     list<Crawler> _bats;                // Liste des chauves souris-enemies
-    Boss _boss;                         // Boss
+    Boss _boss;                         // Boss en haut de l'ecran
     unsigned int _score;                // Score du joueur
 
     // Window
@@ -116,9 +122,9 @@ private:
 
     // Text
     string _extraTitle = "";            // Restant du titre de la fenetre
-    string _message = STR_INSTRUCTIONS;  // Message pendant l'ecran de pause
+    string _message = STR_INSTRUCTIONS; // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
-    Text _messageOnShader;                 // Text afficher par dessus toute la scene
+    Text _messageOnShader;              // Text afficher par dessus toute la scene
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -147,15 +153,12 @@ private:
     Sprite _batSprite[4][4];            // Sprite du bat
 
     Texture _tileset;                   // Source d'image pour les sprite
-    Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
+    Sprite _tileSprite[5][NB_VERSION_BLOCK];    // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
     // Music
-    SoundBuffer _buffBullet;
-    SoundBuffer _buffFlap;				// buffer des sons
-    SoundBuffer _buffFoes;				// buffer des sons
-    Sound _soundBullet;
-    Sound _soundFlap;					// sons
     Music _music;						// musique
+    SoundBuffer _buffBullet;            // Buffer de son des bullet
+    SoundBuffer _buffFoes;				// Buffer de son des ennemis
 
     // Etat
     static enum AppState { RUNNING, PAUSED, BOSS_KILLED, GAME_OVER };   // Etat possibles de application
@@ -170,7 +173,6 @@ private:
 
     // Controles
     float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
-
     bool _bulletWillVanish;             // Si la balle va disparaitre
 public:
 
@@ -195,11 +197,11 @@ public:
     // Initialize un seul sprite a partir de ses proprietes
 
     // Animation
-    void managePlayerAnimation();                       //
-    void animRight();                                   //
-    void animLeft();                                    //
-    void animIdle();                                    //
-    void animAir();                                     //
+    void managePlayerAnimation();                       // Gere les animation du joueur
+    void animRight();                                   // Gere l'animation quand le joueur se deplace vers la droite
+    void animLeft();                                    // Gere l'animation quand le joueur se deplace vers la gauche
+    void animIdle();                                    // Gere l'animation quand le joueur ne se deplace pas
+    void animAir();                                     // Gere l'animation quand le joueur se deplace dans les air
 
     // Event
     void quitApplication();                             // Quitte l'application
@@ -225,8 +227,8 @@ public:
     void handleBossMovingDown();                        // Gere quand le boss doit descendre dans la map
     void handleBossDeath();                             // Gere quand le boss meurt
     void handleBatCreation();                           // Gere la creation de chauve-souris
-    void manageBossWeapon();
-    void bossShootBullet();
+    void manageBossWeapon();                            // Gere l'attaque du boss
+    void bossShootBullet();                             // Gere une bullet lancee par le boss
 
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map
@@ -249,22 +251,23 @@ public:
 
     void manageSphereShield();                          // Gere le bouclier
     void manageBullets();                               // Gere les projectiles
-    bool toolIsAShooter();                              // Regarde si _currentTool lance des bullets
+    bool toolIsAShooter()const;                         // Regarde si _currentTool lance des bullets
 
     // Edge detection
     void managePlayerJump();                            // Gere la physic du jump du joueur
-    bool playerIsOnTheGround();                         // Retourne si le joueur est en contact avec le sol
-    int pixelsBeforeTopBorder();                        // Nombre de pixel avant de tomber dans l'autre case du haut
-    int pixelsBeforeBottomBorder();                     // Nombre de pixel avant de tomber dans l'autre case du bas
-    int pixelsToRise();                                 // Nombre de pixel qu'on peux monter sans collision avec momentum
-    int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
-    bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
-    bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
+    bool playerIsOnTheGround()const;                    // Retourne si le joueur est en contact avec le sol
+    int pixelsBeforeTopBorder()const;                   // Nombre de pixel avant de tomber dans l'autre case du haut
+    int pixelsBeforeBottomBorder()const;                // Nombre de pixel avant de tomber dans l'autre case du bas
+    int pixelsToRise()const;                            // Nombre de pixel qu'on peux monter sans collision avec momentum
+    int pixelsToFall()const;                            // Nombre de pixel qu'on peux tomber sans collision avec momentum
+    bool playerHitTheCeiling()const;                    // Detecte si on va entrer en collision avec le plafond
+    bool playerIsLanding()const;                        // Detecte si on va entrer en collision avec le plancher
+
     // Move
     void moveBoss();                                    // Deplace le boss en ellipse
     void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
     void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
-    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
+    void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);   // Crawler essaye de se deplacer
     void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
     void collisionBulletFoes(Bullet& b);                // Check les collision et les bullet et les ennemis
     void collisionBulletPlayer(Bullet & b);             // Check les collision entre un bullet et le joueur
@@ -276,10 +279,11 @@ public:
     void drawBossHealthBar();                           // Affiche la barre de hp du boss
     void drawThingsDirectlyOnTheScreen();               // Affiche les elements non affecter par la view
     void drawGrid();                                    // Affiche la grille de application
-    void drawPlayer();                          // Affiche les objets mobiles
-    void drawBulletsAndShield();
-    void drawFoes();
-    void drawMovableGui();
+    void drawPlayer();                                  // Affiche les objets mobiles
+    void drawShield();                                  // Affiche les sphere du bouclier
+    void drawBullets();                                 // Affiche les projectiles
+    void drawFoes();                                    // Affiche les ennemis
+    void drawMovableGui();                              // Affiche les element du GUI comme la cible de la souris
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
     void printMap();                                    // Affiche le contenu de la map dans _debug
 };

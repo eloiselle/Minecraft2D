@@ -9,7 +9,6 @@ Goal  : Classe parent de haut niveau
 #pragma once
 #include "pch.h"
 
-#include "Position.h"
 #include "MagnetPosition.h"
 #include "Killable.h"
 
@@ -22,12 +21,12 @@ protected:
     float _speed;       // Vitesse de deplacement
 
 public:
-    Entity() : _speed(1.f), _hitBoxSize(1) {}; // Constructeur
-    Entity(const Entity & e);               // Copieur
+    Entity() : _speed(1.f), _hitBoxSize(1) {};  // Constructeur
+    Entity(const Entity & e);                   // Copieur
 
-    float getSpeed();                       // Retourne la vitesse
-    float getHitBoxSize();                  // Retourne le rayon du hit box
+    float getSpeed()const;                      // Retourne la vitesse
+    float getHitBoxSize()const;                 // Retourne le rayon du hit box
 
-    void setSpeed(float speed);             // Change la vitesse
-    void setHitBoxSize(float size);         // Change le rayon du hitbox
+    void setSpeed(float speed);                 // Change la vitesse
+    void setHitBoxSize(float size);             // Change le rayon du hitbox
 };

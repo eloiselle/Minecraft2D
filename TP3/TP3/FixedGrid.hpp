@@ -1,8 +1,8 @@
 /*****************************************************************************
-File  : Map.h
+File  : FixedGrid.h
 Author: Anthony Côté
 Date  : 2018-11-10
-Goal  : Grille de T qui représente le terrain du jeu
+Goal  : Grille templated qui représente une matrice
         La taille est defini en template donc elle n'est pas modifiable
 ******************************************************************************/
 #pragma once

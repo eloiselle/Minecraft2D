@@ -1,6 +1,11 @@
 #pragma once
 #include "MagnetPosition.h"
 
+tile_t MagnetPosition::getGridCol()const { return _gridC; }; 
+tile_t MagnetPosition::getGridLine()const { return _gridL; };
+pixel_t MagnetPosition::getExactX()const { return _exactX; };
+pixel_t MagnetPosition::getExactY()const { return _exactY; };
+
 // Copie la position
 void MagnetPosition::setPosition(MagnetPosition & mp)
 {
@@ -46,7 +51,7 @@ void MagnetPosition::updateGridPosition()
 }
 
 // Evalu si la position exacte est au centre d'une case
-bool MagnetPosition::isGridCentered()
+bool MagnetPosition::isGridCentered()const
 {
     return
         ((int)_exactX == (_gridC * RATIO) + RATIO / 2) &&
