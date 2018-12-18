@@ -11,122 +11,130 @@ int WorldMap::yFin() const { return _yFin; }
 
 void WorldMap::randomize()
 {
-    //assert(_map != nullptr);
-    //assert(_nbL > 0);
-    //assert(_nbC > 0);
+	//assert(_map != nullptr);
+	//assert(_nbL > 0);
+	//assert(_nbC > 0);
 
-    resize(25, 32);
+	resize(25, 32);
 
-    fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
-    randomizeLineVersion(0);
+	fillLine(0, HARD_BLOCK); // Premiere ligne de HARD_BLOCK pour prevenir des bug
+	randomizeLineVersion(0);
 
-    // Quelques premieres lignes vides
-    for (size_t l = 1; l < NBR_EMPTY_LINE_ON_TOP; l++)
-    {
-        fillLine(l, EMPTY_BLOCK);
-        randomizeLineVersion(l);
-    }
-    // On remplace les characteres par celui de l'entree
-    for (int l = NBR_EMPTY_LINE_ON_TOP; l < _nbL; l++)      // Lignes
-    {
-        randomizeLine(l);
-    }
+	// Quelques premieres lignes vides
+	for (size_t l = 1; l < NBR_EMPTY_LINE_ON_TOP; l++)
+	{
+		fillLine(l, EMPTY_BLOCK);
+		randomizeLineVersion(l);
+	}
 
-    // Rempli les bordures
-    for (size_t l = 0; l < _nbL; l++)
-    {
-        _map[l][0].setType(HARD_BLOCK);
-        _map[l][0].setRandomVersion();
-        _map[l][_nbC - 1].setType(HARD_BLOCK);
-        _map[l][_nbC - 1].setRandomVersion();
-    }
+	// On remplace les characteres par celui de l'entree
+	for (int l = NBR_EMPTY_LINE_ON_TOP; l < _nbL; l++)      // Lignes
+	{
+		randomizeLine(l);
+	}
+
+	// Construit un plancher pour le joueur (éviter les trous si on ne veut pas descendre)
+	for (size_t l = NBR_EMPTY_LINE_ON_TOP; l < NBR_GROUND_LINES + NBR_EMPTY_LINE_ON_TOP; l++)
+	{
+		fillLine(l, SOFT_BLOCK);
+		randomizeLineVersion(l);
+	}
+
+	// Rempli les bordures
+	for (size_t l = 0; l < _nbL; l++)
+	{
+		_map[l][0].setType(HARD_BLOCK);
+		_map[l][0].setRandomVersion();
+		_map[l][_nbC - 1].setType(HARD_BLOCK);
+		_map[l][_nbC - 1].setRandomVersion();
+	}
 }
 
 void WorldMap::randomizeLine(int line)
 {
-    BLOCK_TYPE blockByID[6] = {
-        EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
-        SOFT_BLOCK, SOFT_BLOCK,
-        HARD_BLOCK };
+	BLOCK_TYPE blockByID[6] = {
+		EMPTY_BLOCK, EMPTY_BLOCK, EMPTY_BLOCK,
+		SOFT_BLOCK, SOFT_BLOCK,
+		HARD_BLOCK };
 
-    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
-    {
-        _map[line][c].setType(blockByID[rand() % 6]);
-        _map[line][c].setRandomVersion();
-    }
+	for (int c = 1; c < _nbC - 1; c++)  // Colonnes
+	{
+		_map[line][c].setType(blockByID[rand() % 6]);
+		_map[line][c].setRandomVersion();
+	}
 
-    _map[line][0].setType(HARD_BLOCK);
-    _map[line][0].setRandomVersion();
-    _map[line][_nbC - 1].setType(HARD_BLOCK);
-    _map[line][_nbC - 1].setRandomVersion();
+	_map[line][0].setType(HARD_BLOCK);
+	_map[line][0].setRandomVersion();
+	_map[line][_nbC - 1].setType(HARD_BLOCK);
+	_map[line][_nbC - 1].setRandomVersion();
 }
 
 void WorldMap::fillLine(int line, BLOCK_TYPE bt)
 {
-    for (int c = 1; c < _nbC - 1; c++)  // Colonnes
-    {
-        _map[line][c].setType(bt);
-    }
+	for (int c = 1; c < _nbC - 1; c++)  // Colonnes
+	{
+		_map[line][c].setType(bt);
+	}
 
-    _map[line][0].setType(HARD_BLOCK);
-    _map[line][_nbC - 1].setType(HARD_BLOCK);
+	_map[line][0].setType(HARD_BLOCK);
+	_map[line][_nbC - 1].setType(HARD_BLOCK);
 }
 
 void WorldMap::randomizeLineVersion(int line)
 {
-    for (int c = 0; c < _nbC - 1; c++)  // Colonnes
-    {
-        _map[line][c].setRandomVersion();
-    }
+	for (int c = 0; c < _nbC - 1; c++)  // Colonnes
+	{
+		_map[line][c].setRandomVersion();
+	}
 }
 
 void WorldMap::readGrid(istream& is)
 {
-    assert(_map != nullptr);
-    assert(_nbL > 0);
-    assert(_nbC > 0);
+	assert(_map != nullptr);
+	assert(_nbL > 0);
+	assert(_nbC > 0);
 
-    // On remplace les characteres par celui de l'entree
-    for (int l = 0; l < _nbL; l++)      // Lignes
-    {
-        for (int c = 0; c < _nbC; c++)  // Colonnes
-        {
-            int val;
-            is >> val;          // Remplace le char suivant
-            _map[l][c].setType(static_cast<BLOCK_TYPE>(val));
-            _map[l][c].setRandomVersion();
-        }
-    }
+	// On remplace les characteres par celui de l'entree
+	for (int l = 0; l < _nbL; l++)      // Lignes
+	{
+		for (int c = 0; c < _nbC; c++)  // Colonnes
+		{
+			int val;
+			is >> val;          // Remplace le char suivant
+			_map[l][c].setType(static_cast<BLOCK_TYPE>(val));
+			_map[l][c].setRandomVersion();
+		}
+	}
 }
 
 // Lecture du fichier et extrait la map
 bool WorldMap::readFile(const char* nomFichier)
 {
-    openFile(nomFichier);
+	openFile(nomFichier);
 
-    if (isValidFile())
-    {
-        setName(nomFichier);
+	if (isValidFile())
+	{
+		setName(nomFichier);
 
-        // Lecture de la taille de la map
-        int nbL, nbC;
-        _ifs >> nbL >> nbC;
+		// Lecture de la taille de la map
+		int nbL, nbC;
+		_ifs >> nbL >> nbC;
 
-        resize(nbL, nbC);
+		resize(nbL, nbC);
 
-        readGrid(_ifs);
+		readGrid(_ifs);
 
-        // Prend les positions de depart et d'arrivee
-        _ifs >> _xDepart >> _yDepart >> _xFin >> _yFin;
+		// Prend les positions de depart et d'arrivee
+		_ifs >> _xDepart >> _yDepart >> _xFin >> _yFin;
 
-        _ifs.close();
-        return true;
-    }
-    else
-    {
-        cout << "Le fichier '" << nomFichier << "' n'existe pas.";
-        return false;
-    }
+		_ifs.close();
+		return true;
+	}
+	else
+	{
+		cout << "Le fichier '" << nomFichier << "' n'existe pas.";
+		return false;
+	}
 }
 
 // blockIs...
@@ -136,37 +144,37 @@ bool WorldMap::blockIsDestructible(Block& cm)const { return cm.getType() == SOFT
 // isTraversable
 bool WorldMap::isTraversable(pixel_t x, pixel_t y)const
 {
-    MagnetPosition mp;
-    mp.setPositionExact(x, y);
-    return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
+	MagnetPosition mp;
+	mp.setPositionExact(x, y);
+	return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 bool WorldMap::isTraversable(tile_t x, tile_t y)const
 {
-    return blockIsTraversable(at(y, x));
+	return blockIsTraversable(at(y, x));
 }
 
 bool WorldMap::isTraversable(MagnetPosition & mp)const
 {
-    return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
+	return blockIsTraversable(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 // isDestructible
 bool WorldMap::isDestructible(pixel_t x, pixel_t y)const
 {
-    MagnetPosition mp;
-    mp.setPositionExact(x, y);
-    return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
+	MagnetPosition mp;
+	mp.setPositionExact(x, y);
+	return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 bool WorldMap::isDestructible(tile_t x, tile_t y)const
 {
-    return blockIsDestructible(at(y, x));
+	return blockIsDestructible(at(y, x));
 }
 
 bool WorldMap::isDestructible(MagnetPosition & mp)const
 {
-    return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
+	return blockIsDestructible(at(mp.getGridLine(), mp.getGridCol()));
 }
 
 //char& WorldMap::at(MagnetPosition & mp)const

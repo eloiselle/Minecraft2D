@@ -70,7 +70,7 @@ constexpr int FRAME_WAITED = FRAMERATE / STEP_PER_SECOND;   // Nbr frame attendu
 constexpr int MOUSE_EXPLORE = 10;                           // Vitesse de Deplacement avec la souris
 constexpr int ARROW_EXPLORE = 10;                           // Vitesse de Deplacement avec les fleches
 constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre le joueur et le bas de la map pour aggrandir
-constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 8;          //
+constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 8;          // Nb de line entre le joueur et le boss
 
 // Character size
 constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avatar du joueur pour les collisions

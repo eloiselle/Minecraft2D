@@ -233,18 +233,18 @@ void Game::handleMouseButtonPressed()
 
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			//Placer un bloc
+			// Placer un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
-			//Si on est prêt à tirer
+			// Si on est prêt à tirer
 			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
 			{
 				Character* target = nullptr;
 
 				if (_currentTool == HOMING)
 				{
-					//On vise la _bat la plus proche du joueur
+					// On vise la _bat la plus proche du joueur
 					if (_bats.size() > 0)
 					{
 						target = &*(_bats.begin());
@@ -262,19 +262,19 @@ void Game::handleMouseButtonPressed()
 						}
 					}
 
-					//Si aucune _bat existe, vise le boss
+					// Si aucune _bat existe, vise le boss
 					else
 						target = &_boss;
 				}
 
-				//Tirer le nombre de bullets
+				// Tirer le nombre de bullets
 				for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
 					shootBullet(target);
 			}
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
 		{
-			//Enlever un bloc
+			// Enlever un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				removeBlockAtMouse(c, l);
 		}
