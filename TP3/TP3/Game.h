@@ -47,7 +47,6 @@ constexpr const char* STR_GAME_OVER =
 R"(GAME OVER :(
 
 Press[P] to start a new game)";
-
 // Window
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
 constexpr int MIN_WINDOW_WIDTH = 400;                       // Largeur minimum en pixel de l'ecran
@@ -55,6 +54,7 @@ constexpr int MIN_WINDOW_HEIGHT = 300;                      // Hauteur minimum e
 constexpr int DEF_WINDOW_WIDTH = 1024;                      // Largeur en pixel de l'ecran par defaut
 constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel de l'ecran par defaut
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
+
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -126,24 +126,24 @@ private:
     CircleShape _mouseCoord;            // Position de la souris qui ignore le changement fait par _view
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
-
     static enum { UNFRIENDLY = 0, FRIENDLY };   // Si les balles blesse le joueur ou le boss
-    CircleShape _bulletShape[2];        // 
-    CircleShape _aimingSight;           // 
+    CircleShape _bulletShape[2];        //
+    CircleShape _aimingSight;           //
     RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
 
     // Sprites
-    Image   _playerImage;               // Image du joueur pour modification de transparence
-    Texture _playerTexture;             // Texture du joueur
-    Sprite _playerSprites[4][8];		// Sprites de l'avatar
+    Sprite  _playerSprite;              // Sprite du joueur
+    Image _playerImage;					// Image de l'avatar
+    Texture _playerTexture;				// Texture de l'avatar
+    Sprite _playerSprites[4][9];		// Sprites de l'avatar
 
-    int _iSprite = 3;					// indice i du tableau de sprites
-    int _jSprite = 0;					// indice j du tableau de sprites
-    int _motion = 0;                    // quelle partie du mouvement
+    int _animFrame = 3;					// indice i du tableau de sprites
+    int _animType = 0;					// indice j du tableau de sprites
 
     Image _batImage;                    // Image du bat pour modification de transparence
     Texture _batTexture;                // Texture du bat
     Sprite _batSprite[4][4];            // Sprite du bat
+
     Texture _tileset;                   // Source d'image pour les sprite
     Sprite _tileSprite[5][8];           // Ensemble de sprite pour afficher la map [TYPE][VERSION]
 
@@ -154,7 +154,6 @@ private:
     Sound _soundBullet;
     Sound _soundFlap;					// sons
     Music _music;						// musique
-
     // Etat
     static enum AppState { RUNNING, PAUSED, BOSS_KILLED, GAME_OVER };   // Etat possibles de application
     string _appStateName[4] = { "Running", "Paused", "Boss Killed", "Game Over" };
@@ -168,6 +167,7 @@ private:
 
     // Controles
     float _proximityRatio;              // Ratio de proximite de la bordure de la fenetre centré a 1
+
     bool _bulletWillVanish;             // Si la balle va disparaitre
 public:
 
@@ -184,11 +184,15 @@ public:
     void initBoss();                    // Initialization du Boss
     void initFoes();                    // Initialization des ennemis
     void initWorldMap();                // Initialization du labyrinthe
-    void initMusic();                   // Initialization de la musique
-    void initSounds();                  // Initialization des effet sonores
+    void initMusic();                   // Initialisation de la musique
+    void initSounds();                  // Initialisation des sons
+
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes
+    void animRight();
+    void animLeft();
+    void animIdle();
 
     // Event
     void quitApplication();                             // Quitte l'application
@@ -240,7 +244,6 @@ public:
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter();                              // Regarde si _currentTool lance des bullets
 
-
     // Edge detection
     void managePlayerJump();                            // Gere la physic du jump du joueur
     bool playerIsOnTheGround();                         // Retourne si le joueur est en contact avec le sol
@@ -250,15 +253,13 @@ public:
     int pixelsToFall();                                 // Nombre de pixel qu'on peux tomber sans collision avec momentum
     bool playerHitTheCeiling();                         // Detecte si on va entrer en collision avec le plafond
     bool playerIsLanding();                             // Detecte si on va entrer en collision avec le plancher
-
     // Move
     void moveBoss();                                    // Deplace le boss en ellipse
-    void tryToMove(DIRECTION4 dir, SidewayCharacter& player);   // SidewayCharacter essaye de se deplacer
-    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);    // TopDownCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, SidewayCharacter& player); // SidewayCharacter essaye de se deplacer
+    void tryToMove(DIRECTION4 dir, TopDownCharacter& mover);  // TopDownCharacter essaye de se deplacer
     void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
     void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
     void collisionBulletFoes(Bullet& b);                // Check les collision et les bullet et les ennemis
-
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window
@@ -267,7 +268,10 @@ public:
     void drawBossHealthBar();                           // Affiche la barre de hp du boss
     void drawThingsDirectlyOnTheScreen();               // Affiche les elements non affecter par la view
     void drawGrid();                                    // Affiche la grille de application
-    void drawMovableObjects();                          // Affiche les objets mobiles
+    void drawPlayer();                          // Affiche les objets mobiles
+    void drawBulletsAndShield();
+    void drawFoes();
+    void drawMovableGui();
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical
     void printMap();                                    // Affiche le contenu de la map dans _debug
 };

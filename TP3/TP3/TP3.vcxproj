@@ -161,6 +161,7 @@
     <ClCompile Include="Crawler.cpp" />
     <ClCompile Include="Delay.cpp" />
     <ClCompile Include="FileOpener.cpp" />
+    <ClCompile Include="Game_Anim.cpp" />
     <ClCompile Include="Game_Collision.cpp" />
     <ClCompile Include="Game_GameHandler.cpp" />
     <ClCompile Include="Game_Move.cpp" />

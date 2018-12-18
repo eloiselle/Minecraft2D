@@ -23,13 +23,11 @@ void Game::init()
     initSprites();
     initShapes();
 
-
     initPlayer();
     initShield();
     initFoes();
     initBoss();
     _bullets.clear();
-
     initTexts();
     initMusic();
     initSounds();
@@ -63,10 +61,12 @@ void Game::initSprites()
     // Load files
     if (!_tileset.loadFromFile("img\\tiles.bmp"))
         quitApplication();
+
     if (!_batTexture.loadFromFile("img\\bat.bmp"))
         quitApplication();
     if (!_batImage.loadFromFile("img\\bat.bmp"))
         quitApplication();
+
     if (!_playerTexture.loadFromFile("img\\waddle_doo.bmp"))
         quitApplication();
     if (!_playerImage.loadFromFile("img\\waddle_doo.bmp"))
@@ -75,7 +75,7 @@ void Game::initSprites()
     // Player
     for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 8; j++) // initialiser toutes les sprites
+        for (int j = 0; j < 9; j++) // initialiser toutes les sprites
         {
             _playerSprites[i][j] = initOneSprite(i, j, _playerTexture);
             _playerImage.createMaskFromColor(Color(255, 255, 255));
@@ -140,9 +140,9 @@ void Game::initTexts()
 
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
-    _debugInfo.setCharacterSize(24);                    // In pixels
-    _debugInfo.setFillColor(Color(255, 255, 255, 128)); // White
-    _debugInfo.setOutlineColor(Color(64, 64, 64, 128)); // Dark grey
+    _debugInfo.setCharacterSize(24);                // In pixels
+    _debugInfo.setFillColor(Color(255, 255, 255, 128));  // White
+    _debugInfo.setOutlineColor(Color(64, 64, 64, 128));  // Dark grey
     _debugInfo.setOutlineThickness(3);
     _debugInfo.setPosition(32, 32);
 }
@@ -150,11 +150,16 @@ void Game::initTexts()
 // Initialize les shapes
 void Game::initShapes()
 {
+    // TODO erase ?
+    _playerShape.setFillColor(Color::Green);
+    _playerShape.setSize(Vector2f(3, 3));
+    _playerShape.setOrigin(2, 2);
+
     // Bullet
     _bulletShape[UNFRIENDLY].setRadius(2);
     _bulletShape[UNFRIENDLY].setOrigin(1, 1);
     _bulletShape[UNFRIENDLY].setFillColor(Color::Red);
-    _bulletShape[UNFRIENDLY].setOutlineColor(Color(128,0,0));
+    _bulletShape[UNFRIENDLY].setOutlineColor(Color(128, 0, 0));
     _bulletShape[UNFRIENDLY].setOutlineThickness(1);
 
     _bulletShape[FRIENDLY].setRadius(2);
@@ -167,7 +172,6 @@ void Game::initShapes()
     _mouseCoord.setFillColor(Color::Red);
     _mouseCoord.setRadius(2);
     _mouseCoord.setOrigin(2, 2);
-
     // Aiming Sight
     _aimingSight.setFillColor(Color::Transparent);
     _aimingSight.setOutlineColor(Color(0, 255, 255, 64));
@@ -214,17 +218,17 @@ void Game::initSounds()
     if (MUSIQUE)
     {
         _buffBullet.loadFromFile("music\\pew.wav");
-        _soundBullet.setBuffer(_buffBullet);
+        //_soundBullet.setBuffer(_buffBullet);
 
         _buffFoes.loadFromFile("music\\flap.wav");
-        _soundFlap.setBuffer(_buffFoes);
+        //_soundFlap.setBuffer(_buffFoes);
     }
 }
+
 void Game::initViews()
 {
     // DO NOT CHANGE _currentView HERE
     //_currentView = CAMERA; == BAD
-
     // Zoom
     float maxDim = MAX(_map.nbCol(), _map.nbLine());
     _view[NULL_VIEW] = handleResizeWindow();
@@ -258,7 +262,6 @@ void Game::initPlayer()
     _player.setPositionExact(
         PLAYER_START_C * TILE_SIZE + HALF_TILE_SIZE,
         PLAYER_START_L * TILE_SIZE + TILE_SIZE - 1);
-
     _player.setSpeed(4);
     _map.at(_player.getGridLine(), _player.getGridCol()) = EMPTY_BLOCK;
     _map.at(_player.getGridLine() + 1, _player.getGridCol()) = SOFT_BLOCK;

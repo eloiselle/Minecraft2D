@@ -12,9 +12,11 @@ void Game::drawWindow()
     updateWindowTitle();
     drawGrid();
     updateViews();
-    drawMovableObjects();
-
-
+    
+    drawPlayer();
+    drawFoes();
+    drawBulletsAndShield();
+    drawMovableGui();
 
     drawThingsDirectlyOnTheScreen();
 
@@ -46,7 +48,6 @@ void Game::updateWindowTitle()
     //    to_string(_mouseMagnet.getGridLine());
 
     _extraTitle += toolName[_currentTool];
-
     _extraTitle += "        Lives : " + to_string((int)_player.getHp()) + "/" + to_string((int)_player.getHpMax());
     _extraTitle += "        Game State : " + _appStateName[_appState];
     _extraTitle += "        Score : " + to_string(_score);
@@ -77,48 +78,14 @@ void Game::drawGrid()
     }
 }
 
-void Game::drawMovableObjects()
+void Game::drawPlayer()
 {
-    // Mouse Square
-    _mouseMagnet.setPositionExact(
-        _mouseCoord.getPosition().x,
-        _mouseCoord.getPosition().y);
-    if (_currentTool == BUILD)
-    {
-        _mouseSquare.setPosition(
-            _mouseMagnet.getGridCol() * TILE_SIZE,
-            _mouseMagnet.getGridLine() * TILE_SIZE);
-        _window.draw(_mouseSquare);
-    }
+    _playerSprites[_animFrame][_animType].setPosition(_player.getExactX(), _player.getExactY());
+    _window.draw(_playerSprites[_animFrame][_animType]);
+}
 
-
-    // Player
-    _playerSprites[_iSprite][_jSprite].setPosition(
-        _player.getExactX(),
-        _player.getExactY());
-    _window.draw(_playerSprites[_iSprite][_jSprite]);
-
-    for (Crawler& c : _bats)
-    {
-        _batSprite[_frameRun / 5 % 4][c.getDirection()].setPosition(
-            c.getExactX(),
-            c.getExactY());
-        _window.draw(_batSprite[_frameRun / 5 % 4][c.getDirection()]);
-    }
-
-    // Player
-    _playerSprites[_iSprite][_jSprite].setPosition(_player.getExactX(), _player.getExactY());
-    _window.draw(_playerSprites[_iSprite][_jSprite]);
-
-    // Boss
-    if (_boss.isAlive())
-    {
-        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(2,2));
-        _batSprite[_frameRun / 5 % 4][2].setPosition(_boss.getExactX(), _boss.getExactY());
-        _window.draw(_batSprite[_frameRun / 5 % 4][2]);
-        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(1, 1));
-    }
-
+void Game::drawBulletsAndShield()
+{
     // Bullet Shield
     if (_currentTool == SPHERE_SHIELD)
     {
@@ -134,11 +101,22 @@ void Game::drawMovableObjects()
     {
         _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
         _window.draw(_bulletShape[b->isFriendly()]);
-        //_debug += "\r\n" +
-        //    to_string(b->getDirectionDegree()) + " " +
-        //    to_string(b->getExactX()) + " " +
-        //    to_string(b->getExactY()) + " " +
-        //    to_string(b->getLength());
+    }
+}
+
+void Game::drawMovableGui()
+{
+    // Mouse Square
+    _mouseMagnet.setPositionExact(
+        _mouseCoord.getPosition().x,
+        _mouseCoord.getPosition().y);
+
+    if (_currentTool == BUILD)
+    {
+        _mouseSquare.setPosition(
+            _mouseMagnet.getGridCol() * TILE_SIZE,
+            _mouseMagnet.getGridLine() * TILE_SIZE);
+        _window.draw(_mouseSquare);
     }
 
     if (toolIsAShooter())
@@ -147,6 +125,27 @@ void Game::drawMovableObjects()
             _mouseCoord.getPosition().x,
             _mouseCoord.getPosition().y);
         _window.draw(_aimingSight);
+    }
+}
+
+void Game::drawFoes()
+{
+    // Bats
+    for (Crawler& c : _bats)
+    {
+        _batSprite[_frameRun / 5 % 4][c.getDirection()].setPosition(
+            c.getExactX(),
+            c.getExactY());
+        _window.draw(_batSprite[_frameRun / 5 % 4][c.getDirection()]);
+    }
+
+    // Boss
+    if (_boss.isAlive())
+    {
+        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(2, 2));
+        _batSprite[_frameRun / 5 % 4][2].setPosition(_boss.getExactX(), _boss.getExactY());
+        _window.draw(_batSprite[_frameRun / 5 % 4][2]);
+        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(1, 1));
     }
 }
 
@@ -162,9 +161,7 @@ void Game::drawBossHealthBar()
         _bossHealthBar.setPosition(3, 3);
         _window.draw(_bossHealthBar);
     }
-
 }
-
 // Affiche les objets qui ne sont pas affecter par la view
 void Game::drawThingsDirectlyOnTheScreen()
 {
@@ -173,7 +170,7 @@ void Game::drawThingsDirectlyOnTheScreen()
     drawBossHealthBar();
 
     // Affichage du shader
-    if( _appState != RUNNING)
+    if (_appState != RUNNING)
     {
         _window.draw(_shader);
         _window.draw(_messageOnShader);

@@ -1,11 +1,10 @@
 #pragma once
 #include "Game.h"
 
-
 void Game::managePlayerJump()
 {
-    _iSprite = 0;
-    _jSprite = 0;
+    _animFrame = 0;
+    _animType = 0;
     if (playerHitTheCeiling())
     {
         _player.fallBy(MAX_FALL_SPEED + 1);
@@ -19,8 +18,8 @@ void Game::managePlayerJump()
     {
         if (_player.isFalling())
         {
-            _iSprite = 3;
-            _jSprite = 2;
+            _animFrame = 3;
+            _animType = 2;
         }
         if (_player.isRising() && playerHitTheCeiling())
         {

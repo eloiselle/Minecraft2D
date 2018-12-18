@@ -78,7 +78,6 @@ void WorldMap::randomizeLineVersion(int line)
     {
         _map[line][c].setRandomVersion();
     }
-
 }
 
 void WorldMap::readGrid(istream& is)

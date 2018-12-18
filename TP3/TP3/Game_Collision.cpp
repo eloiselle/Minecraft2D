@@ -1,7 +1,6 @@
 #pragma once
 #include "Game.h"
 
-
 void Game::collisionBulletBlock(Bullet& b)
 {
     if (!_map.isTraversable(b))
@@ -21,7 +20,6 @@ void Game::collisionBulletBlock(Bullet& b)
 
         _score += SCORE_BLOCK;
     }
-
 }
 
 void Game::collisionBulletFoes(Bullet& b)

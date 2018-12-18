@@ -29,7 +29,6 @@ public:
     void setVersion(int version);
     void setRandomVersion();
 
-
     void set(BLOCK_TYPE type, unsigned int version);   // Set
     BLOCK_TYPE operator=(BLOCK_TYPE c);                     // Assigne
 };

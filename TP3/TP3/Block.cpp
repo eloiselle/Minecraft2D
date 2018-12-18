@@ -23,7 +23,6 @@ void Block::set(BLOCK_TYPE type, unsigned int version)
     _version = version;
 }
 
-
 // Operateur = pour assignation
 BLOCK_TYPE Block::operator=(BLOCK_TYPE c)
 {

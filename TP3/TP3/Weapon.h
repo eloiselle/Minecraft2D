@@ -13,7 +13,7 @@ Goal  : TODO : Gere des pattern compliquer de bullet
 //#include "AngleDegree.hpp"
 
 const enum TOOL { BUILD = 0, UZI, ASSAULT, SNIPER, SHOT_GUN, BULLET_HELL, SLOW_MO, HOMING, SPHERE_SHIELD, BOSS };
-const string toolName[10] = { 
+const string toolName[10] = {
     "Build", "Uzi", "Assault", "Sniper", "Shotgun",
     "BulletHell", "Slow-Mo", "Homing", "Sphere Shield", "Boss" };
 
@@ -23,7 +23,7 @@ protected:
 
     bool _friendly = false;     // Alliee du joueur
     int _delayMultiplier = 1;	// Multiplicateur sur le délai
-    int _nbBulletsFired;           
+    int _nbBulletsFired;
     int _accuracy;				// Détermine une variation dans _angle
     float _bulletSpeed;			// Vitesse des bullets
     float _damage;				// Dommages
@@ -39,15 +39,14 @@ public:
     void setHoming(int _frameRun);                      //
     void setWeaponBoss(int _frameRun);                  //
     void setCustom(float, int, float, float, int);      //
-                                                        
+
     int getWeaponNbBulletsFired();                      //
     int getWeaponAccuracy();                            //
     int getWeaponRateOfFire();                          //
     float getWeaponBulletSpeed();                       //
     float getWeaponDamage();                            //
     Bullet getBullet();                                 //
-                                                        
-                                                        
+
     void setWeaponNbBulletsFired(int);                  //
     void setWeaponAccuracy(int);                        //
     void setWeaponRateOfFire(int);                      //

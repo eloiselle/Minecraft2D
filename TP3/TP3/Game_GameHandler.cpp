@@ -11,7 +11,6 @@ void Game::manageBossWeapon()
 {
     if (_boss.delayIsReady(_frameRun))
     {
-
         for (size_t i = 0; i < NB_BOSS_BULLET; i++)
         {
             bossShootBullet();
@@ -21,7 +20,6 @@ void Game::manageBossWeapon()
         _boss.delayReset(_frameRun);
     }
 }
-
 
 void Game::bossShootBullet()
 {
@@ -34,14 +32,12 @@ void Game::bossShootBullet()
         _boss.getExactX(),
         _boss.getExactY());
 
-
     _bullets.back().aim(_player);
 
     _bullets.back().setFriendly(UNFRIENDLY);
     _bullets.back().setLength(10);
     _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
     _bullets.back().setDamage(_player.getWeaponDamage());
-
 }
 
 void Game::manageBossHeight()
@@ -55,7 +51,6 @@ void Game::manageBossHeight()
     else
         _boss.stopMoving();
 }
-
 
 void Game::handleBossDeath()
 {

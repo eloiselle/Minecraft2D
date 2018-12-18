@@ -40,7 +40,6 @@ void Game::managePlayer()
         _player.loseHp(1);
 }
 
-
 void Game::manageMapExpansion()
 {
     if (_player.getGridLine() >= _map.nbLine() - NB_LINE_BEFORE_EXPAND_MAP)
@@ -52,8 +51,6 @@ void Game::manageMapExpansion()
         handleBatCreation();
     }
 }
-
-
 // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
 {
@@ -67,14 +64,11 @@ void Game::manageBoss()
         handleBossDeath();
         return;
     }
-
     manageBossHeight();
     moveBoss();     // Deplacement horizontal et legere variation verticale
 
-
     manageBossWeapon();
 }
-
 
 void Game::manageFoes()
 {
@@ -113,30 +107,26 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
         c = _bats.erase(c);
     else
         c++;
-
 }
 
 bool Game::toolIsAShooter()
 {
     switch (_currentTool)
     {
-    case BUILD:    
-    case SLOW_MO:    
+    case BUILD:
+    case SLOW_MO:
     case SPHERE_SHIELD:
         return false;       break;
-    case UZI:    
-    case ASSAULT:    
-    case SNIPER:    
-    case SHOT_GUN:    
-    case BULLET_HELL:    
+    case UZI:
+    case ASSAULT:
+    case SNIPER:
+    case SHOT_GUN:
+    case BULLET_HELL:
     case HOMING:
         return true;        break;
     default:                break;
     }
-
 }
-
-
 
 void Game::manageSphereShield()
 {
@@ -156,10 +146,7 @@ void Game::manageSphereShield()
 
 void Game::manageBullets()
 {
-
-
     // List of bullets
-
     list<Bullet>::iterator b = _bullets.begin();
 
     while (b != _bullets.end())
@@ -178,11 +165,10 @@ void Game::manageBullets()
         if (isInMap(*b))
         {
             collisionBulletBlock(*b);
-            if ( b->isFriendly())
+            if (b->isFriendly())
             {
                 collisionBulletFoes(*b);
             }
-
         }
         else
             _bulletWillVanish = true;
