@@ -71,6 +71,7 @@ constexpr int PLAYER_HEIGHT = 16;                           // Hauteur de l'avat
 constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l'avatar du joueur pour les collisions
 
 // Game
+constexpr int NB_LIVES = 10;                                // Nombre de vies du joueurs au debut de partie
 constexpr int PLAYER_START_C = 15;                          // Position Col de depart du joueur
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
@@ -78,9 +79,9 @@ constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace en
 constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
 constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
-
-constexpr int NB_BOSS_BULLET = 180;
-constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;
+constexpr int LINE_TO_CREATE_BATS = 5;                      //
+constexpr int NB_BOSS_BULLET = 90;                          //
+constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     //
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -127,8 +128,8 @@ private:
     RectangleShape _mouseSquare;        // Carre qui affiche sur quelle case la souris se trouve
     RectangleShape _playerShape;        // Carre vert
     static enum { UNFRIENDLY = 0, FRIENDLY };   // Si les balles blesse le joueur ou le boss
-    CircleShape _bulletShape[2];        //
-    CircleShape _aimingSight;           //
+    CircleShape _bulletShape[2];        // Shape des bullets
+    CircleShape _aimingSight;           // Cercle vide comme cible
     RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
 
     // Sprites
@@ -139,6 +140,7 @@ private:
 
     int _animFrame = 3;					// indice i du tableau de sprites
     int _animType = 0;					// indice j du tableau de sprites
+    static enum ANIM_FRAME { IDLE = 0, WHAT, RUN_RIGHT, DO, DIE, CRY, WALK_RIGHT, RUN_LEFT, WALK_LEFT };
 
     Image _batImage;                    // Image du bat pour modification de transparence
     Texture _batTexture;                // Texture du bat
@@ -154,6 +156,7 @@ private:
     Sound _soundBullet;
     Sound _soundFlap;					// sons
     Music _music;						// musique
+
     // Etat
     static enum AppState { RUNNING, PAUSED, BOSS_KILLED, GAME_OVER };   // Etat possibles de application
     string _appStateName[4] = { "Running", "Paused", "Boss Killed", "Game Over" };
@@ -190,9 +193,13 @@ public:
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);
     // Initialize un seul sprite a partir de ses proprietes
-    void animRight();
-    void animLeft();
-    void animIdle();
+
+    // Animation
+    void managePlayerAnimation();                       //
+    void animRight();                                   //
+    void animLeft();                                    //
+    void animIdle();                                    //
+    void animAir();                                     //
 
     // Event
     void quitApplication();                             // Quitte l'application
@@ -260,6 +267,7 @@ public:
     void tryToMoveInDirection(Crawler & c, DIRECTION4 dir);     // Crawler essaye de se deplacer
     void collisionBulletBlock(Bullet& b);               // Check les collision entre un bullet et le block sous lui
     void collisionBulletFoes(Bullet& b);                // Check les collision et les bullet et les ennemis
+    void collisionBulletPlayer(Bullet & b);             // Check les collision entre un bullet et le joueur
 
     // Draw
     void drawWindow();                                  // Met a jour le contenu de la window

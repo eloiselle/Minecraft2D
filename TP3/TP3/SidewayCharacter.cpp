@@ -4,13 +4,15 @@
 // Récupere la vitesse de déplacement du saut
 int SidewayCharacter::getUpMomentum() { return _upMomentum; }
 int SidewayCharacter::getDownMomentum() { return -_upMomentum; }
-bool SidewayCharacter::getDirection() { return _isLookingRight; }
+bool SidewayCharacter::isLookingToTheRight() { return _isLookingRight; }
+bool SidewayCharacter::isLookingToTheLeft() { return !_isLookingRight; }
 
 bool SidewayCharacter::hasNoMomentum() { return _upMomentum == 0; }
 bool SidewayCharacter::isFalling() { return _upMomentum <= 0; }
 bool SidewayCharacter::isRising() { return _upMomentum > 0; }
 
-void SidewayCharacter::setDirection(bool isLookingRight) { _isLookingRight = isLookingRight; }
+void SidewayCharacter::lookToTheRight( bool isLookingRight) { _isLookingRight = isLookingRight; }
+void SidewayCharacter::lookToTheLeft(bool isLookingLeft) { _isLookingRight = !isLookingLeft; }
 
 void SidewayCharacter::stopMomentum() { _upMomentum = 0; }
 void SidewayCharacter::applyMomentum() { applyMomentum(_upMomentum); }

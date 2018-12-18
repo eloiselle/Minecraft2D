@@ -12,7 +12,8 @@ void Game::drawWindow()
     updateWindowTitle();
     drawGrid();
     updateViews();
-    
+
+
     drawPlayer();
     drawFoes();
     drawBulletsAndShield();
@@ -48,6 +49,7 @@ void Game::updateWindowTitle()
     //    to_string(_mouseMagnet.getGridLine());
 
     _extraTitle += toolName[_currentTool];
+
     _extraTitle += "        Lives : " + to_string((int)_player.getHp()) + "/" + to_string((int)_player.getHpMax());
     _extraTitle += "        Game State : " + _appStateName[_appState];
     _extraTitle += "        Score : " + to_string(_score);
@@ -77,6 +79,7 @@ void Game::drawGrid()
         }
     }
 }
+
 
 void Game::drawPlayer()
 {
@@ -149,6 +152,7 @@ void Game::drawFoes()
     }
 }
 
+
 void Game::drawBossHealthBar()
 {
     // Boss health bar
@@ -161,7 +165,9 @@ void Game::drawBossHealthBar()
         _bossHealthBar.setPosition(3, 3);
         _window.draw(_bossHealthBar);
     }
+
 }
+
 // Affiche les objets qui ne sont pas affecter par la view
 void Game::drawThingsDirectlyOnTheScreen()
 {
@@ -170,7 +176,7 @@ void Game::drawThingsDirectlyOnTheScreen()
     drawBossHealthBar();
 
     // Affichage du shader
-    if (_appState != RUNNING)
+    if( _appState != RUNNING)
     {
         _window.draw(_shader);
         _window.draw(_messageOnShader);

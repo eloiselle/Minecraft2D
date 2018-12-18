@@ -1,8 +1,7 @@
 
 Priorities: (High to Low)
     Remise      : Trouver comment faire le vidéo
-    Foes        : Changer image de _boss (C)
-    Player      : Implanter les animations de WaddleDoo (C)
+    Player      : Fixer le bug du marche dans les airs (C)
     Boss        : Faire que le boss lance des bullet (A)
     Bullet      : Detecter les collision de bullet avec le joueur (A)
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)

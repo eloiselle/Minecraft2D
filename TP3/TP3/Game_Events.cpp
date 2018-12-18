@@ -1,4 +1,3 @@
-#pragma once
 #include "Game.h"
 
 // ############################################################################
@@ -79,14 +78,14 @@ void Game::handlePausing()
 {
     switch (_appState)
     {
-    case Game::RUNNING:
-        _appState = PAUSED;
+    case Game::RUNNING:         
+        _appState = PAUSED;             
         break;
-    case Game::PAUSED:
-        _appState = RUNNING;
+    case Game::PAUSED:          
+        _appState = RUNNING;            
         break;
-    case Game::BOSS_KILLED:
-        init();
+    case Game::BOSS_KILLED:     
+        init();       
         _appState = RUNNING;
         break;
     case Game::GAME_OVER:
@@ -137,7 +136,6 @@ void Game::handleKeypress()
         _currentTool = BUILD;
         _player.setNoWeapon(_frameRun);
     }
-
     if (Keyboard::isKeyPressed(Keyboard::Num2))
     {
         _currentTool = UZI;
@@ -168,7 +166,6 @@ void Game::handleKeypress()
         _currentTool = SLOW_MO;
         _player.setNoWeapon(_frameRun);
     }
-
     if (Keyboard::isKeyPressed(Keyboard::Num8))
     {
         _currentTool = HOMING;
@@ -183,14 +180,7 @@ void Game::handleKeypress()
 
 void Game::handleArrowKeys()
 {
-    animIdle();
 
-    /* animation joueur tombe */
-    if (_player.isFalling() && _map.isTraversable(_player.getExactX(), _player.getExactY() + TILE_SIZE))
-    {
-        _animFrame = 3;
-        _animType = 2;
-    }
 
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
@@ -199,9 +189,6 @@ void Game::handleArrowKeys()
     {
         _view[CAMERA].move(0, -ARROW_EXPLORE);
 
-        /* Animation saut */
-        _animFrame = 0;
-        _animType = 3;
 
         if (playerIsOnTheGround())
             _player.startJump();
@@ -209,7 +196,8 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Right) ||
         Keyboard::isKeyPressed(Keyboard::D))
     {
-        animRight();
+        _player.lookToTheRight();
+
         _view[CAMERA].move(ARROW_EXPLORE, 0);
         tryToMove(RIGHT, _player);
     }
@@ -221,7 +209,7 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Left) ||
         Keyboard::isKeyPressed(Keyboard::A))
     {
-        animLeft();
+        _player.lookToTheLeft();
         _view[CAMERA].move(-ARROW_EXPLORE, 0);
         tryToMove(LEFT, _player);
     }
@@ -266,6 +254,7 @@ void Game::handleMouseButtonPressed()
                         }
                     }
                 }
+
                 for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
                 {
                     shootBullet(target);
@@ -280,6 +269,7 @@ void Game::handleMouseButtonPressed()
         }
     }
 }
+
 void Game::shootBullet(Character *target)
 {
     _bullets.push_back(Bullet());
@@ -290,6 +280,7 @@ void Game::shootBullet(Character *target)
     _bullets.back().setPositionExact(
         _player.getExactX(),
         _player.getExactY() - HALF_TILE_SIZE);
+
     if (target == nullptr)
     {
         _bullets.back().aim(
@@ -302,7 +293,8 @@ void Game::shootBullet(Character *target)
         _bullets.back().setTarget(target);
         _bullets.back().aim(*target);
     }
-    _bullets.back().setLength(10);
+
+
     _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
     _bullets.back().setDamage(_player.getWeaponDamage());
     _player.delayReset(_frameRun);

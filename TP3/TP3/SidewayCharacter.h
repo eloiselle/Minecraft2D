@@ -25,9 +25,11 @@ public:
 
     int getUpMomentum();    // Retourne la vitesse verticale ascendante
     int getDownMomentum();  // Retourne la vitesse verticale descendante
-    bool getDirection();    // Retourne la direction Gauche(0) ou Droite(1)
+    bool isLookingToTheRight();
+    bool isLookingToTheLeft();
 
-    void setDirection(bool isLookingRight); //
+    void lookToTheRight(bool isLookingToTheRight = true);  //
+    void lookToTheLeft(bool isLookingToTheLeft = false);   //
 
     bool hasNoMomentum();   // Verifi si la position vertical est a 0
     bool isFalling();       // Est en train de tomber

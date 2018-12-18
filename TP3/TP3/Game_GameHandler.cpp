@@ -11,6 +11,7 @@ void Game::manageBossWeapon()
 {
     if (_boss.delayIsReady(_frameRun))
     {
+
         for (size_t i = 0; i < NB_BOSS_BULLET; i++)
         {
             bossShootBullet();
@@ -21,23 +22,21 @@ void Game::manageBossWeapon()
     }
 }
 
+
 void Game::bossShootBullet()
 {
-    _bullets.push_back(Bullet());
-
-    if (MUSIQUE)
-        _bullets.back().play(_buffBullet);
+    _bullets.push_back(_boss.getBullet());
 
     _bullets.back().setPositionExact(
         _boss.getExactX(),
         _boss.getExactY());
 
+
     _bullets.back().aim(_player);
 
-    _bullets.back().setFriendly(UNFRIENDLY);
-    _bullets.back().setLength(10);
-    _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
-    _bullets.back().setDamage(_player.getWeaponDamage());
+    if (MUSIQUE)
+        _bullets.back().play(_buffBullet);
+
 }
 
 void Game::manageBossHeight()
@@ -51,6 +50,7 @@ void Game::manageBossHeight()
     else
         _boss.stopMoving();
 }
+
 
 void Game::handleBossDeath()
 {
@@ -76,7 +76,7 @@ void Game::handleBatCreation()
     {
         // Create new bat on last line
         int l = _map.nbLine() - 2;
-        int c = (rand() % (_map.nbCol() - 5)) + 3;
+        int c = (rand() % (_map.nbCol() - LINE_TO_CREATE_BATS)) + 3;
         _bats.push_back(Crawler());
         _bats.back().setPositionInGrid(c, l);
         _map.at(l, c).setType(EMPTY_BLOCK);

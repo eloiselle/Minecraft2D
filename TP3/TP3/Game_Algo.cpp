@@ -31,6 +31,7 @@ void Game::mainLoop()
 
 void Game::managePlayer()
 {
+
     if (_player.isDead())
         handlePlayerDeath();
 
@@ -38,7 +39,12 @@ void Game::managePlayer()
 
     if (areOnTheSameSquare(_player, _boss))
         _player.loseHp(1);
+
+
+    managePlayerAnimation();
 }
+
+
 
 void Game::manageMapExpansion()
 {
@@ -51,6 +57,8 @@ void Game::manageMapExpansion()
         handleBatCreation();
     }
 }
+
+
 // TODO supprimer si necessaire
 double smartCos(double base, double slowness = 1, double amplitude = 1, double minimum = 0)
 {
@@ -64,11 +72,14 @@ void Game::manageBoss()
         handleBossDeath();
         return;
     }
+
     manageBossHeight();
     moveBoss();     // Deplacement horizontal et legere variation verticale
 
+
     manageBossWeapon();
 }
+
 
 void Game::manageFoes()
 {
@@ -107,6 +118,7 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
         c = _bats.erase(c);
     else
         c++;
+
 }
 
 bool Game::toolIsAShooter()
@@ -126,7 +138,10 @@ bool Game::toolIsAShooter()
         return true;        break;
     default:                break;
     }
+
 }
+
+
 
 void Game::manageSphereShield()
 {
@@ -146,7 +161,10 @@ void Game::manageSphereShield()
 
 void Game::manageBullets()
 {
+
+
     // List of bullets
+
     list<Bullet>::iterator b = _bullets.begin();
 
     while (b != _bullets.end())
@@ -169,6 +187,11 @@ void Game::manageBullets()
             {
                 collisionBulletFoes(*b);
             }
+            else
+            {
+                collisionBulletPlayer(*b);
+            }
+
         }
         else
             _bulletWillVanish = true;

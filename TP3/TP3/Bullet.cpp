@@ -4,14 +4,14 @@
 Bullet::Bullet(float x, float y, float speed)
 {
     _hitBoxSize = 1;
-    _speed = speed;
+    _length = speed;
     setPositionExact(x, y);
 }
 
 // Deplace en fonction de la direction et de la vitesse
 void Bullet::advance()
 {
-    move(getX() * _speed, getY() * _speed);
+    move(getX() * _length, getY() * _length);
 }
 
 // Change l'angle en fonction de coords
@@ -28,24 +28,16 @@ void Bullet::aim(Character& ch)
         ch.getExactY() - _exactY);
 }
 
-void Bullet::setSpeed(float speed) { _speed = speed; }
+void Bullet::setSpeed(float speed) { _length = speed; }
 void Bullet::setDamage(int damage) { _damage = damage; }
 void Bullet::setTarget(Character * ch) { _target = ch; }
+void Bullet::setFriendly(bool friendly) { _friendly = friendly; }
 
-void Bullet::setFriendly(bool friendly)
-{
-    _friendly = friendly;
-}
-
-float Bullet::getSpeed() { return _speed; }
+float Bullet::getSpeed() { return _length; }
 int Bullet::getDamage() { return _damage; }
 Character& Bullet::getTarget() { return *_target; }
 bool Bullet::getHoming() { return _target != nullptr; }
-
-bool Bullet::isFriendly()
-{
-    return _friendly;
-}
+bool Bullet::isFriendly() { return _friendly; }
 
 void Bullet::play(sf::SoundBuffer & buff)
 {
