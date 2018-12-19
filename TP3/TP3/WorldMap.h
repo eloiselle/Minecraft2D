@@ -15,7 +15,7 @@ Goal  : Wrapper de Map<char> qui contient les positions de depart et arrivee
 using namespace std;
 
 constexpr int NBR_EMPTY_LINE_ON_TOP = 12;
-constexpr int NBR_GROUND_LINES = 5;
+constexpr int NBR_GROUND_LINES = 2;
 
 class WorldMap : public ResizableMap<Block>, FileOpener {
 private:

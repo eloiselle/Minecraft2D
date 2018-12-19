@@ -8,9 +8,9 @@ Taches Remise   :
     Oral        : Planifier ce qu´on va dire dans l´oral
 
 Should be done  :
-    Player      : Fixer le bug du marche vers la gauche (C)
     Weapon      : Bulletshield  : Implanter les collisions (E)
-    Weapon      : Homing        : appeller Aim() frequemment (E)
+    Music       : Utiliser une musique plus appropriée (C)
+    Art         : Faire une barre de hp pour le joueur (A)
 
 Si on a le temps:
     View        : Remettre une facon de changer la view
@@ -18,7 +18,7 @@ Si on a le temps:
     Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
 
-Abandonnes:
+Abandonnes      :
     Map         : Faire rapetisser la map (A)
     Weapon      : Separer Weapon en deux classes Weapon et Gun
     Weapon      : Explosion qui tire dans toutes les directions avec un gros delai (E)

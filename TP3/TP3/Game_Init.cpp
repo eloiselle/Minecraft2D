@@ -263,8 +263,8 @@ void Game::initPlayer()
 		PLAYER_START_C * TILE_SIZE + HALF_TILE_SIZE,
 		PLAYER_START_L * TILE_SIZE + TILE_SIZE - 1);
 	_player.setSpeed(4);
-	_map.at(_player.getGridLine(), _player.getGridCol()) = EMPTY_BLOCK;
-	_map.at(_player.getGridLine() + 1, _player.getGridCol()) = SOFT_BLOCK;
+	//_map.at(_player.getGridLine(), _player.getGridCol()) = EMPTY_BLOCK;
+	//_map.at(_player.getGridLine() + 1, _player.getGridCol()) = SOFT_BLOCK;
 }
 
 void Game::initShield()

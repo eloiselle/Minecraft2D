@@ -252,7 +252,7 @@ void Game::handleMouseButtonPressed()
 				}
 			}
 
-            shootWeapon();
+			shootWeapon();
 
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
