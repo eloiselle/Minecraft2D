@@ -8,13 +8,11 @@ Taches Remise   :
     Oral        : Planifier ce qu´on va dire dans l´oral
 
 Should be done  :
-    Weapon      : Bulletshield  : Implanter les collisions (E)
     List        : Finir d'utiliser la liste (C)
     Music       : Utiliser une musique plus appropriée (C)
 
 Si on a le temps:
     Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
-    Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
 
 Abandonnes      :
     Map         : Faire rapetisser la map (A)
