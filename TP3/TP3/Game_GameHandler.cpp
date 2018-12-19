@@ -18,7 +18,7 @@ void Game::handleBossDeath()
 
 void Game::manageBossWeapon()
 {
-    if (_boss.delayIsReady(_frameRun))
+    if (_boss.delayIsReady(_frameFoes))
     {
         for (size_t i = 0; i < NB_BOSS_BULLET; i++)
         {
@@ -26,7 +26,7 @@ void Game::manageBossWeapon()
 
             _bullets.back().rotate(ANGLE_BOSS_BULLET * i);
         }
-        _boss.delayReset(_frameRun);
+        _boss.delayReset(_frameFoes);
     }
 }
 

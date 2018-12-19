@@ -85,7 +85,7 @@ constexpr int PLAYER_START_C = 15;                          // Position Col de d
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace entre les chauves souris au depart
-constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
+constexpr int SLOW_MO_EFFECT = 3;                           // Frequence inverse d'action des foes lorsque en slow-mo
 constexpr int NB_SHIELD_INIT = 6;
 constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
@@ -174,6 +174,7 @@ private:
 
 	TOOL _currentTool;                  // Arme actuellement utiliser
 
+    long int _frameFoes;                //
 	long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
 	long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
 	Event _event;                       // Event presentement en evaluation

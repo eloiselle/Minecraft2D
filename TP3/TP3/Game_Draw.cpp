@@ -137,22 +137,24 @@ void Game::drawMovableGui()
 
 void Game::drawFoes()
 {
+    int animationFrame = _frameFoes / 5 % 4;
+
     // Bats
     for (Crawler& c : _bats)
     {
-        _batSprite[_frameRun / 5 % 4][c.getDirection()].setPosition(
+        _batSprite[animationFrame][c.getDirection()].setPosition(
             c.getExactX(),
             c.getExactY());
-        _window.draw(_batSprite[_frameRun / 5 % 4][c.getDirection()]);
+        _window.draw(_batSprite[animationFrame][c.getDirection()]);
     }
 
     // Boss
     if (_boss.isAlive())
     {
-        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(2, 2));
-        _batSprite[_frameRun / 5 % 4][2].setPosition(_boss.getExactX(), _boss.getExactY());
-        _window.draw(_batSprite[_frameRun / 5 % 4][2]);
-        _batSprite[_frameRun / 5 % 4][2].setScale(Vector2f(1, 1));
+        _batSprite[animationFrame][DOWN].setScale(Vector2f(2, 2));
+        _batSprite[animationFrame][DOWN].setPosition(_boss.getExactX(), _boss.getExactY());
+        _window.draw(_batSprite[animationFrame][DOWN]);
+        _batSprite[animationFrame][DOWN].setScale(Vector2f(1, 1));
     }
 }
 

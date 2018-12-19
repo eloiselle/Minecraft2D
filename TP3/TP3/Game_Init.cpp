@@ -33,6 +33,7 @@ void Game::init()
 	initSounds();
 
 	_currentView == FOLLOW_Y;
+    _frameFoes = 0;
 	_frameRun = 0;
 	_frameTotal = 0;
 }
