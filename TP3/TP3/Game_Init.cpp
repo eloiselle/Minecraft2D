@@ -52,7 +52,10 @@ void Game::initWindow()
 	_window.setView(_view[FOLLOW]);
 
 	// Icon
-	//_window.setIcon(image.GetWidth(), image.GetHeight(), image.GetPixelsPtr());
+    Image _icon;
+    if (!_icon.loadFromFile("img\\icon.bmp"))
+        quitApplication();
+    _window.setIcon(32, 32, _icon.getPixelsPtr());
 }
 
 // Initialize les sprites

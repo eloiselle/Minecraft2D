@@ -13,7 +13,6 @@ Should be done  :
     Music       : Utiliser une musique plus appropriée (C)
 
 Si on a le temps:
-    Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
     Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
 
@@ -40,9 +39,9 @@ Final : 20 décembre à 8h30
         Apprentissage intéressant par personne
             Enum dans tableau
             Structure de code et Interface de classe
-            Tuple
             Delay
             Angle
+            MagnetPosition
             Constexpr
             DataStructures: Pair Tuple Set Tree HashMap Heap AssocMap/Dict Graph
         Conclusion
