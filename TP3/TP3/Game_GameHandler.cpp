@@ -77,3 +77,55 @@ void Game::handleBatCreation()
         _map.at(l, c).setType(EMPTY_BLOCK);
     }
 }
+
+
+void Game::shootWeapon()
+{
+    //Tirer le nombre de bullets
+    if (toolIsAShooter() && _player.delayIsReady(_frameRun))
+    {
+        Character* target = nullptr;
+
+        if (_currentTool == HOMING)
+        {
+            for (Crawler& c : _bats)
+            {
+                //Détermine la target
+                if (areOnTheSameSquare(_mouseMagnet, c))
+                {
+                    target = &_boss;// &c; // TODO bypass c
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
+        {
+            shootBullet(target);
+        }
+    }
+}
+
+void Game::shootBullet(Character *target)
+{
+    _bullets.push_back(Bullet());
+
+    if (MUSIQUE)
+        _bullets.back().play(_buffBullet);
+
+    _bullets.back().setPositionExact(
+        _player.getExactX(),
+        _player.getExactY() - HALF_TILE_SIZE);
+
+    if (target == nullptr) 
+    {
+        _bullets.back().aim(
+            _mouseCoord.getPosition().x,
+            _mouseCoord.getPosition().y,
+            _player.getWeaponAccuracy());
+    }
+
+    _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
+    _bullets.back().setDamage(_player.getWeaponDamage());
+    _player.delayReset(_frameRun);
+}

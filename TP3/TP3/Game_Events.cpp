@@ -168,6 +168,7 @@ void Game::handleKeypress()
     }
     if (Keyboard::isKeyPressed(Keyboard::Num8))
     {
+        _bullets.clear(); // Pour eviter d'abuser du switch entre Bullet Hell et Homing
         _currentTool = HOMING;
         _player.setHoming(_frameRun);
     }
@@ -237,29 +238,7 @@ void Game::handleMouseButtonPressed()
             if (isMouseInMap() && _currentTool == BUILD)
                 insertBlockAtMouse(c, l);
 
-            //Tirer le nombre de bullets
-            if (toolIsAShooter() && _player.delayIsReady(_frameRun))
-            {
-                Character* target = nullptr;
-
-                if (_currentTool == HOMING)
-                {
-                    for (Crawler& c : _bats)
-                    {
-                        //Détermine la target
-                        if (areOnTheSameSquare(_mouseMagnet, c))
-                        {
-                            target = &c;
-                            break;
-                        }
-                    }
-                }
-
-                for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
-                {
-                    shootBullet(target);
-                }
-            }
+            shootWeapon();
         }
         if (Mouse::isButtonPressed(Mouse::Right))
         {
@@ -268,33 +247,4 @@ void Game::handleMouseButtonPressed()
                 removeBlockAtMouse(c, l);
         }
     }
-}
-
-void Game::shootBullet(Character *target)
-{
-    _bullets.push_back(Bullet());
-
-    if (MUSIQUE)
-        _bullets.back().play(_buffBullet);
-
-    _bullets.back().setPositionExact(
-        _player.getExactX(),
-        _player.getExactY() - HALF_TILE_SIZE);
-
-    if (target == nullptr)
-    {
-        _bullets.back().aim(
-            _mouseCoord.getPosition().x,
-            _mouseCoord.getPosition().y,
-            _player.getWeaponAccuracy());
-    }
-    else
-    {
-        _bullets.back().setTarget(target);
-        _bullets.back().aim(*target);
-    }
-
-    _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
-    _bullets.back().setDamage(_player.getWeaponDamage());
-    _player.delayReset(_frameRun);
 }

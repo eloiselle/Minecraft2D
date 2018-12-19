@@ -144,7 +144,7 @@ void Game::manageSphereShield()
         _shieldVA[i].rotate(3);
         _shieldSphere[i].setPositionExact(
             _player.getExactX() + _shieldVA[i].getX(),
-            _player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT / 2);
+            _player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
     }
 }
 
@@ -157,12 +157,15 @@ void Game::manageBullets()
     while (b != _bullets.end())
     {
         _bulletWillVanish = false;
-        if (b->isHoming())
+
+        if (_currentTool == HOMING && b->isFriendly())//b->isHoming()) // TODO bypass
         {
-            if (b->getTarget().isAlive())
-                b->aim(b->getTarget());
-            else
-                b->setTarget(nullptr);
+            b->aim(_boss);
+            //if (b->getTarget().isAlive())
+            //    b->aim(b->getTarget());
+            //else
+            //    b->setTarget(nullptr);
+
         }
 
         b->advance();

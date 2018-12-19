@@ -24,7 +24,7 @@ protected:
     bool _friendly = false;     // Alliee du joueur
     int _delayMultiplier = 1;	// Multiplicateur sur le délai
     int _nbBulletsFired;
-    int _accuracy;				// Détermine une variation dans _angle
+    int _inaccuracy;				// Détermine une variation dans _angle
     float _bulletSpeed;			// Vitesse des bullets
     float _damage;				// Dommages
 

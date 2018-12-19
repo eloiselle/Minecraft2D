@@ -102,6 +102,11 @@ void Game::drawBullets()
 {
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
+        if (b->isFriendly())
+        {
+            _bulletShape[b->isFriendly()].setScale(Vector2f(b->getDamage(), b->getDamage()));
+        }
+
         _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
         _window.draw(_bulletShape[b->isFriendly()]);
     }

@@ -22,7 +22,7 @@ void Weapon::setWeapon(TOOL tool, int _frameRun)
 void Weapon::setNoWeapon(int _frameRun)
 {
     _nbBulletsFired = 0;
-    _accuracy = 1;
+    _inaccuracy = 1;
     _totalDelay = 60 * _delayMultiplier;
     _bulletSpeed = 999999999999;
     _damage = 1;
@@ -32,7 +32,7 @@ void Weapon::setNoWeapon(int _frameRun)
 void Weapon::setUzi(int _frameRun)
 {
     _nbBulletsFired = 1;
-    _accuracy = 60;
+    _inaccuracy = 60;
     _totalDelay = 3 * _delayMultiplier;
     _bulletSpeed = 2;
     _damage = 1;
@@ -42,7 +42,7 @@ void Weapon::setUzi(int _frameRun)
 void Weapon::setAssault(int _frameRun)
 {
     _nbBulletsFired = 1;
-    _accuracy = 1;
+    _inaccuracy = 1;
     _totalDelay = 10 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 2;
@@ -52,7 +52,7 @@ void Weapon::setAssault(int _frameRun)
 void Weapon::setSniper(int _frameRun)
 {
     _nbBulletsFired = 1;
-    _accuracy = 1;
+    _inaccuracy = 1;
     _totalDelay = 50 * _delayMultiplier;
     _bulletSpeed = 5;
     _damage = 4;
@@ -62,7 +62,7 @@ void Weapon::setSniper(int _frameRun)
 void Weapon::setShotgun(int _frameRun)
 {
     _nbBulletsFired = 10;
-    _accuracy = 60;
+    _inaccuracy = 200;
     _totalDelay = 30 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 1;
@@ -72,7 +72,7 @@ void Weapon::setShotgun(int _frameRun)
 void Weapon::setBulletHell(int _frameRun)
 {
     _nbBulletsFired = 25;
-    _accuracy = 360;
+    _inaccuracy = 360;
     _totalDelay = 1;
     _bulletSpeed = 5;
     _damage = 1;
@@ -83,26 +83,26 @@ void Weapon::setHoming(int _frameRun)
 {
     _friendly = false;
     _nbBulletsFired = 1;
-    _accuracy = 60;
-    _totalDelay = 3 * _delayMultiplier;
-    _bulletSpeed = 2;
-    _damage = 1;
+    _inaccuracy = 1;
+    _totalDelay = 150 * _delayMultiplier;
+    _bulletSpeed = 1;
+    _damage = 5;
     delayInit(_frameRun, _totalDelay);
 }
 
 void Weapon::setWeaponBoss(int _frameRun)
 {
     _nbBulletsFired = 1;
-    _accuracy = 1;
+    _inaccuracy = 1;
     _totalDelay = 300 * _delayMultiplier;
-    _bulletSpeed = 2;
+    _bulletSpeed = 4;
     _damage = 1;
     delayInit(_frameRun, _totalDelay);
 }
 
 void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier, int _frameRun)
 {
-    _accuracy = accuracy;
+    _inaccuracy = accuracy;
     _totalDelay = rateOfFire * _delayMultiplier;
     _bulletSpeed = bulletSpeed;
     _damage = damageMultiplier;
@@ -110,7 +110,7 @@ void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float 
 }
 
 int Weapon::getWeaponNbBulletsFired()const { return _nbBulletsFired; }
-int Weapon::getWeaponAccuracy()const { return _accuracy; }
+int Weapon::getWeaponAccuracy()const { return _inaccuracy; }
 int Weapon::getWeaponRateOfFire()const { return _totalDelay; }
 float Weapon::getWeaponBulletSpeed()const { return _bulletSpeed; }
 float Weapon::getWeaponDamage()const { return _damage; }
@@ -125,7 +125,7 @@ Bullet Weapon::getBullet()const
 }
 
 void Weapon::setWeaponNbBulletsFired(int nb) { _nbBulletsFired = nb; }
-void Weapon::setWeaponAccuracy(int accuracy) { _accuracy = accuracy; }
+void Weapon::setWeaponAccuracy(int accuracy) { _inaccuracy = accuracy; }
 void Weapon::setWeaponRateOfFire(int rateOfFire) { _totalDelay = rateOfFire; }
 void Weapon::setWeaponBulletSpeed(float bulletSpeed) { _bulletSpeed = bulletSpeed; }
 void Weapon::setWeaponDamage(float damageMultiplier) { _damage = damageMultiplier; }
