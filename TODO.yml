@@ -21,7 +21,7 @@ Abandonnes      :
     Weapon      : Separer Weapon en deux classes Weapon et Gun
     Weapon      : Explosion qui tire dans toutes les directions avec un gros delai (E)
     Meta        : Timer qui compte en descendant (A)
-    Weapon      : Beam          : RectangleShape qui passe au travers des blocs (E)
+    Weapon      : Beam : RectangleShape qui passe au travers des blocs (E)
     Map         : Map Editor Sauvegarder la map et la loader
 
 
@@ -36,9 +36,14 @@ Final : 20 décembre à 8h30
     Oral: (15-20 min. par équipe)
         Introduction
         Résultat intéressant
+        Plus grande difficulté
+            C : liste?
+            E : s'adapter au code? bullet?
+            A : Angles et Jump/Collision
         Apprentissage intéressant par personne
             Enum dans tableau
-            Structure de code et Interface de classe
+            A : Structure de code et Interface de classe
+            A : Multiple inheritance
             Delay
             Angle
             MagnetPosition

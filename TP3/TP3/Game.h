@@ -46,13 +46,15 @@ Roll the mousewheel to zoom-in/zoom-out
 Click on the map to modify it.)";
 
 constexpr const char* STR_BOSS_KILLED =     // String a afficher apres avoir tuer le boss
-R"(Boss Killed :D
+R"(  Boss Killed :D
 
-Press[P] to start a new game)";
+Press[P] to start
+   a new game.)";
 constexpr const char* STR_GAME_OVER =       // String a afficher quand le joueur est mort
-R"(GAME OVER :(
+R"(  GAME OVER :(
 
-Press[P] to start a new game)";
+Press[P] to start
+   a new game.)";
 // Window
 constexpr char WINDOW_TITLE[] = "Minecraft2D";              // Titre de base de la fenetre
 constexpr int MIN_WINDOW_WIDTH = 400;                       // Largeur minimum en pixel de l'ecran

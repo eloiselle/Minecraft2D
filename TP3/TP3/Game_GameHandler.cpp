@@ -5,6 +5,15 @@ void Game::handlePlayerDeath()
 {
     _appState = GAME_OVER;
     _messageOnShader.setString(STR_GAME_OVER);
+    _messageOnShader.setCharacterSize(100);
+}
+
+void Game::handleBossDeath()
+{
+    _score += SCORE_BOSS_KILLED;
+    _appState = BOSS_KILLED;
+    _messageOnShader.setString(STR_BOSS_KILLED);
+    _messageOnShader.setCharacterSize(100);
 }
 
 void Game::manageBossWeapon()
@@ -45,13 +54,6 @@ void Game::manageBossHeight()
         handleBossMovingDown();
     else
         _boss.stopMoving();
-}
-
-void Game::handleBossDeath()
-{
-    _score += SCORE_BOSS_KILLED;
-    _appState = BOSS_KILLED;
-    _messageOnShader.setString(STR_BOSS_KILLED);
 }
 
 void Game::handleBossMovingDown()

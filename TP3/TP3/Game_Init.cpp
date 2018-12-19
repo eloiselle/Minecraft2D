@@ -52,10 +52,11 @@ void Game::initWindow()
 	_window.setView(_view[FOLLOW]);
 
 	// Icon
-    Image _icon;
-    if (!_icon.loadFromFile("img\\icon.bmp"))
+    Image icon;
+    if (!icon.loadFromFile("img\\icon.bmp"))
         quitApplication();
-    _window.setIcon(32, 32, _icon.getPixelsPtr());
+    icon.createMaskFromColor(Color::White);
+    _window.setIcon(32, 32, icon.getPixelsPtr());
 }
 
 // Initialize les sprites
@@ -81,7 +82,7 @@ void Game::initSprites()
 		for (int j = 0; j < 9; j++) // initialiser toutes les sprites
 		{
 			_playerSprites[i][j] = initOneSprite(i, j, _playerTexture);
-			_playerImage.createMaskFromColor(Color(255, 255, 255));
+			_playerImage.createMaskFromColor(Color::White);
 			_playerTexture.update(_playerImage);
 			_playerSprites[i][j].setTextureRect(IntRect(i * 30, j * 30, 30, 30));
 			_playerSprites[i][j].setTexture(_playerTexture);
@@ -94,7 +95,7 @@ void Game::initSprites()
 	{
 		for (size_t j = 0; j < 4; j++)
 		{
-			_batImage.createMaskFromColor(Color(255, 255, 255));
+			_batImage.createMaskFromColor(Color::White);
 			_batTexture.update(_batImage);
 			_batSprite[i][j].setTextureRect(IntRect(TILE_SIZE * i, TILE_SIZE * j, TILE_SIZE, TILE_SIZE));
 			_batSprite[i][j].setTexture(_batTexture);
