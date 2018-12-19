@@ -119,7 +119,7 @@ void Game::updateViewlessMouseCoord()
 }
 
 // Détermine la distance entre 2 positions
-float Game::distanceBetweenMP(MagnetPosition & mp1, MagnetPosition & mp2)
+float Game::distanceBetweenMP(MagnetPosition & mp1, MagnetPosition & mp2)const
 {
 	return abs(sqrt(
 		(mp1.getExactY() - mp2.getExactY()) * (mp1.getExactY() - mp2.getExactY())

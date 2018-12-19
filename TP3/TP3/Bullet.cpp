@@ -30,13 +30,12 @@ void Bullet::aim(Character& ch)
 
 void Bullet::setSpeed(float speed) { _length = speed; }
 void Bullet::setDamage(int damage) { _damage = damage; }
-void Bullet::setTarget(Character * ch) { _target = ch; }
 void Bullet::setFriendly(bool friendly) { _friendly = friendly; }
+void Bullet::setHoming(bool isHoming) { _isHoming = isHoming; }
 
 float Bullet::getSpeed()const { return _length; }
 int Bullet::getDamage()const { return _damage; }
-Character& Bullet::getTarget()const { return *_target; }
-bool Bullet::isHoming()const { return _target != nullptr; }
+bool Bullet::isHoming()const { return _isHoming; }
 bool Bullet::isFriendly()const { return _friendly; }
 
 void Bullet::play(sf::SoundBuffer & buff)
