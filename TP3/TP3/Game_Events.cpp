@@ -234,16 +234,30 @@ void Game::handleMouseButtonPressed()
 
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			//Placer un bloc
+			// Placer un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
+
+			// Ajouter un shield au cercle de shield
+			if (isMouseInMap() && _currentTool == SPHERE_SHIELD)
+			{
+				_shieldSphere.insert(_shieldSphere.end(), Bullet());
+				_shieldVA.insert(_shieldVA.end(), VectorAngle());
+
+				for (size_t i = 0; i < _shieldSphere.size(); i++)
+				{
+					_shieldVA[i].init(100, 0, 1);
+					_shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
+				}
+			}
+
             shootWeapon();
-			
+
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
 		{
-			//Enlever un bloc
+			// Enlever un bloc
 			if (isMouseInMap() && _currentTool == BUILD)
 				removeBlockAtMouse(c, l);
 		}
