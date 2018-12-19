@@ -90,7 +90,7 @@ void Game::drawShield()
 {
 	if (_currentTool == SPHERE_SHIELD)
 	{
-		for (size_t i = 0; i < NB_SHIELD; i++)
+		for (size_t i = 0; i < _shieldSphere.size(); i++)
 		{
 			_bulletShape[FRIENDLY].setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
 			_window.draw(_bulletShape[FRIENDLY]);

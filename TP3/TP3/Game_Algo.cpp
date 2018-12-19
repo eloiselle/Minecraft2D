@@ -137,14 +137,24 @@ void Game::manageSphereShield()
 	if (_currentTool != SPHERE_SHIELD)
 		return;
 
-	for (size_t i = 0; i < NB_SHIELD; i++)
+	for (size_t i = 0; i < _shieldSphere.size(); i++)
 	{
+		_bulletWillVanish = false;
+
 		// Yoyo : Example d'utilisation de VectorAngle
 		//_yoyoString.setLength(smartCos(_frameRun, 20, 20, 5));
 		_shieldVA[i].rotate(3);
 		_shieldSphere[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
 			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT / 2);
+
+		collisionBulletFoes(_shieldSphere[i]);
+
+		if (_bulletWillVanish)
+		{
+			_shieldSphere.erase(_shieldSphere.begin() + i);
+			_shieldVA.erase(_shieldVA.begin() + i);
+		}
 	}
 }
 

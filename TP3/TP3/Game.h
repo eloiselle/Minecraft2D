@@ -82,9 +82,8 @@ constexpr int PLAYER_START_C = 15;                          // Position Col de d
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace entre les chauves souris au depart
-constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
-constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
+constexpr int NB_SHIELD_INIT = 6;
 constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
 constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaque balle du boss
@@ -104,8 +103,8 @@ private:
 	// Game Elements
 	WorldMap _map;                      // World map
 	Player _player;                     // Avatar controlled by user
-	Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
-	VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
+	vector<Bullet> _shieldSphere;		// Tourne a l'entour de _player
+	vector<VectorAngle> _shieldVA;		// Distance entre _shieldSphere et _player
 	list<Bullet> _bullets;              // Liste des projectiles
 	list<Crawler> _bats;                // Liste des chauves souris-enemies
 	Boss _boss;                         // Boss en haut de l'ecran
@@ -189,7 +188,7 @@ public:
 	void initShapes();                  // Initialization des formes geometriques
 	void initViews();                   // Initialization des view
 	void initPlayer();                  // Initialization du joueur
-	void initShield();                  // Initialization du bouclier
+	void initShield();            // Initialization du bouclier
 	void initBoss();                    // Initialization du Boss
 	void initFoes();                    // Initialization des ennemis
 	void initWorldMap();                // Initialization du labyrinthe
