@@ -215,7 +215,7 @@ void Game::initMusic()
 {
 	if (MUSIQUE)
 	{
-		_music.openFromFile("music\\zelda.wav");
+		_music.openFromFile("music\\boss.wav");
 		_music.play();
 	}
 }
@@ -261,7 +261,7 @@ void Game::initViews()
 void Game::initPlayer()
 {
     _currentTool = ASSAULT;
-	_player.setAssault);
+	_player.setAssault(0);
 
 	_player.setHpMax(NB_LIVES);
 	_player.refillHp();

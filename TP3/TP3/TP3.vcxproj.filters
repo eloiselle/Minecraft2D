@@ -180,6 +180,18 @@
     <Image Include="dungeon.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="img\bat.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\tiles.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\waddle_doo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Labyrinthe1.txt">

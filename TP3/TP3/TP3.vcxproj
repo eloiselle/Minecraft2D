@@ -214,6 +214,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="dungeon.bmp" />
+    <Image Include="img\bat.bmp" />
+    <Image Include="img\icon.bmp" />
+    <Image Include="img\tiles.bmp" />
+    <Image Include="img\waddle_doo.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="INVASION2000.TTF" />
