@@ -127,9 +127,6 @@ void Game::handleKeypress()
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 		quitApplication();
 
-	if (Keyboard::isKeyPressed(Keyboard::Num0))
-		initWorldMap();
-
 	// Change weapon
 	if (Keyboard::isKeyPressed(Keyboard::Num1))
 	{

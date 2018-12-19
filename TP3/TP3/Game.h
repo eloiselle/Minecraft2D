@@ -60,7 +60,8 @@ constexpr int MIN_WINDOW_HEIGHT = 300;                      // Hauteur minimum e
 constexpr int DEF_WINDOW_WIDTH = 1024;                      // Largeur en pixel de l'ecran par defaut
 constexpr int DEF_WINDOW_HEIGHT = 700;                      // Hauteur en pixel de l'ecran par defaut
 constexpr int ANTI_ALIASING_LEVEL = 2;                      // Niveau de smoothing des textures
-
+constexpr int SHAPE_THICKNESS = 3;                          // Epaisseur par defaut des shape
+constexpr int HEALTH_BAR_HEIGHT = 16;                       // Epaisseur de la bar de hp
 constexpr float BORDURE = DEF_WINDOW_HEIGHT / 5;            // Zone de scroll automatique avec la souris
 
 // Run speed
@@ -136,6 +137,7 @@ private:
 	CircleShape _bulletShape[2];        // Shape des bullets
 	CircleShape _aimingSight;           // Cercle vide comme cible
 	RectangleShape _bossHealthBar;      // Barre rouge qui represente la vie restante du boss
+    RectangleShape _playerHealthBar;    // Barre verte qui represente la vie restante du joueur
 
 	// Sprites
 	Sprite  _playerSprite;              // Sprite du joueur
@@ -218,8 +220,8 @@ public:
 	void handleArrowKeys();                             // Handler des fleches du clavier et WASD
 	void handleMouseWheelMoved();                       // Handler de la roulette de souris
 	void handleMouseButtonPressed();                    // Handler des boutons de souris
-    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
-    void shootWeapon();                                 //
+	bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);
+	void shootWeapon();                                 //
 	void shootBullet(Character*);                       // Tire une balle
 	void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
 	void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris

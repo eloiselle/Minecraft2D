@@ -180,16 +180,22 @@ void Game::initShapes()
 	_aimingSight.setOrigin(TILE_SIZE / 2, TILE_SIZE / 2);
 
 	// Mouse Square
-	int tk = 3; // thickness
-	_mouseSquare.setOrigin(-tk, -tk);
-	_mouseSquare.setSize(Vector2f(TILE_SIZE - tk * 2, TILE_SIZE - tk * 2));
+
+	_mouseSquare.setOrigin(-SHAPE_THICKNESS, -SHAPE_THICKNESS);
+	_mouseSquare.setSize(Vector2f(TILE_SIZE - SHAPE_THICKNESS * 2, TILE_SIZE - SHAPE_THICKNESS * 2));
 	_mouseSquare.setFillColor(Color(0, 0, 0, 0));
 	_mouseSquare.setOutlineColor(Color::Black);
-	_mouseSquare.setOutlineThickness(tk);
+	_mouseSquare.setOutlineThickness(SHAPE_THICKNESS);
 	// Boss Health Bar
 	_bossHealthBar.setFillColor(Color::Red);
 	_bossHealthBar.setOutlineColor(Color(128, 0, 0));
-	_bossHealthBar.setOutlineThickness(tk);
+	_bossHealthBar.setOutlineThickness(SHAPE_THICKNESS);
+
+    // Boss Health Bar
+    _playerHealthBar.setFillColor(Color::Green);
+    _playerHealthBar.setOutlineColor(Color(0, 128, 0));
+    _playerHealthBar.setOutlineThickness(SHAPE_THICKNESS);
+
 
 	// Shader pour l'ecran de pause
 	_shader.setSize(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
