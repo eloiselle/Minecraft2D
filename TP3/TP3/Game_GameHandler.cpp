@@ -85,13 +85,20 @@ void Game::shootWeapon()
     //Tirer le nombre de bullets
     if (toolIsAShooter() && _player.delayIsReady(_frameRun))
     {
+        Character* target = nullptr;
+
+        if (_currentTool == HOMING)
+        {
+            target = &_boss;// &c; // TODO bypass c
+        }
+
         // Tirer le nombre de bullets
         for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
-            shootPlayerBullet();
+            shootBullet(target);
     }
 }
 
-void Game::shootPlayerBullet()
+void Game::shootBullet(Character *target)
 {
     _bullets.push_back(Bullet());
 
@@ -102,13 +109,12 @@ void Game::shootPlayerBullet()
         _player.getExactX(),
         _player.getExactY() - HALF_TILE_SIZE);
 
-    if (_currentTool == HOMING)
+    if (target == nullptr)
     {
         _bullets.back().aim(
             _mouseCoord.getPosition().x,
             _mouseCoord.getPosition().y,
             _player.getWeaponAccuracy());
-        _bullets.back().setHoming(true);
     }
 
     _bullets.back().setSpeed(_player.getWeaponBulletSpeed());

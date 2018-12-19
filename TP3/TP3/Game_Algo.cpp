@@ -157,13 +157,13 @@ void Game::manageBullets()
     while (b != _bullets.end())
     {
         _bulletWillVanish = false;
-
-        if (b->isHoming())
+        if (_currentTool == HOMING && b->isFriendly())//b->isHoming()) // TODO bypass
         {
-            if (b->isFriendly())
-                b->aim(_boss);
-            else
-                b->aim(_player);
+            b->aim(_boss);
+            //if (b->getTarget().isAlive())
+            //    b->aim(b->getTarget());
+            //else
+            //    b->setTarget(nullptr);
         }
 
         b->advance();
@@ -171,7 +171,6 @@ void Game::manageBullets()
         if (isInMap(*b))
         {
             collisionBulletBlock(*b);
-
             if (b->isFriendly())
             {
                 collisionBulletFoes(*b);
