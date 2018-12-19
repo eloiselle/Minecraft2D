@@ -89,7 +89,7 @@ constexpr int SCORE_BAT = 100;                              // Bonus de score po
 constexpr int SCORE_BLOCK = 10;                             // Bonus de score pour detruire un block
 
 // OPTIONS
-constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
+constexpr bool MUSIQUE = true;                             // Option pour desactiver l'audio
 
 class Game
 {

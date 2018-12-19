@@ -4,23 +4,17 @@
 // Gere les animation du joueur
 void Game::managePlayerAnimation()
 {
+	if (playerIsOnTheGround())
+	{
+		animIdle();
+		if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+			animRight();
 
-    if (playerIsOnTheGround())
-    {
-        animIdle();
-        if (Keyboard::isKeyPressed(Keyboard::Right) ||
-            Keyboard::isKeyPressed(Keyboard::D) ||
-            Keyboard::isKeyPressed(Keyboard::Left) ||
-            Keyboard::isKeyPressed(Keyboard::A))
-        {
-            if (_player.isLookingToTheRight())
-                animRight();
-            else
-                animLeft();
-        }
-    }
-    else
-        animAir();
+		else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
+			animLeft();
+	}
+	else
+		animAir();
 
 }
 
