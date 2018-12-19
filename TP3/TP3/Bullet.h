@@ -12,7 +12,7 @@ Goal  : Projectiles
 #include "VectorAngle.h"
 #include "Character.h"
 
-class Bullet : public Entity, public VectorAngle
+class Bullet : public Movable, public VectorAngle
 {
 private:
     bool _friendly = true;      // Si l'arme est alliee ou ennemie

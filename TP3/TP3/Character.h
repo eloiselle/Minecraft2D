@@ -9,7 +9,7 @@ Goal  : Classe pour representer le personnage
 #pragma once
 #include "Entity.h"
 
-class Character : public Entity, public Killable
+class Character : public Movable, public Killable
 {
 public: // La classe ne fait que heriter de deux autres classes
 };
