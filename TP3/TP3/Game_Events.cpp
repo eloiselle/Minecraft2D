@@ -237,6 +237,9 @@ void Game::handleMouseButtonPressed()
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
+			if (_currentTool == SPHERE_SHIELD)
+				_shield..push_back(Bullet());
+
 			// Si on est prêt à tirer
 			if (toolIsAShooter() && _player.delayIsReady(_frameRun))
 			{
