@@ -81,7 +81,7 @@ void Game::handleBossMovingDown()
 void Game::handleBatCreation()
 {
     list<Crawler>::iterator b;
-    b = _bats.end()--;
+    
     if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
     {
         // Create new bat on last line
