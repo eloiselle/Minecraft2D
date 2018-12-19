@@ -216,7 +216,8 @@ public:
 	// Handler
 	void handlePausing();                               // Verifi si on doit changer l'etat de pause
 	View& handleResizeWindow();                         // Handler le redimensionnement de la fenetre
-	void handleKeypress();                              // Handler des touches de clavier
+    void handleKeypressOnce();                          // Handler des touches de clavier une seule fois
+	void handleKeypressContinu();                              // Handler des touches de clavier en continu
 	void handleArrowKeys();                             // Handler des fleches du clavier et WASD
 	void handleMouseWheelMoved();                       // Handler de la roulette de souris
 	void handleMouseButtonPressed();                    // Handler des boutons de souris

@@ -29,14 +29,8 @@ void Game::inputActivatedOnlyTheFirstTime()
 			_appState = PAUSED;
 			break;
 		case Event::KeyPressed:
-			if (_event.key.code == Keyboard::BackSpace)
-				init();
-			if (_event.key.code == Keyboard::P)
-				handlePausing();
-			if (_event.key.code == Keyboard::T && canTeleportAtMouse())
-				_player.setPositionExact(
-					_mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
-					_mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
+            handleKeypressOnce();
+
 		}
 
 		if (_appState == RUNNING)
@@ -45,6 +39,28 @@ void Game::inputActivatedOnlyTheFirstTime()
 				handleMouseWheelMoved();
 		}
 	}
+}
+
+void Game::handleKeypressOnce()
+{
+    if (_event.key.code == Keyboard::BackSpace)
+        init();
+    if (_event.key.code == Keyboard::P)
+        handlePausing();
+    if (_event.key.code == Keyboard::T && canTeleportAtMouse())
+        _player.setPositionExact(
+            _mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
+            _mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
+
+    // View
+    if (_event.key.code == Keyboard::F1)
+        _currentView = FOLLOW_Y;
+    if (_event.key.code == Keyboard::F2)
+        _currentView = FOLLOW;
+    if (_event.key.code == Keyboard::F3)
+        _currentView = NEUTRAL;
+    if (_event.key.code == Keyboard::F4)
+        _currentView = CAMERA;
 }
 
 bool Game::canTeleportAtMouse()
@@ -58,7 +74,7 @@ bool Game::canTeleportAtMouse()
 // Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
-	handleKeypress(); // TODO event allow to do it only once
+	handleKeypressContinu(); // TODO event allow to do it only once
 
 	if (_appState == RUNNING)
 	{
@@ -118,7 +134,7 @@ View& Game::handleResizeWindow()
 }
 
 // Observe l'etat des touches de claviers
-void Game::handleKeypress()
+void Game::handleKeypressContinu()
 {
 	if (_appState == RUNNING)
 	{

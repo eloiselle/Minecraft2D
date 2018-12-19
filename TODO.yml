@@ -13,7 +13,6 @@ Should be done  :
     Music       : Utiliser une musique plus appropriée (C)
 
 Si on a le temps:
-    View        : Remettre une facon de changer la view
     Art         : Mettre une icone de fenetre (Game_Init.cpp line:46) (C)
     Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
