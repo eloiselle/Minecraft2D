@@ -17,6 +17,7 @@ Goal  : Lance une partie de Minecraft2D
 #pragma once
 #include "pch.h"
 
+#include "list.h"
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"

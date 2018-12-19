@@ -20,6 +20,7 @@ void Game::manageBossWeapon()
 {
     if (_boss.delayIsReady(_frameFoes))
     {
+
         for (size_t i = 0; i < NB_BOSS_BULLET; i++)
         {
             bossShootBullet();
@@ -30,18 +31,23 @@ void Game::manageBossWeapon()
     }
 }
 
+
 void Game::bossShootBullet()
 {
-    _bullets.push_back(_boss.getBullet());
+	list<Bullet>::iterator b;
 
-    _bullets.back().setPositionExact(
+    b = _bullets.push_back(_boss.getBullet());
+
+    b->setPositionExact(
         _boss.getExactX(),
         _boss.getExactY());
 
-    _bullets.back().aim(_player);
+
+    b->aim(_player);
 
     if (MUSIQUE)
-        _bullets.back().play(_buffBullet);
+        b->play(_buffBullet);
+
 }
 
 void Game::manageBossHeight()
@@ -56,6 +62,8 @@ void Game::manageBossHeight()
         _boss.stopMoving();
 }
 
+
+
 void Game::handleBossMovingDown()
 {
     _boss.setDirection(DOWN);
@@ -69,13 +77,15 @@ void Game::handleBossMovingDown()
 
 void Game::handleBatCreation()
 {
+	list<Crawler>::iterator b;
+	b = _bats.end()--;
     if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
     {
         // Create new bat on last line
         int l = _map.nbLine() - 2;
         int c = (rand() % (_map.nbCol() - LINE_TO_CREATE_BATS)) + 3;
         _bats.push_back(Crawler());
-        _bats.back().setPositionInGrid(c, l);
+        b->setPositionInGrid(c, l);
         _map.at(l, c).setType(EMPTY_BLOCK);
     }
 }

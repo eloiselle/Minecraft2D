@@ -4,9 +4,9 @@
 // Gere les animation du joueur
 void Game::managePlayerAnimation()
 {
+
     if (playerIsOnTheGround())
     {
-
         if (_player.isMoving())
         {
             if (_player.isLookingToTheRight())
@@ -19,7 +19,9 @@ void Game::managePlayerAnimation()
     }
     else
         animAir();
+
 }
+
 
 // animations image lorsque ne bouge pas
 void Game::animIdle()
@@ -42,13 +44,11 @@ void Game::animLeft()
 {
     _animType = WALK_LEFT;
     _animFrame = (_frameRun / 10) % 4;
-
 }
 
 void Game::animAir()
 {
     _animType = AIR;
-
     /* animation joueur tombe */
     if (_player.isFalling()
         && _map.isTraversable(
