@@ -272,30 +272,56 @@ void Game::handleMouseButtonPressed()
 
 void Game::shootBullet(Character *target)
 {
-    _bullets.push_back(Bullet());
+	list<Bullet>::iterator b;
 
-    if (MUSIQUE)
-        _bullets.back().play(_buffBullet);
+	b = _bullets.end();
 
-    _bullets.back().setPositionExact(
-        _player.getExactX(),
-        _player.getExactY() - HALF_TILE_SIZE);
+    // (_bullets).push_back(Bullet());
+
+	b = _bullets.insert(b, Bullet());
+	//b = _bullets.end();
+	//b--;
+	
+	if (MUSIQUE)
+		// _bullets.back().play(_buffBullet);
+		b->play(_buffBullet);
+
+	b->setPositionExact(
+		_player.getExactX(),
+		_player.getExactY() - HALF_TILE_SIZE);
+
+    //_bullets.back().setPositionExact(
+    //    _player.getExactX(),
+    //    _player.getExactY() - HALF_TILE_SIZE);
 
     if (target == nullptr)
     {
-        _bullets.back().aim(
-            _mouseCoord.getPosition().x,
-            _mouseCoord.getPosition().y,
-            _player.getWeaponAccuracy());
+		b->aim(
+			_mouseCoord.getPosition().x,
+			_mouseCoord.getPosition().y,
+			_player.getWeaponAccuracy());
+
+
+        //_bullets.back().aim(
+        //    _mouseCoord.getPosition().x,
+        //    _mouseCoord.getPosition().y,
+        //    _player.getWeaponAccuracy());
     }
     else
     {
-        _bullets.back().setTarget(target);
-        _bullets.back().aim(*target);
+
+		b->setTarget(target);
+		b->aim(*target);
+
+        //_bullets.back().setTarget(target);
+        //_bullets.back().aim(*target);
     }
 
+	b->setSpeed(_player.getWeaponBulletSpeed());
+	b->setDamage(_player.getWeaponDamage());
 
-    _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
-    _bullets.back().setDamage(_player.getWeaponDamage());
-    _player.delayReset(_frameRun);
+    //_bullets.back().setSpeed(_player.getWeaponBulletSpeed());
+    //_bullets.back().setDamage(_player.getWeaponDamage());
+
+	_player.delayReset(_frameRun);
 }

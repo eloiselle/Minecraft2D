@@ -95,12 +95,13 @@ void Game::manageFoes()
 
 void Game::manageOneFoe(list<Crawler>::iterator& c)
 {
-    // Manage one foe
+
+	// Manage one foe
     if (c->isGridCentered()) // Pret a se deplacer
     {
         if (_frameRun % 24 == 12 && MUSIQUE)
         {
-            _bats.back().play(_buffFoes);
+           c->play(_buffFoes);
         }
         c->stopMoving();
         tryToMoveInDirection(*c, static_cast<DIRECTION4>(rand() % 4));

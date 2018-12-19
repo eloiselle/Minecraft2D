@@ -8,6 +8,7 @@ Goal  : Solutionne un labyrinthe visuellement en SFML
 #pragma once
 #include "pch.h"
 
+#include "list.h"
 #include "WorldMap.h"
 #include "Player.h"
 #include "Bullet.h"

@@ -5,7 +5,7 @@ Programme: Classe liste
 
 
 #pragma once
-#include <cassert>
+#include <assert.h>
 
 template<typename TYPE> class list;
 
@@ -77,9 +77,9 @@ public:
 	iterator begin()const;			//return premier
 	iterator end()const;				//return nullptr
 
-	TYPE back();
+	iterator back();
 
-	void push_back(const TYPE& ele);
+	iterator push_back(const TYPE& ele);
 
 
 	iterator insert(iterator iter, const TYPE& e); // insérer avant l'itérateur
@@ -359,7 +359,7 @@ typename list<TYPE>::iterator list<TYPE>::iterator::operator--(int i) // i--
 	if (_current == nullptr) // si à la fin
 		it._current = _list->_first->previous;
 	else
-		_current = _current->previous;
+		it._current = _current->previous;
 
 
 	return it;
@@ -393,19 +393,38 @@ const TYPE & list<TYPE>::iterator::operator*() const
 
 
 
+
+
 template<typename TYPE>
-typename TYPE list<TYPE>::back()
+typename list<TYPE>::iterator list<TYPE>::back()
 {
+	list<TYPE>::iterator it;
+	it._list = this;
+
+	if (_first == nullptr)
+	{
+		it._current = nullptr;
+	}
+	else if (_first == _first->previous)
+		it._current = _first;
+	else
+		it._current = _first->previous;
+
+	return it;
+
+
 	//_first->previous->element;
 	//return (end()--);
-	return (_first->previous->element);
+	//return (_first->previous->element);
 }
 
 
 template<typename TYPE>
-typename void list<TYPE>::push_back(const TYPE& ele)
+typename list<TYPE>::iterator list<TYPE>::push_back(const TYPE& ele)
 {
-	insert(end(), ele);
+	list<TYPE>::iterator it;
+	it = insert(end(), ele);
+	return it;
 }
 
 template<typename TYPE>
