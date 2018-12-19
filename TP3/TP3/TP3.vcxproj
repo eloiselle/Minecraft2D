@@ -171,7 +171,6 @@
     <ClCompile Include="Game_Algo.cpp" />
     <ClCompile Include="Nameable.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="SidewayCharacter.cpp" />
     <ClCompile Include="TopDownCharacter.cpp" />
     <ClCompile Include="Game_Init.cpp" />
@@ -202,7 +201,6 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Nameable.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Shield.h" />
     <ClInclude Include="SidewayCharacter.h" />
     <ClInclude Include="TopDownCharacter.h" />
     <ClInclude Include="Game.h" />

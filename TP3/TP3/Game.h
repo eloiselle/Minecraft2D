@@ -22,7 +22,6 @@ Goal  : Lance une partie de Minecraft2D
 #include "Bullet.h"
 #include "Crawler.h"
 #include "Boss.h"
-#include "Shield.h"
 
 using namespace std;
 using namespace sf;     // librairie SFML pour les graphiques et l'audio
@@ -83,7 +82,8 @@ constexpr int PLAYER_START_C = 15;                          // Position Col de d
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace entre les chauves souris au depart
-constexpr int NB_SHIELD_INITIAL = 6;                                // Nombre de spheres dans le bouclier
+constexpr int NB_SHIELD = 6;                                // Nombre de spheres dans le bouclier
+constexpr int SHIELD_ANGLE = 360 / NB_SHIELD;               // Angle entre les spheres du bouclier
 constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
 constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
@@ -104,7 +104,8 @@ private:
 	// Game Elements
 	WorldMap _map;                      // World map
 	Player _player;                     // Avatar controlled by user
-	Shield _shield;						// Bouclier qui tourne autour de _player
+	Bullet _shieldSphere[NB_SHIELD];    // Tourne a l'entour de _player
+	VectorAngle _shieldVA[NB_SHIELD];   // Distance entre _shieldSphere et _player
 	list<Bullet> _bullets;              // Liste des projectiles
 	list<Crawler> _bats;                // Liste des chauves souris-enemies
 	Boss _boss;                         // Boss en haut de l'ecran
@@ -188,7 +189,7 @@ public:
 	void initShapes();                  // Initialization des formes geometriques
 	void initViews();                   // Initialization des view
 	void initPlayer();                  // Initialization du joueur
-	void initShield(int nb);            // Initialization du bouclier
+	void initShield();                  // Initialization du bouclier
 	void initBoss();                    // Initialization du Boss
 	void initFoes();                    // Initialization des ennemis
 	void initWorldMap();                // Initialization du labyrinthe
