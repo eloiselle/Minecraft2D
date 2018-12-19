@@ -44,6 +44,10 @@ Final : 20 décembre à 8h30
             Enum dans tableau
             A : Structure de code et Interface de classe
             A : Multiple inheritance
+			E : Utiliser des options pour déterminer 
+				- la cadence de tir des armes
+				- le nombre de projectiles à tirer
+				- 
             Delay
             Angle
             MagnetPosition

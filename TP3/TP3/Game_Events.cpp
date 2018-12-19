@@ -29,8 +29,7 @@ void Game::inputActivatedOnlyTheFirstTime()
 			_appState = PAUSED;
 			break;
 		case Event::KeyPressed:
-            handleKeypressOnce();
-
+			handleKeypressOnce();
 		}
 
 		if (_appState == RUNNING)
@@ -43,24 +42,24 @@ void Game::inputActivatedOnlyTheFirstTime()
 
 void Game::handleKeypressOnce()
 {
-    if (_event.key.code == Keyboard::BackSpace)
-        init();
-    if (_event.key.code == Keyboard::P)
-        handlePausing();
-    if (_event.key.code == Keyboard::T && canTeleportAtMouse())
-        _player.setPositionExact(
-            _mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
-            _mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
+	if (_event.key.code == Keyboard::BackSpace)
+		init();
+	if (_event.key.code == Keyboard::P)
+		handlePausing();
+	if (_event.key.code == Keyboard::T && canTeleportAtMouse())
+		_player.setPositionExact(
+			_mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
+			_mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
 
-    // View
-    if (_event.key.code == Keyboard::F1)
-        _currentView = FOLLOW_Y;
-    if (_event.key.code == Keyboard::F2)
-        _currentView = FOLLOW;
-    if (_event.key.code == Keyboard::F3)
-        _currentView = NEUTRAL;
-    if (_event.key.code == Keyboard::F4)
-        _currentView = CAMERA;
+	// View
+	if (_event.key.code == Keyboard::F1)
+		_currentView = FOLLOW_Y;
+	if (_event.key.code == Keyboard::F2)
+		_currentView = FOLLOW;
+	if (_event.key.code == Keyboard::F3)
+		_currentView = NEUTRAL;
+	if (_event.key.code == Keyboard::F4)
+		_currentView = CAMERA;
 }
 
 bool Game::canTeleportAtMouse()
@@ -251,9 +250,8 @@ void Game::handleMouseButtonPressed()
 			if (isMouseInMap() && _currentTool == BUILD)
 				insertBlockAtMouse(c, l);
 
-
 			// Ajouter un shield au cercle de shield
-			if (isMouseInMap() && _currentTool == SPHERE_SHIELD)
+			if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= 10)
 			{
 				_shieldSphere.insert(_shieldSphere.end(), Bullet());
 				_shieldVA.insert(_shieldVA.end(), VectorAngle());
@@ -266,7 +264,6 @@ void Game::handleMouseButtonPressed()
 			}
 
 			shootWeapon();
-
 		}
 		if (Mouse::isButtonPressed(Mouse::Right))
 		{
