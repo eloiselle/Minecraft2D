@@ -199,6 +199,7 @@
     <ClInclude Include="Killable.h" />
     <ClInclude Include="Delay.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="Nameable.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SidewayCharacter.h" />

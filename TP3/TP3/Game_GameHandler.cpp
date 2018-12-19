@@ -25,7 +25,10 @@ void Game::manageBossWeapon()
         {
             bossShootBullet();
 
-            _bullets.back().rotate(ANGLE_BOSS_BULLET * i);
+            list<Bullet>::iterator b;
+            b = _bullets.end()--;
+
+            b->rotate(ANGLE_BOSS_BULLET * i);
         }
         _boss.delayReset(_frameFoes);
     }
@@ -34,7 +37,7 @@ void Game::manageBossWeapon()
 
 void Game::bossShootBullet()
 {
-	list<Bullet>::iterator b;
+    list<Bullet>::iterator b;
 
     b = _bullets.push_back(_boss.getBullet());
 
@@ -77,14 +80,14 @@ void Game::handleBossMovingDown()
 
 void Game::handleBatCreation()
 {
-	list<Crawler>::iterator b;
-	b = _bats.end()--;
+    list<Crawler>::iterator b;
+    b = _bats.end()--;
     if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
     {
         // Create new bat on last line
         int l = _map.nbLine() - 2;
         int c = (rand() % (_map.nbCol() - LINE_TO_CREATE_BATS)) + 3;
-        _bats.push_back(Crawler());
+        b = _bats.push_back(Crawler());
         b->setPositionInGrid(c, l);
         _map.at(l, c).setType(EMPTY_BLOCK);
     }
@@ -112,24 +115,29 @@ void Game::shootWeapon()
 
 void Game::shootBullet(Character *target)
 {
-    _bullets.push_back(Bullet());
+    list<Bullet>::iterator b;
+    b = _bullets.end();
+
+    b = _bullets.insert(b, Bullet());
+
 
     if (MUSIQUE)
-        _bullets.back().play(_buffBullet);
+        b->play(_buffBullet);
 
-    _bullets.back().setPositionExact(
+    b->setPositionExact(
         _player.getExactX(),
         _player.getExactY() - HALF_TILE_SIZE);
 
     if (target == nullptr)
     {
-        _bullets.back().aim(
+        b->aim(
             _mouseCoord.getPosition().x,
             _mouseCoord.getPosition().y,
             _player.getWeaponAccuracy());
     }
 
-    _bullets.back().setSpeed(_player.getWeaponBulletSpeed());
-    _bullets.back().setDamage(_player.getWeaponDamage());
+    b->setSpeed(_player.getWeaponBulletSpeed());
+    b->setDamage(_player.getWeaponDamage());
+
     _player.delayReset(_frameRun);
 }
