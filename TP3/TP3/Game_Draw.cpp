@@ -104,7 +104,9 @@ void Game::drawBullets()
     {
         if (b->isFriendly())
         {
-            _bulletShape[b->isFriendly()].setScale(Vector2f(b->getDamage(), b->getDamage()));
+            int size = b->getDamage() / 10 + 1;
+            _bulletShape[b->isFriendly()].setScale(
+                Vector2f(size, size));
         }
         _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
         _window.draw(_bulletShape[b->isFriendly()]);
@@ -165,7 +167,7 @@ void Game::drawBossHealthBar()
     {
         float hpRatio = (float)_boss.getHp() / _boss.getHpMax();
         _bossHealthBar.setSize(Vector2f(
-            (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio, 
+            (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio,
             HEALTH_BAR_HEIGHT));
         _bossHealthBar.setPosition(SHAPE_THICKNESS, SHAPE_THICKNESS);
         _window.draw(_bossHealthBar);
@@ -176,11 +178,11 @@ void Game::drawBossHealthBar()
     {
         float hpRatio = (float)_player.getHp() / _player.getHpMax();
         _playerHealthBar.setSize(Vector2f(
-            (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio, 
+            (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio,
             HEALTH_BAR_HEIGHT));
         _playerHealthBar.setPosition(
             SHAPE_THICKNESS,
-            _window.getSize().y - HEALTH_BAR_HEIGHT - SHAPE_THICKNESS );
+            _window.getSize().y - HEALTH_BAR_HEIGHT - SHAPE_THICKNESS);
         _window.draw(_playerHealthBar);
     }
 }

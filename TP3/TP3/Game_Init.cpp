@@ -155,10 +155,6 @@ void Game::initTexts()
 // Initialize les shapes
 void Game::initShapes()
 {
-	// TODO erase ?
-	_playerShape.setFillColor(Color::Green);
-	_playerShape.setSize(Vector2f(3, 3));
-	_playerShape.setOrigin(2, 2);
 
 	// Bullet
 	_bulletShape[UNFRIENDLY].setRadius(2);
@@ -264,8 +260,8 @@ void Game::initViews()
 
 void Game::initPlayer()
 {
-	_currentTool = BULLET_HELL;
-	_player.setBulletHell(0);
+    _currentTool = ASSAULT;
+	_player.setAssault);
 
 	_player.setHpMax(NB_LIVES);
 	_player.refillHp();
@@ -274,8 +270,7 @@ void Game::initPlayer()
 		PLAYER_START_C * TILE_SIZE + HALF_TILE_SIZE,
 		PLAYER_START_L * TILE_SIZE + TILE_SIZE - 1);
 	_player.setSpeed(4);
-	//_map.at(_player.getGridLine(), _player.getGridCol()) = EMPTY_BLOCK;
-	//_map.at(_player.getGridLine() + 1, _player.getGridCol()) = SOFT_BLOCK;
+
 }
 
 void Game::initShield()
@@ -297,8 +292,8 @@ void Game::initBoss()
 	_boss.setPositionInGrid(_map.nbCol() / 2, 3);
 	_boss.setSpeed(5);
 
-	_boss.setHpMax(100);
-	_boss.setHp(100);
+	_boss.setHpMax(BOSS_HP_MAX);
+    _boss.refillHp();
 
 	_boss.setWeaponBoss(0);
 }

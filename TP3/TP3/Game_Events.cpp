@@ -171,23 +171,23 @@ void Game::handleKeypressContinu()
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Num6))
 	{
-		_currentTool = BULLET_HELL;
-		_player.setBulletHell(_frameRun);
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Num7))
-	{
-		_currentTool = SLOW_MO;
-		_player.setNoWeapon(_frameRun);
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Num8))
-	{
 		_bullets.clear(); // Pour eviter d'abuser du switch entre Bullet Hell et Homing
 		_currentTool = HOMING;
 		_player.setHoming(_frameRun);
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Num9))
+	if (Keyboard::isKeyPressed(Keyboard::Num7))
+	{
+		_currentTool = BULLET_HELL;
+		_player.setBulletHell(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num8))
 	{
 		_currentTool = SPHERE_SHIELD;
+		_player.setNoWeapon(_frameRun);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Num9))
+	{
+		_currentTool = SLOW_MO;
 		_player.setNoWeapon(_frameRun);
 	}
 }
