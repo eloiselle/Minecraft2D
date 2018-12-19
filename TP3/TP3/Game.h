@@ -81,12 +81,13 @@ constexpr int PLAYER_FOOT = 8;                              // Demi-Largeur de l
 
 // Game
 constexpr int NB_LIVES = 10;                                // Nombre de vies du joueurs au debut de partie
+constexpr int BOSS_HP_MAX = 500;                            // Nombre de hp du boss au debut
 constexpr int PLAYER_START_C = 15;                          // Position Col de depart du joueur
 constexpr int PLAYER_START_L = NBR_EMPTY_LINE_ON_TOP - 1;   // Position Line de depart du joueur
 constexpr int NB_STARTING_BATS = 4;                         // Nombre d'ennemis a creer au debut
 constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace entre les chauves souris au depart
-constexpr int SLOW_MO_EFFECT = 4;                           // Frequence inverse d'action des foes lorsque en slow-mo
-constexpr int NB_SHIELD_INIT = 6;
+constexpr int SLOW_MO_EFFECT = 3;                           // Frequence inverse d'action des foes lorsque en slow-mo
+constexpr int NB_SHIELD_INIT = 6;                           // 
 constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
 constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaque balle du boss
@@ -97,7 +98,7 @@ constexpr int SCORE_BAT = 100;                              // Bonus de score po
 constexpr int SCORE_BLOCK = 10;                             // Bonus de score pour detruire un block
 
 // OPTIONS
-constexpr bool MUSIQUE = false;                             // Option pour desactiver l'audio
+constexpr bool MUSIQUE = true;                             // Option pour desactiver l'audio
 
 class Game
 {
@@ -174,6 +175,7 @@ private:
 
 	TOOL _currentTool;                  // Arme actuellement utiliser
 
+    long int _frameFoes;                //
 	long int _frameRun;                 // Garde en memoire le nombre de frame depuis le debut quand ca run
 	long int _frameTotal;               // Garde en memoire le nombre de frame depuis le debut
 	Event _event;                       // Event presentement en evaluation

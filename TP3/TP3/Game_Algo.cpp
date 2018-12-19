@@ -83,6 +83,7 @@ void Game::manageFoes()
 		{
 			manageOneFoe(c);
 		}
+        _frameFoes++;
 	}
 }
 

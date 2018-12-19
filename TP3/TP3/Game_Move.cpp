@@ -153,12 +153,12 @@ void Game::tryToMoveInDirection(Crawler& c, DIRECTION4 dir)
 void Game::moveBoss()
 {
     // Deplacement du boss
-    float round = cos(_frameRun / 100.f);
+    float round = cos(_frameFoes / 100.f);
     float minimum = TILE_SIZE * 2;
     float maximum = MAP_WIDTH_PIXELS - TILE_SIZE * 2;
     float amplitude = (maximum - minimum) / 2;
     float x = amplitude * round + amplitude + minimum;
-    float y = cos(_frameRun / 16.f);
+    float y = cos(_frameFoes / 16.f);
 
     _boss.setPositionExact(x, y + _boss.getExactY());
 }
