@@ -157,7 +157,6 @@ void Game::manageBullets()
     while (b != _bullets.end())
     {
         _bulletWillVanish = false;
-
         if (_currentTool == HOMING && b->isFriendly())//b->isHoming()) // TODO bypass
         {
             b->aim(_boss);
@@ -165,7 +164,6 @@ void Game::manageBullets()
             //    b->aim(b->getTarget());
             //else
             //    b->setTarget(nullptr);
-
         }
 
         b->advance();

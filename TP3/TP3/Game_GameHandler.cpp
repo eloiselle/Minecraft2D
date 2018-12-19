@@ -79,6 +79,7 @@ void Game::handleBatCreation()
 }
 
 
+
 void Game::shootWeapon()
 {
     //Tirer le nombre de bullets
@@ -88,21 +89,12 @@ void Game::shootWeapon()
 
         if (_currentTool == HOMING)
         {
-            for (Crawler& c : _bats)
-            {
-                //Détermine la target
-                if (areOnTheSameSquare(_mouseMagnet, c))
-                {
-                    target = &_boss;// &c; // TODO bypass c
-                    break;
-                }
-            }
+            target = &_boss;// &c; // TODO bypass c
         }
 
+        // Tirer le nombre de bullets
         for (int i = 0; i < _player.getWeaponNbBulletsFired(); i++)
-        {
             shootBullet(target);
-        }
     }
 }
 
@@ -117,7 +109,7 @@ void Game::shootBullet(Character *target)
         _player.getExactX(),
         _player.getExactY() - HALF_TILE_SIZE);
 
-    if (target == nullptr) 
+    if (target == nullptr)
     {
         _bullets.back().aim(
             _mouseCoord.getPosition().x,
