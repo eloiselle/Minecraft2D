@@ -155,7 +155,7 @@ void Game::manageSphereShield()
 		_shieldVA[i].rotate(3);
 		_shieldSphere[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
-			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT *0.75);
+			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
 		collisionBulletFoes(_shieldSphere[i]);
 
 		if (_bulletWillVanish)

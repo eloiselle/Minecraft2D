@@ -142,6 +142,14 @@ void Game::initTexts()
     _messageOnShader.setPosition(32, 32);
     _messageOnShader.setString(STR_INSTRUCTIONS);
 
+    // Text Tool Switch
+    _textToolSwitch.setFont(_fontInvasion2000);
+    _textToolSwitch.setCharacterSize(24);                // In pixels
+    _textToolSwitch.setFillColor(Color(255, 255, 255, 128));  // White
+    _textToolSwitch.setOutlineColor(Color(64, 64, 64, 128));  // Dark grey
+    _textToolSwitch.setOutlineThickness(3);
+    _textToolSwitch.setPosition(32, _window.getSize().y - 64);
+
     // Text debugInfo
     _debugInfo.setFont(_fontInvasion2000);
     _debugInfo.setCharacterSize(24);                // In pixels
@@ -191,12 +199,15 @@ void Game::initShapes()
     _bossHealthBar.setFillColor(Color::Red);
     _bossHealthBar.setOutlineColor(Color(128, 0, 0));
     _bossHealthBar.setOutlineThickness(SHAPE_THICKNESS);
+    _bossHealthBar.setPosition(SHAPE_THICKNESS, SHAPE_THICKNESS);
 
     // Boss Health Bar
     _playerHealthBar.setFillColor(Color::Green);
     _playerHealthBar.setOutlineColor(Color(0, 128, 0));
     _playerHealthBar.setOutlineThickness(SHAPE_THICKNESS);
-
+    _playerHealthBar.setPosition(
+        SHAPE_THICKNESS,
+        _window.getSize().y - HEALTH_BAR_HEIGHT - SHAPE_THICKNESS);
 
     // Shader pour l'ecran de pause
     _shader.setSize(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
@@ -251,8 +262,7 @@ void Game::initViews()
 
 void Game::initPlayer()
 {
-    _currentTool = ASSAULT;
-    _player.setAssault(0);
+    switchTool(ASSAULT);
 
     _player.setHpMax(NB_LIVES);
     _player.refillHp();

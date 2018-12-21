@@ -48,7 +48,7 @@ void Game::updateWindowTitle()
     //    to_string(_mouseMagnet.getGridCol()) + " " +
     //    to_string(_mouseMagnet.getGridLine());
 
-    _extraTitle += toolName[_currentTool];
+    _extraTitle += TOOL_NAMES[_currentTool];
 
     _extraTitle += "        Lives : " + to_string((int)_player.getHp()) + "/" + to_string((int)_player.getHpMax());
     _extraTitle += "        Game State : " + _appStateName[_appState];
@@ -169,7 +169,7 @@ void Game::drawBossHealthBar()
         _bossHealthBar.setSize(Vector2f(
             (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio,
             HEALTH_BAR_HEIGHT));
-        _bossHealthBar.setPosition(SHAPE_THICKNESS, SHAPE_THICKNESS);
+
         _window.draw(_bossHealthBar);
     }
 
@@ -180,9 +180,7 @@ void Game::drawBossHealthBar()
         _playerHealthBar.setSize(Vector2f(
             (MAP_WIDTH_PIXELS - SHAPE_THICKNESS * 2) * hpRatio,
             HEALTH_BAR_HEIGHT));
-        _playerHealthBar.setPosition(
-            SHAPE_THICKNESS,
-            _window.getSize().y - HEALTH_BAR_HEIGHT - SHAPE_THICKNESS);
+
         _window.draw(_playerHealthBar);
     }
 }
@@ -200,6 +198,9 @@ void Game::drawThingsDirectlyOnTheScreen()
         _window.draw(_shader);
         _window.draw(_messageOnShader);
     }
+
+
+    _window.draw(_textToolSwitch);
 
     // Debug info
     _debugInfo.setString(_debug);

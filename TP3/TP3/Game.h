@@ -100,6 +100,7 @@ constexpr int SLOW_MO_EFFECT = 3;                           // Frequence inverse
 constexpr int NB_SHIELD_INIT = 6;                           // 
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
 constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaque balle du boss
+constexpr int MAX_SHIELD_SPHERES = 6;                      // 
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -144,6 +145,7 @@ private:
     string _message = STR_INSTRUCTIONS; // Message pendant l'ecran de pause
     Font _fontInvasion2000;             // Font retro avec des gros pixels
     Text _messageOnShader;              // Text afficher par dessus toute la scene
+    Text _textToolSwitch;               // 
     Text _debugInfo;                    // Text afficher par dessus toute la scene
     string _debug = "DEBUG";            // Message modifiable pour tracker les variables en temps réel
 
@@ -239,11 +241,12 @@ private:
     void handlePausing();                               // Verifi si on doit changer l'etat de pause
     View& handleResizeWindow();                         // Handler le redimensionnement de la fenetre
     void handleKeypressOnce();                          // Handler des touches de clavier une seule fois
-    void handleKeypressContinu();                              // Handler des touches de clavier en continu
+    void handleKeypressContinu();                       // Handler des touches de clavier en continu
     void handleArrowKeys();                             // Handler des fleches du clavier et WASD
     void handleMouseWheelMoved();                       // Handler de la roulette de souris
     void handleMouseButtonPressed();                    // Handler des boutons de souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
+    void switchTool(TOOL tool);                         //
 
     // Tools
     void shootWeapon();                                 // Utilise l'arme selectionnee
@@ -280,7 +283,6 @@ private:
     void manageFoes();                                  // Gere les ennemis
     void manageOneFoe(list<Crawler>::iterator& c);      // Gere un seul ennemi
     void manageMapExpansion();                          // Gere quand on doit agrandir la map
-
     void manageSphereShield();                          // Gere le bouclier
     void manageBullets();                               // Gere les projectiles
     bool toolIsAShooter()const;                         // Regarde si _currentTool lance des bullets

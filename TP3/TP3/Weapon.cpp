@@ -33,9 +33,9 @@ void Weapon::setUzi(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 60;
-    _totalDelay = 3 * _delayMultiplier;
-    _bulletSpeed = 2;
-    _damage = 10;
+    _totalDelay = 1 * _delayMultiplier;
+    _bulletSpeed = 3;
+    _damage = 4;
     delayInit(_frameRun, _totalDelay);
 }
 
@@ -74,7 +74,7 @@ void Weapon::setBulletHell(int _frameRun)
     _nbBulletsFired = 25;
     _inaccuracy = 360;
     _totalDelay = 1;
-    _bulletSpeed = 5;
+    _bulletSpeed = 4;
     _damage = 1;
     delayInit(_frameRun, _totalDelay);
 }

@@ -80,7 +80,7 @@ bool Game::canTeleportAtMouse()
 // Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
-    handleKeypressContinu(); // TODO event allow to do it only once
+    handleKeypressContinu(); 
 
     if (_appState == RUNNING)
     {
@@ -116,6 +116,7 @@ void Game::handlePausing()
         break;
     default:        break;
     }
+
 }
 
 // Gere quand la fenetre est redimensionner
@@ -146,57 +147,20 @@ void Game::handleKeypressContinu()
     {
         handleArrowKeys();
     }
-    if (Keyboard::isKeyPressed(Keyboard::Escape))
-        quitApplication();
+
+    if (Keyboard::isKeyPressed(Keyboard::Escape))           quitApplication();
 
 
-    // Change weapon
-    if (Keyboard::isKeyPressed(Keyboard::Num1))
-    {
-        _currentTool = BUILD;
-        _player.setNoWeapon(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num2))
-    {
-        _currentTool = UZI;
-        _player.setUzi(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num3))
-    {
-        _currentTool = ASSAULT;
-        _player.setAssault(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num4))
-    {
-        _currentTool = SNIPER;
-        _player.setSniper(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num5))
-    {
-        _currentTool = SHOT_GUN;
-        _player.setShotgun(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num6))
-    {
-        _bullets.clear(); // Pour eviter d'abuser du switch entre Bullet Hell et Homing
-        _currentTool = HOMING;
-        _player.setHoming(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num7))
-    {
-        _currentTool = BULLET_HELL;
-        _player.setBulletHell(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num8))
-    {
-        _currentTool = SPHERE_SHIELD;
-        _player.setNoWeapon(_frameRun);
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Num9))
-    {
-        _currentTool = SLOW_MO;
-        _player.setNoWeapon(_frameRun);
-    }
+    // Change tool
+    if      (Keyboard::isKeyPressed(Keyboard::Num1))        switchTool(BUILD);
+    else if (Keyboard::isKeyPressed(Keyboard::Num2))        switchTool(UZI);
+    else if (Keyboard::isKeyPressed(Keyboard::Num3))        switchTool(ASSAULT);
+    else if (Keyboard::isKeyPressed(Keyboard::Num4))        switchTool(SNIPER);
+    else if (Keyboard::isKeyPressed(Keyboard::Num5))        switchTool(SHOT_GUN);
+    else if (Keyboard::isKeyPressed(Keyboard::Num6))        switchTool(HOMING);
+    else if (Keyboard::isKeyPressed(Keyboard::Num7))        switchTool(BULLET_HELL);
+    else if (Keyboard::isKeyPressed(Keyboard::Num8))        switchTool(SPHERE_SHIELD);
+    else if (Keyboard::isKeyPressed(Keyboard::Num9))        switchTool(SLOW_MO);
 }
 
 void Game::handleArrowKeys()
@@ -253,6 +217,7 @@ void Game::handleMouseButtonPressed()
         int c = _mouseCoord.getPosition().x / TILE_SIZE;
         int l = _mouseCoord.getPosition().y / TILE_SIZE;
 
+        // Left Click
         if (Mouse::isButtonPressed(Mouse::Left))
         {
             //Placer un bloc
@@ -260,7 +225,7 @@ void Game::handleMouseButtonPressed()
                 insertBlockAtMouse(c, l);
 
             // Ajouter un shield au cercle de shield
-            if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= 10)
+            if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= MAX_SHIELD_SPHERES)
             {
                 _shieldSphere.insert(_shieldSphere.end(), Bullet());
                 _shieldVA.insert(_shieldVA.end(), VectorAngle());
@@ -274,11 +239,23 @@ void Game::handleMouseButtonPressed()
 
             shootWeapon();
         }
+        // Right Click
         if (Mouse::isButtonPressed(Mouse::Right))
         {
             //Enlever un bloc
             if (isMouseInMap() && _currentTool == BUILD)
                 removeBlockAtMouse(c, l);
         }
+    }
+}
+
+void Game::switchTool(TOOL tool)
+{
+    if (tool != _currentTool)
+    {
+        _bullets.clear();
+        _currentTool = tool;
+        _player.setWeapon(tool, _frameRun);
+        _textToolSwitch.setString(TOOL_NAMES[_currentTool]);
     }
 }

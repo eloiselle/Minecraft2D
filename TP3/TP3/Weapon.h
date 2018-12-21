@@ -23,7 +23,7 @@ const enum TOOL {
     SPHERE_SHIELD,  // Bouclier de balles
     BOSS
 };         // Bullet de l'attaque sonique du boss
-const string toolName[10] = {
+const string TOOL_NAMES[10] = {
     "Build", "Uzi", "Assault", "Sniper", "Shotgun",
     "BulletHell", "Slow-Mo", "Homing", "Sphere Shield", "Boss" };
 

@@ -1,12 +1,5 @@
 ###############################################################################
 
-Taches Remise   :
-    Video       : Faire la video
-    Video       : Editer la video
-    Code        : Effacer/Commenter ce qui n´est pas utilisé
-    Remise      : Remettre le projet et le video
-    Oral        : Planifier ce qu´on va dire dans l´oral
-
 Should be done  :
     Weapon      : Bulletshield  : Implanter les collisions (E)
     List        : Finir d'utiliser la liste (C)
@@ -15,6 +8,7 @@ Should be done  :
 Si on a le temps:
     Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
     Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
+    Code        : Effacer/Commenter ce qui n´est pas utilisé
 
 Abandonnes      :
     Map         : Faire rapetisser la map (A)
@@ -23,35 +17,3 @@ Abandonnes      :
     Meta        : Timer qui compte en descendant (A)
     Weapon      : Beam : RectangleShape qui passe au travers des blocs (E)
     Map         : Map Editor Sauvegarder la map et la loader
-
-
-
-
-Final : 20 décembre à 8h30
-    Remise: 
-        Tp3_Minecraft2D_CatherineBronsard_LoiselleEmile_CoteAnthony.zip
-        Vidéo de votre projet qui s’exécute (Interactions générées par vous)
-        Le code de votre projet (pas de pdf, je corrigerai avec visual studio)
-    
-    Oral: (15-20 min. par équipe)
-        Introduction
-        Résultat intéressant
-        Plus grande difficulté
-            C : liste?
-            E : s'adapter au code? bullet?
-            A : Angles et Jump/Collision
-        Apprentissage intéressant par personne
-            Enum dans tableau
-            A : Structure de code et Interface de classe
-            A : Multiple inheritance
-			E : Utiliser des options pour déterminer 
-				- la cadence de tir des armes
-				- le nombre de projectiles à tirer
-            Delay
-            Angle
-            MagnetPosition
-            Constexpr
-            DataStructures: Pair Tuple Set Tree HashMap Heap AssocMap/Dict Graph
-        Conclusion
-
-
