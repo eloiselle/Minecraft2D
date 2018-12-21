@@ -95,7 +95,7 @@ void Weapon::setWeaponBoss(int _frameRun)
     _nbBulletsFired = 1;
     _inaccuracy = 1;
     _totalDelay = 300 * _delayMultiplier;
-    _bulletSpeed = 4;
+    _bulletSpeed = 2;
     _damage = 1;
     delayInit(_frameRun, _totalDelay);
 }

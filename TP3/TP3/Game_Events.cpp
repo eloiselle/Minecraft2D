@@ -29,37 +29,44 @@ void Game::inputActivatedOnlyTheFirstTime()
             _appState = PAUSED;
             break;
         case Event::KeyPressed:
-			handleKeypressOnce();
-		}
+            handleKeypressOnce();
+        }
 
-		if (_appState == RUNNING)
-		{
-			if (_event.type == Event::MouseWheelMoved)
-				handleMouseWheelMoved();
-		}
-	}
+        if (_appState == RUNNING)
+        {
+            if (_event.type == Event::MouseWheelMoved)
+                handleMouseWheelMoved();
+        }
+    }
 }
 
 void Game::handleKeypressOnce()
 {
-            if (_event.key.code == Keyboard::BackSpace)
-                init();
-            if (_event.key.code == Keyboard::P)
-                handlePausing();
-            if (_event.key.code == Keyboard::T && canTeleportAtMouse())
-                _player.setPositionExact(
-                    _mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
-                    _mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
+    if (_event.key.code == Keyboard::BackSpace)
+        init();
+    if (_event.key.code == Keyboard::P)
+        handlePausing();
+    if (_event.key.code == Keyboard::T && canTeleportAtMouse())
+        _player.setPositionExact(
+            _mouseMagnet.getGridCol() * TILE_SIZE + (TILE_SIZE / 2),
+            _mouseMagnet.getGridLine() * TILE_SIZE + TILE_SIZE - 1);
 
-	// View
-	if (_event.key.code == Keyboard::F1)
-		_currentView = FOLLOW_Y;
-	if (_event.key.code == Keyboard::F2)
-		_currentView = FOLLOW;
-	if (_event.key.code == Keyboard::F3)
-		_currentView = NEUTRAL;
-	if (_event.key.code == Keyboard::F4)
-		_currentView = CAMERA;
+
+    if (_event.key.code == Keyboard::M)
+    {
+        _isAudioActivated = !_isAudioActivated;
+        _music.setVolume(100 * _isAudioActivated);
+    }
+
+    // View
+    if (_event.key.code == Keyboard::F1)
+        _currentView = FOLLOW_Y;
+    if (_event.key.code == Keyboard::F2)
+        _currentView = FOLLOW;
+    if (_event.key.code == Keyboard::F3)
+        _currentView = NEUTRAL;
+    if (_event.key.code == Keyboard::F4)
+        _currentView = CAMERA;
 }
 
 bool Game::canTeleportAtMouse()
@@ -73,7 +80,7 @@ bool Game::canTeleportAtMouse()
 // Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
-	handleKeypressContinu(); // TODO event allow to do it only once
+    handleKeypressContinu(); // TODO event allow to do it only once
 
     if (_appState == RUNNING)
     {
@@ -93,14 +100,14 @@ void Game::handlePausing()
 {
     switch (_appState)
     {
-    case Game::RUNNING:         
-        _appState = PAUSED;             
+    case Game::RUNNING:
+        _appState = PAUSED;
         break;
-    case Game::PAUSED:          
-        _appState = RUNNING;            
+    case Game::PAUSED:
+        _appState = RUNNING;
         break;
-    case Game::BOSS_KILLED:     
-        init();       
+    case Game::BOSS_KILLED:
+        init();
         _appState = RUNNING;
         break;
     case Game::GAME_OVER:
@@ -171,30 +178,30 @@ void Game::handleKeypressContinu()
     }
     if (Keyboard::isKeyPressed(Keyboard::Num6))
     {
-		_bullets.clear(); // Pour eviter d'abuser du switch entre Bullet Hell et Homing
-		_currentTool = HOMING;
-		_player.setHoming(_frameRun);
+        _bullets.clear(); // Pour eviter d'abuser du switch entre Bullet Hell et Homing
+        _currentTool = HOMING;
+        _player.setHoming(_frameRun);
     }
     if (Keyboard::isKeyPressed(Keyboard::Num7))
     {
-		_currentTool = BULLET_HELL;
-		_player.setBulletHell(_frameRun);
+        _currentTool = BULLET_HELL;
+        _player.setBulletHell(_frameRun);
     }
     if (Keyboard::isKeyPressed(Keyboard::Num8))
     {
-		_currentTool = SPHERE_SHIELD;
-		_player.setNoWeapon(_frameRun);
+        _currentTool = SPHERE_SHIELD;
+        _player.setNoWeapon(_frameRun);
     }
     if (Keyboard::isKeyPressed(Keyboard::Num9))
     {
-		_currentTool = SLOW_MO;
+        _currentTool = SLOW_MO;
         _player.setNoWeapon(_frameRun);
     }
 }
 
 void Game::handleArrowKeys()
 {
-
+    _player.isMoving(false);
 
     // Keyboard Arrow
     if (Keyboard::isKeyPressed(Keyboard::Up) ||
@@ -210,8 +217,8 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Right) ||
         Keyboard::isKeyPressed(Keyboard::D))
     {
+        _player.isMoving(true);
         _player.lookToTheRight();
-
         _view[CAMERA].move(ARROW_EXPLORE, 0);
         tryToMove(RIGHT, _player);
     }
@@ -223,7 +230,7 @@ void Game::handleArrowKeys()
     if (Keyboard::isKeyPressed(Keyboard::Left) ||
         Keyboard::isKeyPressed(Keyboard::A))
     {
-		_player.isMoving(true);
+        _player.isMoving(true);
         _player.lookToTheLeft();
         _view[CAMERA].move(-ARROW_EXPLORE, 0);
         tryToMove(LEFT, _player);
@@ -252,20 +259,20 @@ void Game::handleMouseButtonPressed()
             if (isMouseInMap() && _currentTool == BUILD)
                 insertBlockAtMouse(c, l);
 
-			// Ajouter un shield au cercle de shield
-			if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= 10)
+            // Ajouter un shield au cercle de shield
+            if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= 10)
             {
-				_shieldSphere.insert(_shieldSphere.end(), Bullet());
-				_shieldVA.insert(_shieldVA.end(), VectorAngle());
+                _shieldSphere.insert(_shieldSphere.end(), Bullet());
+                _shieldVA.insert(_shieldVA.end(), VectorAngle());
 
-				for (size_t i = 0; i < _shieldSphere.size(); i++)
+                for (size_t i = 0; i < _shieldSphere.size(); i++)
                 {
-					_shieldVA[i].init(100, 0, 1);
-					_shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
-                    }
+                    _shieldVA[i].init(100, 0, 1);
+                    _shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
                 }
+            }
 
-			shootWeapon();
+            shootWeapon();
         }
         if (Mouse::isButtonPressed(Mouse::Right))
         {

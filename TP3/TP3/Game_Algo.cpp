@@ -2,7 +2,7 @@
 #include "Game.h"
 
 // Boucle principale
-void Game::mainLoop()
+void Game::run()
 {
 	while (_window.isOpen())
 	{
@@ -99,7 +99,7 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
 	// Manage one foe
 	if (c->isGridCentered()) // Pret a se deplacer
 	{
-		if (_frameRun % 24 == 12 && MUSIQUE)
+		if (_frameRun % 24 == 12 && _isAudioActivated)
 		{
 		   c->playSound(_buffFoes);
 		}
