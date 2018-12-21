@@ -262,7 +262,7 @@ void Game::initViews()
 
 void Game::initPlayer()
 {
-    switchTool(ASSAULT);
+    switchTool(SLOW_MO);
 
     _player.setHpMax(NB_LIVES);
     _player.refillHp();
@@ -283,7 +283,7 @@ void Game::initShield()
     {
         _shieldSphere.insert(_shieldSphere.begin(), Bullet());
         _shieldVA.insert(_shieldVA.begin() + i, VectorAngle());
-        _shieldVA[i].init(100, 0, 1);
+        _shieldVA[i].init(SHIELD_DISTANCE, 0, 1);
         _shieldVA[i].setAngleDegree(i * (360 / NB_SHIELD_INIT));
     }
 }

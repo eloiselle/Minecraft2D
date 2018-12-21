@@ -11,9 +11,9 @@ void Weapon::setWeapon(TOOL tool, int _frameRun)
     case SNIPER:            setSniper(_frameRun);           break;
     case SHOT_GUN:          setShotgun(_frameRun);          break;
     case BULLET_HELL:       setBulletHell(_frameRun);       break;
-    case SLOW_MO:           setNoWeapon(_frameRun);         break;
+    case SLOW_MO:           setHandGun(_frameRun);         break;
     case HOMING:			setHoming(_frameRun);			break;
-    case SPHERE_SHIELD:     setNoWeapon(_frameRun);         break;
+    case SPHERE_SHIELD:     setHandGun(_frameRun);         break;
     default:
         break;
     }
@@ -28,6 +28,17 @@ void Weapon::setNoWeapon(int _frameRun)
     _damage = 0;
     delayInit(_frameRun, _totalDelay);
 }
+
+void Weapon::setHandGun(int _frameRun)
+{
+    _nbBulletsFired = 1;
+    _inaccuracy = 20;
+    _totalDelay = 30 * _delayMultiplier;
+    _bulletSpeed = 3;
+    _damage = 4;
+    delayInit(_frameRun, _totalDelay);
+}
+
 
 void Weapon::setUzi(int _frameRun)
 {

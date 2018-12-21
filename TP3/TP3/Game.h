@@ -94,13 +94,18 @@ constexpr int NB_LINE_BEFORE_EXPAND_MAP = 12;               // Nb de line entre 
 constexpr int NB_LINE_BETWEEN_BOSS_AND_PLAYER = 8;          // Nb de line entre le joueur et le boss
 constexpr int LINE_TO_CREATE_BATS = 5;                      // Ligne sur laquel les premieres bats sont creer
 constexpr int SPACE_BETWEEN_BATS = NB_COL / (NB_STARTING_BATS + 1); // Espace entre les chauves souris au depart
+constexpr int NB_LINE_DELETE_BULLET_ABOVE_BOSS = 5;         //
 
 // Tools
 constexpr int SLOW_MO_EFFECT = 3;                           // Frequence inverse d'action des foes lorsque en slow-mo
-constexpr int NB_SHIELD_INIT = 6;                           // 
 constexpr int NB_BOSS_BULLET = 90;                          // Nombre de balles creer par le boss a chaque attaque
 constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaque balle du boss
-constexpr int MAX_SHIELD_SPHERES = 6;                      // 
+
+// Shield
+constexpr int NB_SHIELD_INIT = 1;                           // Nombre initial de Sphere au shield
+constexpr int MAX_SHIELD_SPHERES = 12;                       // Nombre maximum de sphere au shield
+constexpr int SHIELD_DISTANCE = 50;                         // Distance du shield entre le joueur et les sphere
+constexpr int ANGLE_ROTATION_SHIELD = 3;                    // Vitesse de rotation du shield
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss
@@ -242,9 +247,9 @@ private:
     View& handleResizeWindow();                         // Handler le redimensionnement de la fenetre
     void handleKeypressOnce();                          // Handler des touches de clavier une seule fois
     void handleKeypressContinu();                       // Handler des touches de clavier en continu
-    void handleArrowKeys();                             // Handler des fleches du clavier et WASD
+    void handleArrowKeysInContinu();                             // Handler des fleches du clavier et WASD
     void handleMouseWheelMoved();                       // Handler de la roulette de souris
-    void handleMouseButtonPressed();                    // Handler des boutons de souris
+    void handleMouseButtonPressedInContinu();                    // Handler des boutons de souris
     void handleMouseOnWindowBorders();                  // Gere lorsque la souris est proche des bordures d'ecran
     void switchTool(TOOL tool);                         //
 
@@ -265,6 +270,7 @@ private:
     void handleBatCreation();                           // Gere la creation de chauve-souris
     void manageBossWeapon();                            // Gere l'attaque du boss
     void bossShootBullet();                             // Gere une bullet lancee par le boss
+    void addShieldSphere();                             // Ajoute une sphere au shield
 
     // Window View
     bool isInMap(int x, int y) const;                   // Retourne si les coords sont dans la map

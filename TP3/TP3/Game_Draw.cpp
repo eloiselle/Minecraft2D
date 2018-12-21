@@ -88,6 +88,8 @@ void Game::drawPlayer()
 
 void Game::drawShield()
 {
+    _bulletShape[FRIENDLY].setScale(
+        Vector2f(5, 5));
     if (_currentTool == SPHERE_SHIELD)
     {
         for (size_t i = 0; i < _shieldSphere.size(); i++)

@@ -30,6 +30,11 @@ void Game::inputActivatedOnlyTheFirstTime()
             break;
         case Event::KeyPressed:
             handleKeypressOnce();
+            break;
+        case Event::MouseButtonPressed:
+            if (_currentTool == SPHERE_SHIELD)
+                addShieldSphere();
+            break;
         }
 
         if (_appState == RUNNING)
@@ -37,6 +42,9 @@ void Game::inputActivatedOnlyTheFirstTime()
             if (_event.type == Event::MouseWheelMoved)
                 handleMouseWheelMoved();
         }
+
+
+
     }
 }
 
@@ -89,7 +97,7 @@ void Game::inputActivatedInContinu()
 
         if (Mouse::isButtonPressed(Mouse::Left)
             || Mouse::isButtonPressed(Mouse::Right))
-            handleMouseButtonPressed();
+            handleMouseButtonPressedInContinu();
     }
 
     updateViewlessMouseCoord();
@@ -145,7 +153,7 @@ void Game::handleKeypressContinu()
 {
     if (_appState == RUNNING)
     {
-        handleArrowKeys();
+        handleArrowKeysInContinu();
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Escape))           quitApplication();
@@ -163,7 +171,7 @@ void Game::handleKeypressContinu()
     else if (Keyboard::isKeyPressed(Keyboard::Num9))        switchTool(SLOW_MO);
 }
 
-void Game::handleArrowKeys()
+void Game::handleArrowKeysInContinu()
 {
     _player.isMoving(false);
 
@@ -209,7 +217,7 @@ void Game::handleMouseWheelMoved()
 }
 
 // Gere quand un bouton de souris est clicker
-void Game::handleMouseButtonPressed()
+void Game::handleMouseButtonPressedInContinu()
 {
     if (isMouseInWindow()
         && !areOnTheSameSquare(_mouseMagnet, _player))
@@ -224,19 +232,7 @@ void Game::handleMouseButtonPressed()
             if (isMouseInMap() && _currentTool == BUILD)
                 insertBlockAtMouse(c, l);
 
-            // Ajouter un shield au cercle de shield
-            if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= MAX_SHIELD_SPHERES)
-            {
-                _shieldSphere.insert(_shieldSphere.end(), Bullet());
-                _shieldVA.insert(_shieldVA.end(), VectorAngle());
-
-                for (size_t i = 0; i < _shieldSphere.size(); i++)
-                {
-                    _shieldVA[i].init(100, 0, 1);
-                    _shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
-                }
-            }
-
+            
             shootWeapon();
         }
         // Right Click
@@ -245,6 +241,21 @@ void Game::handleMouseButtonPressed()
             //Enlever un bloc
             if (isMouseInMap() && _currentTool == BUILD)
                 removeBlockAtMouse(c, l);
+        }
+    }
+}
+
+void Game::addShieldSphere()
+{
+    if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= MAX_SHIELD_SPHERES)
+    {
+        _shieldSphere.insert(_shieldSphere.end(), Bullet());
+        _shieldVA.insert(_shieldVA.end(), VectorAngle());
+
+        for (size_t i = 0; i < _shieldSphere.size(); i++)
+        {
+            _shieldVA[i].init(100, 0, 1);
+            _shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
         }
     }
 }

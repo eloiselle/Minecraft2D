@@ -21,7 +21,8 @@ const enum TOOL {
     SLOW_MO,        // Ralenti les ennemis
     HOMING,         // Balle qui vise automatiquement le boss
     SPHERE_SHIELD,  // Bouclier de balles
-    BOSS
+    BOSS            //
+    // Handgun      // Arme faible pour compenser le manque offensif de Slow-mo et Sphere shield
 };         // Bullet de l'attaque sonique du boss
 const string TOOL_NAMES[10] = {
     "Build", "Uzi", "Assault", "Sniper", "Shotgun",
@@ -42,6 +43,7 @@ public:
     // Change weapon
     void setWeapon(TOOL tool, int _frameRun);
     void setNoWeapon(int _frameRun);
+    void setHandGun(int _frameRun);
     void setUzi(int _frameRun);
     void setAssault(int _frameRun);
     void setSniper(int _frameRun);

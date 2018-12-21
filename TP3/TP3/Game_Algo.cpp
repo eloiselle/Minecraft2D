@@ -127,9 +127,9 @@ bool Game::toolIsAShooter()const
 	switch (_currentTool)
 	{
 	case BUILD:
-	case SLOW_MO:
-	case SPHERE_SHIELD:
 		return false;       break;
+	case SPHERE_SHIELD:     // Handgun
+	case SLOW_MO:           // Handgun
 	case UZI:
 	case ASSAULT:
 	case SNIPER:
@@ -152,11 +152,12 @@ void Game::manageSphereShield()
 	for (size_t i = 0; i < _shieldSphere.size(); i++)
 	{
 		_bulletWillVanish = false;
-		_shieldVA[i].rotate(3);
+		_shieldVA[i].rotate(ANGLE_ROTATION_SHIELD);
 		_shieldSphere[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
 			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
 		collisionBulletFoes(_shieldSphere[i]);
+        //collisionBulletBlock(_shieldSphere[i]);
 
 		if (_bulletWillVanish)
 		{
@@ -200,7 +201,7 @@ void Game::manageBullets()
 		else
 			_bulletWillVanish = true;
 
-		if (b->getExactY() < _boss.getExactY() - TILE_SIZE * 5)
+		if (b->getExactY() < _boss.getExactY() - TILE_SIZE * NB_LINE_DELETE_BULLET_ABOVE_BOSS)
 			_bulletWillVanish = true;
 
 		if (_bulletWillVanish)
