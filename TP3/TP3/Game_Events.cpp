@@ -252,13 +252,12 @@ void Game::addShieldSphere()
         && _shield.size() <= MAX_SHIELD_SPHERES)
     {
         _shield.insert(_shield.end(), Bullet());
-        _shieldVA.insert(_shieldVA.end(), VectorAngle());
+        _shieldVA.insert(_shieldVA.end(), VectorAngle(SHIELD_DISTANCE, 0, 1));
 
         // Repositionne les autres bullet
         for (size_t i = 0; i < _shield.size(); i++)
         {
             _shield[i].setDamage(SPHERE_DAMAGE);
-            _shieldVA[i].init(100, 0, 1);
             _shieldVA[i].setAngleDegree(i * (360 / _shield.size()));
 
         }

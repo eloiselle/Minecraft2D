@@ -282,13 +282,6 @@ void Game::initShield()
     for (size_t i = 0; i < NB_SHIELD_INIT; i++)
     {
         addShieldSphere();
-        //_shield.insert(_shield.begin(), Bullet());
-        //_shieldVA.insert(_shieldVA.begin() + i, VectorAngle());
-
-        //_shield.end()->setDamage(4);
-        //_shieldVA[i].init(SHIELD_DISTANCE, 0, 1);
-        //_shieldVA[i].setAngleDegree(i * (360 / NB_SHIELD_INIT));
-
     }
 }
 

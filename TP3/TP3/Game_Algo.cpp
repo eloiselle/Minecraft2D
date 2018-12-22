@@ -156,10 +156,6 @@ void Game::manageSphereShield()
 
 void Game::manageBullets()
 {
-
-
-	// List of bullets
-
 	list<Bullet>::iterator b = _bullets.begin();
 
 	while (b != _bullets.end())
@@ -175,14 +171,11 @@ void Game::manageBullets()
 		if (isInMap(*b))
 		{
 			collisionBulletBlock(*b);
+
 			if (b->isFriendly())
-			{
 				collisionBulletFoes(*b);
-			}
 			else
-			{
 				collisionBulletPlayer(*b);
-			}
 
 		}
 		else

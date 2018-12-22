@@ -18,7 +18,9 @@ protected:
     float _length;                      // Longueur du vecteur (multiplicateur)
 
 public:
-    void init(float length = 1, float normalX = 1, float normalY = 0);  // Constructeur
+    VectorAngle(float length = 1, float normalX = 1, float normalY = 0)
+        : _length(length), _normalizedX(normalX), _normalizedY(normalY) {}; // Constructeur
+    void init(float length = 1, float normalX = 1, float normalY = 0);      // Initializer
 
     float getNormalizedX()const;                            // Retourne la position normalized x
     float getNormalizedY()const;                            // Retourne la position normalized y

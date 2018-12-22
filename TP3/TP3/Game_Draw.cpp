@@ -13,10 +13,10 @@ void Game::drawWindow()
     drawGrid();
     updateViews();
 
-    drawPlayer();
+    drawShield();
     drawFoes();
     drawBullets();
-    drawShield();
+    drawPlayer();
     drawMovableGui();
 
     drawThingsDirectlyOnTheScreen();
