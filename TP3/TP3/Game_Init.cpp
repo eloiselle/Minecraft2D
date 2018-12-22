@@ -196,14 +196,14 @@ void Game::initShapes()
     _mouseSquare.setOutlineThickness(SHAPE_THICKNESS);
 
     // Boss Health Bar
-    _bossHealthBar.setFillColor(Color::Red);
-    _bossHealthBar.setOutlineColor(Color(128, 0, 0));
+    _bossHealthBar.setFillColor(Color(255, 0, 0, 128)); // Red
+    _bossHealthBar.setOutlineColor(Color(128, 0, 0, 128));
     _bossHealthBar.setOutlineThickness(SHAPE_THICKNESS);
     _bossHealthBar.setPosition(SHAPE_THICKNESS, SHAPE_THICKNESS);
 
     // Boss Health Bar
-    _playerHealthBar.setFillColor(Color::Green);
-    _playerHealthBar.setOutlineColor(Color(0, 128, 0));
+    _playerHealthBar.setFillColor(Color(0, 255, 0, 128)); // Green
+    _playerHealthBar.setOutlineColor(Color(0, 128, 0, 128));
     _playerHealthBar.setOutlineThickness(SHAPE_THICKNESS);
     _playerHealthBar.setPosition(
         SHAPE_THICKNESS,

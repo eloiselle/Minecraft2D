@@ -28,13 +28,6 @@
       <FileName>FixedGrid.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Killable" Collapsed="true">
-    <Position X="5.25" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAgCCAAQAAAAAQAAAAAABAAAEAEAAAASAEAAAA=</HashCode>
-      <FileName>Killable.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MagnetPosition" Collapsed="true">
     <Position X="7.25" Y="2" Width="1.5" />
     <TypeIdentifier>
@@ -84,13 +77,6 @@
       <FileName>WorldMap.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Character" Collapsed="true">
-    <Position X="7.25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Character.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Nameable" Collapsed="true">
     <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
@@ -101,7 +87,7 @@
   <Class Name="Game" Collapsed="true">
     <Position X="5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gV9MwJDui8aNcrgr1AEhCml0B6wAeDpQ2GNRIEGY2Ro=</HashCode>
+      <HashCode>gV9MwpHui8KNcrgr9IEhCml0BywAeDpS2ONRIEGY2Qo=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,7 +115,7 @@
   <Class Name="Weapon" Collapsed="true">
     <Position X="7" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAABAACEAQIAQQBAAAAgACJBggAEQAAABKJkARAA=</HashCode>
+      <HashCode>AAIAAABAACEAQIAQQBAAAAgACJBggAEQAEABKJkARAA=</HashCode>
       <FileName>Weapon.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -138,6 +124,13 @@
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAgIAQAAAQAAAAAARAACAAAAAAgAgAAAAA=</HashCode>
       <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boss" Collapsed="true">

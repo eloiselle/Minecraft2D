@@ -83,7 +83,18 @@ void Game::drawGrid()
 void Game::drawPlayer()
 {
     _playerSprites[_animFrame][_animType].setPosition(_player.getExactX(), _player.getExactY());
-    _window.draw(_playerSprites[_animFrame][_animType]);
+
+    if (_player.isVulnerable(_frameRun))
+    {
+        _window.draw(_playerSprites[_animFrame][_animType]);
+    }
+    else
+    {
+        // Affiche le joueur en semi-transparent
+        _playerSprites[_animFrame][_animType].setColor(Color(255, 255, 255, 128));
+        _window.draw(_playerSprites[_animFrame][_animType]);
+        _playerSprites[_animFrame][_animType].setColor(Color::White);
+    }
 }
 
 void Game::drawShield()

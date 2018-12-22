@@ -19,6 +19,6 @@ public:
 
     void delayInit(int now, int delay);         // Remet le delai courant au maximum
 
-    bool delayIsReady(int now);                 // Si pret
+    bool delayIsReady(int now)const;            // Si pret
     void delayReset(int now);                   // Remet le delai courant au maximum
 };

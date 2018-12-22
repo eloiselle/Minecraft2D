@@ -124,22 +124,8 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
 
 bool Game::toolIsAShooter()const
 {
-	switch (_currentTool)
-	{
-	case BUILD:
-		return false;       break;
-	case SPHERE_SHIELD:     // Handgun
-	case SLOW_MO:           // Handgun
-	case UZI:
-	case ASSAULT:
-	case SNIPER:
-	case SHOT_GUN:
-	case BULLET_HELL:
-	case HOMING:
-		return true;        break;
-	default:                break;
-	}
-
+    // Shield et Slow-Mo utilisent le handgun donc ce sont des shooter
+    return _currentTool != BUILD;
 }
 
 
@@ -156,8 +142,9 @@ void Game::manageSphereShield()
 		_shieldSphere[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
 			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
+
 		collisionBulletFoes(_shieldSphere[i]);
-        //collisionBulletBlock(_shieldSphere[i]);
+		//collisionBulletBlock(_shieldSphere[i]); // Presentement detruit par HARD_BLOCK
 
 		if (_bulletWillVanish)
 		{

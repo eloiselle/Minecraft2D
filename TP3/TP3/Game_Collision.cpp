@@ -50,6 +50,7 @@ void Game::collisionBulletFoes(Bullet& b)
     if (areOnTheSameSquare(b, _boss))
     {
         _bulletWillVanish = true;
+
         _boss.loseHp(b.getDamage());
     }
 }
@@ -59,6 +60,11 @@ void Game::collisionBulletPlayer(Bullet& b)
     if (areOnTheSameSquare(b, _player))
     {
         _bulletWillVanish = true;
-        _player.loseHp(b.getDamage());
+
+        if (_player.isVulnerable(_frameRun))
+        {
+            _player.loseHp(b.getDamage());
+            _player.becomeInvulnerable(_frameRun);
+        }
     }
 }

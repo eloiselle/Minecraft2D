@@ -1,19 +1,15 @@
 ###############################################################################
 
-Should be done  :
-    Weapon      : Bulletshield  : Implanter les collisions (E)
-    List        : Finir d'utiliser la liste (C)
-    Music       : Utiliser une musique plus appropriée (C)
-
-Si on a le temps:
-    Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
-    Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool] (E)
-    Code        : Effacer/Commenter ce qui n´est pas utilisé
-
-Abandonnes      :
-    Map         : Faire rapetisser la map (A)
-    Weapon      : Separer Weapon en deux classes Weapon et Gun
-    Weapon      : Explosion qui tire dans toutes les directions avec un gros delai (E)
-    Meta        : Timer qui compte en descendant (A)
-    Weapon      : Beam : RectangleShape qui passe au travers des blocs (E)
-    Map         : Map Editor Sauvegarder la map et la loader
+Weapon      : Bulletshield  : Améliorer les collisions
+Bullet      : Le changement d'arme fait  _bullets.clear() il ne faudrait pas supprimer les bullet du boss
+Inventaire  : Garder en memoire le nombre de bloc detruit pour limiter la construction
+Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
+Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool]
+Code        : Effacer/Commenter ce qui n´est pas utilisé
+Player      : Mettre une invincibilité temporaire quand le joueur se fait toucher (avec Delay)
+Map         : Faire rapetisser la map (swapper les lignes)
+Weapon      : Separer Weapon en deux classes Weapon et Gun
+Weapon      : Explosion qui tire dans toutes les directions avec un gros delai
+Meta        : Timer qui compte en descendant
+Weapon      : Beam : RectangleShape qui passe au travers des blocs 
+Map         : Map Editor Sauvegarder la map et la loader

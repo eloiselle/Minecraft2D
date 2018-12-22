@@ -8,7 +8,7 @@ void Delay::delayInit(int now, int delay)
 }
 
 // Si c'est pret
-bool Delay::delayIsReady(int now)
+bool Delay::delayIsReady(int now)const
 {
     return _readyAt < now;
 }
