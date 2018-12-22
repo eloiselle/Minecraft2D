@@ -99,14 +99,11 @@ void Game::drawPlayer()
 
 void Game::drawShield()
 {
-    _bulletShape[FRIENDLY].setScale(
-        Vector2f(5, 5));
     if (_currentTool == SPHERE_SHIELD)
     {
-        for (size_t i = 0; i < _shieldSphere.size(); i++)
+        for (size_t i = 0; i < _shield.size(); i++)
         {
-            _bulletShape[FRIENDLY].setPosition(_shieldSphere[i].getExactX(), _shieldSphere[i].getExactY());
-            _window.draw(_bulletShape[FRIENDLY]);
+            drawOneBullet(_shield[i]);
         }
     }
 }
@@ -115,15 +112,20 @@ void Game::drawBullets()
 {
     for (list<Bullet>::iterator b = _bullets.begin(); b != _bullets.end(); b++)
     {
-        if (b->isFriendly())
-        {
-            int size = b->getDamage() / 10 + 1;
-            _bulletShape[b->isFriendly()].setScale(
-                Vector2f(size, size));
-        }
-        _bulletShape[b->isFriendly()].setPosition(b->getExactX(), b->getExactY());
-        _window.draw(_bulletShape[b->isFriendly()]);
+        drawOneBullet(*b);
     }
+}
+
+void Game::drawOneBullet(Bullet& b)
+{
+    if (b.isFriendly())
+    {
+        int size = b.getDamage() / 10 + 1;
+        _bulletShape[b.isFriendly()].setScale(
+            Vector2f(size, size));
+    }
+    _bulletShape[b.isFriendly()].setPosition(b.getExactX(), b.getExactY());
+    _window.draw(_bulletShape[b.isFriendly()]);
 }
 
 void Game::drawMovableGui()
@@ -164,13 +166,11 @@ void Game::drawFoes()
     }
 
     // Boss
-    if (_boss.isAlive())
-    {
-        _batSprite[animationFrame][DOWN].setScale(Vector2f(2, 2));
-        _batSprite[animationFrame][DOWN].setPosition(_boss.getExactX(), _boss.getExactY());
-        _window.draw(_batSprite[animationFrame][DOWN]);
-        _batSprite[animationFrame][DOWN].setScale(Vector2f(1, 1));
-    }
+    _batSprite[animationFrame][DOWN].setScale(Vector2f(2, 2));
+    _batSprite[animationFrame][DOWN].setPosition(_boss.getExactX(), _boss.getExactY());
+    _window.draw(_batSprite[animationFrame][DOWN]);
+    _batSprite[animationFrame][DOWN].setScale(Vector2f(1, 1));
+    
 }
 
 void Game::drawBossHealthBar()

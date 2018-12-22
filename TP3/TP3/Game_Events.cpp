@@ -247,15 +247,20 @@ void Game::handleMouseButtonPressedInContinu()
 
 void Game::addShieldSphere()
 {
-    if (isMouseInMap() && _currentTool == SPHERE_SHIELD && _shieldSphere.size() <= MAX_SHIELD_SPHERES)
+    if (isMouseInMap() 
+        && _currentTool == SPHERE_SHIELD 
+        && _shield.size() <= MAX_SHIELD_SPHERES)
     {
-        _shieldSphere.insert(_shieldSphere.end(), Bullet());
+        _shield.insert(_shield.end(), Bullet());
         _shieldVA.insert(_shieldVA.end(), VectorAngle());
 
-        for (size_t i = 0; i < _shieldSphere.size(); i++)
+        // Repositionne les autres bullet
+        for (size_t i = 0; i < _shield.size(); i++)
         {
+            _shield[i].setDamage(SPHERE_DAMAGE);
             _shieldVA[i].init(100, 0, 1);
-            _shieldVA[i].setAngleDegree(i * (360 / _shieldSphere.size()));
+            _shieldVA[i].setAngleDegree(i * (360 / _shield.size()));
+
         }
     }
 }

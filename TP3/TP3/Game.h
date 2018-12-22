@@ -33,7 +33,7 @@ private:
     // Game Elements
     WorldMap _map;                      // World map
     Player _player;                     // Avatar controlled by user
-    vector<Bullet> _shieldSphere;		// Tourne a l'entour de _player
+    vector<Bullet> _shield;		// Tourne a l'entour de _player
     vector<VectorAngle> _shieldVA;		// Distance entre _shieldSphere et _player
     list<Bullet> _bullets;              // Liste des projectiles
     list<Crawler> _bats;                // Liste des chauves souris-enemies
@@ -169,8 +169,9 @@ private:
     void insertBlockAtMouse(int c, int l);              // Insert un block a la position de la souris
     void removeBlockAtMouse(int c, int l);				// Enlève un block à la position de la souris
 
-    float distanceBetweenMP(MagnetPosition &, MagnetPosition &);    // Distance trigo entre deux positions
-    bool areOnTheSameSquare(MagnetPosition & mp1, MagnetPosition & mp2);    // Si les position sont sur la meme case
+    float distanceBetweenMP(MagnetPosition& mp1, MagnetPosition& mp2);// Distance trigo entre deux positions
+    bool areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2);// Si les positions sont sur la meme case
+    bool isBulletHit(Bullet& b, MagnetPosition& target, int bonusDistance = 0); // Si bullet est en collision
 
     // Game Handler
     void handlePlayerDeath();                           // Gere quand le joueur meurt
@@ -178,6 +179,7 @@ private:
     void handleBossMovingDown();                        // Gere quand le boss doit descendre dans la map
     void handleBossDeath();                             // Gere quand le boss meurt
     void handleBatCreation();                           // Gere la creation de chauve-souris
+    void createBatAt(int l, int c);                     // Cree une bat a la position
     void manageBossWeapon();                            // Gere l'attaque du boss
     void bossShootBullet();                             // Gere une bullet lancee par le boss
     void addShieldSphere();                             // Ajoute une sphere au shield
@@ -232,6 +234,7 @@ private:
     void drawPlayer();                                  // Affiche les objets mobiles
     void drawShield();                                  // Affiche les sphere du bouclier
     void drawBullets();                                 // Affiche les projectiles
+    void drawOneBullet(Bullet& b);                      // Affiche une seul bullet
     void drawFoes();                                    // Affiche les ennemis
     void drawMovableGui();                              // Affiche les element du GUI comme la cible de la souris
     void flipSpriteHorizontal(Sprite& s);               // Flip un sprite selon son axeVertical

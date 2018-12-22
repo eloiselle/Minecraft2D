@@ -1,12 +1,6 @@
 #pragma once
 #include "Game.h"
 
-// Retourne si deux objet sont sue la meme case
-bool Game::areOnTheSameSquare(MagnetPosition& mp1, MagnetPosition& mp2)
-{
-	return (mp1.getGridCol() == mp2.getGridCol()
-		&& mp1.getGridLine() == mp2.getGridLine());
-}
 
 void Game::insertBlockAtMouse(int c, int l)
 {
@@ -118,10 +112,3 @@ void Game::updateViewlessMouseCoord()
 			Mouse::getPosition(_window), _view[_currentView]));
 }
 
-// Détermine la distance entre 2 positions
-float Game::distanceBetweenMP(MagnetPosition & mp1, MagnetPosition & mp2)
-{
-	return abs(sqrt(
-		(mp1.getExactY() - mp2.getExactY()) * (mp1.getExactY() - mp2.getExactY())
-		+ (mp1.getExactX() - mp2.getExactX()) * (mp1.getExactX() - mp2.getExactX())));
-}

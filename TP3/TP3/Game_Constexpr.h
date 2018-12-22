@@ -90,8 +90,9 @@ constexpr int ANGLE_BOSS_BULLET = 360 / NB_BOSS_BULLET;     // Angle entre chaqu
 // Shield
 constexpr int NB_SHIELD_INIT = 1;                           // Nombre initial de Sphere au shield
 constexpr int MAX_SHIELD_SPHERES = 12;                      // Nombre maximum de sphere au shield
-constexpr int SHIELD_DISTANCE = 50;                         // Distance du shield entre le joueur et les sphere
+constexpr int SHIELD_DISTANCE = 15;                         // Distance du shield entre le joueur et les sphere
 constexpr int ANGLE_ROTATION_SHIELD = 3;                    // Vitesse de rotation du shield
+constexpr int SPHERE_DAMAGE = 50;                           // Degats effectue par Shield
 
 // Score
 constexpr int SCORE_BOSS_KILLED = 10000;                    // Bonus de score pour tuer le boss

@@ -72,28 +72,27 @@ void Game::handleBossMovingDown()
     _boss.setDirection(DOWN);
     _boss.startMoving();
 
-    for (int c = 1; c < _map.nbCol() - 1; c++)
-    {
-        _map.at(_boss.getGridLine() + 3, c).setType(EMPTY_BLOCK);
-    }
+    _map.fillLine(_boss.getGridLine() + 3, EMPTY_BLOCK);
 }
 
 void Game::handleBatCreation()
 {
-    list<Crawler>::iterator b;
-    
     if (!(rand() % 3)) // Probabilite de creer une autre chauve souris
     {
-        // Create new bat on last line
-        int l = _map.nbLine() - 2;
-        int c = (rand() % (_map.nbCol() - LINE_TO_CREATE_BATS)) + 3;
-        b = _bats.push_back(Crawler());
-        b->setPositionInGrid(c, l);
-        _map.at(l, c).setType(EMPTY_BLOCK);
+        // Create a new bat on the "last" line
+        createBatAt(
+            _map.nbLine() - 2,
+            (rand() % (_map.nbCol() - LINE_TO_CREATE_BATS)) + 3);
     }
 }
 
-
+void Game::createBatAt(int l, int c)
+{
+    list<Crawler>::iterator b;
+    b = _bats.push_back(Crawler());
+    b->setPositionInGrid(c, l);
+    _map.at(l, c).setType(EMPTY_BLOCK);
+}
 
 void Game::shootWeapon()
 {

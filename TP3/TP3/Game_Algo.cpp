@@ -135,20 +135,20 @@ void Game::manageSphereShield()
 	if (_currentTool != SPHERE_SHIELD)
 		return;
 
-	for (size_t i = 0; i < _shieldSphere.size(); i++)
+	for (size_t i = 0; i < _shield.size(); i++)
 	{
 		_bulletWillVanish = false;
 		_shieldVA[i].rotate(ANGLE_ROTATION_SHIELD);
-		_shieldSphere[i].setPositionExact(
+		_shield[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
 			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
 
-		collisionBulletFoes(_shieldSphere[i]);
+		collisionBulletFoes(_shield[i]);
 		//collisionBulletBlock(_shieldSphere[i]); // Presentement detruit par HARD_BLOCK
 
 		if (_bulletWillVanish)
 		{
-			_shieldSphere.erase(_shieldSphere.begin() + i);
+			_shield.erase(_shield.begin() + i);
 			_shieldVA.erase(_shieldVA.begin() + i);
 		}
 	}
