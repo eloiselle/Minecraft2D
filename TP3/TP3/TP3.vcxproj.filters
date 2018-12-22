@@ -178,6 +178,9 @@
     <ClInclude Include="list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game_Constexpr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="dungeon.bmp">

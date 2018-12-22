@@ -196,6 +196,7 @@
     <ClInclude Include="Crawler.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="FileOpener.h" />
+    <ClInclude Include="Game_Constexpr.h" />
     <ClInclude Include="Killable.h" />
     <ClInclude Include="Delay.h" />
     <ClInclude Include="Entity.h" />
