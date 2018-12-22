@@ -14,9 +14,9 @@ void Game::drawWindow()
     updateViews();
 
     drawShield();
+    drawPlayer();
     drawFoes();
     drawBullets();
-    drawPlayer();
     drawMovableGui();
 
     drawThingsDirectlyOnTheScreen();
@@ -120,7 +120,7 @@ void Game::drawOneBullet(Bullet& b)
 {
     if (b.isFriendly())
     {
-        int size = b.getDamage() / 10 + 1;
+        int size = b.getHitBoxSize() / 10 + 1;
         _bulletShape[b.isFriendly()].setScale(
             Vector2f(size, size));
     }

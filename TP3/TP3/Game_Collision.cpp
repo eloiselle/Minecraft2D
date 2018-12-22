@@ -45,7 +45,7 @@ void Game::collisionBulletBlock(Bullet& b)
 
 bool Game::isBulletHit(Bullet& b, MagnetPosition& target, int bonusDistance)
 {
-    return distanceBetweenMP(b, target) < b.getDamage() + bonusDistance;
+    return distanceBetweenMP(b, target) < (b.getHitBoxSize() + bonusDistance) / 2;
 }
 
 void Game::collisionBulletFoes(Bullet& b)
@@ -54,18 +54,18 @@ void Game::collisionBulletFoes(Bullet& b)
     list<Crawler>::iterator c = _bats.begin();
     while (c != _bats.end())
     {
-        if (isBulletHit(b, *c))
+        if (isBulletHit(b, *c, BAT_SIZE))
         {
             _bulletWillVanish = true;
             c = _bats.erase(c);
             _score += SCORE_BAT;
         }
-        else 
+        else
             c++;
     }
 
     // Boss
-    if (isBulletHit(b, _boss))
+    if (isBulletHit(b, _boss, BOSS_SIZE))
     {
         _bulletWillVanish = true;
         _boss.loseHp(b.getDamage());

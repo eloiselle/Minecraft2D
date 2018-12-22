@@ -117,7 +117,7 @@ void Game::shootBullet(Character *target)
     list<Bullet>::iterator b;
     b = _bullets.end();
 
-    b = _bullets.insert(b, Bullet());
+    b = _bullets.insert(b, _player.getBullet());
 
 
     if (_isAudioActivated)
@@ -135,8 +135,8 @@ void Game::shootBullet(Character *target)
             _player.getWeaponInaccuracy());
     }
 
-    b->setSpeed(_player.getWeaponBulletSpeed());
-    b->setDamage(_player.getWeaponDamage());
+    //b->setSpeed(_player.getWeaponBulletSpeed());
+    //b->setDamage(_player.getWeaponDamage());
 
     _player.resetDelay(_frameRun);
 }

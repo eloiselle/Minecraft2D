@@ -88,7 +88,7 @@ bool Game::canTeleportAtMouse()
 // Gere les input qui doivent etre activer en continu
 void Game::inputActivatedInContinu()
 {
-    handleKeypressContinu(); 
+    handleKeypressContinu();
 
     if (_appState == RUNNING)
     {
@@ -160,7 +160,7 @@ void Game::handleKeypressContinu()
 
 
     // Change tool
-    if      (Keyboard::isKeyPressed(Keyboard::Num1))        switchTool(BUILD);
+    if (Keyboard::isKeyPressed(Keyboard::Num1))        switchTool(BUILD);
     else if (Keyboard::isKeyPressed(Keyboard::Num2))        switchTool(UZI);
     else if (Keyboard::isKeyPressed(Keyboard::Num3))        switchTool(ASSAULT);
     else if (Keyboard::isKeyPressed(Keyboard::Num4))        switchTool(SNIPER);
@@ -232,7 +232,7 @@ void Game::handleMouseButtonPressedInContinu()
             if (isMouseInMap() && _currentTool == BUILD)
                 insertBlockAtMouse(c, l);
 
-            
+
             shootWeapon();
         }
         // Right Click
@@ -247,8 +247,8 @@ void Game::handleMouseButtonPressedInContinu()
 
 void Game::addShieldSphere()
 {
-    if (isMouseInMap() 
-        && _currentTool == SPHERE_SHIELD 
+    if (isMouseInMap()
+        && _currentTool == SPHERE_SHIELD
         && _shield.size() <= MAX_SHIELD_SPHERES)
     {
         _shield.insert(_shield.end(), Bullet());
@@ -258,7 +258,10 @@ void Game::addShieldSphere()
         for (size_t i = 0; i < _shield.size(); i++)
         {
             _shield[i].setDamage(SPHERE_DAMAGE);
-            _shieldVA[i].setAngleDegree(i * (360 / _shield.size()));
+            _shield[i].setHitBoxSize(SPHERE_SIZE);
+
+            if (_shield.size() != 1)
+                _shieldVA[i].setAngleDegree(i * (360 / (_shield.size() - 1)));
 
         }
     }

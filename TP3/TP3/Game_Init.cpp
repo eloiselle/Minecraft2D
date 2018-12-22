@@ -136,8 +136,8 @@ void Game::initTexts()
     // Text Instructions
     _messageOnShader.setFont(_fontInvasion2000);
     _messageOnShader.setCharacterSize(36);                // In pixels
-    _messageOnShader.setFillColor(Color(255, 255, 255));  // White
-    _messageOnShader.setOutlineColor(Color(64, 64, 64));  // Dark grey
+    _messageOnShader.setFillColor(Color(255, 255, 255, 128));  // White
+    _messageOnShader.setOutlineColor(Color(64, 64, 64, 128));  // Dark grey
     _messageOnShader.setOutlineThickness(3);
     _messageOnShader.setPosition(32, 32);
     _messageOnShader.setString(STR_INSTRUCTIONS);
@@ -264,12 +264,14 @@ void Game::initPlayer()
 {
     switchTool(SLOW_MO);
 
+    _player.lookToTheRight();
+    _player.isMoving(false);
     _player.setHpMax(NB_LIVES);
     _player.refillHp();
 
     _player.setPositionExact(
         PLAYER_START_COL * TILE_SIZE + HALF_TILE_SIZE,
-        PLAYER_START_LINE * TILE_SIZE + TILE_SIZE - 1);
+        PLAYER_START_LINE * TILE_SIZE + TILE_SIZE - 2);
     _player.setSpeed(4);
 
 }

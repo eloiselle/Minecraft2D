@@ -2,7 +2,7 @@
 
 Inventaire  : Garder en memoire le nombre de bloc detruit pour limiter la construction
 Sound       : Mettre les sounds qui sont dans bullet et crawler soit en pointeur soit en static 
-Weapon      : Utiliser un tableau de Weapon _weapon[_currentTool]
+Weapon      : Utiliser un tableau de Weapon predefini _weapon[_currentTool] au lieu de modifier l´arme du joueur
 Code        : Effacer/Commenter ce qui n´est pas utilisé
 Map         : Faire rapetisser la map (swapper les lignes)
 Weapon      : Separer Weapon en deux classes Weapon et Gun
@@ -10,8 +10,7 @@ Weapon      : Explosion qui tire dans toutes les directions avec un gros delai
 Meta        : Timer qui compte en descendant
 Weapon      : Beam : RectangleShape qui passe au travers des blocs 
 Map         : Map Editor Sauvegarder la map et la loader
-
-
+Debug       : Resetter le jeu quand le joueur tombe cause un bug de collision puisque le joueur va se deplacer apres
 
 
 

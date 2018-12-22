@@ -32,12 +32,13 @@ class Weapon
 {
 protected:
 
-    bool _friendly = false;     // Alliee du joueur
+    bool _friendly = true;      // Alliee du joueur
     int _delayMultiplier = 1;	// Multiplicateur sur le délai
     int _nbBulletsFired;        // Nombres de balles lancee par l'arme
     int _inaccuracy;			// Détermine une variation dans _angle
     float _bulletSpeed;			// Vitesse des bullets
     float _damage;				// Degats occasionnee par l'arme
+    int _bulletSize;            // Taille de bullet pour les collision
     Delay _delay;               // Delai entre chaque attaque
 
 public:
@@ -62,6 +63,7 @@ public:
     int getWeaponRateOfFire()const;
     float getWeaponBulletSpeed()const;
     float getWeaponDamage()const;
+    int getBulletSize()const;
     Bullet getBullet()const;
     Delay getDelay()const;
 
@@ -71,6 +73,7 @@ public:
     void setWeaponRateOfFire(int);
     void setWeaponBulletSpeed(float);
     void setWeaponDamage(float);
+    void setBulletSize(int);
     void setDelay(Delay& delay);
 
     void resetDelay(int now);

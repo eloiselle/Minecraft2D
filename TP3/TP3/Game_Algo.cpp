@@ -37,8 +37,8 @@ void Game::managePlayer()
 
 	managePlayerJump();
 
-	if (areOnTheSameSquare(_player, _boss))
-		_player.loseHp(1);
+	if (distanceBetweenMP(_player, _boss) < (PLAYER_HEIGHT + BOSS_SIZE)/2)
+		_player.die();
 
 
 	managePlayerAnimation();
@@ -110,7 +110,7 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
 	if (c->isWalking())
 		c->move();
 
-	if (areOnTheSameSquare(_player, *c))
+	if (distanceBetweenMP(_player, *c) < (PLAYER_HEIGHT + BAT_SIZE)/2)
 	{
 		_player.loseHp(1);
 		c = _bats.erase(c);
@@ -137,8 +137,10 @@ void Game::manageSphereShield()
 
 	for (size_t i = 0; i < _shield.size(); i++)
 	{
-		_bulletWillVanish = false;
-		_shieldVA[i].rotate(ANGLE_ROTATION_SHIELD);
+        int directionRotation = _player.isLookingToTheRight() * 2 - 1;
+        _bulletWillVanish = false;
+
+		_shieldVA[i].rotate(ANGLE_ROTATION_SHIELD * directionRotation);
 		_shield[i].setPositionExact(
 			_player.getExactX() + _shieldVA[i].getX(),
 			_player.getExactY() + _shieldVA[i].getY() - PLAYER_HEIGHT * 0.75);
