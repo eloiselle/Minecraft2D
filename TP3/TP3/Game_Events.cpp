@@ -264,9 +264,10 @@ void Game::switchTool(TOOL tool)
 {
     if (tool != _currentTool)
     {
-        _bullets.clear();
+        clearPlayerBullet();
         _currentTool = tool;
         _player.setWeapon(tool, _frameRun);
         _textToolSwitch.setString(TOOL_NAMES[_currentTool]);
     }
 }
+

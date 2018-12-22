@@ -134,6 +134,7 @@ private:
     void initWorldMap();                // Initialization du labyrinthe
     void initMusic();                   // Initialisation de la musique
     void initSounds();                  // Initialisation des sons
+    void clearPlayerBullet();           // Vide la list<Bullet> des bullet du player
 
     Sprite initOneSprite(unsigned int line, unsigned  int col, Texture & texture,
         unsigned int tileSize = TILE_SIZE, unsigned  int separation = 0);

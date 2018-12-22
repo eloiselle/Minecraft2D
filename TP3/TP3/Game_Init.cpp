@@ -316,3 +316,16 @@ void Game::initFoes()
         position_x += SPACE_BETWEEN_BATS;
     }
 }
+
+void Game::clearPlayerBullet()
+{
+    list<Bullet>::iterator b = _bullets.begin();
+
+    while (b != _bullets.end())
+    {
+        if (b->isFriendly())
+            b = _bullets.erase(b);
+        else
+            b++;
+    }
+}
