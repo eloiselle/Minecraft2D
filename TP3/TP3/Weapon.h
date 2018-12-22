@@ -28,7 +28,7 @@ const string TOOL_NAMES[10] = {
     "Build", "Uzi", "Assault", "Sniper", "Shotgun",
     "BulletHell", "Slow-Mo", "Homing", "Sphere Shield", "Boss" };
 
-class Weapon : public Delay
+class Weapon
 {
 protected:
 
@@ -38,6 +38,7 @@ protected:
     int _inaccuracy;			// Détermine une variation dans _angle
     float _bulletSpeed;			// Vitesse des bullets
     float _damage;				// Degats occasionnee par l'arme
+    Delay _delay;               // Delai entre chaque attaque
 
 public:
     // Change weapon
@@ -57,17 +58,21 @@ public:
 
     // Get property
     int getWeaponNbBulletsFired()const;
-    int getWeaponAccuracy()const;
+    int getWeaponInaccuracy()const;
     int getWeaponRateOfFire()const;
     float getWeaponBulletSpeed()const;
     float getWeaponDamage()const;
     Bullet getBullet()const;
+    Delay getDelay()const;
 
     // Set property
     void setWeaponNbBulletsFired(int);
-    void setWeaponAccuracy(int);
+    void setWeaponInaccuracy(int);
     void setWeaponRateOfFire(int);
     void setWeaponBulletSpeed(float);
     void setWeaponDamage(float);
+    void setDelay(Delay& delay);
 
+    void resetDelay(int now);
+    bool delayIsReady(int now)const;
 };

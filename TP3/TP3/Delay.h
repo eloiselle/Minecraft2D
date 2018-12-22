@@ -17,8 +17,12 @@ public:
     Delay(int now = 0, int delay = 0)
         : _readyAt(now), _totalDelay(delay) {}; // Constructor
 
-    void delayInit(int now, int delay);         // Remet le delai courant au maximum
+    void init(int now, int delay);              // Remet le delai courant au maximum
 
-    bool delayIsReady(int now)const;            // Si pret
-    void delayReset(int now);                   // Remet le delai courant au maximum
+    bool isReady(int now)const;                 // Si pret
+    void reset(int now);                        // Remet le delai courant au maximum
+
+    int getTotalDelay()const;                   // Retourne le temps total de delai
+
+    void setTotalDelay(int totalDelay);         // Change le temps total de delai
 };

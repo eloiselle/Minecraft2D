@@ -23,20 +23,20 @@ void Weapon::setNoWeapon(int _frameRun)
 {
     _nbBulletsFired = 0;
     _inaccuracy = 1;
-    _totalDelay = 999999999999 * _delayMultiplier;
+    int totalDelay = 999999999999 * _delayMultiplier;
     _bulletSpeed = 999999999999;
     _damage = 0;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setHandGun(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 20;
-    _totalDelay = 30 * _delayMultiplier;
+    int totalDelay = 30 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 4;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 
@@ -44,50 +44,50 @@ void Weapon::setUzi(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 60;
-    _totalDelay = 1 * _delayMultiplier;
+    int totalDelay = 1 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 4;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setAssault(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 1;
-    _totalDelay = 10 * _delayMultiplier;
+    int totalDelay = 10 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 20;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setSniper(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 1;
-    _totalDelay = 50 * _delayMultiplier;
+    int totalDelay = 50 * _delayMultiplier;
     _bulletSpeed = 5;
     _damage = 40;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setShotgun(int _frameRun)
 {
     _nbBulletsFired = 10;
     _inaccuracy = 300;
-    _totalDelay = 30 * _delayMultiplier;
+    int totalDelay = 30 * _delayMultiplier;
     _bulletSpeed = 3;
     _damage = 10;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setBulletHell(int _frameRun)
 {
     _nbBulletsFired = 25;
     _inaccuracy = 360;
-    _totalDelay = 1;
+    int totalDelay = 1;
     _bulletSpeed = 4;
     _damage = 1;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setHoming(int _frameRun)
@@ -95,36 +95,39 @@ void Weapon::setHoming(int _frameRun)
     _friendly = false;
     _nbBulletsFired = 1;
     _inaccuracy = 1;
-    _totalDelay = 150 * _delayMultiplier;
+    int totalDelay = 150 * _delayMultiplier;
     _bulletSpeed = 1;
     _damage = 50;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setWeaponBoss(int _frameRun)
 {
     _nbBulletsFired = 1;
     _inaccuracy = 1;
-    _totalDelay = 300 * _delayMultiplier;
+    int totalDelay = 300 * _delayMultiplier;
     _bulletSpeed = 2;
     _damage = 1;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
 void Weapon::setCustom(float accuracy, int rateOfFire, float bulletSpeed, float damageMultiplier, int _frameRun)
 {
     _inaccuracy = accuracy;
-    _totalDelay = rateOfFire * _delayMultiplier;
+    int totalDelay = rateOfFire * _delayMultiplier;
     _bulletSpeed = bulletSpeed;
     _damage = damageMultiplier;
-    delayInit(_frameRun, _totalDelay);
+    _delay.init(_frameRun, totalDelay);
 }
 
+
+// Property
 int Weapon::getWeaponNbBulletsFired()const { return _nbBulletsFired; }
-int Weapon::getWeaponAccuracy()const { return _inaccuracy; }
-int Weapon::getWeaponRateOfFire()const { return _totalDelay; }
+int Weapon::getWeaponInaccuracy()const { return _inaccuracy; }
+int Weapon::getWeaponRateOfFire()const { return _delay.getTotalDelay(); }
 float Weapon::getWeaponBulletSpeed()const { return _bulletSpeed; }
 float Weapon::getWeaponDamage()const { return _damage; }
+Delay Weapon::getDelay()const { return _delay; }
 
 Bullet Weapon::getBullet()const
 {
@@ -136,7 +139,11 @@ Bullet Weapon::getBullet()const
 }
 
 void Weapon::setWeaponNbBulletsFired(int nb) { _nbBulletsFired = nb; }
-void Weapon::setWeaponAccuracy(int accuracy) { _inaccuracy = accuracy; }
-void Weapon::setWeaponRateOfFire(int rateOfFire) { _totalDelay = rateOfFire; }
+void Weapon::setWeaponInaccuracy(int accuracy) { _inaccuracy = accuracy; }
+void Weapon::setWeaponRateOfFire(int rateOfFire) { _delay.setTotalDelay(rateOfFire); }
 void Weapon::setWeaponBulletSpeed(float bulletSpeed) { _bulletSpeed = bulletSpeed; }
 void Weapon::setWeaponDamage(float damageMultiplier) { _damage = damageMultiplier; }
+void Weapon::setDelay(Delay & delay) { _delay = delay; }
+
+void Weapon::resetDelay(int now) { _delay.reset(now); }
+bool Weapon::delayIsReady(int now) const { return _delay.isReady(now); }

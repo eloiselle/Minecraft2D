@@ -2,19 +2,24 @@
 #include "Delay.h"
 
 // Initializer
-void Delay::delayInit(int now, int delay)
+void Delay::init(int now, int delay)
 {
+    _totalDelay = delay;
     _readyAt = now + delay;
 }
 
 // Si c'est pret
-bool Delay::delayIsReady(int now)const
+bool Delay::isReady(int now)const
 {
-    return _readyAt < now;
+    return now >= _readyAt;
 }
 
 // Remet le "compteur" a zero
-void Delay::delayReset(int now)
+void Delay::reset(int now)
 {
     _readyAt = now + _totalDelay;
 }
+
+int Delay::getTotalDelay()const { return _totalDelay; }
+
+void Delay::setTotalDelay(int totalDelay) { _totalDelay = totalDelay; }

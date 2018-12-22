@@ -30,7 +30,7 @@ void Game::manageBossWeapon()
 
             b->rotate(ANGLE_BOSS_BULLET * i);
         }
-        _boss.delayReset(_frameFoes);
+        _boss.resetDelay(_frameFoes);
     }
 }
 
@@ -133,11 +133,11 @@ void Game::shootBullet(Character *target)
         b->aim(
             _mouseCoord.getPosition().x,
             _mouseCoord.getPosition().y,
-            _player.getWeaponAccuracy());
+            _player.getWeaponInaccuracy());
     }
 
     b->setSpeed(_player.getWeaponBulletSpeed());
     b->setDamage(_player.getWeaponDamage());
 
-    _player.delayReset(_frameRun);
+    _player.resetDelay(_frameRun);
 }
