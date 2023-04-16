@@ -26,7 +26,7 @@ void Game::run()
 		_frameTotal++;
 	}
 
-	quitApplication();
+	quitApplication(0);
 }
 
 void Game::managePlayer()

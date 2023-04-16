@@ -54,7 +54,7 @@ void Game::initWindow()
     // Icon
     Image icon;
     if (!icon.loadFromFile("img\\icon.bmp"))
-        quitApplication();
+        quitApplication(404);
     icon.createMaskFromColor(Color::White);
     _window.setIcon(32, 32, icon.getPixelsPtr());
 }
@@ -64,17 +64,17 @@ void Game::initSprites()
 {
     // Load files
     if (!_tileset.loadFromFile("img\\tiles.bmp"))
-        quitApplication();
+        quitApplication(404);
 
     if (!_batTexture.loadFromFile("img\\bat.bmp"))
-        quitApplication();
+        quitApplication(404);
     if (!_batImage.loadFromFile("img\\bat.bmp"))
-        quitApplication();
+        quitApplication(404);
 
     if (!_playerTexture.loadFromFile("img\\waddle_doo.bmp"))
-        quitApplication();
+        quitApplication(404);
     if (!_playerImage.loadFromFile("img\\waddle_doo.bmp"))
-        quitApplication();
+        quitApplication(404);
 
     // Player
     for (int i = 0; i < 4; i++)
@@ -131,7 +131,7 @@ void Game::initTexts()
 {
     // Font
     if (!_fontInvasion2000.loadFromFile("INVASION2000.TTF"))
-        quitApplication();
+        quitApplication(404);
 
     // Text Instructions
     _messageOnShader.setFont(_fontInvasion2000);

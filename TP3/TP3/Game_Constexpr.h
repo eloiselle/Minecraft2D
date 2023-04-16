@@ -34,12 +34,12 @@ Click on the map using the build tool to add/remove blocks.)";
 constexpr const char* STR_BOSS_KILLED =     // String a afficher apres avoir tuer le boss
 R"(  Boss Killed :D
 
-Press P to start
+Press ESC to start
    a new game.)";
 constexpr const char* STR_GAME_OVER =       // String a afficher quand le joueur est mort
 R"(  GAME OVER :(
 
-Press P to start
+Press ESC to start
    a new game.)";
 
 // Window

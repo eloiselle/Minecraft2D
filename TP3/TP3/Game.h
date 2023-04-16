@@ -100,7 +100,7 @@ private:
     SoundBuffer _buffBullet;            // Buffer de son des bullet
     SoundBuffer _buffFoes;				// Buffer de son des ennemis
     bool _isAudioActivated = true;      // Option pour desactiver l'audio
-    float _volume = 20;
+    float _volume = 2;
 
 
     // Etat
@@ -149,7 +149,7 @@ private:
     void animAir();                                     // Gere l'animation quand le joueur se deplace dans les air
 
     // Event
-    void quitApplication();                             // Quitte l'application
+    void quitApplication(int exitCode);                 // Quitte l'application
     void inputActivatedOnlyTheFirstTime();              // Get input une seule fois
     void inputActivatedInContinu();                     // Get input a repetition
 

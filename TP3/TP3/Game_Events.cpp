@@ -5,10 +5,12 @@
 // ############################################################################
 
 // Quitte l'application
-void Game::quitApplication()
+void Game::quitApplication(int code)
 {
     _window.close();
-    exit(1);
+    exit(code);
+    if(code != 0)
+        system("pause");
 }
 
 // Gere les input qui doivent etre active une seule fois par repetition
@@ -20,7 +22,7 @@ void Game::inputActivatedOnlyTheFirstTime()
         switch (_event.type)
         {
         case Event::Closed:
-            quitApplication();
+            quitApplication(0);
             break;
         case Event::Resized:
             handleResizeWindow();

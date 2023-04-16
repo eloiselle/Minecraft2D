@@ -221,4 +221,18 @@
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="music\boss.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\flap.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\pew.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\zelda.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
