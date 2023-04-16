@@ -8,4 +8,4 @@ To be able to compile this game in Visual Studio 2022, you will need the followi
  - [Visual Studio 2017 build tools](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products)
    - v141 toolset
  - [Visual Studio 2019 build tools](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
-   - Windows 10 SDK version 10.0.16299.0
+   - Windows 10 SDK 10.0.16299.0
