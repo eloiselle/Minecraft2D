@@ -231,6 +231,12 @@
     <Text Include="Labyrinthe4.txt" />
     <Text Include="Labyrinthe5.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="music\boss.wav" />
+    <Media Include="music\flap.wav" />
+    <Media Include="music\pew.wav" />
+    <Media Include="music\zelda.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\sfml_system.redist.2.5.1\build\native\sfml_system.redist.targets" Condition="Exists('..\packages\sfml_system.redist.2.5.1\build\native\sfml_system.redist.targets')" />

@@ -100,6 +100,7 @@ private:
     SoundBuffer _buffBullet;            // Buffer de son des bullet
     SoundBuffer _buffFoes;				// Buffer de son des ennemis
     bool _isAudioActivated = true;      // Option pour desactiver l'audio
+    float _volume = 20;
 
 
     // Etat

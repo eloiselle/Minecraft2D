@@ -52,7 +52,7 @@ void Game::handleKeypressOnce()
 {
     if (_event.key.code == Keyboard::BackSpace)
         init();
-    if (_event.key.code == Keyboard::P)
+    if (_event.key.code == Keyboard::Escape)
         handlePausing();
     if (_event.key.code == Keyboard::T && canTeleportAtMouse())
         _player.setPositionExact(
@@ -156,7 +156,7 @@ void Game::handleKeypressContinu()
         handleArrowKeysInContinu();
     }
 
-    if (Keyboard::isKeyPressed(Keyboard::Escape))           quitApplication();
+    //if (Keyboard::isKeyPressed(Keyboard::Escape))           quitApplication();
 
 
     // Change tool

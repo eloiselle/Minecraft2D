@@ -17,9 +17,9 @@ constexpr const char * STR_INSTRUCTIONS =   // String a afficher a l'ecran de pa
 R"(******************** MINECRAFT 2D ********************
 INSTRUCTIONS
 
-Press [Backspace] to call init()
+Press [Backspace] to restart the game
 
-Press [P] to pause/unpause.
+Press [ESC] to pause/unpause.
 Press the arrow/WASD keys to move around
 Press [Space] to jump
 Press [T] to Teleport
@@ -29,7 +29,7 @@ Press [2] to [9] to change weapon
 
 Roll the mousewheel to zoom-in/zoom-out
 
-Click on the map to modify it.)";
+Click on the map using the build tool to add/remove blocks.)";
 
 constexpr const char* STR_BOSS_KILLED =     // String a afficher apres avoir tuer le boss
 R"(  Boss Killed :D

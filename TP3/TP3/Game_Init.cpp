@@ -225,6 +225,7 @@ void Game::initWorldMap()
 void Game::initMusic()
 {
     _music.openFromFile("music\\boss.wav");
+    _music.setVolume(_volume);
     _music.play();
 }
 

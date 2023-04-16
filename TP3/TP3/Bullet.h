@@ -46,5 +46,5 @@ public:
     bool isHoming()const;                           // Retourne si c'est homing
     bool isFriendly()const;                         // Retourne si c'est une balle alliee
 
-    void play(sf::SoundBuffer & buff);              // Joue un effet sonore
+    void play(sf::SoundBuffer & buff, float vol);              // Joue un effet sonore
 };

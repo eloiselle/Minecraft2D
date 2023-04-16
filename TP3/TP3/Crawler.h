@@ -42,7 +42,7 @@ public:
     void turnLeft();                        // change de direction anticlockwise
     void turnRight();                       // change de direction clockwise
 
-    void playSound(sf::SoundBuffer & buff); // Joue un effet sonore
+    void playSound(sf::SoundBuffer & buff, float vol); // Joue un effet sonore
 
     // Operations
     //void chooseNextMove(FixedGrid& map);    // Utilise l'AI pour change de strategy

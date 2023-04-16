@@ -49,7 +49,7 @@ void Game::bossShootBullet()
     b->aim(_player);
 
     if (_isAudioActivated)
-        b->play(_buffBullet);
+        b->play(_buffBullet, _volume/10);
 
 }
 
@@ -121,7 +121,7 @@ void Game::shootBullet(Character *target)
 
 
     if (_isAudioActivated)
-        b->play(_buffBullet);
+        b->play(_buffBullet, _volume/4);
 
     b->setPositionExact(
         _player.getExactX(),

@@ -78,10 +78,11 @@ void Crawler::turnRight()
     _direction = static_cast<DIRECTION4>((_direction + 1) % 4);
 }
 
-void Crawler::playSound(sf::SoundBuffer & buff)
+void Crawler::playSound(sf::SoundBuffer & buff, float vol)
 {
     //_buffer.loadFromFile("flap.wav");
     _sound.setBuffer(buff);
+    _sound.setVolume(vol);
     _sound.play();
 }
 

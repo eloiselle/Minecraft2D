@@ -101,7 +101,7 @@ void Game::manageOneFoe(list<Crawler>::iterator& c)
 	{
 		if (_frameRun % 24 == 12 && _isAudioActivated)
 		{
-		   c->playSound(_buffFoes);
+		   c->playSound(_buffFoes, _volume);
 		}
 		c->stopMoving();
 		tryToMoveInDirection(*c, static_cast<DIRECTION4>(rand() % 4));

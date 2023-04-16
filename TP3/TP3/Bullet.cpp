@@ -39,9 +39,10 @@ Character& Bullet::getTarget()const { return *_target; }
 bool Bullet::isHoming()const { return _target != nullptr; }
 bool Bullet::isFriendly()const { return _friendly; }
 
-void Bullet::play(sf::SoundBuffer & buff)
+void Bullet::play(sf::SoundBuffer & buff, float vol)
 {
     //_buffer.loadFromFile("pew.wav");
     _sound.setBuffer(buff);
+    _sound.setVolume(vol);
     _sound.play();
 }
